@@ -1,0 +1,42 @@
+/*
+ * Dandelion Admin v2.0 - IE Stylesheet
+ *
+ * This file is part of Dandelion Admin, an Admin template build for sale at ThemeForest.
+ * For questions, suggestions or support request, please mail me at maimairel@yahoo.com
+ *
+ * Development Started:
+ * March 25, 2012
+ * Last Update:
+ * December 07, 2012
+ *
+ */
+
+.lt-ie9 select, 
+.lt-ie9 textarea, 
+.lt-ie9 input[type="text"], 
+.lt-ie9 input[type="password"], 
+.lt-ie9 input[type="datetime"], 
+.lt-ie9 input[type="datetime-local"], 
+.lt-ie9 input[type="date"], 
+.lt-ie9 input[type="month"], 
+.lt-ie9 input[type="time"], 
+.lt-ie9 input[type="week"], 
+.lt-ie9 input[type="number"], 
+.lt-ie9 input[type="email"], 
+.lt-ie9 input[type="url"], 
+.lt-ie9 input[type="search"], 
+.lt-ie9 input[type="tel"], 
+.lt-ie9 input[type="color"], 
+.lt-ie9 select[class*="span"], 
+.lt-ie9 textarea[class*="span"], 
+.lt-ie9 input[class*="span"] {
+	min-height: 18px;
+}
+
+.lt-ie9 .da-gallery .da-gallery-hover ul li a {
+	display: none;
+}
+
+.lt-ie9 .da-gallery li:hover .da-gallery-hover ul li a {
+	display: block;
+}
