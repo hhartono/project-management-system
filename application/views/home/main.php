@@ -1,31 +1,7 @@
-<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
-
-<head>
-    <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Bootstrap Stylesheet -->
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" media="screen">
-
-    <!-- Plugin Stylesheet -->
-
-    <!-- Theme Stylesheet -->
-    <link rel="stylesheet" href="/assets/css/dandelion.theme.css" media="screen">
-    <!-- Icon Stylesheet -->
-    <link rel="stylesheet" href="/assets/css/fonts/glyphicons/style.css" media="screen">
-    <!--  Main Stylesheet -->
-    <link rel="stylesheet" href="/assets/css/dandelion.css" media="screen">
-    <!-- Demo Stylesheet -->
-    <link rel="stylesheet" href="/assets/css/demo.css" media="screen">
+    <!-- Page Stylesheet -->
+    <link rel="stylesheet" href="/assets/css/main.css" media="screen">
 
     <title>Subianto & Siane</title>
-
 </head>
 
 <body>
@@ -40,7 +16,7 @@
                 <div id="da-logo-wrap">
                     <div id="da-logo">
                         <div id="da-logo-img">
-                            <a href="/dashboard">
+                            <a href="/home">
                                 <img src="assets/images/logo.png" alt="Subianto & Siane">
                             </a>
                         </div>
@@ -64,8 +40,10 @@
                             </div>
                         </div>
                         <ul class="dropdown-menu">
+                            <!--
                             <li><a href="dashboard.html">Dashboard</a></li>
                             <li class="divider"></li>
+                            -->
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Settings</a></li>
                             <li><a href="#">Change Password</a></li>
@@ -162,7 +140,7 @@
                 <!-- Breadcrumbs -->
                 <div id="da-breadcrumb">
                     <ul>
-                        <li class="active"><a href="/dashboard"><i class="icon-home"></i> Home</a></li>
+                        <li class="active"><a href="/home"><i class="icon-home"></i> Home</a></li>
                     </ul>
                 </div>
 
@@ -184,7 +162,7 @@
                 <div id="da-main-nav" class="btn-container">
                     <ul>
                         <li class="active">
-                            <a href="/dashboard">
+                            <a href="/home">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-home"></i>
@@ -215,36 +193,89 @@
             <div id="da-content-wrap" class="clearfix">
                 <!-- Content Area -->
                 <div id="da-content-area">
+                    <div class="row-fixed">
+                        <div class="span3 min-width-menu">
+                            <div class="da-panel">
+                                <div class="da-panel-content">
+                                    <table class="main-center">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <img class="main-center" src="assets/images/po-logo.png" alt="Buat PO">
+                                            </td>
+                                            <td>
+                                                <a href="/hello">
+                                                    <h3 class="main-center">Buat<br/>PO</h3>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3 min-width-menu">
+                            <div class="da-panel">
+                                <div class="da-panel-content">
+                                    <table class="main-center">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <img class="main-center" src="assets/images/delivery-logo.png" alt="Terima Barang">
+                                            </td>
+                                            <td>
+                                                <a href="/hello">
+                                                    <h3 class="main-center">Terima<br/>Barang</h3>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3 min-width-menu">
+                            <div class="da-panel">
+                                <div class="da-panel-content">
+                                    <table class="main-center">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <img class="main-center" src="assets/images/usage-logo.png" alt="Pakai Barang">
+                                            </td>
+                                            <td>
+                                                <a href="/hello">
+                                                    <h3 class="main-center">Pakai<br/>Barang</h3>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3 min-width-menu">
+                            <div class="da-panel">
+                                <div class="da-panel-content">
+                                    <table class="main-center">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <img class="main-center" src="assets/images/project-logo.png" alt="Project">
+                                            </td>
+                                            <td>
+                                                <a href="/hello">
+                                                    <h3 class="main-center">Project<br/>Details</h3>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <div id="da-footer">
-        <div class="da-container clearfix">
-            <p>Copyright 2014. Hans Hartono. All Rights Reserved.
-        </div>
-    </div>
-
-    <!-- JS Libs -->
-    <script src="/assets/js/libs/jquery-1.8.3.min.js"></script>
-    <script src="/assets/js/libs/jquery.placeholder.min.js"></script>
-    <script src="/assets/js/libs/jquery.mousewheel.min.js"></script>
-
-    <!-- JS Bootstrap -->
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- jQuery-UI JavaScript Files -->
-
-    <!-- JS Plugins -->
-
-    <!-- JS Demo -->
-
-    <!-- JS Template -->
-    <script src="/assets/js/core/dandelion.core.js"></script>
-
-    <!-- JS Customizer -->
-    <script src="/assets/js/core/dandelion.customizer.js"></script>
-</body>
-</html>

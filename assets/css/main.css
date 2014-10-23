@@ -1,0 +1,15 @@
+/* Main Menu
+================================================== */
+.main-center {
+    /*display: block;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.main-center {
+    padding: 10px;
+}
+
+.min-width-menu {
+    min-width: 220px;
+}

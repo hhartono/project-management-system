@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class dashboard extends CI_Controller {
+class error extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,15 +19,11 @@ class dashboard extends CI_Controller {
 	 */
 	public function index()
 	{
-        $this->load->helper('url');
-        $base_url = base_url();
-
-        $data['base_url'] = $base_url;
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
-		$this->load->view('dashboard/main', $data);
-	}
+        $this->load->view('header');
+        $this->load->view('error/error_404');
+        $this->load->view('footer');
+    }
 }
 
-/* End of file dashboard.php */
-/* Location: ./application/controllers/dashboard.php */
+/* End of file error.php */
+/* Location: ./application/controllers/error.php */
