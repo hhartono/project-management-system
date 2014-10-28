@@ -1,3 +1,6 @@
+        </div>
+    </div>
+
     <!-- Footer -->
     <div id="da-footer">
         <div class="da-container clearfix">
@@ -13,11 +16,19 @@
     <!-- JS Bootstrap -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- jQuery-UI JavaScript Files -->
+    <!-- jQuery-UI JavaScript Files --> <!-- TODO - please double check -->
+    <script src="/assets/jui/js/jquery-ui-1.9.2.min.js"></script>
+    <script src="/assets/jui/jquery.ui.timepicker.min.js"></script>
+    <script src="/assets/jui/jquery.ui.touch-punch.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/jui/css/jquery.ui.all.css" media="screen">
 
-    <!-- JS Plugins -->
+    <!-- JS Plugins --> <!-- TODO - please double check -->
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
 
     <!-- JS Demo -->
+
+    <!-- JS Table -->
+    <script src="/assets/js/unit/unit.tables.js"></script>
 
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>

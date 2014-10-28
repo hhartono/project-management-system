@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class home extends CI_Controller {
+class Home extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,7 +26,8 @@ class home extends CI_Controller {
         $data['username'] = "Hans Hartono";
         $data['company_title'] = "Chief Technology Officer";
         $this->load->view('header');
-        $this->load->view('home/main', $data);
+        $this->load->view('home/navigation', $data);
+        $this->load->view('home/main');
         $this->load->view('footer');
     }
 }
