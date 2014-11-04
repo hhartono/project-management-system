@@ -22,12 +22,16 @@
     <script src="/assets/jui/jquery.ui.touch-punch.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/assets/jui/css/jquery.ui.all.css" media="screen">
 
+    <!-- Validation Plugin -->
+    <script src="/assets/js/plugins/validate/jquery.validate.min.js"></script>
+
     <!-- JS Plugins --> <!-- TODO - please double check -->
-    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
 
     <!-- JS Demo -->
 
     <!-- JS Table -->
+    <script src="/assets/js/unit/unit.modal.js"></script>
     <script src="/assets/js/unit/unit.tables.js"></script>
 
     <!-- JS Template -->

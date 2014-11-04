@@ -24,3 +24,5 @@
     <link rel="stylesheet" href="/assets/css/dandelion.css" media="screen">
     <!-- Demo Stylesheet -->
     <link rel="stylesheet" href="/assets/css/demo.css" media="screen">
+    <!-- User Defined -->
+    <link rel="stylesheet" href="/assets/css/general.css" media="screen">

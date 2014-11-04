@@ -25,16 +25,63 @@ class Unit extends CI_Controller {
 
 	public function index()
 	{
-        $this->load->helper('url');
-        $base_url = base_url();
+        $message = array();
+        $this->show_table($message);
+    }
 
-        $data['base_url'] = $base_url;
+    public function create_unit(){
+        // check if there is any duplicate
+        $duplicate_check = $this->unit_model->get_unit_by_abbreviation($this->input->post('abbreviation'));
+
+        if(empty($duplicate_check)){
+            $response = $this->unit_model->set_unit();
+
+            if($response){
+                $message['success'] = "Satuan berhasil disimpan.";
+                $this->show_table($message);
+            }else{
+                $message['error'] = "Satuan gagal disimpan.";
+                $this->show_table($message);
+            }
+        }else{
+            $message['error'] = "Satuan gagal disimpan. Satuan sudah ada dalam system.";
+            $this->show_table($message);
+        }
+    }
+
+    public function delete_unit($unit_id){
+        $response = $this->unit_model->delete_unit($unit_id);
+
+        // display message according db status
+        if($response){
+            $message['success'] = "Satuan berhasil dihapus.";
+            $this->show_table($message);
+        }else{
+            $message['error'] = "Satuan gagal dihapus.";
+            $this->show_table($message);
+        }
+    }
+
+    private function show_table($message)
+    {
+        // user info
         $data['username'] = "Hans Hartono";
         $data['company_title'] = "Chief Technology Officer";
+
+        // access level
+        $data['access']['create'] = true;
+        $data['access']['edit'] = true;
+        $data['access']['delete'] = true;
+
+        // message
+        $data['message'] = $message;
+
+        // get necessary data
+        $data['units'] = $this->unit_model->get_all_units();
+
+        // show the view
         $this->load->view('header');
         $this->load->view('unit/navigation', $data);
-
-        $data['units'] = $this->unit_model->get_all_units();
         $this->load->view('unit/main', $data);
         $this->load->view('footer');
     }

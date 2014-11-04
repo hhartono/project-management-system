@@ -17,7 +17,7 @@
                     <div id="da-logo">
                         <div id="da-logo-img">
                             <a href="/home">
-                                <img src="assets/images/logo.png" alt="Subianto & Siane">
+                                <img src="/assets/images/logo.png" alt="Subianto & Siane">
                             </a>
                         </div>
                     </div>
