@@ -3,21 +3,18 @@
         /*
             Modal Controller for Creating
          */
-        $("#da-unit-create-form-div").dialog({
+        $("#da-supplier-create-form-div").dialog({
             autoOpen: false,
-            title: "Tambah Satuan",
+            title: "Tambah Supplier",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-unit-create-form-val').submit();
+                    $(this).find('form#da-supplier-create-form-val').submit();
                 }}]
         }).find('form').validate({
             rules: {
-                abbreviation: {
-                    required: true
-                },
                 name: {
                     required: true
                 }
@@ -26,36 +23,33 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-unit-create-validate-error").html(message).show();
+                    $("#da-supplier-create-validate-error").html(message).show();
                 } else {
-                    $("#da-unit-create-validate-error").hide();
+                    $("#da-supplier-create-validate-error").hide();
                 }
             }
         });
 
-        $("#da-unit-create-dialog").bind("click", function(event) {
+        $("#da-supplier-create-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-unit-create-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-supplier-create-form-div").dialog("option", {modal: true}).dialog("open");
         });
 
         /*
             Modal Controller for Editing
          */
-        $("#da-unit-edit-form-div").dialog({
+        $("#da-supplier-edit-form-div").dialog({
             autoOpen: false,
-            title: "Ubah Satuan",
+            title: "Ubah Supplier",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-unit-edit-form-val').submit();
+                    $(this).find('form#da-supplier-edit-form-val').submit();
                 }}]
         }).find('form').validate({
             rules: {
-                abbreviation: {
-                    required: true
-                },
                 name: {
                     required: true
                 }
@@ -64,26 +58,22 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-unit-edit-validate-error").html(message).show();
+                    $("#da-supplier-edit-validate-error").html(message).show();
                 } else {
-                    $("#da-unit-edit-validate-error").hide();
+                    $("#da-supplier-edit-validate-error").hide();
                 }
             }
         });
 
-        $(".da-unit-edit-dialog").bind("click", function(event) {
+        $(".da-supplier-edit-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-unit-edit-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-supplier-edit-form-div").dialog("option", {modal: true}).dialog("open");
 
             var id = $(this).data("value");
-            var abbreviation = $(this).parent("td").parent("tr").find(".abbreviation-row").html();
             var name = $(this).parent("td").parent("tr").find(".name-row").html();
-            var notes = $(this).parent("td").parent("tr").find(".notes-row").html();
 
-            $("#unit-edit-id").val(id);
-            $("#unit-edit-abbreviation").val(abbreviation);
-            $("#unit-edit-name").val(name);
-            $("#unit-edit-notes").val(notes);
+            $("#supplier-edit-id").val(id);
+            $("#supplier-edit-name").val(name);
         });
     });
 }) (jQuery);

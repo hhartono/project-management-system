@@ -105,7 +105,7 @@
                             </a>
                             <ul>
                                 <li><a href="/unit">Satuan</a></li>
-                                <li><a href="/supplier">Suppliers</a></li>
+                                <li><a href="/supplier">Supplier</a></li>
                             </ul>
                         </li>
 

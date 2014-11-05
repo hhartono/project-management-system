@@ -1,23 +1,26 @@
 <?php
-class Unit_model extends CI_Model {
+class Supplier_model extends CI_Model {
     public function __construct()
     {
         $this->load->database();
     }
 
-    public function get_unit_by_abbreviation($abbreviation){
+    public function get_supplier_by_name($name){
+        /*
         $query = $this->db->get_where('unit_master', array('abbreviation' => $abbreviation));
         return $query->result_array();
+        */
     }
 
-    public function get_all_units()
+    public function get_all_suppliers()
     {
-        $query = $this->db->get('unit_master');
+        $query = $this->db->get('supplier_master');
         return $query->result_array();
     }
 
-    public function update_unit()
+    public function update_supplier()
     {
+        /*
         if($this->input->post('id') !== false && $this->input->post('abbreviation') !== false
             && $this->input->post('name') !== false && $this->input->post('notes') !== false){
             $data = array(
@@ -31,10 +34,12 @@ class Unit_model extends CI_Model {
         }else{
             return false;
         }
+        */
     }
 
-    public function set_unit()
+    public function set_supplier()
     {
+        /*
         if($this->input->post('abbreviation') !== false && $this->input->post('name') !== false
             && $this->input->post('notes') !== false){
             date_default_timezone_set('Asia/Jakarta');
@@ -50,9 +55,11 @@ class Unit_model extends CI_Model {
         }else{
             return false;
         }
+        */
     }
 
-    public function delete_unit($unit_id){
+    public function delete_supplier($unit_id){
+        /*
         $response = $this->db->delete('unit_master', array('id' => $unit_id));
         $affected_row = $this->db->affected_rows();
 
@@ -62,5 +69,6 @@ class Unit_model extends CI_Model {
         }
 
         return $delete_status;
+        */
     }
 }

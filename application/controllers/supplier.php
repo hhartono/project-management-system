@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Unit extends CI_Controller {
+class Supplier extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,7 +20,7 @@ class Unit extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('unit_model');
+        $this->load->model('supplier_model');
     }
 
 	public function index()
@@ -29,7 +29,8 @@ class Unit extends CI_Controller {
         $this->show_table($message);
     }
 
-    public function create_unit(){
+    public function create_supplier(){
+        /*
         if($this->input->post('abbreviation')){
             // check if there is any duplicate
             $duplicate_check = $this->unit_model->get_unit_by_abbreviation($this->input->post('abbreviation'));
@@ -52,9 +53,11 @@ class Unit extends CI_Controller {
             $message['error'] = "Satuan gagal disimpan.";
             $this->show_table($message);
         }
+        */
     }
 
-    public function update_unit(){
+    public function update_supplier(){
+        /*
         $response = $this->unit_model->update_unit();
 
         if($response){
@@ -64,9 +67,11 @@ class Unit extends CI_Controller {
             $message['error'] = "Satuan gagal diubah.";
             $this->show_table($message);
         }
+        */
     }
 
-    public function delete_unit($unit_id){
+    public function delete_supplier($supplier_id){
+        /*
         $response = $this->unit_model->delete_unit($unit_id);
 
         // display message according db status
@@ -77,6 +82,7 @@ class Unit extends CI_Controller {
             $message['error'] = "Satuan gagal dihapus.";
             $this->show_table($message);
         }
+        */
     }
 
     private function show_table($message)
@@ -94,15 +100,15 @@ class Unit extends CI_Controller {
         $data['message'] = $message;
 
         // get necessary data
-        $data['units'] = $this->unit_model->get_all_units();
+        $data['suppliers'] = $this->supplier_model->get_all_suppliers();
 
         // show the view
         $this->load->view('header');
-        $this->load->view('unit/navigation', $data);
-        $this->load->view('unit/main', $data);
+        $this->load->view('supplier/navigation', $data);
+        $this->load->view('supplier/main', $data);
         $this->load->view('footer');
     }
 }
 
-/* End of file unit.php */
-/* Location: ./application/controllers/unit.php */
+/* End of file supplier.php */
+/* Location: ./application/controllers/supplier.php */

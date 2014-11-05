@@ -5,7 +5,7 @@
                     <?php if (isset($access['create']) && $access['create']): ?>
                         <div class="row-fluid">
                             <div class="span12">
-                                <button id="da-unit-create-dialog" class="btn btn-success btn-create">[+] Tambah Satuan</button>
+                                <button id="da-supplier-create-dialog" class="btn btn-success btn-create">[+] Tambah Supplier</button>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -27,31 +27,31 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-unit-datatable-numberpaging" class="da-table"">
+                                    <table id="da-supplier-datatable-numberpaging" class="da-table"">
                                         <thead>
                                             <tr>
-                                                <th>Kode Satuan</th>
-                                                <th>Nama Satuan</th>
-                                                <th>Keterangan</th>
+                                                <th>Nama</th>
+                                                <th>Alamat</th>
+                                                <th>Telepon</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <th>Ubah/Hapus</th>
                                                 <?php endif; ?>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($units as $each_unit): ?>
+                                            <?php foreach($suppliers as $each_supplier): ?>
                                                 <tr>
-                                                    <td class="abbreviation-row"><?php echo $each_unit['abbreviation']; ?></td>
-                                                    <td class="name-row"><?php echo $each_unit['name']; ?></td>
-                                                    <td class="notes-row"><?php echo $each_unit['notes']; ?></td>
+                                                    <td class="name-row"><?php echo $each_supplier['name']; ?></td>
+                                                    <td class="address-row"><?php echo $each_supplier['address']; ?></td>
+                                                    <td class="phone-row"><?php echo $each_supplier['phone_number_1']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <?php if(isset($access['edit']) && $access['edit']): ?>
-                                                                <a class="da-unit-edit-dialog" href="#" data-value="<?php echo $each_unit['id']; ?>"><i class="icol-pencil"></i></a>
+                                                                <a class="da-supplier-edit-dialog" href="#" data-value="<?php echo $each_supplier['id']; ?>"><i class="icol-pencil"></i></a>
                                                             <?php endif; ?>
                                                             <?php if(isset($access['delete']) && $access['delete']):
-                                                                $unit_id = $each_unit['id'];
-                                                                $delete_url = "/unit/delete_unit/" . $unit_id;
+                                                                $supplier_id = $each_supplier['id'];
+                                                                $delete_url = "/supplier/delete_supplier/" . $supplier_id;
                                                                 ?>
                                                                 <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
                                                             <?php endif; ?>
@@ -66,55 +66,55 @@
                         </div>
                     </div>
 
-                    <div id="da-unit-create-form-div" class="form-container">
-                        <form id="da-unit-create-form-val" class="da-form" action="/unit/create_unit" method="post">
-                            <div id="da-unit-create-validate-error" class="da-message error" style="display:none;"></div>
+                    <div id="da-supplier-create-form-div" class="form-container">
+                        <form id="da-supplier-create-form-val" class="da-form" action="/supplier/create_supplier" method="post">
+                            <div id="da-supplier-create-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Kode Satuan</label>
-                                    <div class="da-form-item large">
-                                        <input type="text" name="abbreviation">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Nama Satuan</label>
+                                    <label class="da-form-label">Nama</label>
                                     <div class="da-form-item large">
                                         <input type="text" name="name">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Keterangan</label>
+                                    <label class="da-form-label">Alamat</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="notes">
+                                        <input type="text" name="address">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="phone">
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <div id="da-unit-edit-form-div" class="form-container">
-                        <form id="da-unit-edit-form-val" class="da-form" action="/unit/update_unit" method="post">
-                            <div id="da-unit-edit-validate-error" class="da-message error" style="display:none;"></div>
+                    <div id="da-supplier-edit-form-div" class="form-container">
+                        <form id="da-supplier-edit-form-val" class="da-form" action="/supplier/update_supplier" method="post">
+                            <div id="da-supplier-edit-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Kode Satuan</label>
+                                    <label class="da-form-label">Nama</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-abbreviation" type="text" name="abbreviation">
+                                        <input id="supplier-edit-name" type="text" name="name">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Nama Satuan</label>
+                                    <label class="da-form-label">Alamat</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-name" type="text" name="name">
+                                        <input id="supplier-edit-address" type="text" name="address">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Keterangan</label>
+                                    <label class="da-form-label">Telepon</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-notes" type="text" name="notes">
+                                        <input id="supplier-edit-phone" type="text" name="phone">
                                     </div>
                                 </div>
-                                <input id="unit-edit-id" type="hidden" name="id">
+                                <input id="supplier-edit-id" type="hidden" name="id">
                             </div>
                         </form>
                     </div>
