@@ -79,6 +79,11 @@ class Unit extends CI_Controller {
         }
     }
 
+    public function get_unit_detail($unit_id){
+        $unit_detail = $this->unit_model->get_unit_by_id($unit_id);
+        echo json_encode($unit_detail);
+    }
+
     private function show_table($message)
     {
         // user info

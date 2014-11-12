@@ -30,59 +30,58 @@ class Supplier extends CI_Controller {
     }
 
     public function create_supplier(){
-        /*
-        if($this->input->post('abbreviation')){
+        if($this->input->post('name')){
             // check if there is any duplicate
-            $duplicate_check = $this->unit_model->get_unit_by_abbreviation($this->input->post('abbreviation'));
+            $duplicate_check = $this->supplier_model->get_supplier_by_name($this->input->post('name'));
 
             if(empty($duplicate_check)){
-                $response = $this->unit_model->set_unit();
+                $response = $this->supplier_model->set_supplier();
 
                 if($response){
-                    $message['success'] = "Satuan berhasil disimpan.";
+                    $message['success'] = "Supplier berhasil disimpan.";
                     $this->show_table($message);
                 }else{
-                    $message['error'] = "Satuan gagal disimpan.";
+                    $message['error'] = "Supplier gagal disimpan.";
                     $this->show_table($message);
                 }
             }else{
-                $message['error'] = "Satuan gagal disimpan. Satuan sudah ada dalam system.";
+                $message['error'] = "Supplier gagal disimpan. Supplier sudah ada dalam system.";
                 $this->show_table($message);
             }
         }else{
-            $message['error'] = "Satuan gagal disimpan.";
+            $message['error'] = "Supplier gagal disimpan.";
             $this->show_table($message);
         }
-        */
     }
 
     public function update_supplier(){
-        /*
-        $response = $this->unit_model->update_unit();
+        $response = $this->supplier_model->update_supplier();
 
         if($response){
-            $message['success'] = "Satuan berhasil diubah.";
+            $message['success'] = "Supplier berhasil diubah.";
             $this->show_table($message);
         }else{
-            $message['error'] = "Satuan gagal diubah.";
+            $message['error'] = "Supplier gagal diubah.";
             $this->show_table($message);
         }
-        */
     }
 
     public function delete_supplier($supplier_id){
-        /*
-        $response = $this->unit_model->delete_unit($unit_id);
+        $response = $this->supplier_model->delete_supplier($supplier_id);
 
         // display message according db status
         if($response){
-            $message['success'] = "Satuan berhasil dihapus.";
+            $message['success'] = "Supplier berhasil dihapus.";
             $this->show_table($message);
         }else{
-            $message['error'] = "Satuan gagal dihapus.";
+            $message['error'] = "Supplier gagal dihapus.";
             $this->show_table($message);
         }
-        */
+    }
+
+    public function get_supplier_detail($supplier_id){
+        $supplier_detail = $this->supplier_model->get_supplier_by_id($supplier_id);
+        echo json_encode($supplier_detail);
     }
 
     private function show_table($message)

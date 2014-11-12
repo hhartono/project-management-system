@@ -5,6 +5,11 @@ class Unit_model extends CI_Model {
         $this->load->database();
     }
 
+    public function get_unit_by_id($id){
+        $query = $this->db->get_where('unit_master', array('id' => $id));
+        return $query->row_array();
+    }
+
     public function get_unit_by_abbreviation($abbreviation){
         $query = $this->db->get_where('unit_master', array('abbreviation' => $abbreviation));
         return $query->result_array();

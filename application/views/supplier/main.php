@@ -33,30 +33,65 @@
                                                 <th>Nama</th>
                                                 <th>Alamat</th>
                                                 <th>Telepon</th>
-                                                <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
-                                                    <th>Ubah/Hapus</th>
-                                                <?php endif; ?>
+                                                <?php
+                                                    $control_label_array = array();
+                                                    $control_label_array[] = "Lihat";
+
+                                                    if(isset($access['edit']) && $access['edit']){
+                                                        $control_label_array[] = "Ubah";
+                                                    }
+
+                                                    if(isset($access['delete']) && $access['delete']){
+                                                        $control_label_array[] = "Hapus";
+                                                    }
+                                                ?>
+                                                <th><?php echo implode('/', $control_label_array); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach($suppliers as $each_supplier): ?>
                                                 <tr>
                                                     <td class="name-row"><?php echo $each_supplier['name']; ?></td>
-                                                    <td class="address-row"><?php echo $each_supplier['address']; ?></td>
-                                                    <td class="phone-row"><?php echo $each_supplier['phone_number_1']; ?></td>
-                                                    <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
-                                                        <td class="da-icon-column">
-                                                            <?php if(isset($access['edit']) && $access['edit']): ?>
-                                                                <a class="da-supplier-edit-dialog" href="#" data-value="<?php echo $each_supplier['id']; ?>"><i class="icol-pencil"></i></a>
-                                                            <?php endif; ?>
-                                                            <?php if(isset($access['delete']) && $access['delete']):
-                                                                $supplier_id = $each_supplier['id'];
-                                                                $delete_url = "/supplier/delete_supplier/" . $supplier_id;
-                                                                ?>
-                                                                <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
-                                                            <?php endif; ?>
-                                                        </td>
-                                                    <?php endif; ?>
+                                                    <?php
+                                                        // aggreagate the address detail
+                                                        $address_array = array();
+                                                        if(!empty($each_supplier['address'])){
+                                                            $address_array[] = $each_supplier['address'];
+                                                        }
+
+                                                        if(!empty($each_supplier['city'])){
+                                                            $address_array[] = $each_supplier['city'];
+                                                        }
+                                                    ?>
+                                                    <td class="address-row"><?php echo implode(', ', $address_array); ?></td>
+                                                    <?php
+                                                        // aggreagate the phone number
+                                                        $phone_number_array = array();
+                                                        if(!empty($each_supplier['phone_number_1'])){
+                                                            $phone_number_array[] = $each_supplier['phone_number_1'];
+                                                        }
+
+                                                        if(!empty($each_supplier['phone_number_2'])){
+                                                            $phone_number_array[] = $each_supplier['phone_number_2'];
+                                                        }
+
+                                                        if(!empty($each_supplier['phone_number_3'])){
+                                                            $phone_number_array[] = $each_supplier['phone_number_3'];
+                                                        }
+                                                    ?>
+                                                    <td class="phone-row"><?php echo implode(', ', $phone_number_array); ?></td>
+                                                    <td class="da-icon-column">
+                                                        <a class="da-supplier-view-dialog" href="#" data-value="<?php echo $each_supplier['id']; ?>"><i class="icol-eye"></i></a>
+                                                        <?php if(isset($access['edit']) && $access['edit']): ?>
+                                                            <a class="da-supplier-edit-dialog" href="#" data-value="<?php echo $each_supplier['id']; ?>"><i class="icol-pencil"></i></a>
+                                                        <?php endif; ?>
+                                                        <?php if(isset($access['delete']) && $access['delete']):
+                                                            $supplier_id = $each_supplier['id'];
+                                                            $delete_url = "/supplier/delete_supplier/" . $supplier_id;
+                                                            ?>
+                                                            <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
+                                                        <?php endif; ?>
+                                                    </td>
                                                 </tr>
                                             <?php endforeach?>
                                         </tbody>
@@ -64,6 +99,80 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div id="da-supplier-view-form-div" class="form-container">
+                        <form id="da-supplier-view-form-val" class="da-form" method="post">
+                            <div id="da-supplier-view-validate-error" class="da-message error" style="display:none;"></div>
+                            <div class="da-form-inline">
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Nama</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-name" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Alamat</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-address" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kota</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-city" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kode Pos</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-postal-code" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Provinsi</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-province" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 1</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-phone-1" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 2</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-phone-2" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 3</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-phone-3" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Fax</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-fax" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Email</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-email" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Website</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-view-website" type="text" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <div id="da-supplier-create-form-div" class="form-container">
@@ -83,9 +192,57 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Telepon</label>
+                                    <label class="da-form-label">Kota</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="phone">
+                                        <input type="text" name="city">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kode Pos</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="postal_code">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Provinsi</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="province">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 1</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="phone_number_1">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 2</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="phone_number_2">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 3</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="phone_number_3">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Fax</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="fax">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Email</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="email">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Website</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="website">
                                     </div>
                                 </div>
                             </div>
@@ -109,9 +266,57 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Telepon</label>
+                                    <label class="da-form-label">Kota</label>
                                     <div class="da-form-item large">
-                                        <input id="supplier-edit-phone" type="text" name="phone">
+                                        <input id="supplier-edit-city" type="text" name="city">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kode Pos</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-postal-code" type="text" name="postal_code">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Provinsi</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-province" type="text" name="province">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 1</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-phone-1" type="text" name="phone_number_1">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 2</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-phone-2" type="text" name="phone_number_2">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 3</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-phone-3" type="text" name="phone_number_3">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Fax</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-fax" type="text" name="fax">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Email</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-email" type="text" name="email">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Website</label>
+                                    <div class="da-form-item large">
+                                        <input id="supplier-edit-website" type="text" name="website">
                                     </div>
                                 </div>
                                 <input id="supplier-edit-id" type="hidden" name="id">

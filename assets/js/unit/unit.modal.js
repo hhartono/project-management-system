@@ -12,6 +12,11 @@
                 text: "Simpan",
                 click: function() {
                     $(this).find('form#da-unit-create-form-val').submit();
+                }},
+                {
+                text: "Keluar",
+                click: function() {
+                    $("#da-unit-create-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
@@ -50,6 +55,11 @@
                 text: "Simpan",
                 click: function() {
                     $(this).find('form#da-unit-edit-form-val').submit();
+                }},
+                {
+                text: "Keluar",
+                click: function() {
+                    $("#da-unit-edit-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
@@ -76,14 +86,12 @@
             $("#da-unit-edit-form-div").dialog("option", {modal: true}).dialog("open");
 
             var id = $(this).data("value");
-            var abbreviation = $(this).parent("td").parent("tr").find(".abbreviation-row").html();
-            var name = $(this).parent("td").parent("tr").find(".name-row").html();
-            var notes = $(this).parent("td").parent("tr").find(".notes-row").html();
-
-            $("#unit-edit-id").val(id);
-            $("#unit-edit-abbreviation").val(abbreviation);
-            $("#unit-edit-name").val(name);
-            $("#unit-edit-notes").val(notes);
+            $.get( "/unit/get_unit_detail/" + id, function(data) {
+                $("#unit-edit-id").val(id);
+                $("#unit-edit-abbreviation").val(data.abbreviation);
+                $("#unit-edit-name").val(data.name);
+                $("#unit-edit-notes").val(data.notes);
+            }, "json" );
         });
     });
 }) (jQuery);

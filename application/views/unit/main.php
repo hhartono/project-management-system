@@ -34,7 +34,17 @@
                                                 <th>Nama Satuan</th>
                                                 <th>Keterangan</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
-                                                    <th>Ubah/Hapus</th>
+                                                    <?php
+                                                        $control_label_array = array();
+                                                        if(isset($access['edit']) && $access['edit']){
+                                                            $control_label_array[] = "Ubah";
+                                                        }
+
+                                                        if(isset($access['delete']) && $access['delete']){
+                                                            $control_label_array[] = "Hapus";
+                                                        }
+                                                    ?>
+                                                    <th><?php echo implode('/', $control_label_array); ?></th>
                                                 <?php endif; ?>
                                             </tr>
                                         </thead>
