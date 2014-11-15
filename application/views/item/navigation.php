@@ -61,9 +61,12 @@
                 </div>
                 -->
                 <!-- Breadcrumbs -->
+                <!-- Breadcrumbs -->
                 <div id="da-breadcrumb">
                     <ul>
-                        <li class="active"><a href="/home"><i class="icon-home"></i> Home</a></li>
+                        <li><a href="/home"><i class="icon-home"></i> Home</a></li>
+                        <li><a href="#">List</a></li>
+                        <li class="active"><span>Jenis Barang</span></li>
                     </ul>
                 </div>
             </div>
@@ -83,7 +86,7 @@
                 <!-- Main Navigation -->
                 <div id="da-main-nav" class="btn-container">
                     <ul>
-                        <li class="active">
+                        <li>
                             <a href="/home">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
@@ -92,7 +95,7 @@
                                 Home
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">
@@ -104,7 +107,6 @@
                                 <li><a href="/item">Jenis Barang</a></li>
                                 <li><a href="/unit">Satuan</a></li>
                                 <li><a href="/supplier">Supplier</a></li>
-
                             </ul>
                         </li>
 

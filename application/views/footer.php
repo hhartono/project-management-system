@@ -37,6 +37,9 @@
     <script src="/assets/js/supplier/supplier.modal.js"></script>
     <script src="/assets/js/supplier/supplier.tables.js"></script>
 
+    <script src="/assets/js/item/item.modal.js"></script>
+    <script src="/assets/js/item/item.tables.js"></script>
+
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
 

@@ -47,8 +47,8 @@ class Unit_model extends CI_Model {
             $data = array(
                 'abbreviation' => $this->input->post('abbreviation'),
                 'name' => $this->input->post('name'),
-                'creation_date' => date("Y-m-d H:i:s"),
-                'notes' => $this->input->post('notes')
+                'notes' => $this->input->post('notes'),
+                'creation_date' => date("Y-m-d H:i:s")
             );
 
             return $this->db->insert('unit_master', $data);
