@@ -1,32 +1,43 @@
 <?php
-class Item_model extends CI_Model {
+class Stock_model extends CI_Model {
     public function __construct()
     {
         $this->load->database();
     }
 
-    public function get_item_by_id($id){
-        $query = $this->db->get_where('item_master', array('id' => $id));
+    public function get_stock_by_id($id){
+        $this->db->select('stock_master.*, item_master.name, unit_master.name AS unit, supplier_master.name AS supplier');
+        $this->db->from('stock_master');
+        $this->db->join('item_master', 'stock_master.item_id = item_master.id');
+        $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
+        $this->db->join('supplier_master', 'stock_master.supplier_id = supplier_master.id');
+        $this->db->where('stock_master.id', $id);
+        $query = $this->db->get();
+
         return $query->row_array();
     }
 
-    public function get_item_by_name($name){
+    public function get_stock_by_name($name){
+        /*
         $query = $this->db->get_where('item_master', array('name' => $name));
         return $query->result_array();
+        */
     }
 
-    public function get_all_items()
+    public function get_all_stocks()
     {
-        $this->db->select('item_master.*, unit_master.name AS unit');
-        $this->db->from('item_master');
+        $this->db->select('stock_master.*, item_master.name, unit_master.name AS unit');
+        $this->db->from('stock_master');
+        $this->db->join('item_master', 'stock_master.item_id = item_master.id');
         $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
         $query = $this->db->get();
 
         return $query->result_array();
     }
 
-    public function update_item()
+    public function update_stock()
     {
+        /*
         if($this->input->post('id') !== false && $this->input->post('name') !== false
             && $this->input->post('unit_id') !== false && $this->input->post('notes') !== false){
             $data = array(
@@ -40,10 +51,12 @@ class Item_model extends CI_Model {
         }else{
             return false;
         }
+        */
     }
 
-    public function set_item()
+    public function set_stock()
     {
+        /*
         if($this->input->post('name') !== false && $this->input->post('unit_id') !== false
             && $this->input->post('notes') !== false){
             date_default_timezone_set('Asia/Jakarta');
@@ -59,9 +72,11 @@ class Item_model extends CI_Model {
         }else{
             return false;
         }
+        */
     }
 
-    public function delete_item($item_id){
+    public function delete_stock($stock_id){
+        /*
         $response = $this->db->delete('item_master', array('id' => $item_id));
         $affected_row = $this->db->affected_rows();
 
@@ -71,5 +86,6 @@ class Item_model extends CI_Model {
         }
 
         return $delete_status;
+        */
     }
 }

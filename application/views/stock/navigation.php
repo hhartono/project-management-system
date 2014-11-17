@@ -66,7 +66,7 @@
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
                         <li><a href="#">List</a></li>
-                        <li class="active"><span>Supplier</span></li>
+                        <li class="active"><span>Stok Barang</span></li>
                     </ul>
                 </div>
             </div>

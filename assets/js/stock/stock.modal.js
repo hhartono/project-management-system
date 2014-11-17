@@ -3,27 +3,24 @@
         /*
             Modal Controller for Creating
          */
-        $("#da-item-create-form-div").dialog({
+        $("#da-stock-create-form-div").dialog({
             autoOpen: false,
-            title: "Tambah Barang",
+            title: "Tambah Stok",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-item-create-form-val').submit();
+                    $(this).find('form#da-stock-create-form-val').submit();
                 }},
                 {
                 text: "Keluar",
                 click: function() {
-                    $("#da-item-create-form-div").dialog("option", {modal: true}).dialog("close");
+                    $("#da-stock-create-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
                 name: {
-                    required: true
-                },
-                unit: {
                     required: true
                 }
             },
@@ -31,57 +28,56 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-item-create-validate-error").html(message).show();
+                    $("#da-stock-create-validate-error").html(message).show();
                 } else {
-                    $("#da-item-create-validate-error").hide();
+                    $("#da-stock-create-validate-error").hide();
                 }
             }
         });
 
-        $("#da-item-create-dialog").bind("click", function(event) {
+        $("#da-stock-create-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-item-create-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-stock-create-form-div").dialog("option", {modal: true}).dialog("open");
 
             /* get the option for unit */
-            $('#item-create-unit')
+            /*
+            $('#stock-create-unit')
                 .find('option')
                 .remove()
                 .end();
 
-            $.get( "/item/get_all_item_units", function(data) {
+            $.get( "/stock/get_all_stock_units", function(data) {
                 $.each(data, function(key, value){
-                    $('#item-create-unit')
+                    $('#stock-create-unit')
                         .append($("<option></option>")
                         .attr("value", value.id)
                         .text(value.name));
                 });
             }, "json" );
+            */
         });
 
         /*
             Modal Controller for Editing
          */
-        $("#da-item-edit-form-div").dialog({
+        $("#da-stock-edit-form-div").dialog({
             autoOpen: false,
-            title: "Ubah Barang",
+            title: "Ubah Stok",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-item-edit-form-val').submit();
+                    $(this).find('form#da-stock-edit-form-val').submit();
                 }},
                 {
                 text: "Keluar",
                 click: function() {
-                    $("#da-item-edit-form-div").dialog("option", {modal: true}).dialog("close");
+                    $("#da-stock-edit-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
                 name: {
-                    required: true
-                },
-                unit: {
                     required: true
                 }
             },
@@ -89,38 +85,65 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-item-edit-validate-error").html(message).show();
+                    $("#da-stock-edit-validate-error").html(message).show();
                 } else {
-                    $("#da-item-edit-validate-error").hide();
+                    $("#da-stock-edit-validate-error").hide();
                 }
             }
         });
 
-        $(".da-item-edit-dialog").bind("click", function(event) {
+        $(".da-stock-edit-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-item-edit-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-stock-edit-form-div").dialog("option", {modal: true}).dialog("open");
 
             /* get the option for unit */
-            $('#item-edit-unit')
+            /*
+            $('#stock-edit-unit')
                 .find('option')
                 .remove()
                 .end();
 
-            $.get( "/item/get_all_item_units", function(data) {
+            $.get( "/stock/get_all_stock_units", function(data) {
                 $.each(data, function(key, value){
-                    $('#item-edit-unit')
+                    $('#stock-edit-unit')
                         .append($("<option></option>")
                         .attr("value", value.id)
                         .text(value.name));
                 });
             }, "json" );
+            */
 
             var id = $(this).data("value");
-            $.get( "/item/get_item_detail/" + id, function(data) {
-                $("#item-edit-id").val(id);
-                $("#item-edit-unit").val(data.unit_id);
-                $("#item-edit-name").val(data.name);
-                $("#item-edit-notes").val(data.notes);
+            $.get( "/stock/get_stock_detail/" + id, function(data) {
+                $("#stock-edit-id").val(id);
+                $("#stock-edit-name").val(data.name);
+            }, "json" );
+        });
+
+        /*
+         Modal Controller for Viewing
+         */
+        $("#da-stock-view-form-div").dialog({
+            autoOpen: false,
+            title: "Lihat Stok",
+            modal: true,
+            width: "640",
+            buttons: [{
+                text: "Keluar",
+                click: function() {
+                    $("#da-stock-view-form-div").dialog("option", {modal: true}).dialog("close");
+                }}]
+        });
+
+        $(".da-stock-view-dialog").bind("click", function(event) {
+            event.preventDefault();
+            $("#da-stock-view-form-div").dialog("option", {modal: true}).dialog("open");
+
+            var id = $(this).data("value");
+            $.get( "/stock/get_stock_detail/" + id, function(data) {
+                $("#stock-view-name").val(data.name);
+                $("#stock-view-unit").val(data.unit);
+                $("#stock-view-supplier").val(data.supplier);
             }, "json" );
         });
     });

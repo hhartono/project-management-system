@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Item extends CI_Controller {
+class Stock extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,8 +20,7 @@ class Item extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('item_model');
-        $this->load->model('unit_model');
+        $this->load->model('stock_model');
     }
 
 	public function index()
@@ -30,8 +29,9 @@ class Item extends CI_Controller {
         $this->show_table($message);
     }
 
-    public function create_item()
+    public function create_stock()
     {
+        /*
         if($this->input->post('name')){
             // check if there is any duplicate
             $duplicate_check = $this->item_model->get_item_by_name($this->input->post('name'));
@@ -54,9 +54,11 @@ class Item extends CI_Controller {
             $message['error'] = "Barang gagal disimpan.";
             $this->show_table($message);
         }
+        */
     }
 
-    public function update_item(){
+    public function update_stock(){
+        /*
         $response = $this->item_model->update_item();
 
         if($response){
@@ -66,9 +68,11 @@ class Item extends CI_Controller {
             $message['error'] = "Barang gagal diubah.";
             $this->show_table($message);
         }
+        */
     }
 
-    public function delete_item($item_id){
+    public function delete_stock($item_id){
+        /*
         $response = $this->item_model->delete_item($item_id);
 
         // display message according db status
@@ -79,16 +83,12 @@ class Item extends CI_Controller {
             $message['error'] = "Barang gagal dihapus.";
             $this->show_table($message);
         }
+        */
     }
 
-    public function get_item_detail($item_id){
-        $item_detail = $this->item_model->get_item_by_id($item_id);
-        echo json_encode($item_detail);
-    }
-
-    public function get_all_item_units(){
-        $item_units = $this->unit_model->get_all_units();
-        echo json_encode($item_units);
+    public function get_stock_detail($stock_id){
+        $stock_detail = $this->stock_model->get_stock_by_id($stock_id);
+        echo json_encode($stock_detail);
     }
 
     private function show_table($message)
@@ -106,15 +106,15 @@ class Item extends CI_Controller {
         $data['message'] = $message;
 
         // get necessary data
-        $data['items'] = $this->item_model->get_all_items();
+        $data['stocks'] = $this->stock_model->get_all_stocks();
 
         // show the view
         $this->load->view('header');
-        $this->load->view('item/navigation', $data);
-        $this->load->view('item/main', $data);
+        $this->load->view('stock/navigation', $data);
+        $this->load->view('stock/main', $data);
         $this->load->view('footer');
     }
 }
 
-/* End of file item.php */
-/* Location: ./application/controllers/item.php */
+/* End of file stock.php */
+/* Location: ./application/controllers/stock.php */
