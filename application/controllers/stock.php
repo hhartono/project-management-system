@@ -21,6 +21,9 @@ class Stock extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('stock_model');
+        $this->load->model('item_model');
+        $this->load->model('supplier_model');
+        $this->load->model('unit_model');
     }
 
 	public function index()
@@ -86,7 +89,53 @@ class Stock extends CI_Controller {
         */
     }
 
+    public function get_all_stock_items(){
+        $stock_items = $this->item_model->get_all_items();
+        return $stock_items;
+    }
+
+    public function get_all_stock_item_names(){
+        $stock_items = $this->get_all_stock_items();
+        $stock_name = array();
+        foreach($stock_items as $stock_item){
+            $stock_name[] = $stock_item['name'];
+        }
+
+        echo json_encode($stock_name);
+    }
+
+    public function get_all_stock_suppliers(){
+        $stock_suppliers = $this->supplier_model->get_all_suppliers();
+        return $stock_suppliers;
+    }
+
+    public function get_all_stock_supplier_names(){
+        $stock_suppliers = $this->get_all_stock_suppliers();
+        $supplier_name = array();
+        foreach($stock_suppliers as $stock_supplier){
+            $supplier_name[] = $stock_supplier['name'];
+        }
+
+        echo json_encode($supplier_name);
+    }
+
+    public function get_unit_by_item_name($item_name){
+        $item_name = urldecode($item_name);
+        $item_detail = $this->item_model->get_item_by_name($item_name);
+
+        if(!empty($item_detail[0]['unit_id'])){
+            $unit_detail = $this->unit_model->get_unit_by_id($item_detail[0]['unit_id']);
+            echo json_encode($unit_detail);
+        }
+    }
+
+    public function get_all_stock_units(){
+        $item_units = $this->unit_model->get_all_units();
+        echo json_encode($item_units);
+    }
+
     public function get_stock_detail($stock_id){
+        $stock_id = urldecode($stock_id);
         $stock_detail = $this->stock_model->get_stock_by_id($stock_id);
         echo json_encode($stock_detail);
     }

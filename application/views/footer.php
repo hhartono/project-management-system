@@ -27,6 +27,7 @@
 
     <!-- JS Plugins --> <!-- TODO - please double check -->
     <script src="/assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- <script src="/assets/js/libs/jquery.autocomplete.js"></script> -->
 
     <!-- JS Demo -->
 

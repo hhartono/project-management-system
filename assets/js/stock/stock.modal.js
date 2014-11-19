@@ -22,6 +22,12 @@
             rules: {
                 name: {
                     required: true
+                },
+                item_count: {
+                    required: true
+                },
+                supplier: {
+                    required: true
                 }
             },
             invalidHandler: function(form, validator) {
@@ -38,6 +44,21 @@
         $("#da-stock-create-dialog").bind("click", function(event) {
             event.preventDefault();
             $("#da-stock-create-form-div").dialog("option", {modal: true}).dialog("open");
+
+            $.get( "/stock/get_all_stock_item_names", function(data) {
+                $( "#stock-create-name" ).autocomplete({
+                    source: data,
+                    change: function() {
+                        get_unit_by_item_name();
+                    }
+                });
+            }, "json" );
+
+            $.get( "/stock/get_all_stock_supplier_names", function(data) {
+                $( "#stock-create-supplier" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
 
             /* get the option for unit */
             /*
@@ -56,6 +77,38 @@
             }, "json" );
             */
         });
+
+        function get_unit_by_item_name(){
+            var item_name = $("#stock-create-name").val();
+            var item_name_encoded = encodeURIComponent(item_name);
+
+            $.get( "/stock/get_unit_by_item_name/" + item_name_encoded, function(data) {
+                if(data != null && data.name != null){
+                    $('#stock-create-item-count-label').text(data.name);
+                }else{
+                    $('#stock-create-item-count-label').text('');
+                }
+            }, "json" );
+        }
+
+        /*
+        $("#stock-create-name").select(function() {
+            alert('detected selected!');
+        });
+
+        $("#stock-create-name").change(function() {
+            alert('detected!');
+            var item_name = $("#stock-create-name").val();
+
+            $.get( "/stock/get_unit_by_item_name/" + item_name, function(data) {
+                if(data != null && data.name != null){
+                    $('#stock-create-item-count-label').text(data.name);
+                }else{
+                    $('#stock-create-item-count-label').text('');
+                }
+            }, "json" );
+        });
+        */
 
         /*
             Modal Controller for Editing

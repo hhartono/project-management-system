@@ -114,7 +114,38 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Barang</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="name">
+                                        <input id="stock-create-name" type="text" name="name">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Jumlah Stok</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-create-item-count" type="text" name="item_count">
+                                        <label for="stock-create-item-count" id="stock-create-item-count-label"></label>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Supplier Barang</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-create-supplier" type="text" name="supplier">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Subproject</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-create-subproject" type="text" name="subproject">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">PO Detail ID</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-create-po-detail-id" type="text" name="po_detail_id">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Harga Barang</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-create-item-price" type="text" name="item-price">
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +162,7 @@
                                         <input id="stock-edit-name" type="text" name="name">
                                     </div>
                                 </div>
-                                <input id="supplier-edit-id" type="hidden" name="id">
+                                <input id="stock-edit-id" type="hidden" name="id">
                             </div>
                         </form>
                     </div>

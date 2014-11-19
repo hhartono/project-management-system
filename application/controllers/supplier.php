@@ -80,6 +80,7 @@ class Supplier extends CI_Controller {
     }
 
     public function get_supplier_detail($supplier_id){
+        $supplier_id = urldecode($supplier_id);
         $supplier_detail = $this->supplier_model->get_supplier_by_id($supplier_id);
         echo json_encode($supplier_detail);
     }

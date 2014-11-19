@@ -82,6 +82,7 @@ class Item extends CI_Controller {
     }
 
     public function get_item_detail($item_id){
+        $item_id = urldecode($item_id);
         $item_detail = $this->item_model->get_item_by_id($item_id);
         echo json_encode($item_detail);
     }
