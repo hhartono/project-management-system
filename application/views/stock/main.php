@@ -145,7 +145,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Harga Barang</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-create-item-price" type="text" name="item-price">
+                                        <input id="stock-create-item-price" type="text" name="item_price">
                                     </div>
                                 </div>
                             </div>

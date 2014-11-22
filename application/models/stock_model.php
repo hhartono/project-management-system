@@ -54,25 +54,29 @@ class Stock_model extends CI_Model {
         */
     }
 
-    public function set_stock()
+    public function set_stock($database_input_array)
     {
-        /*
-        if($this->input->post('name') !== false && $this->input->post('unit_id') !== false
-            && $this->input->post('notes') !== false){
+        if($database_input_array['item_id'] !== false && $database_input_array['supplier_id'] !== false
+            && $database_input_array['subproject_id'] !== false && $database_input_array['po_detail_id'] !== false
+            && $database_input_array['item_price'] !== false && $database_input_array['item_count'] !== false
+            && $database_input_array['item_stock_code'] !== false){
             date_default_timezone_set('Asia/Jakarta');
 
             $data = array(
-                'name' => $this->input->post('name'),
-                'unit_id' => $this->input->post('unit_id'),
-                'notes' => $this->input->post('notes'),
-                'creation_date' => date("Y-m-d H:i:s")
+                'item_id' => $database_input_array['item_id'],
+                'supplier_id' => $database_input_array['supplier_id'],
+                'subproject_id' => $database_input_array['subproject_id'],
+                'po_detail_id' => $database_input_array['po_detail_id'],
+                'item_price' => $database_input_array['item_price'],
+                'item_count' => $database_input_array['item_count'],
+                'item_stock_code' => $database_input_array['item_stock_code'],
+                'received_date' => date("Y-m-d H:i:s")
             );
 
-            return $this->db->insert('item_master', $data);
+            return $this->db->insert('stock_master', $data);
         }else{
             return false;
         }
-        */
     }
 
     public function delete_stock($stock_id){
