@@ -20,6 +20,7 @@ class Item extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('category_model');
         $this->load->model('item_model');
         $this->load->model('unit_model');
     }
@@ -85,6 +86,11 @@ class Item extends CI_Controller {
         $item_id = urldecode($item_id);
         $item_detail = $this->item_model->get_item_by_id($item_id);
         echo json_encode($item_detail);
+    }
+
+    public function get_all_item_categories(){
+        $item_categories = $this->category_model->get_all_categories();
+        echo json_encode($item_categories);
     }
 
     public function get_all_item_units(){

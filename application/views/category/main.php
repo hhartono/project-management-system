@@ -5,7 +5,7 @@
                     <?php if (isset($access['create']) && $access['create']): ?>
                         <div class="row-fluid">
                             <div class="span12">
-                                <button id="da-unit-create-dialog" class="btn btn-success btn-create">[+] Tambah Satuan</button>
+                                <button id="da-category-create-dialog" class="btn btn-success btn-create">[+] Tambah Kategori</button>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -14,7 +14,7 @@
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Satuan
+                                        <i class="icol-grid"></i> Kategori Barang
                                     </span>
                                 </div>
                                 <?php if(isset($message['success'])): ?>
@@ -27,12 +27,11 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-unit-datatable-numberpaging" class="da-table"">
+                                    <table id="da-category-datatable-numberpaging" class="da-table"">
                                         <thead>
                                             <tr>
-                                                <th>Kode Satuan</th>
-                                                <th>Nama Satuan</th>
-                                                <th>Keterangan</th>
+                                                <th>Prefix Kategori</th>
+                                                <th>Nama Kategori</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         $control_label_array = array();
@@ -49,19 +48,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($units as $each_unit): ?>
+                                            <?php foreach($categories as $each_category): ?>
                                                 <tr>
-                                                    <td class="abbreviation-row"><?php echo $each_unit['abbreviation']; ?></td>
-                                                    <td class="name-row"><?php echo $each_unit['name']; ?></td>
-                                                    <td class="notes-row"><?php echo $each_unit['notes']; ?></td>
+                                                    <td class="prefix-row"><?php echo $each_category['prefix']; ?></td>
+                                                    <td class="name-row"><?php echo $each_category['name']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <?php if(isset($access['edit']) && $access['edit']): ?>
-                                                                <a class="da-unit-edit-dialog" href="#" data-value="<?php echo $each_unit['id']; ?>"><i class="icol-pencil"></i></a>
+                                                                <a class="da-category-edit-dialog" href="#" data-value="<?php echo $each_category['id']; ?>"><i class="icol-pencil"></i></a>
                                                             <?php endif; ?>
                                                             <?php if(isset($access['delete']) && $access['delete']):
-                                                                $unit_id = $each_unit['id'];
-                                                                $delete_url = "/unit/delete_unit/" . $unit_id;
+                                                                $category_id = $each_category['id'];
+                                                                $delete_url = "/category/delete_category/" . $category_id;
                                                                 ?>
                                                                 <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
                                                             <?php endif; ?>
@@ -76,55 +74,43 @@
                         </div>
                     </div>
 
-                    <div id="da-unit-create-form-div" class="form-container">
-                        <form id="da-unit-create-form-val" class="da-form" action="/unit/create_unit" method="post">
-                            <div id="da-unit-create-validate-error" class="da-message error" style="display:none;"></div>
+                    <div id="da-category-create-form-div" class="form-container">
+                        <form id="da-category-create-form-val" class="da-form" action="/category/create_category" method="post">
+                            <div id="da-category-create-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Kode Satuan</label>
+                                    <label class="da-form-label">Prefix Kategori</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="abbreviation">
+                                        <input type="text" name="prefix">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Nama Satuan</label>
+                                    <label class="da-form-label">Nama Kategori</label>
                                     <div class="da-form-item large">
                                         <input type="text" name="name">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Keterangan</label>
-                                    <div class="da-form-item large">
-                                        <input type="text" name="notes">
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <div id="da-unit-edit-form-div" class="form-container">
-                        <form id="da-unit-edit-form-val" class="da-form" action="/unit/update_unit" method="post">
-                            <div id="da-unit-edit-validate-error" class="da-message error" style="display:none;"></div>
+                    <div id="da-category-edit-form-div" class="form-container">
+                        <form id="da-category-edit-form-val" class="da-form" action="/category/update_category" method="post">
+                            <div id="da-category-edit-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Kode Satuan</label>
+                                    <label class="da-form-label">Prefix Kategori</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-abbreviation" type="text" name="abbreviation">
+                                        <input id="category-edit-prefix" type="text" name="prefix">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Nama Satuan</label>
+                                    <label class="da-form-label">Nama Kategori</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-name" type="text" name="name">
+                                        <input id="category-edit-name" type="text" name="name">
                                     </div>
                                 </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Keterangan</label>
-                                    <div class="da-form-item large">
-                                        <input id="unit-edit-notes" type="text" name="notes">
-                                    </div>
-                                </div>
-                                <input id="unit-edit-id" type="hidden" name="id">
+                                <input id="category-edit-id" type="hidden" name="id">
                             </div>
                         </form>
                     </div>

@@ -106,6 +106,7 @@
                             <ul>
                                 <li><a href="/item">Jenis Barang</a></li>
                                 <li><a href="/stock">Stok Barang</a></li>
+                                <li><a href="/category">Kategori Barang</a></li>
                                 <li><a href="/unit">Satuan</a></li>
                                 <li><a href="/supplier">Supplier</a></li>
                             </ul>

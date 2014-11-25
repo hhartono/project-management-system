@@ -32,6 +32,7 @@
                                             <tr>
                                                 <th>Nama Barang</th>
                                                 <th>Satuan Barang</th>
+                                                <th>Kategori Barang</th>
                                                 <th>Keterangan</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
@@ -53,6 +54,7 @@
                                                 <tr>
                                                     <td class="name-row"><?php echo $each_item['name']; ?></td>
                                                     <td class="unit-row"><?php echo $each_item['unit']; ?></td>
+                                                    <td class="unit-row"><?php echo $each_item['category']; ?></td>
                                                     <td class="notes-row"><?php echo $each_item['notes']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
@@ -93,6 +95,12 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
+                                    <label class="da-form-label">Kategori Barang</label>
+                                    <div class="da-form-item large">
+                                        <select id="item-create-category" name="category_id"></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
                                         <input type="text" name="notes">
@@ -116,6 +124,12 @@
                                     <label class="da-form-label">Satuan Barang</label>
                                     <div class="da-form-item large">
                                         <select id="item-edit-unit" name="unit_id"></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kategori Barang</label>
+                                    <div class="da-form-item large">
+                                        <select id="item-edit-category" name="category_id"></select>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

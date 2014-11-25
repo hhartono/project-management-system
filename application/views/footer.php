@@ -32,17 +32,20 @@
     <!-- JS Demo -->
 
     <!-- JS Table -->
-    <script src="/assets/js/unit/unit.modal.js"></script>
-    <script src="/assets/js/unit/unit.tables.js"></script>
+    <script src="/assets/js/custom/unit/unit.modal.js"></script>
+    <script src="/assets/js/custom/unit/unit.tables.js"></script>
 
-    <script src="/assets/js/stock/stock.modal.js"></script>
-    <script src="/assets/js/stock/stock.tables.js"></script>
+    <script src="/assets/js/custom/category/category.modal.js"></script>
+    <script src="/assets/js/custom/category/category.tables.js"></script>
 
-    <script src="/assets/js/supplier/supplier.modal.js"></script>
-    <script src="/assets/js/supplier/supplier.tables.js"></script>
+    <script src="/assets/js/custom/stock/stock.modal.js"></script>
+    <script src="/assets/js/custom/stock/stock.tables.js"></script>
 
-    <script src="/assets/js/item/item.modal.js"></script>
-    <script src="/assets/js/item/item.tables.js"></script>
+    <script src="/assets/js/custom/supplier/supplier.modal.js"></script>
+    <script src="/assets/js/custom/supplier/supplier.tables.js"></script>
+
+    <script src="/assets/js/custom/item/item.modal.js"></script>
+    <script src="/assets/js/custom/item/item.tables.js"></script>
 
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>

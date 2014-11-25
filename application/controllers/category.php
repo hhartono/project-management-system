@@ -30,30 +30,28 @@ class Category extends CI_Controller {
     }
 
     public function create_category(){
-        /*
-        if($this->input->post('abbreviation')){
+        if($this->input->post('prefix')){
             // check if there is any duplicate
-            $duplicate_check = $this->unit_model->get_unit_by_abbreviation($this->input->post('abbreviation'));
+            $duplicate_check = $this->category_model->get_category_by_prefix($this->input->post('prefix'));
 
             if(empty($duplicate_check)){
-                $response = $this->unit_model->set_unit();
+                $response = $this->category_model->set_category();
 
                 if($response){
-                    $message['success'] = "Satuan berhasil disimpan.";
+                    $message['success'] = "Kategori berhasil disimpan.";
                     $this->show_table($message);
                 }else{
-                    $message['error'] = "Satuan gagal disimpan.";
+                    $message['error'] = "Kategori gagal disimpan.";
                     $this->show_table($message);
                 }
             }else{
-                $message['error'] = "Satuan gagal disimpan. Satuan sudah ada dalam system.";
+                $message['error'] = "Kategori gagal disimpan. Kategori sudah ada dalam system.";
                 $this->show_table($message);
             }
         }else{
-            $message['error'] = "Satuan gagal disimpan.";
+            $message['error'] = "Kategori gagal disimpan.";
             $this->show_table($message);
         }
-        */
     }
 
     public function update_category(){
@@ -83,7 +81,7 @@ class Category extends CI_Controller {
 
     public function get_category_detail($category_id){
         $category_id = urldecode($category_id);
-        $category_detail = $this->categoty_model->get_category_by_id($category_id);
+        $category_detail = $this->category_model->get_category_by_id($category_id);
         echo json_encode($category_detail);
     }
 

@@ -17,9 +17,10 @@ class Item_model extends CI_Model {
 
     public function get_all_items()
     {
-        $this->db->select('item_master.*, unit_master.name AS unit');
+        $this->db->select('item_master.*, unit_master.name AS unit, category_master.name AS category');
         $this->db->from('item_master');
         $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
+        $this->db->join('category_master', 'item_master.category_id = category_master.id');
         $query = $this->db->get();
 
         return $query->result_array();
@@ -28,10 +29,12 @@ class Item_model extends CI_Model {
     public function update_item()
     {
         if($this->input->post('id') !== false && $this->input->post('name') !== false
-            && $this->input->post('unit_id') !== false && $this->input->post('notes') !== false){
+            && $this->input->post('unit_id') !== false && $this->input->post('category_id') !== false
+            && $this->input->post('notes') !== false){
             $data = array(
                 'name' => $this->input->post('name'),
                 'unit_id' => $this->input->post('unit_id'),
+                'category_id' => $this->input->post('category_id'),
                 'notes' => $this->input->post('notes')
             );
 
@@ -45,12 +48,13 @@ class Item_model extends CI_Model {
     public function set_item()
     {
         if($this->input->post('name') !== false && $this->input->post('unit_id') !== false
-            && $this->input->post('notes') !== false){
+            && $this->input->post('category_id') !== false && $this->input->post('notes') !== false){
             date_default_timezone_set('Asia/Jakarta');
 
             $data = array(
                 'name' => $this->input->post('name'),
                 'unit_id' => $this->input->post('unit_id'),
+                'category_id' => $this->input->post('category_id'),
                 'notes' => $this->input->post('notes'),
                 'creation_date' => date("Y-m-d H:i:s")
             );

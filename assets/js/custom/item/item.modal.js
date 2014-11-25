@@ -25,6 +25,9 @@
                 },
                 unit: {
                     required: true
+                },
+                category: {
+                    required: true
                 }
             },
             invalidHandler: function(form, validator) {
@@ -56,6 +59,21 @@
                         .text(value.name));
                 });
             }, "json" );
+
+            /* get the option for category */
+            $('#item-create-category')
+                .find('option')
+                .remove()
+                .end();
+
+            $.get( "/item/get_all_item_categories", function(data) {
+                $.each(data, function(key, value){
+                    $('#item-create-category')
+                        .append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.name));
+                });
+            }, "json" );
         });
 
         /*
@@ -82,6 +100,9 @@
                     required: true
                 },
                 unit: {
+                    required: true
+                },
+                category: {
                     required: true
                 }
             },
@@ -121,6 +142,21 @@
                 $("#item-edit-unit").val(data.unit_id);
                 $("#item-edit-name").val(data.name);
                 $("#item-edit-notes").val(data.notes);
+            }, "json" );
+
+            /* get the option for category */
+            $('#item-edit-category')
+                .find('option')
+                .remove()
+                .end();
+
+            $.get( "/item/get_all_item_categories", function(data) {
+                $.each(data, function(key, value){
+                    $('#item-edit-category')
+                        .append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.name));
+                });
             }, "json" );
         });
     });
