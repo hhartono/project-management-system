@@ -17,11 +17,9 @@ class Stock_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function get_stock_by_name($name){
-        /*
-        $query = $this->db->get_where('item_master', array('name' => $name));
-        return $query->result_array();
-        */
+    public function get_stock_by_stock_code($stock_code){
+        $query = $this->db->get_where('stock_master', array('item_stock_code' => $stock_code));
+        return $query->row_array();
     }
 
     public function get_all_stocks()
@@ -80,8 +78,7 @@ class Stock_model extends CI_Model {
     }
 
     public function delete_stock($stock_id){
-        /*
-        $response = $this->db->delete('item_master', array('id' => $item_id));
+        $response = $this->db->delete('stock_master', array('id' => $stock_id));
         $affected_row = $this->db->affected_rows();
 
         $delete_status = false;
@@ -90,6 +87,5 @@ class Stock_model extends CI_Model {
         }
 
         return $delete_status;
-        */
     }
 }

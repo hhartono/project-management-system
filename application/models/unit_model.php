@@ -12,7 +12,7 @@ class Unit_model extends CI_Model {
 
     public function get_unit_by_abbreviation($abbreviation){
         $query = $this->db->get_where('unit_master', array('abbreviation' => $abbreviation));
-        return $query->result_array();
+        return $query->row_array();
     }
 
     public function get_all_units()

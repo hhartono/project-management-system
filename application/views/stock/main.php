@@ -86,9 +86,22 @@
                             <div id="da-stock-view-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
+                                    <label class="da-form-label">Kode Barang</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-view-item-stock-code" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
                                     <label class="da-form-label">Nama Barang</label>
                                     <div class="da-form-item large">
                                         <input id="stock-view-name" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Jumlah Stok</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-view-item-count" type="text" readonly>
+                                        <label for="stock-view-item-count" id="stock-view-item-count-label"></label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -101,6 +114,24 @@
                                     <label class="da-form-label">Supplier Barang</label>
                                     <div class="da-form-item large">
                                         <input id="stock-view-supplier" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Subproject</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-view-subproject" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">PO Detail ID</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-view-po-detail-id" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Harga Barang</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-view-item-price" type="text" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -160,6 +191,13 @@
                                     <label class="da-form-label">Nama Barang</label>
                                     <div class="da-form-item large">
                                         <input id="stock-edit-name" type="text" name="name">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Jumlah Stok</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-edit-item-count" type="text" name="item_count">
+                                        <label for="stock-edit-item-count" id="stock-edit-item-count-label"></label>
                                     </div>
                                 </div>
                                 <input id="stock-edit-id" type="hidden" name="id">

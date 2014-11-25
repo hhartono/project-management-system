@@ -12,7 +12,7 @@ class Category_model extends CI_Model {
 
     public function get_category_by_prefix($prefix){
         $query = $this->db->get_where('category_master', array('prefix' => $prefix));
-        return $query->result_array();
+        return $query->row_array();
     }
 
     public function get_all_categories()
@@ -26,7 +26,7 @@ class Category_model extends CI_Model {
         if($this->input->post('id') !== false && $this->input->post('prefix') !== false
             && $this->input->post('name') !== false){
             $data = array(
-                'prefix' => $this->input->post('prefix'),
+                'prefix' => strtoupper($this->input->post('prefix')),
                 'name' => $this->input->post('name')
             );
 
@@ -43,7 +43,7 @@ class Category_model extends CI_Model {
             date_default_timezone_set('Asia/Jakarta');
 
             $data = array(
-                'prefix' => $this->input->post('prefix'),
+                'prefix' => strtoupper($this->input->post('prefix')),
                 'name' => $this->input->post('name'),
                 'creation_date' => date("Y-m-d H:i:s")
             );

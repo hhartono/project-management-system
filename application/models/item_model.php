@@ -12,7 +12,7 @@ class Item_model extends CI_Model {
 
     public function get_item_by_name($name){
         $query = $this->db->get_where('item_master', array('name' => $name));
-        return $query->result_array();
+        return $query->row_array();
     }
 
     public function get_all_items()

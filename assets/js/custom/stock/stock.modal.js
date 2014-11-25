@@ -49,7 +49,8 @@
                 $( "#stock-create-name" ).autocomplete({
                     source: data,
                     change: function() {
-                        get_unit_by_item_name();
+                        var item_name = $("#stock-create-name").val();
+                        get_unit_by_item_name(item_name, '#stock-create-item-count-label');
                     }
                 });
             }, "json" );
@@ -59,56 +60,7 @@
                     source: data
                 });
             }, "json" );
-
-            /* get the option for unit */
-            /*
-            $('#stock-create-unit')
-                .find('option')
-                .remove()
-                .end();
-
-            $.get( "/stock/get_all_stock_units", function(data) {
-                $.each(data, function(key, value){
-                    $('#stock-create-unit')
-                        .append($("<option></option>")
-                        .attr("value", value.id)
-                        .text(value.name));
-                });
-            }, "json" );
-            */
         });
-
-        function get_unit_by_item_name(){
-            var item_name = $("#stock-create-name").val();
-            var item_name_encoded = encodeURIComponent(item_name);
-
-            $.get( "/stock/get_unit_by_item_name/" + item_name_encoded, function(data) {
-                if(data != null && data.name != null){
-                    $('#stock-create-item-count-label').text(data.name);
-                }else{
-                    $('#stock-create-item-count-label').text('');
-                }
-            }, "json" );
-        }
-
-        /*
-        $("#stock-create-name").select(function() {
-            alert('detected selected!');
-        });
-
-        $("#stock-create-name").change(function() {
-            alert('detected!');
-            var item_name = $("#stock-create-name").val();
-
-            $.get( "/stock/get_unit_by_item_name/" + item_name, function(data) {
-                if(data != null && data.name != null){
-                    $('#stock-create-item-count-label').text(data.name);
-                }else{
-                    $('#stock-create-item-count-label').text('');
-                }
-            }, "json" );
-        });
-        */
 
         /*
             Modal Controller for Editing
@@ -131,6 +83,12 @@
         }).find('form').validate({
             rules: {
                 name: {
+                    required: true
+                },
+                item_count: {
+                    required: true
+                },
+                supplier: {
                     required: true
                 }
             },
@@ -171,6 +129,15 @@
                 $("#stock-edit-id").val(id);
                 $("#stock-edit-name").val(data.name);
             }, "json" );
+
+
+            $.get( "/stock/get_all_stock_supplier_names", function(data) {
+                $( "#stock-create-supplier" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
+
+
         });
 
         /*
@@ -194,10 +161,33 @@
 
             var id = $(this).data("value");
             $.get( "/stock/get_stock_detail/" + id, function(data) {
+                $("#stock-view-item-stock-code").val(data.item_stock_code);
                 $("#stock-view-name").val(data.name);
+                $("#stock-view-item-count").val(data.item_count);
                 $("#stock-view-unit").val(data.unit);
                 $("#stock-view-supplier").val(data.supplier);
+                $("#stock-view-subproject").val(data.subproject_id);
+                $("#stock-view-po-detail-id").val(data.po_detail_id);
+                $("#stock-view-item-price").val(data.item_price);
+
+                var item_name = data.name;
+                get_unit_by_item_name(item_name, '#stock-view-item-count-label');
             }, "json" );
         });
+
+        /*
+         Common Function
+         */
+        function get_unit_by_item_name(item_name, target_textplace){
+            var item_name_encoded = encodeURIComponent(item_name);
+
+            $.get( "/stock/get_unit_by_item_name/" + item_name_encoded, function(data) {
+                if(data != null && data.name != null){
+                    $(target_textplace).text(data.name);
+                }else{
+                    $(target_textplace).text('');
+                }
+            }, "json" );
+        }
     });
 }) (jQuery);

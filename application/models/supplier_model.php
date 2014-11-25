@@ -12,7 +12,7 @@ class Supplier_model extends CI_Model {
 
     public function get_supplier_by_name($name){
         $query = $this->db->get_where('supplier_master', array('name' => $name));
-        return $query->result_array();
+        return $query->row_array();
     }
 
     public function get_all_suppliers()

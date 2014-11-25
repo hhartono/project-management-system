@@ -30,12 +30,13 @@ class Stock extends CI_Controller {
 	{
         $message = array();
         $this->show_table($message);
+
+        $this->load->helper('stock_code_helper');
+        $generated_stock_code = stock_code_generator(2, 2);
     }
 
     public function create_stock()
     {
-        // var_dump($this->input->post());
-
         // check all necessary input
         if(!empty($this->input->post('name')) && !empty($this->input->post('item_count'))
             && !empty($this->input->post('supplier'))){
@@ -43,22 +44,23 @@ class Stock extends CI_Controller {
             // search for item id
             $database_input_array = array();
             $item_detail = $this->item_model->get_item_by_name($this->input->post('name'));
-            if(empty($item_detail[0])){
+            if(empty($item_detail)){
                 $message['error'] = "Stok gagal disimpan. Nama barang tidak ada dalam system.";
                 $this->show_table($message);
                 return;
             }else{
-                $database_input_array['item_id'] = $item_detail[0]['id'];
+                $database_input_array['item_id'] = $item_detail['id'];
+                $database_input_array['category_id'] = $item_detail['category_id'];
             }
 
             // search for supplier id
             $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
-            if(empty($supplier_detail[0])){
+            if(empty($supplier_detail)){
                 $message['error'] = "Stok gagal disimpan. Supplier barang tidak ada dalam system.";
                 $this->show_table($message);
                 return;
             }else{
-                $database_input_array['supplier_id'] = $supplier_detail[0]['id'];
+                $database_input_array['supplier_id'] = $supplier_detail['id'];
             }
 
             // TODO - search for subproject id
@@ -75,7 +77,7 @@ class Stock extends CI_Controller {
 
             // generate item stock code
             $this->load->helper('stock_code_helper');
-            $generated_stock_code = stock_code_generator($this->input->post('name'));
+            $generated_stock_code = stock_code_generator($database_input_array['category_id'], $database_input_array['supplier_id']);
             if(empty($generated_stock_code)){
                 $message['error'] = "Stok gagal disimpan. Kode stok tidak dapat dibuat.";
                 $this->show_table($message);
@@ -114,19 +116,17 @@ class Stock extends CI_Controller {
         */
     }
 
-    public function delete_stock($item_id){
-        /*
-        $response = $this->item_model->delete_item($item_id);
+    public function delete_stock($stock_id){
+        $response = $this->stock_model->delete_stock($stock_id);
 
         // display message according db status
         if($response){
-            $message['success'] = "Barang berhasil dihapus.";
+            $message['success'] = "Stok berhasil dihapus.";
             $this->show_table($message);
         }else{
-            $message['error'] = "Barang gagal dihapus.";
+            $message['error'] = "Stok gagal dihapus.";
             $this->show_table($message);
         }
-        */
     }
 
     public function get_all_stock_items(){
@@ -163,8 +163,8 @@ class Stock extends CI_Controller {
         $item_name = urldecode($item_name);
         $item_detail = $this->item_model->get_item_by_name($item_name);
 
-        if(!empty($item_detail[0]['unit_id'])){
-            $unit_detail = $this->unit_model->get_unit_by_id($item_detail[0]['unit_id']);
+        if(!empty($item_detail['unit_id'])){
+            $unit_detail = $this->unit_model->get_unit_by_id($item_detail['unit_id']);
             echo json_encode($unit_detail);
         }
     }
