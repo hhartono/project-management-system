@@ -32,6 +32,7 @@
                                             <tr>
                                                 <th>Prefix Kategori</th>
                                                 <th>Nama Kategori</th>
+                                                <th>Keterangan</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         $control_label_array = array();
@@ -52,6 +53,7 @@
                                                 <tr>
                                                     <td class="prefix-row"><?php echo $each_category['prefix']; ?></td>
                                                     <td class="name-row"><?php echo $each_category['name']; ?></td>
+                                                    <td class="notes-row"><?php echo $each_category['notes']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <?php if(isset($access['edit']) && $access['edit']): ?>
@@ -90,6 +92,12 @@
                                         <input type="text" name="name">
                                     </div>
                                 </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Keterangan</label>
+                                    <div class="da-form-item large">
+                                        <input type="text" name="notes">
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -101,13 +109,19 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Prefix Kategori</label>
                                     <div class="da-form-item large">
-                                        <input id="category-edit-prefix" type="text" name="prefix">
+                                        <input id="category-edit-prefix" type="text" name="prefix" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Kategori</label>
                                     <div class="da-form-item large">
-                                        <input id="category-edit-name" type="text" name="name">
+                                        <input id="category-edit-name" type="text" name="name" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Keterangan</label>
+                                    <div class="da-form-item large">
+                                        <input id="category-edit-notes" type="text" name="notes">
                                     </div>
                                 </div>
                                 <input id="category-edit-id" type="hidden" name="id">

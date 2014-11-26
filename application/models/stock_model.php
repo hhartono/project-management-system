@@ -33,23 +33,27 @@ class Stock_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function update_stock()
+    public function update_stock($database_input_array)
     {
-        /*
-        if($this->input->post('id') !== false && $this->input->post('name') !== false
-            && $this->input->post('unit_id') !== false && $this->input->post('notes') !== false){
+        if($database_input_array['id'] && $database_input_array['item_id'] !== false
+            && $database_input_array['supplier_id'] !== false && $database_input_array['subproject_id'] !== false
+            && $database_input_array['po_detail_id'] !== false && $database_input_array['item_price'] !== false
+            && $database_input_array['item_count'] !== false){
+
             $data = array(
-                'name' => $this->input->post('name'),
-                'unit_id' => $this->input->post('unit_id'),
-                'notes' => $this->input->post('notes')
+                'item_id' => $database_input_array['item_id'],
+                'supplier_id' => $database_input_array['supplier_id'],
+                'subproject_id' => $database_input_array['subproject_id'],
+                'po_detail_id' => $database_input_array['po_detail_id'],
+                'item_price' => $database_input_array['item_price'],
+                'item_count' => $database_input_array['item_count']
             );
 
-            $this->db->where('id', $this->input->post('id'));
-            return $this->db->update('item_master', $data);
+            $this->db->where('id', $database_input_array['id']);
+            return $this->db->update('stock_master', $data);
         }else{
             return false;
         }
-        */
     }
 
     public function set_stock($database_input_array)

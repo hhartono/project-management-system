@@ -256,7 +256,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama</label>
                                     <div class="da-form-item large">
-                                        <input id="supplier-edit-name" type="text" name="name">
+                                        <input id="supplier-edit-name" type="text" name="name" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

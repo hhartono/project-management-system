@@ -107,37 +107,24 @@
             event.preventDefault();
             $("#da-stock-edit-form-div").dialog("option", {modal: true}).dialog("open");
 
-            /* get the option for unit */
-            /*
-            $('#stock-edit-unit')
-                .find('option')
-                .remove()
-                .end();
-
-            $.get( "/stock/get_all_stock_units", function(data) {
-                $.each(data, function(key, value){
-                    $('#stock-edit-unit')
-                        .append($("<option></option>")
-                        .attr("value", value.id)
-                        .text(value.name));
-                });
-            }, "json" );
-            */
-
             var id = $(this).data("value");
             $.get( "/stock/get_stock_detail/" + id, function(data) {
                 $("#stock-edit-id").val(id);
                 $("#stock-edit-name").val(data.name);
+                $("#stock-edit-item-count").val(data.item_count);
+                $("#stock-edit-supplier").val(data.supplier);
+                $("#stock-edit-subproject").val(data.subproject_id);
+                $("#stock-edit-po-detail-id").val(data.po_detail_id);
+                $("#stock-edit-item-price").val(data.item_price);
+
+                get_unit_by_item_name(data.name, '#stock-edit-item-count-label');
             }, "json" );
 
-
             $.get( "/stock/get_all_stock_supplier_names", function(data) {
-                $( "#stock-create-supplier" ).autocomplete({
+                $( "#stock-edit-supplier" ).autocomplete({
                     source: data
                 });
             }, "json" );
-
-
         });
 
         /*

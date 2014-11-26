@@ -117,7 +117,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Barang</label>
                                     <div class="da-form-item large">
-                                        <input id="item-edit-name" type="text" name="name">
+                                        <input id="item-edit-name" type="text" name="name" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -129,7 +129,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kategori Barang</label>
                                     <div class="da-form-item large">
-                                        <select id="item-edit-category" name="category_id"></select>
+                                        <select id="item-edit-category" name="category_id" disabled></select>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

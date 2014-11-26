@@ -190,7 +190,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Barang</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-edit-name" type="text" name="name">
+                                        <input id="stock-edit-name" type="text" name="name" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -198,6 +198,30 @@
                                     <div class="da-form-item large">
                                         <input id="stock-edit-item-count" type="text" name="item_count">
                                         <label for="stock-edit-item-count" id="stock-edit-item-count-label"></label>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Supplier Barang</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-edit-supplier" type="text" name="supplier" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Subproject</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-edit-subproject" type="text" name="subproject">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">PO Detail ID</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-edit-po-detail-id" type="text" name="po_detail_id">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Harga Barang</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-edit-item-price" type="text" name="item_price">
                                     </div>
                                 </div>
                                 <input id="stock-edit-id" type="hidden" name="id">

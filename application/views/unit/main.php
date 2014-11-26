@@ -109,13 +109,13 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Satuan</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-abbreviation" type="text" name="abbreviation">
+                                        <input id="unit-edit-abbreviation" type="text" name="abbreviation" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Satuan</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-name" type="text" name="name">
+                                        <input id="unit-edit-name" type="text" name="name" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

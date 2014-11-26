@@ -103,17 +103,61 @@ class Stock extends CI_Controller {
     }
 
     public function update_stock(){
-        /*
-        $response = $this->item_model->update_item();
+        // check all necessary input
+        if(!empty($this->input->post('id')) && !empty($this->input->post('name'))
+            && !empty($this->input->post('item_count')) && !empty($this->input->post('supplier'))){
 
-        if($response){
-            $message['success'] = "Barang berhasil diubah.";
-            $this->show_table($message);
+            // search for item id
+            $database_input_array = array();
+            $item_detail = $this->item_model->get_item_by_name($this->input->post('name'));
+            if(empty($item_detail)){
+                $message['error'] = "Stok gagal diubah. Nama barang tidak ada dalam system.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['item_id'] = $item_detail['id'];
+                $database_input_array['category_id'] = $item_detail['category_id'];
+            }
+
+            // search for supplier id
+            $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
+            if(empty($supplier_detail)){
+                $message['error'] = "Stok gagal diubah. Supplier barang tidak ada dalam system.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['supplier_id'] = $supplier_detail['id'];
+            }
+
+            // TODO - search for subproject id
+            $database_input_array['subproject_id'] = '';
+
+            // TODO - search for po detail id
+            $database_input_array['po_detail_id'] = '';
+
+            // item price
+            $database_input_array['item_price'] = $this->input->post('item_price');
+
+            // item count
+            $database_input_array['item_count'] = $this->input->post('item_count');
+
+            // database id
+            $database_input_array['id'] = $this->input->post('id');
+
+            // store stock information
+            $response = $this->stock_model->update_stock($database_input_array);
+
+            if($response){
+                $message['success'] = "Stok berhasil diubah.";
+                $this->show_table($message);
+            }else{
+                $message['error'] = "Stok gagal diubah.";
+                $this->show_table($message);
+            }
         }else{
-            $message['error'] = "Barang gagal diubah.";
+            $message['error'] = "Stok gagal diubah.";
             $this->show_table($message);
         }
-        */
     }
 
     public function delete_stock($stock_id){

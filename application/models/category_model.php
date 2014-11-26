@@ -24,10 +24,11 @@ class Category_model extends CI_Model {
     public function update_category()
     {
         if($this->input->post('id') !== false && $this->input->post('prefix') !== false
-            && $this->input->post('name') !== false){
+            && $this->input->post('name') !== false && $this->input->post('notes') !== false){
             $data = array(
                 'prefix' => strtoupper($this->input->post('prefix')),
-                'name' => $this->input->post('name')
+                'name' => $this->input->post('name'),
+                'notes' => $this->input->post('notes')
             );
 
             $this->db->where('id', $this->input->post('id'));
@@ -39,12 +40,14 @@ class Category_model extends CI_Model {
 
     public function set_category()
     {
-        if($this->input->post('prefix') !== false && $this->input->post('name') !== false){
+        if($this->input->post('prefix') !== false && $this->input->post('name') !== false
+            && $this->input->post('notes') !== false){
             date_default_timezone_set('Asia/Jakarta');
 
             $data = array(
                 'prefix' => strtoupper($this->input->post('prefix')),
                 'name' => $this->input->post('name'),
+                'notes' => $this->input->post('notes'),
                 'creation_date' => date("Y-m-d H:i:s")
             );
 

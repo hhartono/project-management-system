@@ -90,6 +90,7 @@
                 $("#category-edit-id").val(id);
                 $("#category-edit-prefix").val(data.prefix);
                 $("#category-edit-name").val(data.name);
+                $("#category-edit-notes").val(data.notes);
             }, "json" );
         });
     });
