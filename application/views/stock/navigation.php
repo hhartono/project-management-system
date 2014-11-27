@@ -109,6 +109,7 @@
                                 <li><a href="/stock">Stok Barang</a></li>
                                 <li><a href="/unit">Satuan</a></li>
                                 <li><a href="/supplier">Supplier</a></li>
+                                <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
                         </li>
 
