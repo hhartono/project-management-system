@@ -66,7 +66,7 @@
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
                         <li><a href="#">List</a></li>
-                        <li class="active"><span>Divisi Tukang</span></li>
+                        <li class="active"><span>Tukang</span></li>
                     </ul>
                 </div>
             </div>

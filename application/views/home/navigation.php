@@ -107,6 +107,7 @@
                                 <li><a href="/unit">Satuan</a></li>
                                 <li><a href="/supplier">Supplier</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
+                                <li><a href="/worker">Tukang</a></li>
                             </ul>
                         </li>
 

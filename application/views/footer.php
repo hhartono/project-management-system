@@ -41,6 +41,9 @@
     <script src="/assets/js/custom/division/division.modal.js"></script>
     <script src="/assets/js/custom/division/division.tables.js"></script>
 
+    <script src="/assets/js/custom/worker/worker.modal.js"></script>
+    <script src="/assets/js/custom/worker/worker.tables.js"></script>
+
     <script src="/assets/js/custom/stock/stock.modal.js"></script>
     <script src="/assets/js/custom/stock/stock.tables.js"></script>
 

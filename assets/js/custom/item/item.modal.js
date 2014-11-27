@@ -23,10 +23,10 @@
                 name: {
                     required: true
                 },
-                unit: {
+                unit_id: {
                     required: true
                 },
-                category: {
+                category_id: {
                     required: true
                 }
             },
@@ -52,6 +52,11 @@
                 .end();
 
             $.get( "/item/get_all_item_units", function(data) {
+                $('#item-create-unit')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
                 $.each(data, function(key, value){
                     $('#item-create-unit')
                         .append($("<option></option>")
@@ -67,6 +72,11 @@
                 .end();
 
             $.get( "/item/get_all_item_categories", function(data) {
+                $('#item-create-category')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
                 $.each(data, function(key, value){
                     $('#item-create-category')
                         .append($("<option></option>")
@@ -87,6 +97,7 @@
             buttons: [{
                 text: "Simpan",
                 click: function() {
+                    $("#item-edit-category").prop("disabled", false);
                     $(this).find('form#da-item-edit-form-val').submit();
                 }},
                 {
@@ -99,10 +110,10 @@
                 name: {
                     required: true
                 },
-                unit: {
+                unit_id: {
                     required: true
                 },
-                category: {
+                category_id: {
                     required: true
                 }
             },
@@ -128,20 +139,17 @@
                 .end();
 
             $.get( "/item/get_all_item_units", function(data) {
+                $('#item-edit-unit')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
                 $.each(data, function(key, value){
                     $('#item-edit-unit')
                         .append($("<option></option>")
                         .attr("value", value.id)
                         .text(value.name));
                 });
-            }, "json" );
-
-            var id = $(this).data("value");
-            $.get( "/item/get_item_detail/" + id, function(data) {
-                $("#item-edit-id").val(id);
-                $("#item-edit-unit").val(data.unit_id);
-                $("#item-edit-name").val(data.name);
-                $("#item-edit-notes").val(data.notes);
             }, "json" );
 
             /* get the option for category */
@@ -151,12 +159,26 @@
                 .end();
 
             $.get( "/item/get_all_item_categories", function(data) {
+                $('#item-edit-category')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
                 $.each(data, function(key, value){
                     $('#item-edit-category')
                         .append($("<option></option>")
                             .attr("value", value.id)
                             .text(value.name));
                 });
+            }, "json" );
+
+            var id = $(this).data("value");
+            $.get( "/item/get_item_detail/" + id, function(data) {
+                $("#item-edit-id").val(id);
+                $("#item-edit-unit").val(data.unit_id);
+                $("#item-edit-category").val(data.category_id);
+                $("#item-edit-name").val(data.name);
+                $("#item-edit-notes").val(data.notes);
             }, "json" );
         });
     });
