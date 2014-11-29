@@ -26,7 +26,7 @@ class Division_model extends CI_Model {
         if($this->input->post('id') !== false && $this->input->post('division_code') !== false
             && $this->input->post('name') !== false && $this->input->post('notes') !== false){
             $data = array(
-                'division_code' => $this->input->post('division_code'),
+                'division_code' => strtoupper($this->input->post('division_code')),
                 'name' => $this->input->post('name'),
                 'notes' => $this->input->post('notes')
             );
@@ -45,7 +45,7 @@ class Division_model extends CI_Model {
             date_default_timezone_set('Asia/Jakarta');
 
             $data = array(
-                'division_code' => $this->input->post('division_code'),
+                'division_code' => strtoupper($this->input->post('division_code')),
                 'name' => $this->input->post('name'),
                 'notes' => $this->input->post('notes'),
                 'creation_date' => date("Y-m-d H:i:s")

@@ -36,6 +36,8 @@
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         $control_label_array = array();
+                                                        $control_label_array[] = "Lihat";
+
                                                         if(isset($access['edit']) && $access['edit']){
                                                             $control_label_array[] = "Ubah";
                                                         }
@@ -56,6 +58,7 @@
                                                     <td class="division-row"><?php echo $each_worker['division']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
+                                                            <a class="da-worker-view-dialog" href="#" data-value="<?php echo $each_worker['id']; ?>"><i class="icol-eye"></i></a>
                                                             <?php if(isset($access['edit']) && $access['edit']): ?>
                                                                 <a class="da-worker-edit-dialog" href="#" data-value="<?php echo $each_worker['id']; ?>"><i class="icol-pencil"></i></a>
                                                             <?php endif; ?>
@@ -74,6 +77,68 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div id="da-worker-view-form-div" class="form-container">
+                        <form id="da-worker-edit-form-val" class="da-form" method="post">
+                            <div id="da-worker-view-validate-error" class="da-message error" style="display:none;"></div>
+                            <div class="da-form-inline">
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kode Tukang</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-worker-code" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Nama Tukang</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-name" type="text" name="name" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Divisi Tukang</label>
+                                    <div class="da-form-item large">
+                                        <select id="worker-view-division" name="division_id" disabled></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Alamat</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-address" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 1</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-phone-1" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 2</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-phone-2" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Tanggal Masuk</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-join-date" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Gaji</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-salary" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Keterangan</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-view-notes" type="text" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <div id="da-worker-create-form-div" class="form-container">
@@ -113,7 +178,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Tanggal Masuk</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-create-join-date" type="text">
+                                        <input id="worker-create-join-date" type="text" name="join_date">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -137,15 +202,57 @@
                             <div id="da-worker-edit-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
+                                    <label class="da-form-label">Kode Tukang</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-edit-worker-code" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
                                     <label class="da-form-label">Nama Tukang</label>
                                     <div class="da-form-item large">
                                         <input id="worker-edit-name" type="text" name="name" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
+                                    <label class="da-form-label">Divisi Tukang</label>
+                                    <div class="da-form-item large">
+                                        <select id="worker-edit-division" name="division_id" disabled></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
                                     <label class="da-form-label">Alamat</label>
                                     <div class="da-form-item large">
                                         <input id="worker-edit-address" type="text" name="address">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 1</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-edit-phone-1" type="text" name="phone_number_1">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Telepon 2</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-edit-phone-2" type="text" name="phone_number_2">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Tanggal Masuk</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-edit-join-date" type="text" name="join_date">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Gaji</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-edit-salary" type="text" name="salary">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Keterangan</label>
+                                    <div class="da-form-item large">
+                                        <input id="worker-edit-notes" type="text" name="notes">
                                     </div>
                                 </div>
                                 <input id="worker-edit-id" type="hidden" name="id">

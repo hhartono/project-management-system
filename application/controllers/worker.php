@@ -31,64 +31,159 @@ class Worker extends CI_Controller {
     }
 
     public function create_worker(){
-        /*
-        if($this->input->post('abbreviation')){
+        if($this->input->post('name') && $this->input->post('division_id')){
             // check if there is any duplicate
-            $duplicate_check = $this->unit_model->get_unit_by_abbreviation($this->input->post('abbreviation'));
+            $duplicate_check = $this->worker_model->get_worker_by_name_division($this->input->post('name'), $this->input->post('division_id'));
 
             if(empty($duplicate_check)){
-                $response = $this->unit_model->set_unit();
+                $database_input_array = array();
+
+                // division id
+                $database_input_array['division_id'] = $this->input->post('division_id');
+
+                // generate worker id for each new worker
+                $this->load->helper('worker_code_helper');
+                $generated_worker_code = worker_code_generator($database_input_array['division_id']);
+                if(empty($generated_worker_code)){
+                    $message['error'] = "Tukang gagal disimpan. Kode tukang tidak dapat dibuat.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['worker_code'] = $generated_worker_code;
+                }
+
+                // worker name
+                $database_input_array['name'] = $this->input->post('name');
+
+                // worker address
+                $database_input_array['address'] = $this->input->post('address');
+
+                // phone number 1
+                $database_input_array['phone_number_1'] = $this->input->post('phone_number_1');
+
+                // phone number 2
+                $database_input_array['phone_number_2'] = $this->input->post('phone_number_2');
+
+                // join date
+                date_default_timezone_set('Asia/Jakarta');
+                $join_date = strtotime($this->input->post('join_date'));
+                if($join_date === false){
+                    $message['error'] = "Tukang gagal disimpan. Tanggal masuk tidak valid.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $join_date = date("Y-m-d H:i:s", $join_date);
+                    if($join_date === false){
+                        $message['error'] = "Tukang gagal disimpan. Tanggal masuk tidak valid.";
+                        $this->show_table($message);
+                        return;
+                    }else{
+                        $database_input_array['join_date'] = $join_date;
+                    }
+                }
+
+                // salary
+                $database_input_array['salary'] = $this->input->post('salary');
+
+                // notes
+                $database_input_array['notes'] = $this->input->post('notes');
+
+                // store worker information
+                $response = $this->worker_model->set_worker($database_input_array);
 
                 if($response){
-                    $message['success'] = "Satuan berhasil disimpan.";
+                    $message['success'] = "Tukang berhasil disimpan.";
                     $this->show_table($message);
                 }else{
-                    $message['error'] = "Satuan gagal disimpan.";
+                    $message['error'] = "Tukang gagal disimpan.";
                     $this->show_table($message);
                 }
             }else{
-                $message['error'] = "Satuan gagal disimpan. Satuan sudah ada dalam system.";
+                $message['error'] = "Tukang gagal disimpan. Tukang sudah ada dalam system.";
                 $this->show_table($message);
             }
         }else{
-            $message['error'] = "Satuan gagal disimpan.";
+            $message['error'] = "Tukang gagal disimpan.";
             $this->show_table($message);
         }
-        */
     }
 
     public function update_worker(){
-        /*
-        $response = $this->unit_model->update_unit();
+        $database_input_array = array();
+
+        // division id
+        $database_input_array['division_id'] = $this->input->post('division_id');
+
+        // worker name
+        $database_input_array['name'] = $this->input->post('name');
+
+        // worker address
+        $database_input_array['address'] = $this->input->post('address');
+
+        // phone number 1
+        $database_input_array['phone_number_1'] = $this->input->post('phone_number_1');
+
+        // phone number 2
+        $database_input_array['phone_number_2'] = $this->input->post('phone_number_2');
+
+        // join date
+        date_default_timezone_set('Asia/Jakarta');
+        $join_date = strtotime($this->input->post('join_date'));
+        if($join_date === false){
+            $message['error'] = "Tukang gagal disimpan. Tanggal masuk tidak valid.";
+            $this->show_table($message);
+            return;
+        }else{
+            $join_date = date("Y-m-d H:i:s", $join_date);
+            if($join_date === false){
+                $message['error'] = "Tukang gagal disimpan. Tanggal masuk tidak valid.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['join_date'] = $join_date;
+            }
+        }
+
+        // salary
+        $database_input_array['salary'] = $this->input->post('salary');
+
+        // notes
+        $database_input_array['notes'] = $this->input->post('notes');
+
+        // id
+        $database_input_array['id'] = $this->input->post('id');
+
+        // store worker information
+        $response = $this->worker_model->update_worker($database_input_array);
 
         if($response){
-            $message['success'] = "Satuan berhasil diubah.";
+            $message['success'] = "Tukang berhasil diubah.";
             $this->show_table($message);
         }else{
-            $message['error'] = "Satuan gagal diubah.";
+            $message['error'] = "Tukang gagal diubah.";
             $this->show_table($message);
         }
-        */
     }
 
     public function delete_worker($worker_id){
-        /*
-        $response = $this->unit_model->delete_unit($unit_id);
+        $response = $this->worker_model->delete_worker($worker_id);
 
         // display message according db status
         if($response){
-            $message['success'] = "Satuan berhasil dihapus.";
+            $message['success'] = "Tukang berhasil dihapus.";
             $this->show_table($message);
         }else{
-            $message['error'] = "Satuan gagal dihapus.";
+            $message['error'] = "Tukang gagal dihapus.";
             $this->show_table($message);
         }
-        */
     }
 
     public function get_worker_detail($worker_id){
+        date_default_timezone_set('Asia/Jakarta');
+
         $worker_id = urldecode($worker_id);
         $worker_detail = $this->worker_model->get_worker_by_id($worker_id);
+        $worker_detail['formatted_join_date'] = date("d-m-Y", strtotime($worker_detail['join_date']));
         echo json_encode($worker_detail);
     }
 

@@ -10,11 +10,19 @@ class Worker_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function get_worker_by_abbreviation($abbreviation){
-        /*
-        $query = $this->db->get_where('unit_master', array('abbreviation' => $abbreviation));
+    public function get_worker_by_worker_code($worker_code){
+        $query = $this->db->get_where('worker_master', array('worker_code' => $worker_code));
         return $query->row_array();
-        */
+    }
+
+    public function get_worker_by_name_division($name, $division_id){
+        $this->db->select('worker_master.*');
+        $this->db->from('worker_master');
+        $this->db->where('name', $name);
+        $this->db->where('division_id', $division_id);
+        $query = $this->db->get();
+
+        return $query->row_array();
     }
 
     public function get_all_workers()
@@ -27,48 +35,62 @@ class Worker_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function update_worker()
+    public function update_worker($database_input_array)
     {
-        /*
-        if($this->input->post('id') !== false && $this->input->post('abbreviation') !== false
-            && $this->input->post('name') !== false && $this->input->post('notes') !== false){
-            $data = array(
-                'abbreviation' => $this->input->post('abbreviation'),
-                'name' => $this->input->post('name'),
-                'notes' => $this->input->post('notes')
-            );
-
-            $this->db->where('id', $this->input->post('id'));
-            return $this->db->update('unit_master', $data);
-        }else{
-            return false;
-        }
-        */
-    }
-
-    public function set_worker()
-    {
-        /*
-        if($this->input->post('abbreviation') !== false && $this->input->post('name') !== false
-            && $this->input->post('notes') !== false){
+        if($database_input_array['id'] !== false && $database_input_array['division_id'] !== false
+            && $database_input_array['name'] !== false && $database_input_array['address'] !== false
+            && $database_input_array['phone_number_1'] !== false && $database_input_array['phone_number_2'] !== false
+            && $database_input_array['join_date'] !== false && $database_input_array['salary'] !== false
+            && $database_input_array['notes'] !== false){
             date_default_timezone_set('Asia/Jakarta');
 
             $data = array(
-                'abbreviation' => $this->input->post('abbreviation'),
-                'name' => $this->input->post('name'),
-                'notes' => $this->input->post('notes'),
-                'creation_date' => date("Y-m-d H:i:s")
+                'division_id' => $database_input_array['division_id'],
+                'name' => $database_input_array['name'],
+                'address' => $database_input_array['address'],
+                'phone_number_1' => $database_input_array['phone_number_1'],
+                'phone_number_2' => $database_input_array['phone_number_2'],
+                'join_date' => $database_input_array['join_date'],
+                'salary' => $database_input_array['salary'],
+                'notes' => $database_input_array['notes'],
             );
 
-            return $this->db->insert('unit_master', $data);
+            $this->db->where('id', $this->input->post('id'));
+            return $this->db->update('worker_master', $data);
         }else{
             return false;
         }
-        */
+    }
+
+    public function set_worker($database_input_array)
+    {
+        if($database_input_array['division_id'] !== false && $database_input_array['worker_code'] !== false
+            && $database_input_array['name'] !== false && $database_input_array['address'] !== false
+            && $database_input_array['phone_number_1'] !== false && $database_input_array['phone_number_2'] !== false
+            && $database_input_array['join_date'] !== false && $database_input_array['salary'] !== false
+            && $database_input_array['notes'] !== false){
+            date_default_timezone_set('Asia/Jakarta');
+
+            $data = array(
+                'division_id' => $database_input_array['division_id'],
+                'worker_code' => $database_input_array['worker_code'],
+                'name' => $database_input_array['name'],
+                'address' => $database_input_array['address'],
+                'phone_number_1' => $database_input_array['phone_number_1'],
+                'phone_number_2' => $database_input_array['phone_number_2'],
+                'join_date' => $database_input_array['join_date'],
+                'salary' => $database_input_array['salary'],
+                'notes' => $database_input_array['notes'],
+                'creation_date' => date("Y-m-d H:i:s")
+            );
+
+            return $this->db->insert('worker_master', $data);
+        }else{
+            return false;
+        }
     }
 
     public function delete_worker($worker_id){
-        /*
         $response = $this->db->delete('worker_master', array('id' => $worker_id));
         $affected_row = $this->db->affected_rows();
 
@@ -78,6 +100,5 @@ class Worker_model extends CI_Model {
         }
 
         return $delete_status;
-        */
     }
 }
