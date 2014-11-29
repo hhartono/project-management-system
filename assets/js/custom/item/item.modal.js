@@ -132,6 +132,12 @@
             event.preventDefault();
             $("#da-item-edit-form-div").dialog("option", {modal: true}).dialog("open");
 
+            // fill unit with all possible values
+            var id = $(this).data("value");
+            prepareEditUnit(id);
+        });
+
+        function prepareEditUnit(id) {
             /* get the option for unit */
             $('#item-edit-unit')
                 .find('option')
@@ -147,11 +153,16 @@
                 $.each(data, function(key, value){
                     $('#item-edit-unit')
                         .append($("<option></option>")
-                        .attr("value", value.id)
-                        .text(value.name));
+                            .attr("value", value.id)
+                            .text(value.name));
                 });
-            }, "json" );
 
+                // fill category with all possible values
+                prepareEditCategory(id);
+            }, "json" );
+        }
+
+        function prepareEditCategory(id) {
             /* get the option for category */
             $('#item-edit-category')
                 .find('option')
@@ -170,9 +181,13 @@
                             .attr("value", value.id)
                             .text(value.name));
                 });
-            }, "json" );
 
-            var id = $(this).data("value");
+                // fill the known value
+                fillEdit(id);
+            }, "json" );
+        }
+
+        function fillEdit(id){
             $.get( "/item/get_item_detail/" + id, function(data) {
                 $("#item-edit-id").val(id);
                 $("#item-edit-unit").val(data.unit_id);
@@ -180,6 +195,6 @@
                 $("#item-edit-name").val(data.name);
                 $("#item-edit-notes").val(data.notes);
             }, "json" );
-        });
+        }
     });
 }) (jQuery);
