@@ -41,6 +41,9 @@
     <script src="/assets/js/custom/division/division.modal.js"></script>
     <script src="/assets/js/custom/division/division.tables.js"></script>
 
+    <script src="/assets/js/custom/project/project.modal.js"></script>
+    <script src="/assets/js/custom/project/project.tables.js"></script>
+
     <script src="/assets/js/custom/worker/worker.modal.js"></script>
     <script src="/assets/js/custom/worker/worker.tables.js"></script>
 
@@ -49,6 +52,9 @@
 
     <script src="/assets/js/custom/supplier/supplier.modal.js"></script>
     <script src="/assets/js/custom/supplier/supplier.tables.js"></script>
+
+    <script src="/assets/js/custom/customer/customer.modal.js"></script>
+    <script src="/assets/js/custom/customer/customer.tables.js"></script>
 
     <script src="/assets/js/custom/item/item.modal.js"></script>
     <script src="/assets/js/custom/item/item.tables.js"></script>

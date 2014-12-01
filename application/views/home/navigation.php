@@ -104,8 +104,10 @@
                                 <li><a href="/category">Kategori Barang</a></li>
                                 <li><a href="/item">Jenis Barang</a></li>
                                 <li><a href="/stock">Stok Barang</a></li>
-                                <li><a href="/unit">Satuan</a></li>
                                 <li><a href="/supplier">Supplier</a></li>
+                                <li><a href="/unit">Satuan</a></li>
+                                <li><a href="/customer">Customer</a></li>
+                                <li><a href="/project">Project</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                                 <li><a href="/worker">Tukang</a></li>
                             </ul>
