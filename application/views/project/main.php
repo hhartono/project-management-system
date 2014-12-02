@@ -111,13 +111,13 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Inisial Project</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="project_initial">
+                                        <input type="text" name="project_initial" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Project</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="name">
+                                        <input type="text" name="name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -129,19 +129,19 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Tanggal Mulai</label>
                                     <div class="da-form-item large">
-                                        <input id="project-create-start-date" type="text" name="start_date">
+                                        <input id="project-create-start-date" type="text" name="start_date" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Alamat Project</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="address">
+                                        <input type="text" name="address" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="notes">
+                                        <input type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -179,13 +179,13 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Alamat Project</label>
                                     <div class="da-form-item large">
-                                        <input id="project-edit-address" type="text" name="address">
+                                        <input id="project-edit-address" type="text" name="address" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input id="project-edit-notes" type="text" name="notes">
+                                        <input id="project-edit-notes" type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                                 <input id="project-edit-id" type="hidden" name="id">

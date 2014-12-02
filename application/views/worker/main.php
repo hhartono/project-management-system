@@ -148,7 +148,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Tukang</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="name">
+                                        <input type="text" name="name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -160,37 +160,37 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Alamat</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="address">
+                                        <input type="text" name="address" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 1</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="phone_number_1">
+                                        <input type="text" name="phone_number_1" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 2</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="phone_number_2">
+                                        <input type="text" name="phone_number_2" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Tanggal Masuk</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-create-join-date" type="text" name="join_date">
+                                        <input id="worker-create-join-date" type="text" name="join_date" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Gaji</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="salary">
+                                        <input type="text" name="salary" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="notes">
+                                        <input type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -222,37 +222,37 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Alamat</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-edit-address" type="text" name="address">
+                                        <input id="worker-edit-address" type="text" name="address" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 1</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-edit-phone-1" type="text" name="phone_number_1">
+                                        <input id="worker-edit-phone-1" type="text" name="phone_number_1" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 2</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-edit-phone-2" type="text" name="phone_number_2">
+                                        <input id="worker-edit-phone-2" type="text" name="phone_number_2" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Tanggal Masuk</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-edit-join-date" type="text" name="join_date">
+                                        <input id="worker-edit-join-date" type="text" name="join_date" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Gaji</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-edit-salary" type="text" name="salary">
+                                        <input id="worker-edit-salary" type="text" name="salary" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-edit-notes" type="text" name="notes">
+                                        <input id="worker-edit-notes" type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                                 <input id="worker-edit-id" type="hidden" name="id">

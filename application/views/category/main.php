@@ -83,19 +83,19 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Prefix Kategori</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="prefix">
+                                        <input type="text" name="prefix" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Kategori</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="name">
+                                        <input type="text" name="name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="notes">
+                                        <input type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input id="category-edit-notes" type="text" name="notes">
+                                        <input id="category-edit-notes" type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                                 <input id="category-edit-id" type="hidden" name="id">

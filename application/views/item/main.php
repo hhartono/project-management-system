@@ -85,7 +85,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Barang</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="name">
+                                        <input type="text" name="name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -103,7 +103,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="notes">
+                                        <input type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input id="item-edit-notes" type="text" name="notes">
+                                        <input id="item-edit-notes" type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                                 <input id="item-edit-id" type="hidden" name="id">

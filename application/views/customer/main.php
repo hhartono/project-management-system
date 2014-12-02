@@ -176,61 +176,61 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="name">
+                                        <input type="text" name="name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Alamat</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="address">
+                                        <input type="text" name="address" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kota</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="city">
+                                        <input type="text" name="city" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Pos</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="postal_code">
+                                        <input type="text" name="postal_code" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Provinsi</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="province">
+                                        <input type="text" name="province" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 1</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="phone_number_1">
+                                        <input type="text" name="phone_number_1" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 2</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="phone_number_2">
+                                        <input type="text" name="phone_number_2" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 3</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="phone_number_3">
+                                        <input type="text" name="phone_number_3" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Fax</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="fax">
+                                        <input type="text" name="fax" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Email</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="email">
+                                        <input type="text" name="email" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -250,61 +250,55 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Alamat</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-address" type="text" name="address">
+                                        <input id="customer-edit-address" type="text" name="address" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kota</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-city" type="text" name="city">
+                                        <input id="customer-edit-city" type="text" name="city" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Pos</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-postal-code" type="text" name="postal_code">
+                                        <input id="customer-edit-postal-code" type="text" name="postal_code" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Provinsi</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-province" type="text" name="province">
+                                        <input id="customer-edit-province" type="text" name="province" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 1</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-phone-1" type="text" name="phone_number_1">
+                                        <input id="customer-edit-phone-1" type="text" name="phone_number_1" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 2</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-phone-2" type="text" name="phone_number_2">
+                                        <input id="customer-edit-phone-2" type="text" name="phone_number_2" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Telepon 3</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-phone-3" type="text" name="phone_number_3">
+                                        <input id="customer-edit-phone-3" type="text" name="phone_number_3" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Fax</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-fax" type="text" name="fax">
+                                        <input id="customer-edit-fax" type="text" name="fax" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Email</label>
                                     <div class="da-form-item large">
-                                        <input id="customer-edit-email" type="text" name="email">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Website</label>
-                                    <div class="da-form-item large">
-                                        <input id="customer-edit-website" type="text" name="website">
+                                        <input id="customer-edit-email" type="text" name="email" autocomplete="off">
                                     </div>
                                 </div>
                                 <input id="customer-edit-id" type="hidden" name="id">

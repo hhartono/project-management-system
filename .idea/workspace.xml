@@ -32,19 +32,13 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/application/views/stock/main.php" />
         <option value="$PROJECT_DIR$/application/controllers/stock.php" />
         <option value="$PROJECT_DIR$/application/models/stock_model.php" />
-        <option value="$PROJECT_DIR$/application/views/supplier/main.php" />
-        <option value="$PROJECT_DIR$/application/views/unit/main.php" />
-        <option value="$PROJECT_DIR$/application/views/category/main.php" />
         <option value="$PROJECT_DIR$/application/models/category_model.php" />
         <option value="$PROJECT_DIR$/assets/js/custom/category/category.modal.js" />
         <option value="$PROJECT_DIR$/assets/js/custom/division/unit.tables.js" />
         <option value="$PROJECT_DIR$/assets/js/custom/division/division.modal.js" />
         <option value="$PROJECT_DIR$/application/controllers/division.php" />
-        <option value="$PROJECT_DIR$/application/views/division/main.php" />
-        <option value="$PROJECT_DIR$/application/views/item/main.php" />
         <option value="$PROJECT_DIR$/application/models/item_model.php" />
         <option value="$PROJECT_DIR$/assets/js/custom/worker/worker.tables.js" />
         <option value="$PROJECT_DIR$/application/helpers/stock_code_helper.php" />
@@ -57,7 +51,6 @@
         <option value="$PROJECT_DIR$/assets/js/custom/project/project.tables.js" />
         <option value="$PROJECT_DIR$/application/controllers/customer.php" />
         <option value="$PROJECT_DIR$/assets/js/custom/customer/supplier.tables.js" />
-        <option value="$PROJECT_DIR$/application/views/customer/main.php" />
         <option value="$PROJECT_DIR$/assets/js/custom/customer/customer.modal.js" />
         <option value="$PROJECT_DIR$/application/views/subproject/navigation.php" />
         <option value="$PROJECT_DIR$/application/views/category/navigation.php" />
@@ -70,19 +63,26 @@
         <option value="$PROJECT_DIR$/application/views/worker/navigation.php" />
         <option value="$PROJECT_DIR$/application/views/unit/navigation.php" />
         <option value="$PROJECT_DIR$/application/views/supplier/navigation.php" />
-        <option value="$PROJECT_DIR$/application/views/worker/main.php" />
         <option value="$PROJECT_DIR$/application/models/customer_model.php" />
         <option value="$PROJECT_DIR$/assets/js/custom/subproject/subproject.tables.js" />
         <option value="$PROJECT_DIR$/application/views/footer.php" />
         <option value="$PROJECT_DIR$/application/helpers/subproject_code_helper.php" />
         <option value="$PROJECT_DIR$/application/controllers/project.php" />
         <option value="$PROJECT_DIR$/application/models/project_model.php" />
-        <option value="$PROJECT_DIR$/application/views/project/main.php" />
         <option value="$PROJECT_DIR$/assets/js/custom/project/project.modal.js" />
         <option value="$PROJECT_DIR$/application/controllers/subproject.php" />
-        <option value="$PROJECT_DIR$/application/views/subproject/main.php" />
         <option value="$PROJECT_DIR$/application/models/subproject_model.php" />
         <option value="$PROJECT_DIR$/assets/js/custom/subproject/subproject.modal.js" />
+        <option value="$PROJECT_DIR$/application/views/category/main.php" />
+        <option value="$PROJECT_DIR$/application/views/customer/main.php" />
+        <option value="$PROJECT_DIR$/application/views/division/main.php" />
+        <option value="$PROJECT_DIR$/application/views/item/main.php" />
+        <option value="$PROJECT_DIR$/application/views/project/main.php" />
+        <option value="$PROJECT_DIR$/application/views/stock/main.php" />
+        <option value="$PROJECT_DIR$/application/views/subproject/main.php" />
+        <option value="$PROJECT_DIR$/application/views/supplier/main.php" />
+        <option value="$PROJECT_DIR$/application/views/unit/main.php" />
+        <option value="$PROJECT_DIR$/application/views/worker/main.php" />
       </list>
     </option>
   </component>
@@ -385,21 +385,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/item/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="99" selection-start="9175" selection-end="9183" vertical-scroll-proportion="0.7054429" vertical-offset="1304" max-vertical-offset="2265" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/custom/category/category.modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="69" selection-start="2928" selection-end="2928" vertical-scroll-proportion="0.70343393" vertical-offset="569" max-vertical-offset="1530" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/custom/division/division.modal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="20" selection-start="738" selection-end="738" vertical-scroll-proportion="-0.264308" vertical-offset="569" max-vertical-offset="1530" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/custom/item/item.modal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="199" column="12" selection-start="6940" selection-end="6940" vertical-scroll-proportion="0.96878254" vertical-offset="2054" max-vertical-offset="3075" />
@@ -408,11 +393,6 @@
     <entry file="file://$PROJECT_DIR$/assets/js/custom/unit/unit.modal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="58" column="17" selection-start="1970" selection-end="1970" vertical-scroll-proportion="0.3132154" vertical-offset="569" max-vertical-offset="1530" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/home/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="48" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.055496264" vertical-offset="413" max-vertical-offset="1395" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/header.php">
@@ -425,24 +405,9 @@
         <state line="2" column="22" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="54" selection-start="3653" selection-end="3653" vertical-scroll-proportion="-16.078432" vertical-offset="875" max-vertical-offset="1785" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/custom/customer/customer.tables.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="28" selection-start="76" selection-end="76" vertical-scroll-proportion="0.031948883" vertical-offset="0" max-vertical-offset="939" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/customer/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="48" selection-start="7062" selection-end="7062" vertical-scroll-proportion="24.647058" vertical-offset="2697" max-vertical-offset="4800" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/category/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2055" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/category/navigation.php">
@@ -522,23 +487,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/worker/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="83" selection-start="12957" selection-end="12957" vertical-scroll-proportion="-28.75" vertical-offset="2160" max-vertical-offset="4020">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/custom/worker/worker.modal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="113" column="57" selection-start="4177" selection-end="4279" vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="3570">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/stock/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="34" selection-start="9733" selection-end="9733" vertical-scroll-proportion="-9.666667" vertical-offset="1808" max-vertical-offset="3555">
           <folding />
         </state>
       </provider>
@@ -588,13 +539,6 @@
     <entry file="file://$PROJECT_DIR$/application/models/category_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="38" selection-start="1549" selection-end="1559" vertical-scroll-proportion="0.63180363" vertical-offset="113" max-vertical-offset="1140">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/customer_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="465" selection-end="465" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1605">
           <folding />
         </state>
       </provider>
@@ -655,33 +599,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/supplier/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="70" selection-start="5702" selection-end="5880" vertical-scroll-proportion="-25.625" vertical-offset="630" max-vertical-offset="4980">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/project/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="0" selection-start="15234" selection-end="15627" vertical-scroll-proportion="-10.156863" vertical-offset="2737" max-vertical-offset="3765">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#4;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/subproject/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="117" selection-start="6256" selection-end="6256" vertical-scroll-proportion="-17.980392" vertical-offset="313" max-vertical-offset="3360">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/project_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="26" selection-start="481" selection-end="1205" vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="2385">
@@ -720,6 +637,97 @@
     <entry file="file://$PROJECT_DIR$/application/controllers/project.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="195" column="0" selection-start="7488" selection-end="7488" vertical-scroll-proportion="0.39167556" vertical-offset="2558" max-vertical-offset="3675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/category/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="115" selection-start="8778" selection-end="8778" vertical-scroll-proportion="0.77588046" vertical-offset="1118" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/customer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="54" selection-start="3653" selection-end="3653" vertical-scroll-proportion="0.9039488" vertical-offset="848" max-vertical-offset="1785">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/customer_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="465" selection-end="465" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1605">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/customer/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="38" selection-start="20364" selection-end="20364" vertical-scroll-proportion="1.5763074" vertical-offset="3053" max-vertical-offset="4710">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/division/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="115" selection-start="8772" selection-end="8772" vertical-scroll-proportion="0.77588046" vertical-offset="1118" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/home/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="48" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.49626467" vertical-offset="0" max-vertical-offset="1395">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/item/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="137" column="111" selection-start="9636" selection-end="9636" vertical-scroll-proportion="0.91995734" vertical-offset="1193" max-vertical-offset="2265">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/project/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="187" column="114" selection-start="13573" selection-end="13573" vertical-scroll-proportion="-0.024546424" vertical-offset="2828" max-vertical-offset="3765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/stock/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="223" column="122" selection-start="15751" selection-end="15751" vertical-scroll-proportion="0.8719317" vertical-offset="2528" max-vertical-offset="3555">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/subproject/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="165" column="117" selection-start="12560" selection-end="12560" vertical-scroll-proportion="0.055496264" vertical-offset="2423" max-vertical-offset="3360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/supplier/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="318" column="119" selection-start="21462" selection-end="21462" vertical-scroll-proportion="-30.291666" vertical-offset="4043" max-vertical-offset="4980">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/unit/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="111" selection-start="8670" selection-end="8670" vertical-scroll-proportion="0.77588046" vertical-offset="1118" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/worker/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="254" column="113" selection-start="17376" selection-end="17376" vertical-scroll-proportion="0.8004269" vertical-offset="3060" max-vertical-offset="4020">
           <folding />
         </state>
       </provider>

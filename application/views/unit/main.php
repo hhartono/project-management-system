@@ -83,19 +83,19 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Satuan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="abbreviation">
+                                        <input type="text" name="abbreviation" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Satuan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="name">
+                                        <input type="text" name="name" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="notes">
+                                        <input type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-notes" type="text" name="notes">
+                                        <input id="unit-edit-notes" type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
                                 <input id="unit-edit-id" type="hidden" name="id">

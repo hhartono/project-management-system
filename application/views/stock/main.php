@@ -151,7 +151,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Jumlah Stok</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-create-item-count" type="text" name="item_count">
+                                        <input id="stock-create-item-count" type="text" name="item_count" autocomplete="off">
                                         <label for="stock-create-item-count" id="stock-create-item-count-label"></label>
                                     </div>
                                 </div>
@@ -164,19 +164,19 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Subproject</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-create-subproject" type="text" name="subproject">
+                                        <input id="stock-create-subproject" type="text" name="subproject" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">PO Detail ID</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-create-po-detail-id" type="text" name="po_detail_id">
+                                        <input id="stock-create-po-detail-id" type="text" name="po_detail_id" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Harga Barang</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-create-item-price" type="text" name="item_price">
+                                        <input id="stock-create-item-price" type="text" name="item_price" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Jumlah Stok</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-edit-item-count" type="text" name="item_count">
+                                        <input id="stock-edit-item-count" type="text" name="item_count" autocomplete="off">
                                         <label for="stock-edit-item-count" id="stock-edit-item-count-label"></label>
                                     </div>
                                 </div>
@@ -209,19 +209,19 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Subproject</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-edit-subproject" type="text" name="subproject">
+                                        <input id="stock-edit-subproject" type="text" name="subproject" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">PO Detail ID</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-edit-po-detail-id" type="text" name="po_detail_id">
+                                        <input id="stock-edit-po-detail-id" type="text" name="po_detail_id" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Harga Barang</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-edit-item-price" type="text" name="item_price">
+                                        <input id="stock-edit-item-price" type="text" name="item_price" autocomplete="off">
                                     </div>
                                 </div>
                                 <input id="stock-edit-id" type="hidden" name="id">
