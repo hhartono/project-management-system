@@ -38,6 +38,8 @@
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         $control_label_array = array();
+                                                        $control_label_array[] = "Lihat";
+
                                                         if(isset($access['edit']) && $access['edit']){
                                                             $control_label_array[] = "Ubah";
                                                         }
@@ -57,8 +59,8 @@
                                                     <td class="customer-name-row"><?php echo $each_project['customer_name']; ?></td>
                                                     <td class="address-row"><?php echo $each_project['address']; ?></td>
                                                     <td class="start-date-row">
-                                                        <?php if($each_project['formatted_start_date'] == -1){
-                                                            echo '-';
+                                                        <?php if(empty($each_project['formatted_start_date'])){
+                                                            echo "";
                                                         }else{
                                                             echo $each_project['formatted_start_date'];
                                                         }
@@ -66,7 +68,7 @@
                                                     </td>
                                                     <td class="finish-date-row">
                                                         <?php
-                                                            if($each_project['formatted_finish_date'] == -1){
+                                                            if(empty($each_project['formatted_finish_date'])){
                                                                 $project_id = $each_project['id'];
                                                                 $finish_url = "/project/finish_project/" . $project_id;
                                                         ?>
@@ -81,6 +83,7 @@
                                                     </td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
+                                                            <a class="da-project-view-dialog" href="#" data-value="<?php echo $each_project['id']; ?>"><i class="icol-eye"></i></a>
                                                             <?php if(isset($access['edit']) && $access['edit']): ?>
                                                                 <a class="da-project-edit-dialog" href="#" data-value="<?php echo $each_project['id']; ?>"><i class="icol-pencil"></i></a>
                                                             <?php endif; ?>
@@ -186,6 +189,56 @@
                                     </div>
                                 </div>
                                 <input id="project-edit-id" type="hidden" name="id">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="da-project-view-form-div" class="form-container">
+                        <form id="da-project-view-form-val" class="da-form" method="post">
+                            <div id="da-project-view-validate-error" class="da-message error" style="display:none;"></div>
+                            <div class="da-form-inline">
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Inisial Project</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-view-project-initial" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Nama Project</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-view-name" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Nama Customer</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-view-customer" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Tanggal Mulai</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-view-start-date" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Tanggal Selesai</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-view-finish-date" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Alamat Project</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-view-address" type="text" readonly>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Keterangan</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-view-notes" type="text" readonly>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

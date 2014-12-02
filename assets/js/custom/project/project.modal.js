@@ -103,7 +103,7 @@
         $(".da-project-edit-dialog").bind("click", function(event) {
             event.preventDefault();
             $("#da-project-edit-form-div").dialog("option", {modal: true}).dialog("open");
-            $("#project-edit-start-date").datepicker({showOtherMonths:true, dateFormat: 'dd-mm-yy'});
+            //$("#project-edit-start-date").datepicker({showOtherMonths:true, dateFormat: 'dd-mm-yy'});
 
             $.get( "/project/get_all_project_customer_names", function(data) {
                 $( "#project-edit-customer" ).autocomplete({
@@ -120,6 +120,37 @@
                 $("#project-edit-start-date").val(data.formatted_start_date);
                 $("#project-edit-address").val(data.address);
                 $("#project-edit-notes").val(data.notes);
+            }, "json" );
+        });
+
+        /*
+         Modal Controller for Viewing
+         */
+        $("#da-project-view-form-div").dialog({
+            autoOpen: false,
+            title: "Lihat Project",
+            modal: true,
+            width: "640",
+            buttons: [{
+                text: "Keluar",
+                click: function() {
+                    $("#da-project-view-form-div").dialog("option", {modal: true}).dialog("close");
+                }}]
+        });
+
+        $(".da-project-view-dialog").bind("click", function(event) {
+            event.preventDefault();
+            $("#da-project-view-form-div").dialog("option", {modal: true}).dialog("open");
+
+            var id = $(this).data("value");
+            $.get( "/project/get_project_detail/" + id, function(data) {
+                $("#project-view-project-initial").val(data.project_initial);
+                $("#project-view-name").val(data.name);
+                $("#project-view-customer").val(data.customer_name);
+                $("#project-view-start-date").val(data.formatted_start_date);
+                $("#project-view-finish-date").val(data.formatted_finish_date);
+                $("#project-view-address").val(data.address);
+                $("#project-view-notes").val(data.notes);
             }, "json" );
         });
     });

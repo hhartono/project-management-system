@@ -106,7 +106,7 @@ class Project extends CI_Controller {
             $database_input_array = array();
             $customer_detail = $this->customer_model->get_customer_by_name($this->input->post('customer_name'));
             if(empty($customer_detail)){
-                $message['error'] = "Project gagal disimpan. Nama customer tidak ada dalam system.";
+                $message['error'] = "Project gagal diubah. Nama customer tidak ada dalam system.";
                 $this->show_table($message);
                 return;
             }else{
@@ -129,13 +129,13 @@ class Project extends CI_Controller {
             date_default_timezone_set('Asia/Jakarta');
             $start_date = strtotime($this->input->post('start_date'));
             if($start_date === false){
-                $message['error'] = "Project gagal disimpan. Tanggal mulai tidak valid.";
+                $message['error'] = "Project gagal diubah. Tanggal mulai tidak valid.";
                 $this->show_table($message);
                 return;
             }else{
                 $start_date = date("Y-m-d H:i:s", $start_date);
                 if($start_date === false){
-                    $message['error'] = "Project gagal disimpan. Tanggal mulai tidak valid.";
+                    $message['error'] = "Project gagal diubah. Tanggal mulai tidak valid.";
                     $this->show_table($message);
                     return;
                 }else{
@@ -193,7 +193,6 @@ class Project extends CI_Controller {
 
         $project_id = urldecode($project_id);
         $project_detail = $this->project_model->get_project_by_id($project_id);
-        $project_detail['formatted_start_date'] = date("d-m-Y", strtotime($project_detail['start_date']));
         echo json_encode($project_detail);
     }
 

@@ -12,7 +12,25 @@ class Project_model extends CI_Model {
         $this->db->where('project_master.id', $id);
         $query = $this->db->get();
 
-        return $query->row_array();
+        $row_array = $query->row_array();
+        if($row_array === false){
+            return false;
+        }else{
+            date_default_timezone_set('Asia/Jakarta');
+            if(strtotime($row_array['start_date']) <= 0){
+                $row_array['formatted_start_date'] = "";
+            }else{
+                $row_array['formatted_start_date'] = date("d-m-Y", strtotime($row_array['start_date']));
+            }
+
+            if(strtotime($row_array['finish_date']) <= 0){
+                $row_array['formatted_finish_date'] = "";
+            }else{
+                $row_array['formatted_finish_date'] = date("d-m-Y", strtotime($row_array['finish_date']));
+            }
+
+            return $row_array;
+        }
     }
 
     public function get_project_by_name_customer($name, $customer_id){
@@ -22,6 +40,11 @@ class Project_model extends CI_Model {
         $this->db->where('customer_id', $customer_id);
         $query = $this->db->get();
 
+        return $query->row_array();
+    }
+
+    public function get_project_by_name($name){
+        $query = $this->db->get_where('project_master', array('name' => $name));
         return $query->row_array();
     }
 
@@ -40,13 +63,13 @@ class Project_model extends CI_Model {
             $array_length = count($result_array);
             for($walk = 0; $walk < $array_length; $walk++){
                 if(strtotime($result_array[$walk]['start_date']) <= 0){
-                    $result_array[$walk]['formatted_start_date'] = -1;
+                    $result_array[$walk]['formatted_start_date'] = "";
                 }else{
                     $result_array[$walk]['formatted_start_date'] = date("d-m-Y", strtotime($result_array[$walk]['start_date']));
                 }
 
                 if(strtotime($result_array[$walk]['finish_date']) <= 0){
-                    $result_array[$walk]['formatted_finish_date'] = -1;
+                    $result_array[$walk]['formatted_finish_date'] = "";
                 }else{
                     $result_array[$walk]['formatted_finish_date'] = date("d-m-Y", strtotime($result_array[$walk]['finish_date']));
                 }
@@ -71,7 +94,6 @@ class Project_model extends CI_Model {
                 'address' => $database_input_array['address'],
                 'notes' => $database_input_array['notes'],
                 'start_date' => $database_input_array['start_date'],
-                'creation_date' => date("Y-m-d H:i:s")
             );
 
             $this->db->where('id', $this->input->post('id'));

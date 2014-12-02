@@ -3,24 +3,24 @@
         /*
             Modal Controller for Creating
          */
-        $("#da-unit-create-form-div").dialog({
+        $("#da-subproject-create-form-div").dialog({
             autoOpen: false,
-            title: "Tambah Satuan",
+            title: "Tambah Subproject",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-unit-create-form-val').submit();
+                    $(this).find('form#da-subproject-create-form-val').submit();
                 }},
                 {
                 text: "Keluar",
                 click: function() {
-                    $("#da-unit-create-form-div").dialog("option", {modal: true}).dialog("close");
+                    $("#da-subproject-create-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
-                abbreviation: {
+                project_name: {
                     required: true
                 },
                 name: {
@@ -31,39 +31,45 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-unit-create-validate-error").html(message).show();
+                    $("#da-subproject-create-validate-error").html(message).show();
                 } else {
-                    $("#da-unit-create-validate-error").hide();
+                    $("#da-subproject-create-validate-error").hide();
                 }
             }
         });
 
-        $("#da-unit-create-dialog").bind("click", function(event) {
+        $("#da-subproject-create-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-unit-create-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-subproject-create-form-div").dialog("option", {modal: true}).dialog("open");
+
+            $.get( "/subproject/get_all_subproject_project_names", function(data) {
+                $( "#subproject-create-project" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
         });
 
         /*
             Modal Controller for Editing
          */
-        $("#da-unit-edit-form-div").dialog({
+        $("#da-subproject-edit-form-div").dialog({
             autoOpen: false,
-            title: "Ubah Satuan",
+            title: "Ubah Subproject",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-unit-edit-form-val').submit();
+                    $(this).find('form#da-subproject-edit-form-val').submit();
                 }},
                 {
                 text: "Keluar",
                 click: function() {
-                    $("#da-unit-edit-form-div").dialog("option", {modal: true}).dialog("close");
+                    $("#da-subproject-edit-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
-                abbreviation: {
+                project_name: {
                     required: true
                 },
                 name: {
@@ -74,23 +80,53 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-unit-edit-validate-error").html(message).show();
+                    $("#da-subproject-edit-validate-error").html(message).show();
                 } else {
-                    $("#da-unit-edit-validate-error").hide();
+                    $("#da-subproject-edit-validate-error").hide();
                 }
             }
         });
 
-        $(".da-unit-edit-dialog").bind("click", function(event) {
+        $(".da-subproject-edit-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-unit-edit-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-subproject-edit-form-div").dialog("option", {modal: true}).dialog("open");
 
             var id = $(this).data("value");
-            $.get( "/unit/get_unit_detail/" + id, function(data) {
-                $("#unit-edit-id").val(id);
-                $("#unit-edit-abbreviation").val(data.abbreviation);
-                $("#unit-edit-name").val(data.name);
-                $("#unit-edit-notes").val(data.notes);
+            $.get( "/subproject/get_subproject_detail/" + id, function(data) {
+                $("#subproject-edit-id").val(id);
+                $("#subproject-edit-project").val(data.project_name);
+                $("#subproject-edit-name").val(data.name);
+                $("#subproject-edit-notes").val(data.notes);
+            }, "json" );
+        });
+
+        /*
+         Modal Controller for Viewing
+         */
+        $("#da-subproject-view-form-div").dialog({
+            autoOpen: false,
+            title: "Lihat Subproject",
+            modal: true,
+            width: "640",
+            buttons: [{
+                text: "Keluar",
+                click: function() {
+                    $("#da-subproject-view-form-div").dialog("option", {modal: true}).dialog("close");
+                }}]
+        });
+
+        $(".da-subproject-view-dialog").bind("click", function(event) {
+            event.preventDefault();
+            $("#da-subproject-view-form-div").dialog("option", {modal: true}).dialog("open");
+
+            var id = $(this).data("value");
+            $.get( "/subproject/get_subproject_detail/" + id, function(data) {
+                $("#subproject-view-project").val(data.project_name);
+                $("#subproject-view-subproject-code").val(data.subproject_code);
+                $("#subproject-view-name").val(data.name);
+                $("#subproject-view-start-date").val(data.formatted_start_date);
+                $("#subproject-view-install-date").val(data.formatted_install_date);
+                $("#subproject-view-notes").val(data.notes);
             }, "json" );
         });
     });

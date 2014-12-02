@@ -44,6 +44,9 @@
     <script src="/assets/js/custom/project/project.modal.js"></script>
     <script src="/assets/js/custom/project/project.tables.js"></script>
 
+    <script src="/assets/js/custom/subproject/subproject.modal.js"></script>
+    <script src="/assets/js/custom/subproject/subproject.tables.js"></script>
+
     <script src="/assets/js/custom/worker/worker.modal.js"></script>
     <script src="/assets/js/custom/worker/worker.tables.js"></script>
 

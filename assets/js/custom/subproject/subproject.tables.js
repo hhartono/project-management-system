@@ -1,6 +1,6 @@
 (function($) {
 	$(document).ready(function(e) {
-        $("table#da-project-datatable-numberpaging").DataTable({
+        $("table#da-subproject-datatable-numberpaging").DataTable({
             sPaginationType: "full_numbers"
         });
 	});
