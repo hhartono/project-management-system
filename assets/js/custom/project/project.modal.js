@@ -3,27 +3,33 @@
         /*
             Modal Controller for Creating
          */
-        $("#da-unit-create-form-div").dialog({
+        $("#da-project-create-form-div").dialog({
             autoOpen: false,
-            title: "Tambah Satuan",
+            title: "Tambah Project",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-unit-create-form-val').submit();
+                    $(this).find('form#da-project-create-form-val').submit();
                 }},
                 {
                 text: "Keluar",
                 click: function() {
-                    $("#da-unit-create-form-div").dialog("option", {modal: true}).dialog("close");
+                    $("#da-project-create-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
-                abbreviation: {
+                project_initial: {
                     required: true
                 },
                 name: {
+                    required: true
+                },
+                customer_name: {
+                    required: true
+                },
+                start_date: {
                     required: true
                 }
             },
@@ -31,42 +37,55 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-unit-create-validate-error").html(message).show();
+                    $("#da-project-create-validate-error").html(message).show();
                 } else {
-                    $("#da-unit-create-validate-error").hide();
+                    $("#da-project-create-validate-error").hide();
                 }
             }
         });
 
-        $("#da-unit-create-dialog").bind("click", function(event) {
+        $("#da-project-create-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-unit-create-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-project-create-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#project-create-start-date").datepicker({showOtherMonths:true, dateFormat: 'dd-mm-yy'});
+
+            $.get( "/project/get_all_project_customer_names", function(data) {
+                $( "#project-create-customer" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
         });
 
         /*
             Modal Controller for Editing
          */
-        $("#da-unit-edit-form-div").dialog({
+        $("#da-project-edit-form-div").dialog({
             autoOpen: false,
-            title: "Ubah Satuan",
+            title: "Ubah Project",
             modal: true,
             width: "640",
             buttons: [{
                 text: "Simpan",
                 click: function() {
-                    $(this).find('form#da-unit-edit-form-val').submit();
+                    $(this).find('form#da-project-edit-form-val').submit();
                 }},
                 {
                 text: "Keluar",
                 click: function() {
-                    $("#da-unit-edit-form-div").dialog("option", {modal: true}).dialog("close");
+                    $("#da-project-edit-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         }).find('form').validate({
             rules: {
-                abbreviation: {
+                project_initial: {
                     required: true
                 },
                 name: {
+                    required: true
+                },
+                customer_name: {
+                    required: true
+                },
+                start_date: {
                     required: true
                 }
             },
@@ -74,23 +93,33 @@
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var message = 'Atribut yang diberi tanda wajib diisi.';
-                    $("#da-unit-edit-validate-error").html(message).show();
+                    $("#da-project-edit-validate-error").html(message).show();
                 } else {
-                    $("#da-unit-edit-validate-error").hide();
+                    $("#da-project-edit-validate-error").hide();
                 }
             }
         });
 
-        $(".da-unit-edit-dialog").bind("click", function(event) {
+        $(".da-project-edit-dialog").bind("click", function(event) {
             event.preventDefault();
-            $("#da-unit-edit-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#da-project-edit-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#project-edit-start-date").datepicker({showOtherMonths:true, dateFormat: 'dd-mm-yy'});
+
+            $.get( "/project/get_all_project_customer_names", function(data) {
+                $( "#project-edit-customer" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
 
             var id = $(this).data("value");
-            $.get( "/unit/get_unit_detail/" + id, function(data) {
-                $("#unit-edit-id").val(id);
-                $("#unit-edit-abbreviation").val(data.abbreviation);
-                $("#unit-edit-name").val(data.name);
-                $("#unit-edit-notes").val(data.notes);
+            $.get( "/project/get_project_detail/" + id, function(data) {
+                $("#project-edit-id").val(id);
+                $("#project-edit-project-initial").val(data.project_initial);
+                $("#project-edit-name").val(data.name);
+                $("#project-edit-customer").val(data.customer_name);
+                $("#project-edit-start-date").val(data.formatted_start_date);
+                $("#project-edit-address").val(data.address);
+                $("#project-edit-notes").val(data.notes);
             }, "json" );
         });
     });

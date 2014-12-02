@@ -111,6 +111,7 @@
                                 <li><a href="/unit">Satuan</a></li>
                                 <li><a href="/customer">Customer</a></li>
                                 <li><a href="/project">Project</a></li>
+                                <li><a href="/subproject">Subproject</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                                 <li><a href="/worker">Tukang</a></li>
                             </ul>

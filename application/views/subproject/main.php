@@ -34,7 +34,6 @@
                                                 <th>Nama Customer</th>
                                                 <th>Alamat Project</th>
                                                 <th>Tanggal Mulai</th>
-                                                <th>Tanggal Selesai</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         $control_label_array = array();
@@ -56,29 +55,7 @@
                                                     <td class="name-row"><?php echo $each_project['name']; ?></td>
                                                     <td class="customer-name-row"><?php echo $each_project['customer_name']; ?></td>
                                                     <td class="address-row"><?php echo $each_project['address']; ?></td>
-                                                    <td class="start-date-row">
-                                                        <?php if($each_project['formatted_start_date'] == -1){
-                                                            echo '-';
-                                                        }else{
-                                                            echo $each_project['formatted_start_date'];
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td class="finish-date-row">
-                                                        <?php
-                                                            if($each_project['formatted_finish_date'] == -1){
-                                                                $project_id = $each_project['id'];
-                                                                $finish_url = "/project/finish_project/" . $project_id;
-                                                        ?>
-                                                            <form id="da-project-finish-form-val" class="da-form" action=<?php echo $finish_url; ?> method="post">
-                                                                <button id="da-project-finish" class="btn btn-success">Selesai</button>
-                                                            </form>
-                                                        <?php
-                                                            }else{
-                                                                echo $each_project['formatted_finish_date'];
-                                                            }
-                                                        ?>
-                                                    </td>
+                                                    <td class="start-date-row"><?php echo $each_project['formatted_start_date']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <?php if(isset($access['edit']) && $access['edit']): ?>
@@ -101,38 +78,21 @@
                         </div>
                     </div>
 
-                    <div id="da-project-create-form-div" class="form-container">
-                        <form id="da-project-create-form-val" class="da-form" action="/project/create_project" method="post">
-                            <div id="da-project-create-validate-error" class="da-message error" style="display:none;"></div>
+                    <!--
+                    <div id="da-unit-create-form-div" class="form-container">
+                        <form id="da-unit-create-form-val" class="da-form" action="/unit/create_unit" method="post">
+                            <div id="da-unit-create-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Inisial Project</label>
+                                    <label class="da-form-label">Kode Satuan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="project_initial">
+                                        <input type="text" name="abbreviation">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Nama Project</label>
+                                    <label class="da-form-label">Nama Satuan</label>
                                     <div class="da-form-item large">
                                         <input type="text" name="name">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Nama Customer</label>
-                                    <div class="da-form-item large">
-                                        <input id="project-create-customer" type="text" name="customer_name">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Tanggal Mulai</label>
-                                    <div class="da-form-item large">
-                                        <input id="project-create-start-date" type="text" name="start_date">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Alamat Project</label>
-                                    <div class="da-form-item large">
-                                        <input type="text" name="address">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -145,49 +105,32 @@
                         </form>
                     </div>
 
-                    <div id="da-project-edit-form-div" class="form-container">
-                        <form id="da-project-edit-form-val" class="da-form" action="/project/update_project" method="post">
-                            <div id="da-project-edit-validate-error" class="da-message error" style="display:none;"></div>
+                    <div id="da-unit-edit-form-div" class="form-container">
+                        <form id="da-unit-edit-form-val" class="da-form" action="/unit/update_unit" method="post">
+                            <div id="da-unit-edit-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Inisial Project</label>
+                                    <label class="da-form-label">Kode Satuan</label>
                                     <div class="da-form-item large">
-                                        <input id="project-edit-project-initial" type="text" name="project_initial" readonly>
+                                        <input id="unit-edit-abbreviation" type="text" name="abbreviation" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Nama Project</label>
+                                    <label class="da-form-label">Nama Satuan</label>
                                     <div class="da-form-item large">
-                                        <input id="project-edit-name" type="text" name="name" readonly>
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Nama Customer</label>
-                                    <div class="da-form-item large">
-                                        <input id="project-edit-customer" type="text" name="customer_name">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Tanggal Mulai</label>
-                                    <div class="da-form-item large">
-                                        <input id="project-edit-start-date" type="text" name="start_date" readonly>
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Alamat Project</label>
-                                    <div class="da-form-item large">
-                                        <input id="project-edit-address" type="text" name="address">
+                                        <input id="unit-edit-name" type="text" name="name" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Keterangan</label>
                                     <div class="da-form-item large">
-                                        <input id="project-edit-notes" type="text" name="notes">
+                                        <input id="unit-edit-notes" type="text" name="notes">
                                     </div>
                                 </div>
-                                <input id="project-edit-id" type="hidden" name="id">
+                                <input id="unit-edit-id" type="hidden" name="id">
                             </div>
                         </form>
                     </div>
+                    -->
                 </div>
             </div>

@@ -10,6 +10,11 @@ class Customer_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_customer_by_name($name){
+        $query = $this->db->get_where('customer_master', array('name' => $name));
+        return $query->row_array();
+    }
+
     public function get_customer_by_name_address($name, $address){
         $this->db->select('customer_master.*');
         $this->db->from('customer_master');
