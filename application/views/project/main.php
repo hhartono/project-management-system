@@ -111,7 +111,8 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Inisial Project</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="project_initial" autocomplete="off">
+                                        <input id="project-create-project-initial" type="text" name="project_initial" autocomplete="off" maxlength="5">
+                                        <label for="project-create-project-initial">(max 5 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -155,7 +156,8 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Inisial Project</label>
                                     <div class="da-form-item large">
-                                        <input id="project-edit-project-initial" type="text" name="project_initial" readonly>
+                                        <input id="project-edit-project-initial" type="text" name="project_initial" maxlength="5" readonly>
+                                        <label for="project-edit-project-initial">(max 5 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

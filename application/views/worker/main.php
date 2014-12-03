@@ -14,7 +14,7 @@
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Satuan
+                                        <i class="icol-grid"></i> Tukang
                                     </span>
                                 </div>
                                 <?php if(isset($message['success'])): ?>

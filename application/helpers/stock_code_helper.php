@@ -7,6 +7,7 @@ if (!defined('BASEPATH')) {
 if (!function_exists('stock_code_generator')) {
     function stock_code_generator($category_id, $supplier_id) {
         $max_code_length = 10;
+        $max_category_prefix_length = 3;
 
         // get category detail
         $CI = get_instance();
@@ -21,7 +22,7 @@ if (!function_exists('stock_code_generator')) {
             // check the length of the category prefix
             $prefix_length = strlen($category_detail['prefix']);
 
-            if($prefix_length > 2){
+            if($prefix_length > $max_category_prefix_length){
                 return false;
             }else{
                 $stock_code = $category_detail['prefix'] . $supplier_id;

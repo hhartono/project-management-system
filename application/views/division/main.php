@@ -83,7 +83,8 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Divisi</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="division_code" autocomplete="off">
+                                        <input id="division-create-code" type="text" name="division_code" autocomplete="off" maxlength="3">
+                                        <label for="division-create-code">(3 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -109,7 +110,8 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Divisi</label>
                                     <div class="da-form-item large">
-                                        <input id="division-edit-code" type="text" name="division_code" readonly>
+                                        <input id="division-edit-code" type="text" name="division_code" maxlength="3" readonly>
+                                        <label for="division-edit-code">(3 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

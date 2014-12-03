@@ -95,6 +95,12 @@
                 },
                 division_id: {
                     required: true
+                },
+                join_date: {
+                    required: true
+                },
+                salary: {
+                    required: true
                 }
             },
             invalidHandler: function(form, validator) {
@@ -159,6 +165,12 @@
                     required: true
                 },
                 division_id: {
+                    required: true
+                },
+                join_date: {
+                    required: true
+                },
+                salary: {
                     required: true
                 }
             },

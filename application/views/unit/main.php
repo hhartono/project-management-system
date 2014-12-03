@@ -83,7 +83,8 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Satuan</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="abbreviation" autocomplete="off">
+                                        <input id="unit-create-abbreviation" type="text" name="abbreviation" autocomplete="off" maxlength="5">
+                                        <label for="unit-create-abbreviation">(max 5 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -109,7 +110,8 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Kode Satuan</label>
                                     <div class="da-form-item large">
-                                        <input id="unit-edit-abbreviation" type="text" name="abbreviation" readonly>
+                                        <input id="unit-edit-abbreviation" type="text" name="abbreviation" maxlength="5" readonly>
+                                        <label for="unit-edit-abbreviation">(max 5 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

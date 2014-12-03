@@ -7,6 +7,7 @@ if (!defined('BASEPATH')) {
 if (!function_exists('subproject_code_generator')) {
     function subproject_code_generator($project_id) {
         $max_code_length = 10;
+        $max_project_initial_length = 5;
 
         // get category detail
         $CI = get_instance();
@@ -20,7 +21,7 @@ if (!function_exists('subproject_code_generator')) {
             // check the length of the category prefix
             $project_initial_length = strlen($project_detail['project_initial']);
 
-            if($project_initial_length > 5){
+            if($project_initial_length > $max_project_initial_length){
                 return false;
             }else{
                 $subproject_code = $project_detail['project_initial'];

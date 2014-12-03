@@ -7,6 +7,7 @@ if (!defined('BASEPATH')) {
 if (!function_exists('worker_code_generator')) {
     function worker_code_generator($division_id) {
         $max_code_length = 10;
+        $max_division_code_length = 3;
 
         // get category detail
         $CI = get_instance();
@@ -21,7 +22,7 @@ if (!function_exists('worker_code_generator')) {
             // check the length of the category prefix
             $division_code_length = strlen($division_detail['division_code']);
 
-            if($division_code_length > 3){
+            if($division_code_length > $max_division_code_length){
                 return false;
             }else{
                 $worker_code = $division_detail['division_code'];

@@ -83,7 +83,8 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Prefix Kategori</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="prefix" autocomplete="off">
+                                        <input id="category-create-prefix" type="text" name="prefix" autocomplete="off" maxlength="3">
+                                        <label for="category-create-prefix">(3 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -107,9 +108,10 @@
                             <div id="da-category-edit-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Prefix Kategori</label>
+                                    <label class="da-form-label">Prefix Kategori (3 karakter)</label>
                                     <div class="da-form-item large">
-                                        <input id="category-edit-prefix" type="text" name="prefix" readonly>
+                                        <input id="category-edit-prefix" type="text" name="prefix" maxlength="3" readonly>
+                                        <label for="category-edit-prefix">(3 karakter)</label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
