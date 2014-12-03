@@ -65,8 +65,7 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="#">Tukang</a></li>
-                        <li class="active"><span>Tukang</span></li>
+                        <li class="active"><span>Buat PO</span></li>
                     </ul>
                 </div>
             </div>
@@ -125,7 +124,7 @@
                                 <li><a href="/customer">Customer</a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">
@@ -138,7 +137,7 @@
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="/createpo">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">

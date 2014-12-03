@@ -98,7 +98,7 @@
                                 	<span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>
-                                List
+                                Barang
                             </a>
                             <ul>
                                 <li><a href="/category">Kategori Barang</a></li>
@@ -106,12 +106,43 @@
                                 <li><a href="/stock">Stok Barang</a></li>
                                 <li><a href="/supplier">Supplier</a></li>
                                 <li><a href="/unit">Satuan</a></li>
-                                <li><a href="/customer">Customer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Project
+                            </a>
+                            <ul>
                                 <li><a href="/project">Project</a></li>
                                 <li><a href="/subproject">Subproject</a></li>
-                                <li><a href="/division">Divisi Tukang</a></li>
-                                <li><a href="/worker">Tukang</a></li>
+                                <li><a href="/customer">Customer</a></li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <!-- Icon Container -->
+                                	<span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Tukang
+                            </a>
+                            <ul>
+                                <li><a href="/worker">Tukang</a></li>
+                                <li><a href="/division">Divisi Tukang</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/createpo">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-edit"></i>
+                                    </span>
+                                Create PO
+                            </a>
                         </li>
 
                         <!--

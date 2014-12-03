@@ -13,7 +13,7 @@
                                                 <img class="main-center" src="assets/images/po-logo.png" alt="Buat PO">
                                             </td>
                                             <td>
-                                                <a href="/hello">
+                                                <a href="/createpo">
                                                     <h3 class="main-center">Buat<br/>PO</h3>
                                                 </a>
                                             </td>

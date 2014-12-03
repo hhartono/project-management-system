@@ -62,6 +62,9 @@
     <script src="/assets/js/custom/item/item.modal.js"></script>
     <script src="/assets/js/custom/item/item.tables.js"></script>
 
+    <script src="/assets/js/custom/createpo/createpo.modal.js"></script>
+    <script src="/assets/js/custom/createpo/createpo.tables.js"></script>
+
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
 
