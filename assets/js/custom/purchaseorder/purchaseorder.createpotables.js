@@ -1,6 +1,6 @@
 (function($) {
 	$(document).ready(function(e) {
-        var poTable = $("table#da-createpo-datatable-numberpaging").DataTable({
+        var poTable = $("table#da-purchaseorder-createpo-datatable-numberpaging").DataTable({
             bPaginate: false,
             bFilter: false,
             fnCreatedRow: function(nRow, aData, iDataIndex) {
@@ -13,38 +13,38 @@
         });
         var totalItem = 0;
 
-        $.get( "/createpo/get_all_po_item_names", function(data) {
-            $( "#createpo-insert-name" ).autocomplete({
+        $.get( "/purchaseorder/get_all_po_item_names", function(data) {
+            $( "#purchaseorder-createpo-insert-name" ).autocomplete({
                 source: data,
                 change: function() {
-                    var item_name = $("#createpo-insert-name").val();
-                    get_unit_by_item_name(item_name, '#createpo-insert-item-count-label');
+                    var item_name = $("#purchaseorder-createpo-insert-name").val();
+                    get_unit_by_item_name(item_name, '#purchaseorder-createpo-insert-item-count-label');
                 }
             });
         }, "json" );
 
-        $.get( "/createpo/get_all_po_supplier_names", function(data) {
-            $( "#createpo-detail-supplier" ).autocomplete({
+        $.get( "/purchaseorder/get_all_po_supplier_names", function(data) {
+            $( "#purchaseorder-createpo-detail-supplier" ).autocomplete({
                 source: data
             });
         }, "json" );
 
-        $.get( "/createpo/get_all_po_customer_names", function(data) {
-            $( "#createpo-detail-customer" ).autocomplete({
+        $.get( "/purchaseorder/get_all_po_customer_names", function(data) {
+            $( "#purchaseorder-createpo-detail-customer" ).autocomplete({
                 source: data
             });
         }, "json" );
 
-        $('#da-createpo-insert-add').on( 'click', function (event) {
+        $('#da-purchaseorder-createpo-insert-add').on( 'click', function (event) {
             event.preventDefault();
 
             // get input value
-            var item_name = $('#createpo-insert-name').val();
-            var item_count = $('#createpo-insert-item-count').val();
-            var item_notes = $('#createpo-insert-notes').val();
+            var item_name = $('#purchaseorder-createpo-insert-name').val();
+            var item_count = $('#purchaseorder-createpo-insert-item-count').val();
+            var item_notes = $('#purchaseorder-createpo-insert-notes').val();
 
             // prepare error message
-            $("#da-createpo-insert-error").hide();
+            $("#da-purchaseorder-createpo-insert-error").hide();
 
             // add error checking when input is blank
             if(item_name && item_count){
@@ -55,31 +55,31 @@
                 table_array[3] = item_notes;
 
                 // clear all the text fields
-                $('#createpo-insert-name').val('');
-                $('#createpo-insert-item-count').val('');
-                $('#createpo-insert-item-count-label').text('');
-                $('#createpo-insert-notes').val('');
+                $('#purchaseorder-createpo-insert-name').val('');
+                $('#purchaseorder-createpo-insert-item-count').val('');
+                $('#purchaseorder-createpo-insert-item-count-label').text('');
+                $('#purchaseorder-createpo-insert-notes').val('');
 
                 get_item_id_by_item_name(poTable, table_array);
             }else{
                 var message = "Nama dan jumlah barang wajib diisi.";
-                $("#da-createpo-insert-error").html(message).show();
+                $("#da-purchaseorder-createpo-insert-error").html(message).show();
             }
         });
 
-        $('#da-createpo-insert-clear').on( 'click', function (event) {
+        $('#da-purchaseorder-createpo-insert-clear').on( 'click', function (event) {
             event.preventDefault();
 
             // hide error message
-            $("#da-createpo-insert-error").hide();
+            $("#da-purchaseorder-createpo-insert-error").hide();
 
             // clear all the text fields
-            $('#createpo-insert-name').val('');
-            $('#createpo-insert-item-count').val('');
-            $('#createpo-insert-notes').val('');
+            $('#purchaseorder-createpo-insert-name').val('');
+            $('#purchaseorder-createpo-insert-item-count').val('');
+            $('#purchaseorder-createpo-insert-notes').val('');
         });
 
-        $('#da-createpo-submit').on('click', function(event) {
+        $('#da-purchaseorder-createpo-submit').on('click', function(event) {
             event.preventDefault();
 
             // get all the value from preview table
@@ -87,14 +87,14 @@
             var walk = 0;
 
             // get input detail
-            var po_supplier = $('#createpo-detail-supplier').val();
-            var po_customer = $('#createpo-detail-customer').val();
-            $("#da-createpo-detail-error").hide();
-            $("#da-createpo-table-error").hide();
+            var po_supplier = $('#purchaseorder-createpo-detail-supplier').val();
+            var po_customer = $('#purchaseorder-createpo-detail-customer').val();
+            $("#da-purchaseorder-createpo-detail-error").hide();
+            $("#da-purchaseorder-createpo-table-error").hide();
 
             if(po_supplier && po_customer){
                 if(totalItem > 0){
-                    $('table#da-createpo-datatable-numberpaging tr').each(function(outer_index) {
+                    $('table#da-purchaseorder-createpo-datatable-numberpaging tr').each(function(outer_index) {
                         if(outer_index > 0){
                             tableValue[walk] = {};
                             $.each(this.cells, function(index, element){
@@ -108,17 +108,17 @@
 
                     // create JSON
                     var poItemValues = JSON.stringify(tableValue);
-                    $('#da-createpo-submit-item-values').val(poItemValues);
+                    $('#da-purchaseorder-createpo-submit-item-values').val(poItemValues);
 
                     // submit form
-                    $('form#da-createpo-detail-form-val').submit();
+                    $('form#da-purchaseorder-createpo-detail-form-val').submit();
                 }else{
                     var message = "Tidak ada barang untuk PO.";
-                    $("#da-createpo-table-error").html(message).show();
+                    $("#da-purchaseorder-createpo-table-error").html(message).show();
                 }
             }else{
                 var message = "Supplier dan customer wajib diisi.";
-                $("#da-createpo-detail-error").html(message).show();
+                $("#da-purchaseorder-createpo-detail-error").html(message).show();
             }
         });
 
@@ -128,7 +128,7 @@
         function get_unit_by_item_name(item_name, target_textplace){
             var item_name_encoded = encodeURIComponent(item_name);
 
-            $.get( "/createpo/get_unit_by_item_name/" + item_name_encoded, function(data) {
+            $.get( "/purchaseorder/get_unit_by_item_name/" + item_name_encoded, function(data) {
                 if(data != null && data.name != null){
                     $(target_textplace).text(data.name);
                 }else{
@@ -140,9 +140,9 @@
         function get_item_id_by_item_name(poTable, table_array){
             var item_name_encoded = encodeURIComponent(table_array[1]);
 
-            $.get( "/createpo/get_item_detail_by_item_name/" + item_name_encoded, function(data) {
+            $.get( "/purchaseorder/get_item_detail_by_item_name/" + item_name_encoded, function(data) {
                 if(data != null && data.id != null){
-                    $("#da-createpo-table-error").hide();
+                    $("#da-purchaseorder-createpo-table-error").hide();
 
                     // update table
                     totalItem++;
@@ -151,7 +151,7 @@
                 }else{
                     // error message
                     var message = "Barang tidak ditemukan dalam sistem.";
-                    $("#da-createpo-insert-error").html(message).show();
+                    $("#da-purchaseorder-createpo-insert-error").html(message).show();
                 }
             }, "json" );
         }

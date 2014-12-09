@@ -139,12 +139,12 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/createpo">
+                            <a href="/purchaseorder">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-edit"></i>
                                     </span>
-                                Create PO
+                                Purchase Order
                             </a>
                         </li>
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Createpo extends CI_Controller {
+class Purchaseorder extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -24,11 +24,16 @@ class Createpo extends CI_Controller {
         $this->load->model('unit_model');
         $this->load->model('supplier_model');
         $this->load->model('customer_model');
-        $this->load->model('createpo_model');
+        $this->load->model('purchaseorder_model');
     }
 
 	public function index()
 	{
+        $message = array();
+        $this->show_table($message);
+    }
+
+    public function createpo(){
         $this->load->helper('url');
         $base_url = base_url();
 
@@ -36,9 +41,22 @@ class Createpo extends CI_Controller {
         $data['username'] = "Hans Hartono";
         $data['company_title'] = "Chief Technology Officer";
         $this->load->view('header');
-        $this->load->view('createpo/navigation', $data);
-        $this->load->view('createpo/main');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/createpo');
         $this->load->view('footer');
+    }
+
+    public function deletepo($po_id){
+        $response = $this->purchaseorder_model->delete_po($po_id);
+
+        // display message according db status
+        if($response){
+            $message['success'] = "Purchase Order berhasil dihapus.";
+            $this->show_table($message);
+        }else{
+            $message['error'] = "Purchase Order gagal dihapus.";
+            $this->show_table($message);
+        }
     }
 
     public function submit_item_values(){
@@ -52,10 +70,22 @@ class Createpo extends CI_Controller {
                 // item values successfully decoded
                 $database_input_array = array();
 
+                // generate purchase order code
+                $this->load->helper('purchaseorder_code_helper');
+                $generated_purchaseorder_code = purchaseorder_code_generator();
+                if(empty($generated_purchaseorder_code)){
+                    $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
+                }
+
                 // customer name
                 $customer_detail = $this->customer_model->get_customer_by_name($this->input->post('customer_name'));
                 if(empty($customer_detail)){
-                    // TODO - show error message - no customer
+                    $message['error'] = "Purchase Order gagal dibuat. Customer tidak ada dalam system.";
+                    $this->show_table($message);
                     return;
                 }else{
                     $database_input_array['customer_id'] = $customer_detail['id'];
@@ -64,7 +94,8 @@ class Createpo extends CI_Controller {
                 // search for supplier id
                 $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
                 if(empty($supplier_detail)){
-                    // TODO - show error message - no supplier
+                    $message['error'] = "Purchase Order gagal dibuat. Supplier tidak ada dalam system.";
+                    $this->show_table($message);
                     return;
                 }else{
                     $database_input_array['supplier_id'] = $supplier_detail['id'];
@@ -74,18 +105,22 @@ class Createpo extends CI_Controller {
                 $database_input_array['po_item_values'] = $po_item_values;
 
                 // input data to database
-                $response = $this->createpo_model->set_po_detail($database_input_array);
+                $response = $this->purchaseorder_model->set_po_detail($database_input_array);
 
                 if($response){
-                    // TODO - show success message
+                    $message['success'] = "Purchase Order berhasil dibuat.";
+                    $this->show_table($message);
                 }else{
-                    // TODO - show error message
+                    $message['error'] = "Purchase Order gagal dibuat.";
+                    $this->show_table($message);
                 }
             }else{
-                // TODO - show error message - po item error
+                $message['error'] = "Purchase Order gagal dibuat. Item tidak dapat dideteksi.";
+                $this->show_table($message);
             }
         }else{
-            // TODO - show error message
+            $message['error'] = "Purchase Order gagal dibuat.";
+            $this->show_table($message);
         }
    }
 
@@ -149,7 +184,31 @@ class Createpo extends CI_Controller {
 
         echo json_encode($customer_name);
     }
+
+    private function show_table($message)
+    {
+        // user info
+        $data['username'] = "Hans Hartono";
+        $data['company_title'] = "Chief Technology Officer";
+
+        // access level
+        $data['access']['create'] = true;
+        $data['access']['edit'] = true;
+        $data['access']['delete'] = true;
+
+        // message
+        $data['message'] = $message;
+
+        // get necessary data
+        $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
+
+        // show the view
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/main', $data);
+        $this->load->view('footer');
+    }
 }
 
-/* End of file createpo.php */
-/* Location: ./application/controllers/createpo.php */
+/* End of file purchaseorder.php */
+/* Location: ./application/controllers/purchaseorder.php */

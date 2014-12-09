@@ -10,31 +10,31 @@
                                         <i class="icol-grid"></i> Input Pesanan
                                     </span>
                                 </div>
-                                <div id="da-createpo-insert-error" class="da-message error" style="display:none;"></div>
+                                <div id="da-purchaseorder-createpo-insert-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
-                                    <form id="da-createpo-insert-form-val" class="da-form da-form-inline" method="post">
+                                    <form id="da-purchaseorder-createpo-insert-form-val" class="da-form da-form-inline" method="post">
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Barang</label>
                                             <div class="da-form-item large">
-                                                <input id="createpo-insert-name" type="text" name="name">
+                                                <input id="purchaseorder-createpo-insert-name" type="text" name="name">
                                             </div>
                                         </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Jumlah Barang</label>
                                             <div class="da-form-item large">
-                                                <input id="createpo-insert-item-count" type="text" name="item_count" autocomplete="off">
-                                                <label for="createpo-insert-item-count" id="createpo-insert-item-count-label"></label>
+                                                <input id="purchaseorder-createpo-insert-item-count" type="text" name="item_count" autocomplete="off">
+                                                <label for="purchaseorder-createpo-insert-item-count" id="purchaseorder-createpo-insert-item-count-label"></label>
                                             </div>
                                         </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Keterangan</label>
                                             <div class="da-form-item large">
-                                                <input id="createpo-insert-notes" type="text" name="notes" autocomplete="off">
+                                                <input id="purchaseorder-createpo-insert-notes" type="text" name="notes" autocomplete="off">
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">
-                                            <button id="da-createpo-insert-add" class="btn btn-success">Tambah Barang</button>
-                                            <button id="da-createpo-insert-clear" class="btn btn-danger">Hapus Input</button>
+                                            <button id="da-purchaseorder-createpo-insert-add" class="btn btn-success">Tambah Barang</button>
+                                            <button id="da-purchaseorder-createpo-insert-clear" class="btn btn-danger">Hapus Input</button>
                                         </div>
                                     </form>
                                 </div>
@@ -59,9 +59,9 @@
                                         <i class="icol-grid"></i> Preview Pesanan
                                     </span>
                                 </div>
-                                <div id="da-createpo-table-error" class="da-message error" style="display:none;"></div>
+                                <div id="da-purchaseorder-createpo-table-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-createpo-datatable-numberpaging" class="da-table"">
+                                    <table id="da-purchaseorder-createpo-datatable-numberpaging" class="da-table"">
                                         <thead>
                                             <tr>
                                                 <th>Database ID</th>
@@ -73,10 +73,10 @@
                                     </table>
                                 </div>
                                 <!--
-                                <form id="da-createpo-submit-form-val" class="da-form da-form-inline" action="/createpo/submit_item_values" method="post">
+                                <form id="da-purchaseorder-createpo-submit-form-val" class="da-form da-form-inline" action="/purchaseorder/submit_item_values" method="post">
                                     <div style="padding:20px; text-align:center;">
-                                        <input id="da-createpo-submit-item-values" type="hidden" name="po_item_values">
-                                        <button id="da-createpo-submit" class="btn-large btn btn-success">Buat PO</button>
+                                        <input id="da-purchaseorder-createpo-submit-item-values" type="hidden" name="po_item_values">
+                                        <button id="da-purchaseorder-createpo-submit" class="btn-large btn btn-success">Buat PO</button>
                                     </div>
                                 </form>
                                 -->
@@ -90,24 +90,24 @@
                                     </span>
                                 </div>
 
-                                <div id="da-createpo-detail-error" class="da-message error" style="display:none;"></div>
+                                <div id="da-purchaseorder-createpo-detail-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
-                                    <form id="da-createpo-detail-form-val" class="da-form da-form-inline" action="/createpo/submit_item_values" method="post">
+                                    <form id="da-purchaseorder-createpo-detail-form-val" class="da-form da-form-inline" action="/purchaseorder/submit_item_values" method="post">
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Supplier</label>
                                             <div class="da-form-item large">
-                                                <input id="createpo-detail-supplier" type="text" name="supplier">
+                                                <input id="purchaseorder-createpo-detail-supplier" type="text" name="supplier">
                                             </div>
                                         </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Customer</label>
                                             <div class="da-form-item large">
-                                                <input id="createpo-detail-customer" type="text" name="customer">
+                                                <input id="purchaseorder-createpo-detail-customer" type="text" name="customer">
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">
-                                            <input id="da-createpo-submit-item-values" type="hidden" name="po_item_values">
-                                            <button id="da-createpo-submit" class="btn btn-success">Buat PO</button>
+                                            <input id="da-purchaseorder-createpo-submit-item-values" type="hidden" name="po_item_values">
+                                            <button id="da-purchaseorder-createpo-submit" class="btn btn-success">Buat PO</button>
                                         </div>
                                     </form>
                                 </div>

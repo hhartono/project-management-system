@@ -65,7 +65,7 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li class="active"><span>Buat PO</span></li>
+                        <li class="active"><span>Purchase Order</span></li>
                     </ul>
                 </div>
             </div>
@@ -138,15 +138,14 @@
                             </ul>
                         </li>
                         <li class="active">
-                            <a href="/createpo">
+                            <a href="/purchaseorder">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-edit"></i>
                                     </span>
-                                Create PO
+                                Purchase Order
                             </a>
                         </li>
-
                         <!--
                         <li>
                             <a href="statistics.html">
