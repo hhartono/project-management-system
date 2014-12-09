@@ -2,21 +2,15 @@
             <div id="da-content-wrap" class="clearfix">
                 <!-- Content Area -->
                 <div id="da-content-area">
-                    <?php //if (isset($access['create']) && $access['create']): ?>
-                        <div class="row-fluid">
-                            <div class="span12">
-                                <button id="da-createpo-create-dialog" class="btn btn-success btn-create">[+] Tambah Barang</button>
-                            </div>
-                        </div>
-                    <?php //endif; ?>
                     <div class="row-fluid">
-                        <div class="span6">
+                        <div class="span5">
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
                                         <i class="icol-grid"></i> Input Pesanan
                                     </span>
                                 </div>
+                                <div id="da-createpo-insert-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
                                     <form id="da-createpo-insert-form-val" class="da-form da-form-inline" method="post">
                                         <div class="da-form-row">
@@ -29,7 +23,7 @@
                                             <label class="da-form-label">Jumlah Barang</label>
                                             <div class="da-form-item large">
                                                 <input id="createpo-insert-item-count" type="text" name="item_count" autocomplete="off">
-                                                <label for="createpo-insert-item-count">(satuan)</label>
+                                                <label for="createpo-insert-item-count" id="createpo-insert-item-count-label"></label>
                                             </div>
                                         </div>
                                         <div class="da-form-row">
@@ -38,9 +32,9 @@
                                                 <input id="createpo-insert-notes" type="text" name="notes" autocomplete="off">
                                             </div>
                                         </div>
-                                        <div class="da-form-row" style="display: block; margin: auto;">
+                                        <div class="da-form-row" style="text-align:center;">
                                             <button id="da-createpo-insert-add" class="btn btn-success">Tambah Barang</button>
-                                            <button id="da-createpo-insert-clear" class="btn btn-info">Hapus</button>
+                                            <button id="da-createpo-insert-clear" class="btn btn-danger">Hapus Input</button>
                                         </div>
                                     </form>
                                 </div>
@@ -58,32 +52,64 @@
                                 -->
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span7">
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Pesanan
+                                        <i class="icol-grid"></i> Preview Pesanan
                                     </span>
                                 </div>
-                                <?php if(isset($message['success'])): ?>
-                                   <div class="da-message success"><?php echo $message['success']; ?></div>
-                                <?php endif; ?>
-                                <?php if(isset($message['info'])): ?>
-                                    <div class="da-message info"><?php echo $message['info']; ?></div>
-                                <?php endif; ?>
-                                <?php if(isset($message['error'])): ?>
-                                    <div class="da-message error"><?php echo $message['error']; ?></div>
-                                <?php endif; ?>
+                                <div id="da-createpo-table-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-table-container">
                                     <table id="da-createpo-datatable-numberpaging" class="da-table"">
                                         <thead>
                                             <tr>
+                                                <th>Database ID</th>
                                                 <th>Nama Barang</th>
                                                 <th>Jumlah Barang</th>
                                                 <th>Keterangan</th>
                                             </tr>
                                         </thead>
                                     </table>
+                                </div>
+                                <!--
+                                <form id="da-createpo-submit-form-val" class="da-form da-form-inline" action="/createpo/submit_item_values" method="post">
+                                    <div style="padding:20px; text-align:center;">
+                                        <input id="da-createpo-submit-item-values" type="hidden" name="po_item_values">
+                                        <button id="da-createpo-submit" class="btn-large btn btn-success">Buat PO</button>
+                                    </div>
+                                </form>
+                                -->
+                            </div>
+                        </div>
+                        <div class="span7">
+                            <div class="da-panel">
+                                <div class="da-panel-header">
+                                    <span class="da-panel-title">
+                                        <i class="icol-grid"></i> Detail Pesanan
+                                    </span>
+                                </div>
+
+                                <div id="da-createpo-detail-error" class="da-message error" style="display:none;"></div>
+                                <div class="da-panel-content da-form-container">
+                                    <form id="da-createpo-detail-form-val" class="da-form da-form-inline" action="/createpo/submit_item_values" method="post">
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Supplier</label>
+                                            <div class="da-form-item large">
+                                                <input id="createpo-detail-supplier" type="text" name="supplier">
+                                            </div>
+                                        </div>
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Customer</label>
+                                            <div class="da-form-item large">
+                                                <input id="createpo-detail-customer" type="text" name="customer">
+                                            </div>
+                                        </div>
+                                        <div class="da-form-row" style="text-align:center;">
+                                            <input id="da-createpo-submit-item-values" type="hidden" name="po_item_values">
+                                            <button id="da-createpo-submit" class="btn btn-success">Buat PO</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
