@@ -23,7 +23,7 @@ class Purchaseorder extends CI_Controller {
         $this->load->model('item_model');
         $this->load->model('unit_model');
         $this->load->model('supplier_model');
-        $this->load->model('customer_model');
+        $this->load->model('project_model');
         $this->load->model('purchaseorder_model');
     }
 
@@ -62,7 +62,7 @@ class Purchaseorder extends CI_Controller {
     public function submit_item_values(){
         // get the input value
         if(!empty($this->input->post('po_item_values')) && !empty($this->input->post('supplier'))
-            && !empty($this->input->post('customer'))){
+            && !empty($this->input->post('project'))){
             $po_item_values = $this->input->post('po_item_values');
             $po_item_values = json_decode($po_item_values, TRUE);
 
@@ -81,14 +81,14 @@ class Purchaseorder extends CI_Controller {
                     $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
                 }
 
-                // customer name
-                $customer_detail = $this->customer_model->get_customer_by_name($this->input->post('customer_name'));
-                if(empty($customer_detail)){
-                    $message['error'] = "Purchase Order gagal dibuat. Customer tidak ada dalam system.";
+                // project name
+                $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
+                if(empty($project_detail)){
+                    $message['error'] = "Purchase Order gagal dibuat. Project tidak ada dalam system.";
                     $this->show_table($message);
                     return;
                 }else{
-                    $database_input_array['customer_id'] = $customer_detail['id'];
+                    $database_input_array['project_id'] = $project_detail['id'];
                 }
 
                 // search for supplier id
@@ -170,6 +170,22 @@ class Purchaseorder extends CI_Controller {
         echo json_encode($supplier_name);
     }
 
+    public function get_all_po_projects(){
+        $po_projects = $this->project_model->get_all_projects();
+        return $po_projects;
+    }
+
+    public function get_all_po_project_names(){
+        $po_projects = $this->get_all_po_projects();
+        $project_name = array();
+        foreach($po_projects as $po_project){
+            $project_name[] = $po_project['name'];
+        }
+
+        echo json_encode($project_name);
+    }
+
+    /*
     public function get_all_po_customers(){
         $po_customers = $this->customer_model->get_all_customers();
         return $po_customers;
@@ -184,6 +200,7 @@ class Purchaseorder extends CI_Controller {
 
         echo json_encode($customer_name);
     }
+    */
 
     private function show_table($message)
     {

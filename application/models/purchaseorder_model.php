@@ -19,9 +19,9 @@ class Purchaseorder_model extends CI_Model {
 
     public function get_all_purchaseorders()
     {
-        $this->db->select('transaction_po_main.*, customer_master.name AS customer, supplier_master.name AS supplier');
+        $this->db->select('transaction_po_main.*, project_master.name AS project, supplier_master.name AS supplier');
         $this->db->from('transaction_po_main');
-        $this->db->join('customer_master', 'transaction_po_main.customer_id = customer_master.id');
+        $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id');
         $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id');
         $query = $this->db->get();
 
@@ -64,7 +64,7 @@ class Purchaseorder_model extends CI_Model {
 
     public function set_po_detail($database_input_array)
     {
-        if($database_input_array['supplier_id'] !== false && $database_input_array['customer_id'] !== false
+        if($database_input_array['supplier_id'] !== false && $database_input_array['project_id'] !== false
             && $database_input_array['po_item_values'] !== false){
             date_default_timezone_set('Asia/Jakarta');
 
@@ -75,7 +75,7 @@ class Purchaseorder_model extends CI_Model {
             $data = array(
                 'po_reference_number' => $database_input_array['po_reference_number'],
                 'supplier_id' => $database_input_array['supplier_id'],
-                'customer_id' => $database_input_array['customer_id'],
+                'project_id' => $database_input_array['project_id'],
                 'po_input_date' => date("Y-m-d H:i:s")
             );
             $this->db->insert('transaction_po_main', $data);

@@ -29,8 +29,8 @@
             });
         }, "json" );
 
-        $.get( "/purchaseorder/get_all_po_customer_names", function(data) {
-            $( "#purchaseorder-createpo-detail-customer" ).autocomplete({
+        $.get( "/purchaseorder/get_all_po_project_names", function(data) {
+            $( "#purchaseorder-createpo-detail-project" ).autocomplete({
                 source: data
             });
         }, "json" );
@@ -88,11 +88,11 @@
 
             // get input detail
             var po_supplier = $('#purchaseorder-createpo-detail-supplier').val();
-            var po_customer = $('#purchaseorder-createpo-detail-customer').val();
+            var po_project = $('#purchaseorder-createpo-detail-project').val();
             $("#da-purchaseorder-createpo-detail-error").hide();
             $("#da-purchaseorder-createpo-table-error").hide();
 
-            if(po_supplier && po_customer){
+            if(po_supplier && po_project){
                 if(totalItem > 0){
                     $('table#da-purchaseorder-createpo-datatable-numberpaging tr').each(function(outer_index) {
                         if(outer_index > 0){
@@ -117,7 +117,7 @@
                     $("#da-purchaseorder-createpo-table-error").html(message).show();
                 }
             }else{
-                var message = "Supplier dan customer wajib diisi.";
+                var message = "Supplier dan project wajib diisi.";
                 $("#da-purchaseorder-createpo-detail-error").html(message).show();
             }
         });

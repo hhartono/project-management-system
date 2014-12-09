@@ -33,7 +33,7 @@
                                                 <th>Tanggal Purchase Order</th>
                                                 <th>Kode Purchase Order</th>
                                                 <th>Nama Supplier</th>
-                                                <th>Nama Customer</th>
+                                                <th>Nama Project</th>
                                                 <?php if ((isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         if(isset($access['delete']) && $access['delete']){
@@ -50,7 +50,7 @@
                                                     <td class="input-date-row"><?php echo $each_purchaseorder['formatted_po_input_date']; ?></td>
                                                     <td class="code-row"><?php echo $each_purchaseorder['po_reference_number']; ?></td>
                                                     <td class="supplier-row"><?php echo $each_purchaseorder['supplier']; ?></td>
-                                                    <td class="customer-row"><?php echo $each_purchaseorder['customer']; ?></td>
+                                                    <td class="customer-row"><?php echo $each_purchaseorder['project']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <?php if(isset($access['delete']) && $access['delete']):

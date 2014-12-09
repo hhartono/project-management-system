@@ -100,9 +100,9 @@
                                             </div>
                                         </div>
                                         <div class="da-form-row">
-                                            <label class="da-form-label">Nama Customer</label>
+                                            <label class="da-form-label">Nama Project</label>
                                             <div class="da-form-item large">
-                                                <input id="purchaseorder-createpo-detail-customer" type="text" name="customer">
+                                                <input id="purchaseorder-createpo-detail-project" type="text" name="project">
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">
