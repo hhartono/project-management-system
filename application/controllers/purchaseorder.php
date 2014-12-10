@@ -34,15 +34,27 @@ class Purchaseorder extends CI_Controller {
     }
 
     public function createpo(){
-        $this->load->helper('url');
-        $base_url = base_url();
-
-        $data['base_url'] = $base_url;
+        // user info
         $data['username'] = "Hans Hartono";
         $data['company_title'] = "Chief Technology Officer";
+
+        /*
+        // access level
+        $data['access']['create'] = true;
+        $data['access']['edit'] = true;
+        $data['access']['delete'] = true;
+
+        // message
+        $data['message'] = $message;
+
+        // get necessary data
+        $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
+        */
+
+        // show the view
         $this->load->view('header');
         $this->load->view('purchaseorder/navigation', $data);
-        $this->load->view('purchaseorder/createpo');
+        $this->load->view('purchaseorder/createpo', $data);
         $this->load->view('footer');
     }
 
@@ -56,6 +68,64 @@ class Purchaseorder extends CI_Controller {
         }else{
             $message['error'] = "Purchase Order gagal dihapus.";
             $this->show_table($message);
+        }
+    }
+
+    public function receive_po_items($po_id){
+        if(empty($this->input->post())){
+            $message = array();
+            $this->show_detail_table($message, $po_id);
+        }else{
+            if(!empty($this->input->post('po_received_item_values')) && !empty($this->input->post('supplier'))
+                && !empty($this->input->post('project'))) {
+                $po_received_item_values = $this->input->post('po_received_item_values');
+                $po_received_item_values = json_decode($po_received_item_values, TRUE);
+
+                if($po_received_item_values){
+                    // item values successfully decoded
+                    $database_input_array = array();
+
+                    // search for supplier id
+                    $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
+                    if(empty($supplier_detail)){
+                        $message['error'] = "Barang gagal diterima. Supplier tidak ada dalam system.";
+                        $this->show_table($message);
+                        return;
+                    }else{
+                        $database_input_array['supplier_id'] = $supplier_detail['id'];
+                    }
+
+                    // project name
+                    $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
+                    if(empty($project_detail)){
+                        $message['error'] = "Barang gagal diterima. Project tidak ada dalam system.";
+                        $this->show_table($message);
+                        return;
+                    }else{
+                        $database_input_array['project_id'] = $project_detail['id'];
+                    }
+
+                    // set the receive item values
+                    $database_input_array['po_received_item_values'] = $po_received_item_values;
+
+                    // input data to database
+                    $response = $this->purchaseorder_model->receive_po_items($database_input_array, $po_id);
+
+                    if($response){
+                        $message['success'] = "Barang berhasil diterima.";
+                        $this->show_detail_table($message, $po_id);
+                    }else{
+                        $message['error'] = "Barang gagal diterima.";
+                        $this->show_detail_table($message, $po_id);
+                    }
+                }else{
+                    $message['error'] = "Barang gagal diterima. Item tidak dapat dideteksi.";
+                    $this->show_detail_table($message, $po_id);
+                }
+            }else{
+                $message['error'] = "Barang gagal diterima. Silahkan coba kembali.";
+                $this->show_detail_table($message, $po_id);
+            }
         }
     }
 
@@ -223,6 +293,31 @@ class Purchaseorder extends CI_Controller {
         $this->load->view('header');
         $this->load->view('purchaseorder/navigation', $data);
         $this->load->view('purchaseorder/main', $data);
+        $this->load->view('footer');
+    }
+
+    private function show_detail_table($message, $po_id)
+    {
+        // user info
+        $data['username'] = "Hans Hartono";
+        $data['company_title'] = "Chief Technology Officer";
+
+        // access level
+        $data['access']['create'] = true;
+        $data['access']['edit'] = true;
+        $data['access']['delete'] = true;
+
+        // message
+        $data['message'] = $message;
+
+        // get necessary data
+        $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_po_id($po_id);
+        $data['purchaseorder_main'] = $this->purchaseorder_model->get_purchaseorder_by_id($po_id);
+
+        // show the view
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/receive_po_items', $data);
         $this->load->view('footer');
     }
 }

@@ -121,9 +121,9 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Subproject</label>
+                                    <label class="da-form-label">Project</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-view-subproject" type="text" readonly>
+                                        <input id="stock-view-project" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -166,9 +166,9 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Subproject</label>
+                                    <label class="da-form-label">Project</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-create-subproject" type="text" name="subproject" autocomplete="off">
+                                        <input id="stock-create-project" type="text" name="project">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -211,9 +211,9 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Subproject</label>
+                                    <label class="da-form-label">Project</label>
                                     <div class="da-form-item large">
-                                        <input id="stock-edit-subproject" type="text" name="subproject" autocomplete="off">
+                                        <input id="stock-edit-project" type="text" name="project">
                                     </div>
                                 </div>
                                 <div class="da-form-row">

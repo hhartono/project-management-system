@@ -14,7 +14,7 @@
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Satuan
+                                        <i class="icol-grid"></i> Purchase Order
                                     </span>
                                 </div>
                                 <?php if(isset($message['success'])): ?>
@@ -34,8 +34,12 @@
                                                 <th>Kode Purchase Order</th>
                                                 <th>Nama Supplier</th>
                                                 <th>Nama Project</th>
+                                                <th>Tanggal Terima Barang</th>
                                                 <?php if ((isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
+                                                        $control_label_array = array();
+                                                        $control_label_array[] = "Lihat";
+
                                                         if(isset($access['delete']) && $access['delete']){
                                                             $control_label_array[] = "Hapus";
                                                         }
@@ -51,11 +55,29 @@
                                                     <td class="code-row"><?php echo $each_purchaseorder['po_reference_number']; ?></td>
                                                     <td class="supplier-row"><?php echo $each_purchaseorder['supplier']; ?></td>
                                                     <td class="customer-row"><?php echo $each_purchaseorder['project']; ?></td>
+                                                    <td class="closed-status-row">
+                                                        <?php
+                                                            if(empty($each_purchaseorder['po_close_date'])){
+                                                                // po still open
+                                                                $purchaseorder_id = $each_purchaseorder['id'];
+                                                                $receive_url = "/purchaseorder/receive_po_items/" . $purchaseorder_id;
+                                                        ?>
+                                                            <form id="da-purchaseorder-receive-form-val" class="da-form" action=<?php echo $receive_url; ?> method="post">
+                                                                <button id="da-purchaseorder-receive" class="btn btn-success">Terima Barang</button>
+                                                            </form>
+                                                        <?php
+                                                            }else{
+                                                                // po already closed
+                                                                echo $each_purchaseorder['formatted_po_close_date'];
+                                                            }
+                                                        ?>
+                                                    </td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
+                                                            <a class="da-purchaseorder-view-dialog" href="#" data-value="<?php echo $each_purchaseorder['id']; ?>"><i class="icol-eye"></i></a>
                                                             <?php if(isset($access['delete']) && $access['delete']):
-                                                                $unit_id = $each_purchaseorder['id'];
-                                                                $delete_url = "/purchaseorder/deletepo/" . $unit_id;
+                                                                $po_id = $each_purchaseorder['id'];
+                                                                $delete_url = "/purchaseorder/deletepo/" . $po_id;
                                                                 ?>
                                                                 <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
                                                             <?php endif; ?>

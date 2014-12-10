@@ -23,6 +23,7 @@ class Stock extends CI_Controller {
         $this->load->model('stock_model');
         $this->load->model('item_model');
         $this->load->model('supplier_model');
+        $this->load->model('project_model');
         $this->load->model('unit_model');
     }
 
@@ -63,11 +64,18 @@ class Stock extends CI_Controller {
                 $database_input_array['supplier_id'] = $supplier_detail['id'];
             }
 
-            // TODO - search for subproject id
-            $database_input_array['subproject_id'] = '';
+            // search for project id
+            $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
+            if(empty($project_detail)){
+                $message['error'] = "Stok gagal disimpan. Project tidak ada dalam system.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['project_id'] = $project_detail['id'];
+            }
 
-            // TODO - search for po detail id
-            $database_input_array['po_detail_id'] = '';
+            // po detail id
+            $database_input_array['po_detail_id'] = $this->input->post('po_detail_id');
 
             // item price
             $database_input_array['item_price'] = $this->input->post('item_price');
@@ -129,11 +137,18 @@ class Stock extends CI_Controller {
                 $database_input_array['supplier_id'] = $supplier_detail['id'];
             }
 
-            // TODO - search for subproject id
-            $database_input_array['subproject_id'] = '';
+            // search for project id
+            $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
+            if(empty($project_detail)){
+                $message['error'] = "Stok gagal disimpan. Project tidak ada dalam system.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['project_id'] = $project_detail['id'];
+            }
 
-            // TODO - search for po detail id
-            $database_input_array['po_detail_id'] = '';
+            // po detail id
+            $database_input_array['po_detail_id'] = $this->input->post('po_detail_id');
 
             // item price
             $database_input_array['item_price'] = $this->input->post('item_price');
@@ -201,6 +216,21 @@ class Stock extends CI_Controller {
         }
 
         echo json_encode($supplier_name);
+    }
+
+    public function get_all_stock_projects(){
+        $stock_projects = $this->project_model->get_all_projects();
+        return $stock_projects;
+    }
+
+    public function get_all_stock_project_names(){
+        $stock_projects = $this->get_all_stock_projects();
+        $project_name = array();
+        foreach($stock_projects as $stock_project){
+            $project_name[] = $stock_project['name'];
+        }
+
+        echo json_encode($project_name);
     }
 
     public function get_unit_by_item_name($item_name){

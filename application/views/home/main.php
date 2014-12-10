@@ -33,7 +33,7 @@
                                                 <img class="main-center" src="assets/images/delivery-logo.png" alt="Terima Barang">
                                             </td>
                                             <td>
-                                                <a href="/hello">
+                                                <a href="/purchaseorder">
                                                     <h3 class="main-center">Terima<br/>Barang</h3>
                                                 </a>
                                             </td>

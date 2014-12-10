@@ -82,7 +82,7 @@
                                 -->
                             </div>
                         </div>
-                        <div class="span7">
+                        <div class="span7" style="float: right;">
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">

@@ -5,11 +5,16 @@ class Purchaseorder_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get_unit_by_id($id){
-        /*
-        $query = $this->db->get_where('unit_master', array('id' => $id));
-        return $query->row_array();
-        */
+    public function get_purchaseorder_by_id($id){
+        $this->db->select('transaction_po_main.*, supplier_master.name AS supplier, project_master.name AS project');
+        $this->db->from('transaction_po_main');
+        $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id');
+        $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id');
+        $this->db->where('transaction_po_main.id', $id);
+        $query = $this->db->get();
+
+        $row_array = $query->row_array();
+        return $row_array;
     }
 
     public function get_purchaseorder_by_purchaseorder_code($purchaseorder_code){
@@ -35,12 +40,29 @@ class Purchaseorder_model extends CI_Model {
                 if(strtotime($result_array[$walk]['po_input_date']) <= 0){
                     $result_array[$walk]['formatted_po_input_date'] = "";
                 }else{
-                    $result_array[$walk]['formatted_po_input_date'] = date("d-m-Y", strtotime($result_array[$walk]['po_input_date']));
+                    $result_array[$walk]['formatted_po_input_date'] = date("d-m-Y H:i", strtotime($result_array[$walk]['po_input_date']));
+                }
+
+                if(strtotime($result_array[$walk]['po_close_date']) <= 0){
+                    $result_array[$walk]['formatted_po_close_date'] = "";
+                }else{
+                    $result_array[$walk]['formatted_po_close_date'] = date("d-m-Y", strtotime($result_array[$walk]['po_close_date']));
                 }
             }
 
             return $result_array;
         }
+    }
+
+    public function get_purchaseorder_detail_by_po_id($po_id){
+        $this->db->select('transaction_po_detail.*, item_master.name AS item_name');
+        $this->db->from('transaction_po_detail');
+        $this->db->join('item_master', 'transaction_po_detail.item_id = item_master.id');
+        $this->db->where('po_id', $po_id);
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        return $result_array;
     }
 
     public function update_unit()
@@ -61,6 +83,67 @@ class Purchaseorder_model extends CI_Model {
         }
         */
     }
+
+    public function receive_po_items($database_input_array, $po_id)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+
+        // start database transaction
+        $this->db->trans_begin();
+
+        // remaining counter
+        $remaining_counter = 0;
+
+        $po_received_item_values = $database_input_array['po_received_item_values'];
+        foreach($po_received_item_values as $each_po_received_item_value){
+            // PART 1 - update PO detail
+            $data = array(
+                'quantity_received' => ($each_po_received_item_value['quantity_received'] + $each_po_received_item_value['quantity_already_received'])
+            );
+            $this->db->where('id', $each_po_received_item_value['po_detail_id']);
+            $this->db->update('transaction_po_detail', $data);
+
+            // PART 2 - insert item to stock
+            $additional_database_input_array = $this->prepare_stock_detail($each_po_received_item_value['po_detail_id'], $database_input_array['supplier_id']);
+            if(empty($additional_database_input_array)){
+                $this->db->trans_rollback();
+                return FALSE;
+            }
+
+            $data = array(
+                'item_id' => $additional_database_input_array['item_id'],
+                'supplier_id' => $database_input_array['supplier_id'],
+                'project_id' => $database_input_array['project_id'],
+                'po_detail_id' => $each_po_received_item_value['po_detail_id'],
+                'item_count' => $each_po_received_item_value['quantity_received'],
+                'item_stock_code' => $additional_database_input_array['item_stock_code'],
+                'received_date' => date("Y-m-d H:i:s")
+            );
+            $this->db->insert('stock_master', $data);
+
+            // update remaining counter
+            $remaining_counter += $each_po_received_item_value['quantity_ordered'] - $each_po_received_item_value['quantity_received'] - $each_po_received_item_value['quantity_already_received'];
+        }
+
+        // PART 3 - update the PO main
+        if($remaining_counter <= 0){
+            $data = array(
+                'po_close_date' => date("Y-m-d H:i:s")
+            );
+            $this->db->where('id', $po_id);
+            $this->db->update('transaction_po_main', $data);
+        }
+
+        // return false if something went wrong
+        if ($this->db->trans_status() === FALSE){
+            $this->db->trans_rollback();
+            return FALSE;
+        }else{
+            $this->db->trans_commit();
+            return TRUE;
+        }
+    }
+
 
     public function set_po_detail($database_input_array)
     {
@@ -126,5 +209,35 @@ class Purchaseorder_model extends CI_Model {
         }
 
         return $delete_status;
+    }
+
+    private function prepare_stock_detail($po_detail_id, $supplier_id){
+        $additional_database_input_array = array();
+
+        // get the item id
+        $this->db->select('transaction_po_detail.*, item_master.category_id AS category_id, item_master.id AS item_id');
+        $this->db->from('transaction_po_detail');
+        $this->db->join('item_master', 'transaction_po_detail.item_id = item_master.id');
+        $this->db->where('transaction_po_detail.id', $po_detail_id);
+        $query = $this->db->get();
+        $item_detail = $query->row_array();
+
+        if(!empty($item_detail)){
+            $additional_database_input_array['item_id'] = $item_detail['item_id'];
+
+            // generate item stock code
+            $this->load->helper('stock_code_helper');
+            $generated_stock_code = stock_code_generator($item_detail['category_id'], $supplier_id);
+
+            if(!empty($generated_stock_code)){
+                $additional_database_input_array['item_stock_code'] = $generated_stock_code;
+
+                return $additional_database_input_array;
+            }else{
+                return FALSE;
+            }
+        }else{
+            return FALSE;
+        }
     }
 }

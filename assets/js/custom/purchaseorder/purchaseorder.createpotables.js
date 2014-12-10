@@ -98,9 +98,11 @@
                         if(outer_index > 0){
                             tableValue[walk] = {};
                             $.each(this.cells, function(index, element){
-                                var column_name = $(element).attr("name");
-                                var column_value = $(element).text();
-                                tableValue[walk][column_name] = column_value;
+                                if($(element).attr("name")){
+                                    var column_name = $(element).attr("name");
+                                    var column_value = $(element).text();
+                                    tableValue[walk][column_name] = column_value;
+                                }
                             });
                             walk++;
                         }

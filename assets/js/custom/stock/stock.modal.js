@@ -28,6 +28,9 @@
                 },
                 supplier: {
                     required: true
+                },
+                project: {
+                    required: true
                 }
             },
             invalidHandler: function(form, validator) {
@@ -57,6 +60,12 @@
 
             $.get( "/stock/get_all_stock_supplier_names", function(data) {
                 $( "#stock-create-supplier" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
+
+            $.get( "/stock/get_all_stock_project_names", function(data) {
+                $( "#stock-create-project" ).autocomplete({
                     source: data
                 });
             }, "json" );
@@ -90,6 +99,9 @@
                 },
                 supplier: {
                     required: true
+                },
+                project: {
+                    required: true
                 }
             },
             invalidHandler: function(form, validator) {
@@ -113,7 +125,7 @@
                 $("#stock-edit-name").val(data.name);
                 $("#stock-edit-item-count").val(data.item_count);
                 $("#stock-edit-supplier").val(data.supplier);
-                $("#stock-edit-subproject").val(data.subproject_id);
+                $("#stock-edit-project").val(data.project);
                 $("#stock-edit-po-detail-id").val(data.po_detail_id);
                 $("#stock-edit-item-price").val(data.item_price);
 
@@ -122,6 +134,12 @@
 
             $.get( "/stock/get_all_stock_supplier_names", function(data) {
                 $( "#stock-edit-supplier" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
+
+            $.get( "/stock/get_all_stock_project_names", function(data) {
+                $( "#stock-edit-project" ).autocomplete({
                     source: data
                 });
             }, "json" );
@@ -153,7 +171,7 @@
                 $("#stock-view-item-count").val(data.item_count);
                 $("#stock-view-unit").val(data.unit);
                 $("#stock-view-supplier").val(data.supplier);
-                $("#stock-view-subproject").val(data.subproject_id);
+                $("#stock-view-project").val(data.project);
                 $("#stock-view-po-detail-id").val(data.po_detail_id);
                 $("#stock-view-item-price").val(data.item_price);
 
