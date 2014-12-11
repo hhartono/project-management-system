@@ -117,15 +117,18 @@ class Purchaseorder_model extends CI_Model {
                 'po_detail_id' => $each_po_received_item_value['po_detail_id'],
                 'item_count' => $each_po_received_item_value['quantity_received'],
                 'item_stock_code' => $additional_database_input_array['item_stock_code'],
+                'item_price' => $each_po_received_item_value['item_price'],
                 'received_date' => date("Y-m-d H:i:s")
             );
             $this->db->insert('stock_master', $data);
 
             // update remaining counter
             $remaining_counter += $each_po_received_item_value['quantity_ordered'] - $each_po_received_item_value['quantity_received'] - $each_po_received_item_value['quantity_already_received'];
+
+            // TODO - generate stock barcode
         }
 
-        // PART 3 - update the PO main
+        // PART 3 - update the PO main if necessary
         if($remaining_counter <= 0){
             $data = array(
                 'po_close_date' => date("Y-m-d H:i:s")

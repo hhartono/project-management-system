@@ -37,6 +37,10 @@
                                     column_value = $(element).children("input").val();
                                     quantity_received_status = true;
                                 }
+
+                                if($(element).children('input').length > 0 && column_name == 'item_price'){
+                                    column_value = $(element).children("input").val();
+                                }
                                 tempObject[column_name] = column_value;
                                 walk_status = true;
 
