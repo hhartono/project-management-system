@@ -213,7 +213,7 @@ class Worker extends CI_Controller {
         $this->load->view('header');
         $this->load->view('worker/navigation', $data);
         $this->load->view('worker/main', $data);
-        $this->load->view('footer');
+        $this->load->view('worker/footer');
     }
 }
 

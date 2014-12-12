@@ -1,5 +1,5 @@
 <?php
-class Purchaseorder_model extends CI_Model {
+class Useitem_model extends CI_Model {
     public function __construct()
     {
         $this->load->database();
@@ -96,37 +96,36 @@ class Purchaseorder_model extends CI_Model {
 
         $po_received_item_values = $database_input_array['po_received_item_values'];
         foreach($po_received_item_values as $each_po_received_item_value){
-            if($each_po_received_item_value['quantity_received'] > 0){
-                // PART 1 - update PO detail
-                $data = array(
-                    'quantity_received' => ($each_po_received_item_value['quantity_received'] + $each_po_received_item_value['quantity_already_received'])
-                );
-                $this->db->where('id', $each_po_received_item_value['po_detail_id']);
-                $this->db->update('transaction_po_detail', $data);
+            // PART 1 - update PO detail
+            $data = array(
+                'quantity_received' => ($each_po_received_item_value['quantity_received'] + $each_po_received_item_value['quantity_already_received'])
+            );
+            $this->db->where('id', $each_po_received_item_value['po_detail_id']);
+            $this->db->update('transaction_po_detail', $data);
 
-                // PART 2 - insert item to stock
-                $additional_database_input_array = $this->prepare_stock_detail($each_po_received_item_value['po_detail_id'], $database_input_array['supplier_id']);
-                if(empty($additional_database_input_array)){
-                    $this->db->trans_rollback();
-                    return FALSE;
-                }
-
-                $data = array(
-                    'item_id' => $additional_database_input_array['item_id'],
-                    'supplier_id' => $database_input_array['supplier_id'],
-                    'project_id' => $database_input_array['project_id'],
-                    'po_detail_id' => $each_po_received_item_value['po_detail_id'],
-                    'item_count' => $each_po_received_item_value['quantity_received'],
-                    'item_stock_code' => $additional_database_input_array['item_stock_code'],
-                    'item_price' => $each_po_received_item_value['item_price'],
-                    'received_date' => date("Y-m-d H:i:s")
-                );
-                $this->db->insert('stock_master', $data);
-
-                // TODO - generate stock barcode
+            // PART 2 - insert item to stock
+            $additional_database_input_array = $this->prepare_stock_detail($each_po_received_item_value['po_detail_id'], $database_input_array['supplier_id']);
+            if(empty($additional_database_input_array)){
+                $this->db->trans_rollback();
+                return FALSE;
             }
+
+            $data = array(
+                'item_id' => $additional_database_input_array['item_id'],
+                'supplier_id' => $database_input_array['supplier_id'],
+                'project_id' => $database_input_array['project_id'],
+                'po_detail_id' => $each_po_received_item_value['po_detail_id'],
+                'item_count' => $each_po_received_item_value['quantity_received'],
+                'item_stock_code' => $additional_database_input_array['item_stock_code'],
+                'item_price' => $each_po_received_item_value['item_price'],
+                'received_date' => date("Y-m-d H:i:s")
+            );
+            $this->db->insert('stock_master', $data);
+
             // update remaining counter
             $remaining_counter += $each_po_received_item_value['quantity_ordered'] - $each_po_received_item_value['quantity_received'] - $each_po_received_item_value['quantity_already_received'];
+
+            // TODO - generate stock barcode
         }
 
         // PART 3 - update the PO main if necessary

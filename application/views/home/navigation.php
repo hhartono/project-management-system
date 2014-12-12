@@ -93,6 +93,24 @@
                             </a>
                         </li>
                         <li>
+                            <a href="/purchaseorder">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-edit"></i>
+                                    </span>
+                                Purchase Order
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/useitem">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-classic-hammer"></i>
+                                    </span>
+                                Pakai Barang
+                            </a>
+                        </li>
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">
@@ -134,15 +152,6 @@
                                 <li><a href="/worker">Tukang</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="/purchaseorder">
-                                <!-- Icon Container -->
-                                    <span class="da-nav-icon">
-                                        <i class="icon-edit"></i>
-                                    </span>
-                                Purchase Order
-                            </a>
                         </li>
 
                         <!--

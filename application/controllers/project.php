@@ -232,7 +232,7 @@ class Project extends CI_Controller {
         $this->load->view('header');
         $this->load->view('project/navigation', $data);
         $this->load->view('project/main', $data);
-        $this->load->view('footer');
+        $this->load->view('project/footer');
     }
 }
 

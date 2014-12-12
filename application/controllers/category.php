@@ -106,7 +106,7 @@ class Category extends CI_Controller {
         $this->load->view('header');
         $this->load->view('category/navigation', $data);
         $this->load->view('category/main', $data);
-        $this->load->view('footer');
+        $this->load->view('category/footer');
     }
 }
 

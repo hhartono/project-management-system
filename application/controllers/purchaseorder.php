@@ -55,7 +55,7 @@ class Purchaseorder extends CI_Controller {
         $this->load->view('header');
         $this->load->view('purchaseorder/navigation', $data);
         $this->load->view('purchaseorder/createpo', $data);
-        $this->load->view('footer');
+        $this->load->view('purchaseorder/footer');
     }
 
     public function deletepo($po_id){
@@ -293,7 +293,7 @@ class Purchaseorder extends CI_Controller {
         $this->load->view('header');
         $this->load->view('purchaseorder/navigation', $data);
         $this->load->view('purchaseorder/main', $data);
-        $this->load->view('footer');
+        $this->load->view('purchaseorder/footer');
     }
 
     private function show_detail_table($message, $po_id)
@@ -318,7 +318,7 @@ class Purchaseorder extends CI_Controller {
         $this->load->view('header');
         $this->load->view('purchaseorder/navigation', $data);
         $this->load->view('purchaseorder/receive_po_items', $data);
-        $this->load->view('footer');
+        $this->load->view('purchaseorder/footer');
     }
 }
 

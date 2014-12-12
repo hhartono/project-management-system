@@ -119,7 +119,7 @@ class Item extends CI_Controller {
         $this->load->view('header');
         $this->load->view('item/navigation', $data);
         $this->load->view('item/main', $data);
-        $this->load->view('footer');
+        $this->load->view('item/footer');
     }
 }
 

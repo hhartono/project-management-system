@@ -23,6 +23,17 @@ class Stock_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_stock_item_detail_by_stock_code($stock_code){
+        $this->db->select('stock_master.*, item_master.name AS item_name, unit_master.name AS item_unit');
+        $this->db->from('stock_master');
+        $this->db->join('item_master', 'stock_master.item_id = item_master.id');
+        $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
+        $this->db->where('stock_master.item_stock_code', $stock_code);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
     public function get_all_stocks()
     {
         $this->db->select('stock_master.*, item_master.name, unit_master.name AS unit');

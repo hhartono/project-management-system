@@ -107,7 +107,7 @@ class Division extends CI_Controller {
         $this->load->view('header');
         $this->load->view('division/navigation', $data);
         $this->load->view('division/main', $data);
-        $this->load->view('footer');
+        $this->load->view('division/footer');
     }
 }
 

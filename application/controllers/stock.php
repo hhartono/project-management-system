@@ -275,7 +275,7 @@ class Stock extends CI_Controller {
         $this->load->view('header');
         $this->load->view('stock/navigation', $data);
         $this->load->view('stock/main', $data);
-        $this->load->view('footer');
+        $this->load->view('stock/footer');
     }
 }
 

@@ -106,7 +106,7 @@ class Customer extends CI_Controller {
         $this->load->view('header');
         $this->load->view('customer/navigation', $data);
         $this->load->view('customer/main', $data);
-        $this->load->view('footer');
+        $this->load->view('customer/footer');
     }
 }
 
