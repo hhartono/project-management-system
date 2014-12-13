@@ -45,11 +45,16 @@
             $("#da-useitem-detail-error").hide();
             $("#da-useitem-table-error").hide();
 
+            // prepare check stock status
+            var stock_count_per_item = {};
+            var usage_count_per_item = {};
+
             if(po_project && po_subproject){
                 if(totalItem > 0){
                     $('table#da-useitem-datatable-numberpaging tr').each(function(outer_index) {
                         var stock_count = 0;
                         var usage_count = 0;
+                        var item_stock_code = '';
 
                         if(outer_index > 0){
                             tableValue[walk] = {};
@@ -64,6 +69,11 @@
                                     tableValue[walk][column_name] = column_value;
 
                                     // prepare value to check overflow
+                                    if(column_name == 'item_stock_code'){
+                                        item_stock_code = column_value;
+                                    }
+
+                                    // prepare value to check overflow
                                     if(column_name == 'item_stock'){
                                         stock_count = parseInt(column_value);
                                     }
@@ -75,8 +85,16 @@
                                 }
                             });
 
+                            // aggregate to find out stock status
+                            stock_count_per_item[item_stock_code] = stock_count;
+                            if(usage_count_per_item[item_stock_code]){
+                                usage_count_per_item[item_stock_code] += usage_count;
+                            }else{
+                                usage_count_per_item[item_stock_code] = usage_count;
+                            }
+
                             // check if all item have enough stock
-                            if(usage_count > stock_count){
+                            if(usage_count_per_item[item_stock_code] > stock_count_per_item[item_stock_code]){
                                 overflowStatus = true;
                             }
                             walk++;

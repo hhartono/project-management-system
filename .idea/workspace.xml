@@ -26,7 +26,16 @@
       <file leaf-file-name="useitem.tables.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/custom/useitem/useitem.tables.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="70" selection-start="5123" selection-end="5123" vertical-scroll-proportion="1.2799168" vertical-offset="585" max-vertical-offset="2310">
+            <state line="104" column="38" selection-start="4664" selection-end="4664" vertical-scroll-proportion="0.38543898" vertical-offset="1200" max-vertical-offset="2580">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/useitem/main.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="63" selection-start="2787" selection-end="2787" vertical-scroll-proportion="-15.0" vertical-offset="270" max-vertical-offset="1350">
               <folding />
             </state>
           </provider>
@@ -749,13 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/useitem/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="63" selection-start="2787" selection-end="2787" vertical-scroll-proportion="0.0" vertical-offset="207" max-vertical-offset="1350">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/purchaseorder/receive_po_items.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="98" selection-start="4852" selection-end="4997" vertical-scroll-proportion="0.0" vertical-offset="885" max-vertical-offset="1845">
@@ -784,9 +786,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/useitem/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="63" selection-start="2787" selection-end="2787" vertical-scroll-proportion="-15.0" vertical-offset="270" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/custom/useitem/useitem.tables.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="70" selection-start="5123" selection-end="5123" vertical-scroll-proportion="1.2799168" vertical-offset="585" max-vertical-offset="2310">
+        <state line="104" column="38" selection-start="4664" selection-end="4664" vertical-scroll-proportion="0.38543898" vertical-offset="1200" max-vertical-offset="2580">
           <folding />
         </state>
       </provider>
