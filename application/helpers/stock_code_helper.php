@@ -6,7 +6,7 @@ if (!defined('BASEPATH')) {
 
 if (!function_exists('stock_code_generator')) {
     function stock_code_generator($category_id, $supplier_id) {
-        $max_code_length = 10;
+        $max_code_length = 7;
         $max_category_prefix_length = 3;
 
         // get category detail

@@ -36,6 +36,23 @@
     <script src="/assets/js/custom/purchaseorder/purchaseorder.tables.js"></script>
     <script src="/assets/js/custom/purchaseorder/purchaseorder.createpotables.js"></script>
     <script src="/assets/js/custom/purchaseorder/purchaseorder.receiveitemstables.js"></script>
+    <script src="/assets/js/custom/purchaseorder/purchaseorder.printbarcodetables.js"></script>
+
+    <!-- JS Barcode -->
+    <?php if(isset($po_id)){ ?>
+        <script>
+            (function($) {
+                $(document).ready(function(e) {
+                    $('#da-purchaseorder-barcode-print-confirmation-submit').on('click', function(event) {
+                        event.preventDefault();
+
+                        // print barcode
+                        jsWebClientPrint.print('po_id=' + <?php echo $po_id; ?>);
+                    });
+                });
+            }) (jQuery);
+        </script>
+    <?php } ?>
 
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>

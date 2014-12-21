@@ -1,5 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+include FCPATH . "/assets/barcodeprint/WebClientPrint.php";
+use Neodynamic\SDK\Web\Utils;
+use Neodynamic\SDK\Web\WebClientPrint;
+
 class Purchaseorder extends CI_Controller {
 
 	/**
@@ -71,6 +75,39 @@ class Purchaseorder extends CI_Controller {
         }
     }
 
+    public function print_item_barcodes($po_id){
+        if(empty($this->input->post())){
+            $message = array();
+            $this->show_print_barcode_table($message, $po_id);
+        }else{
+            $barcode_print_values = $this->input->post('po_barcode_print_item_values');
+            $barcode_print_values = json_decode($barcode_print_values, TRUE);
+
+            if($barcode_print_values){
+                // item values successfully decoded
+                $database_input_array = array();
+
+                // set the receive item values
+                $database_input_array['barcode_print_values'] = $barcode_print_values;
+
+                // input data to database
+                $response = $this->purchaseorder_model->update_barcode_status_quantity($database_input_array, $po_id);
+
+                if($response){
+                    $message = array();
+                    $this->show_print_confirmation_screen($message, $po_id);
+                    echo WebClientPrint::createScript('http://architect.local/printbarcode');
+                }else{
+                    $message['error'] = "Label gagal di print.";
+                    $this->show_print_barcode_table($message, $po_id);
+                }
+            }else{
+                $message['error'] = "Label gagal di print.";
+                $this->show_print_barcode_table($message, $po_id);
+            }
+        }
+    }
+
     public function receive_po_items($po_id){
         if(empty($this->input->post())){
             $message = array();
@@ -113,7 +150,7 @@ class Purchaseorder extends CI_Controller {
 
                     if($response){
                         $message['success'] = "Barang berhasil diterima.";
-                        $this->show_detail_table($message, $po_id);
+                        $this->show_table($message);
                     }else{
                         $message['error'] = "Barang gagal diterima.";
                         $this->show_detail_table($message, $po_id);
@@ -319,6 +356,56 @@ class Purchaseorder extends CI_Controller {
         $this->load->view('purchaseorder/navigation', $data);
         $this->load->view('purchaseorder/receive_po_items', $data);
         $this->load->view('purchaseorder/footer');
+    }
+
+    private function show_print_barcode_table($message, $po_id)
+    {
+        // user info
+        $data['username'] = "Hans Hartono";
+        $data['company_title'] = "Chief Technology Officer";
+
+        // access level
+        $data['access']['create'] = true;
+        $data['access']['edit'] = true;
+        $data['access']['delete'] = true;
+
+        // message
+        $data['message'] = $message;
+
+        // get necessary data
+        $data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
+        $data['po_id'] = $po_id;
+
+        // show the view
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/print_item_barcodes', $data);
+        $this->load->view('purchaseorder/footer');
+    }
+
+    private function show_print_confirmation_screen($message, $po_id)
+    {
+        // user info
+        $data['username'] = "Hans Hartono";
+        $data['company_title'] = "Chief Technology Officer";
+
+        // access level
+        $data['access']['create'] = true;
+        $data['access']['edit'] = true;
+        $data['access']['delete'] = true;
+
+        // message
+        $data['message'] = $message;
+
+        // get necessary data
+        //$data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
+        $data['po_id'] = $po_id;
+
+        // show the view
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/print_item_barcodes_confirmation', $data);
+        $this->load->view('purchaseorder/footer', $data);
     }
 }
 

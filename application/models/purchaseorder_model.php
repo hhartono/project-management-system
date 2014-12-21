@@ -48,10 +48,43 @@ class Purchaseorder_model extends CI_Model {
                 }else{
                     $result_array[$walk]['formatted_po_close_date'] = date("d-m-Y", strtotime($result_array[$walk]['po_close_date']));
                 }
+
+                $result_array[$walk]['print_label'] = false;
+            }
+
+            // check the print label status
+            $this->db->select('transaction_po_main.id AS po_id, barcode_master.print_status AS print_status');
+            $this->db->from('transaction_po_main');
+            $this->db->join('barcode_master', 'transaction_po_main.id = barcode_master.po_id');
+            $this->db->where('print_status', 0);
+            $this->db->or_where('print_status', 1);
+            $this->db->group_by('transaction_po_main.id');
+            $label_status_query = $this->db->get();
+
+            $label_status_result_array = $label_status_query->result_array();
+
+            // assigning the printed status
+            foreach($label_status_result_array as $each_label_print_status){
+                for($walk = 0; $walk < $array_length; $walk++){
+                    if($result_array[$walk]['id'] == $each_label_print_status['po_id']){
+                        $result_array[$walk]['print_label'] = true;
+                        break;
+                    }
+                }
             }
 
             return $result_array;
         }
+    }
+
+    public function get_barcode_detail_by_po_id($po_id){
+        $this->db->select('*');
+        $this->db->from('barcode_master');
+        $where = "po_id='" . $po_id . "' AND (print_status='0' OR print_status='1')";
+        $this->db->where($where, NULL, FALSE);
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 
     public function get_purchaseorder_detail_by_po_id($po_id){
@@ -82,6 +115,34 @@ class Purchaseorder_model extends CI_Model {
             return false;
         }
         */
+    }
+
+    public function update_barcode_status_quantity($database_input_array, $po_id){
+        // start database transaction
+        $this->db->trans_begin();
+
+        $barcode_print_values = $database_input_array['barcode_print_values'];
+        foreach($barcode_print_values as $barcode_print_value){
+            if($barcode_print_value['label_quantity'] > 0){
+                $data = array(
+                    'label_quantity' => $barcode_print_value['label_quantity'],
+                    'print_status' => '1',
+                );
+
+                $this->db->where('po_detail_id', $barcode_print_value['po_detail_id']);
+                $this->db->update('barcode_master', $data);
+            }
+        }
+
+        // complete database transaction
+        $this->db->trans_complete();
+
+        // return false if something went wrong
+        if ($this->db->trans_status() === FALSE){
+            return FALSE;
+        }else{
+            return TRUE;
+        }
     }
 
     public function receive_po_items($database_input_array, $po_id)
@@ -123,7 +184,18 @@ class Purchaseorder_model extends CI_Model {
                 );
                 $this->db->insert('stock_master', $data);
 
-                // TODO - generate stock barcode
+                // PART 4 - generate barcode data
+                $data = array(
+                    'po_id' => $po_id,
+                    'po_detail_id' => $each_po_received_item_value['po_detail_id'],
+                    'label_name' => $each_po_received_item_value['item_name'],
+                    'label_quantity' => $each_po_received_item_value['quantity_received'],
+                    'label_code' => $additional_database_input_array['item_stock_code'],
+                    'item_quantity' => $each_po_received_item_value['quantity_received'],
+                    'print_status' => '0',
+                    'creation_date' => date("Y-m-d H:i:s")
+                );
+                $this->db->insert('barcode_master', $data);
             }
             // update remaining counter
             $remaining_counter += $each_po_received_item_value['quantity_ordered'] - $each_po_received_item_value['quantity_received'] - $each_po_received_item_value['quantity_already_received'];

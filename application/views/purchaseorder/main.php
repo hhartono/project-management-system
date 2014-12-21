@@ -66,6 +66,15 @@
                                                                 <button id="da-purchaseorder-receive" class="btn btn-success">Terima Barang</button>
                                                             </form>
                                                         <?php
+                                                            }else if($each_purchaseorder['print_label']){
+                                                                // label hasn't been printed
+                                                                $purchaseorder_id = $each_purchaseorder['id'];
+                                                                $print_url = "/purchaseorder/print_item_barcodes/" . $purchaseorder_id;
+                                                        ?>
+                                                            <form id="da-purchaseorder-print-form-val" class="da-form" action=<?php echo $print_url; ?> method="post">
+                                                                <button id="da-purchaseorder-receive" class="btn btn-success">Print Label</button>
+                                                            </form>
+                                                        <?php
                                                             }else{
                                                                 // po already closed
                                                                 echo $each_purchaseorder['formatted_po_close_date'];
