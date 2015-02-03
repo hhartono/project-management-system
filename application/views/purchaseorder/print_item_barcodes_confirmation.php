@@ -3,6 +3,17 @@
                 <!-- Content Area -->
                 <div id="da-content-area">
                     <div class="row-fluid">
+                        <div class="span12">
+                            <div class="da-panel">
+                                <div class="da-panel-header" style="text-align:center;">
+                                    <h4>System akan mencetak</h4>
+                                    <h2><u><?php echo $total_barcode_quantity; ?> label</u></h2>
+                                    <h4>Lanjutkan print?</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
                         <div class="span4" style="float: right;">
                             <div class="da-panel">
                                 <div class="da-panel-header">

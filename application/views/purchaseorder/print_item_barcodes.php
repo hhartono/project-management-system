@@ -59,7 +59,7 @@
                                     <form id="da-purchaseorder-barcode-print-detail-form-val" class="da-form da-form-inline" action="<?php echo '/purchaseorder/print_item_barcodes/' . $po_id; ?>" method="post">
                                         <div class="da-form-row" style="text-align:center;">
                                             <input id="da-purchaseorder-barcode-print-submit-item-values" type="hidden" name="po_barcode_print_item_values">
-                                            <button id="da-purchaseorder-barcode-print-submit" class="btn btn-success">Lanjutkan -></button>
+                                            <button id="da-purchaseorder-barcode-print-submit" class="btn btn-success">Lanjutkan</button>
                                         </div>
                                     </form>
                                 </div>

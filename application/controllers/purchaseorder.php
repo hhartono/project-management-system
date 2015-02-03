@@ -98,7 +98,13 @@ class Purchaseorder extends CI_Controller {
 
                 if($response){
                     $message = array();
-                    $this->show_print_confirmation_screen($message, $po_id);
+                    $total_barcode_quantity = 0;
+                    $barcode_details = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
+                    foreach($barcode_details as $barcode_detail){
+                        $total_barcode_quantity += $barcode_detail['label_quantity'];
+                    }
+
+                    $this->show_print_confirmation_screen($message, $po_id, $total_barcode_quantity);
                     echo WebClientPrint::createScript('http://architect.local/printbarcode');
                 }else{
                     $message['error'] = "Label gagal di print.";
@@ -404,7 +410,7 @@ class Purchaseorder extends CI_Controller {
         }
     }
 
-    private function show_print_confirmation_screen($message, $po_id)
+    private function show_print_confirmation_screen($message, $po_id, $total_barcode_quantity)
     {
         $user_id = $this->input->cookie('uid', TRUE);
         if($user_id){
@@ -424,6 +430,7 @@ class Purchaseorder extends CI_Controller {
             // get necessary data
             //$data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
             $data['po_id'] = $po_id;
+            $data['total_barcode_quantity'] = $total_barcode_quantity;
 
             // show the view
             $this->load->view('header');
