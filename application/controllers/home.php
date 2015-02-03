@@ -20,15 +20,23 @@ class Home extends CI_Controller {
 	public function index()
 	{
         $this->load->helper('url');
+        $this->load->model('login_model');
+        $this->load->helper('cookie');
         $base_url = base_url();
 
-        $data['base_url'] = $base_url;
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
-        $this->load->view('header');
-        $this->load->view('home/navigation', $data);
-        $this->load->view('home/main');
-        $this->load->view('home/footer');
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['base_url'] = $base_url;
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $this->load->view('header');
+            $this->load->view('home/navigation', $data);
+            $this->load->view('home/main');
+            $this->load->view('home/footer');
+        }else{
+            redirect('/login', 'refresh');
+        }
     }
 }
 

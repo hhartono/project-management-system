@@ -29,6 +29,9 @@ class Purchaseorder extends CI_Controller {
         $this->load->model('supplier_model');
         $this->load->model('project_model');
         $this->load->model('purchaseorder_model');
+        $this->load->model('login_model');
+        $this->load->helper('cookie');
+        $this->load->helper('url');
     }
 
 	public function index()
@@ -311,101 +314,125 @@ class Purchaseorder extends CI_Controller {
 
     private function show_table($message)
     {
-        // user info
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
 
-        // access level
-        $data['access']['create'] = true;
-        $data['access']['edit'] = true;
-        $data['access']['delete'] = true;
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
 
-        // message
-        $data['message'] = $message;
+            // message
+            $data['message'] = $message;
 
-        // get necessary data
-        $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
+            // get necessary data
+            $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
 
-        // show the view
-        $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
-        $this->load->view('purchaseorder/main', $data);
-        $this->load->view('purchaseorder/footer');
+            // show the view
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/main', $data);
+            $this->load->view('purchaseorder/footer');
+        }else{
+            redirect('/login', 'refresh');
+        }
     }
 
     private function show_detail_table($message, $po_id)
     {
-        // user info
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
 
-        // access level
-        $data['access']['create'] = true;
-        $data['access']['edit'] = true;
-        $data['access']['delete'] = true;
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
 
-        // message
-        $data['message'] = $message;
+            // message
+            $data['message'] = $message;
 
-        // get necessary data
-        $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_po_id($po_id);
-        $data['purchaseorder_main'] = $this->purchaseorder_model->get_purchaseorder_by_id($po_id);
+            // get necessary data
+            $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_po_id($po_id);
+            $data['purchaseorder_main'] = $this->purchaseorder_model->get_purchaseorder_by_id($po_id);
 
-        // show the view
-        $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
-        $this->load->view('purchaseorder/receive_po_items', $data);
-        $this->load->view('purchaseorder/footer');
+            // show the view
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/receive_po_items', $data);
+            $this->load->view('purchaseorder/footer');
+        }else{
+            redirect('/login', 'refresh');
+        }
     }
 
     private function show_print_barcode_table($message, $po_id)
     {
-        // user info
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
 
-        // access level
-        $data['access']['create'] = true;
-        $data['access']['edit'] = true;
-        $data['access']['delete'] = true;
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
 
-        // message
-        $data['message'] = $message;
+            // message
+            $data['message'] = $message;
 
-        // get necessary data
-        $data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
-        $data['po_id'] = $po_id;
+            // get necessary data
+            $data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
+            $data['po_id'] = $po_id;
 
-        // show the view
-        $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
-        $this->load->view('purchaseorder/print_item_barcodes', $data);
-        $this->load->view('purchaseorder/footer');
+            // show the view
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/print_item_barcodes', $data);
+            $this->load->view('purchaseorder/footer');
+        }else{
+            redirect('/login', 'refresh');
+        }
     }
 
     private function show_print_confirmation_screen($message, $po_id)
     {
-        // user info
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
 
-        // access level
-        $data['access']['create'] = true;
-        $data['access']['edit'] = true;
-        $data['access']['delete'] = true;
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
 
-        // message
-        $data['message'] = $message;
+            // message
+            $data['message'] = $message;
 
-        // get necessary data
-        //$data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
-        $data['po_id'] = $po_id;
+            // get necessary data
+            //$data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
+            $data['po_id'] = $po_id;
 
-        // show the view
-        $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
-        $this->load->view('purchaseorder/print_item_barcodes_confirmation', $data);
-        $this->load->view('purchaseorder/footer', $data);
+            // show the view
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/print_item_barcodes_confirmation', $data);
+            $this->load->view('purchaseorder/footer', $data);
+        }else{
+            redirect('/login', 'refresh');
+        }
     }
 }
 

@@ -53,7 +53,7 @@
                                                 <img class="main-center" src="assets/images/usage-logo.png" alt="Pakai Barang">
                                             </td>
                                             <td>
-                                                <a href="/hello">
+                                                <a href="/useitem">
                                                     <h3 class="main-center">Pakai<br/>Barang</h3>
                                                 </a>
                                             </td>

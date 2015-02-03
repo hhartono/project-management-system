@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" media="screen">
 
     <!--  Fluid Grid System -->
-    <link rel="stylesheet" href="/assets/css/fluid.css" media="screen">
+    <!--<link rel="stylesheet" href="/assets/css/fluid.css" media="screen">-->
 
     <!-- Login Stylesheet -->
     <link rel="stylesheet" href="/assets/css/form.css" media="screen">

@@ -70,6 +70,13 @@ class Login extends CI_Controller {
             $this->load->view('login/main');
         }
     }
+
+    public function logout()
+    {
+        // delete the cookie & show the login screen
+        delete_cookie('uid');
+        $this->load->view('login/main');
+    }
 }
 
 /* End of file login.php */

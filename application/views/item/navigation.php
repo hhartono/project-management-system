@@ -32,17 +32,19 @@
                                 <span class="da-user-title"><?php echo $company_title?></span>
                             </div>
                         </div>
+                        <!--
                         <ul class="dropdown-menu">
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Settings</a></li>
                             <li><a href="#">Change Password</a></li>
                         </ul>
+                        -->
                     </div>
                     <div id="da-header-button-container">
                         <ul>
                             <li class="da-header-button-wrap">
                                 <div class="da-header-button">
-                                    <a href="../index.html"><i class="icon-power"></i></a>
+                                    <a href="/login/logout"><i class="icon-power"></i></a>
                                 </div>
                             </li>
                         </ul>

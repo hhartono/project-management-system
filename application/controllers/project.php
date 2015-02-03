@@ -22,6 +22,9 @@ class Project extends CI_Controller {
         parent::__construct();
         $this->load->model('project_model');
         $this->load->model('customer_model');
+        $this->load->model('login_model');
+        $this->load->helper('cookie');
+        $this->load->helper('url');
     }
 
 	public function index()
@@ -213,26 +216,32 @@ class Project extends CI_Controller {
 
     private function show_table($message)
     {
-        // user info
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
 
-        // access level
-        $data['access']['create'] = true;
-        $data['access']['edit'] = true;
-        $data['access']['delete'] = true;
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
 
-        // message
-        $data['message'] = $message;
+            // message
+            $data['message'] = $message;
 
-        // get necessary data
-        $data['projects'] = $this->project_model->get_all_projects();
+            // get necessary data
+            $data['projects'] = $this->project_model->get_all_projects();
 
-        // show the view
-        $this->load->view('header');
-        $this->load->view('project/navigation', $data);
-        $this->load->view('project/main', $data);
-        $this->load->view('project/footer');
+            // show the view
+            $this->load->view('header');
+            $this->load->view('project/navigation', $data);
+            $this->load->view('project/main', $data);
+            $this->load->view('project/footer');
+        }else{
+            redirect('/login', 'refresh');
+        }
     }
 }
 
