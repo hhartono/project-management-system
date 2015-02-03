@@ -48,6 +48,11 @@
 
                         // print barcode
                         jsWebClientPrint.print('po_id=' + <?php echo $po_id; ?>);
+
+                        // redirect the page
+                        setTimeout( function () {
+                            $('#da-purchaseorder-barcode-print-confirmation-detail-form-val').submit();
+                        }, 500);
                     });
                 });
             }) (jQuery);

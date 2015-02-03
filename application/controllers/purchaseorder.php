@@ -41,28 +41,34 @@ class Purchaseorder extends CI_Controller {
     }
 
     public function createpo(){
-        // user info
-        $data['username'] = "Hans Hartono";
-        $data['company_title'] = "Chief Technology Officer";
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
 
-        /*
-        // access level
-        $data['access']['create'] = true;
-        $data['access']['edit'] = true;
-        $data['access']['delete'] = true;
+            /*
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
 
-        // message
-        $data['message'] = $message;
+            // message
+            $data['message'] = $message;
 
-        // get necessary data
-        $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
-        */
+            // get necessary data
+            $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
+            */
 
-        // show the view
-        $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
-        $this->load->view('purchaseorder/createpo', $data);
-        $this->load->view('purchaseorder/footer');
+            // show the view
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/createpo', $data);
+            $this->load->view('purchaseorder/footer');
+        }else{
+            redirect('/login', 'refresh');
+        }
     }
 
     public function deletepo($po_id){

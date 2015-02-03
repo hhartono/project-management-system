@@ -23,9 +23,10 @@
                                 </div>
                                 <div id="da-purchaseorder-barcode-print-confirmation-detail-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
-                                    <form id="da-purchaseorder-barcode-print-confirmation-detail-form-val" class="da-form da-form-inline" action="" method="post">
+                                    <form id="da-purchaseorder-barcode-print-confirmation-detail-form-val" class="da-form da-form-inline" action="/purchaseorder" method="post">
                                         <div class="da-form-row" style="text-align:center;">
-                                            <button id="da-purchaseorder-barcode-print-confirmation-submit" class="btn btn-success" onclick='javascript:doClientPrint();'>Print Label</button>
+                                            <!--<button id="da-purchaseorder-barcode-print-confirmation-submit" class="btn btn-success" onclick='javascript:doClientPrint();'>Print Label</button>-->
+                                            <button id="da-purchaseorder-barcode-print-confirmation-submit" class="btn btn-success">Print Label</button>
                                         </div>
                                     </form>
                                 </div>
