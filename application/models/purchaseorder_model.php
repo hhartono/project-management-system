@@ -49,6 +49,12 @@ class Purchaseorder_model extends CI_Model {
                     $result_array[$walk]['formatted_po_close_date'] = date("d-m-Y", strtotime($result_array[$walk]['po_close_date']));
                 }
 
+                if(strtotime($result_array[$walk]['po_input_date']) <= 0){
+                    $result_array[$walk]['sort_po_input_date'] = "";
+                }else{
+                    $result_array[$walk]['sort_po_input_date'] = strtotime($result_array[$walk]['po_input_date']);
+                }
+
                 $result_array[$walk]['print_label'] = false;
             }
 

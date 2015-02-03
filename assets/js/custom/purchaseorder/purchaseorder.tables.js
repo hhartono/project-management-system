@@ -2,7 +2,13 @@
 	$(document).ready(function(e) {
         $("table#da-purchaseorder-datatable-numberpaging").DataTable({
             sPaginationType: "full_numbers",
-            order: [0, "desc"]
+            order: [0, "desc"],
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false
+                }
+            ]
         });
 
         // set focus to search box

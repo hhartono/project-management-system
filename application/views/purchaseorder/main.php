@@ -31,6 +31,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Tanggal Purchase Order</th>
+                                                <th>Tanggal Purchase Order</th>
                                                 <th>Kode Purchase Order</th>
                                                 <th>Nama Supplier</th>
                                                 <th>Nama Project</th>
@@ -51,6 +52,7 @@
                                         <tbody>
                                             <?php foreach($purchaseorders as $each_purchaseorder): ?>
                                                 <tr>
+                                                    <td class="input-date-sort-row"><?php echo $each_purchaseorder['sort_po_input_date']; ?></td>
                                                     <td class="input-date-row"><?php echo $each_purchaseorder['formatted_po_input_date']; ?></td>
                                                     <td class="code-row"><?php echo $each_purchaseorder['po_reference_number']; ?></td>
                                                     <td class="supplier-row"><?php echo $each_purchaseorder['supplier']; ?></td>
