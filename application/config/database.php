@@ -47,10 +47,11 @@
 
 $active_group = 'default';
 $active_record = TRUE;
+$database_password = getenv('DB_PASSWORD');
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
+$db['default']['password'] = $database_password;
 $db['default']['database'] = 'project_management_system';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

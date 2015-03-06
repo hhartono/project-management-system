@@ -85,6 +85,8 @@ class Purchaseorder extends CI_Controller {
     }
 
     public function print_item_barcodes($po_id){
+        $host_name = $database_password = getenv('HOST_NAME');
+
         if(empty($this->input->post())){
             $message = array();
             $this->show_print_barcode_table($message, $po_id);
@@ -111,7 +113,7 @@ class Purchaseorder extends CI_Controller {
                     }
 
                     $this->show_print_confirmation_screen($message, $po_id, $total_barcode_quantity);
-                    echo WebClientPrint::createScript('http://architect.local/printbarcode');
+                    echo WebClientPrint::createScript($host_name . '/printbarcode');
                 }else{
                     $message['error'] = "Label gagal di print.";
                     $this->show_print_barcode_table($message, $po_id);
