@@ -141,6 +141,7 @@
                             <ul>
                                 <li><a href="/project">Project</a></li>
                                 <li><a href="/subproject">Subproject</a></li>
+                                <li><a href="/projectdetail">Project Detail</a></li>
                                 <li><a href="/customer">Customer</a></li>
                             </ul>
                         </li>

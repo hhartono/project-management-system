@@ -32,6 +32,7 @@
                                             <tr>
                                                 <th>Nama Project</th>
                                                 <th>Nama Customer</th>
+                                                <th>Nama Perusahaan</th>
                                                 <th>Alamat Project</th>
                                                 <th>Tanggal Mulai</th>
                                                 <th>Tanggal Selesai</th>
@@ -57,6 +58,7 @@
                                                 <tr>
                                                     <td class="name-row"><?php echo $each_project['name']; ?></td>
                                                     <td class="customer-name-row"><?php echo $each_project['customer_name']; ?></td>
+                                                    <td class="company-name-row"><?php echo $each_project['company_name']; ?></td>
                                                     <td class="address-row"><?php echo $each_project['address']; ?></td>
                                                     <td class="start-date-row">
                                                         <?php if(empty($each_project['formatted_start_date'])){
@@ -125,6 +127,12 @@
                                     <label class="da-form-label">Nama Customer</label>
                                     <div class="da-form-item large">
                                         <input id="project-create-customer" type="text" name="customer_name">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Nama Company</label>
+                                    <div class="da-form-item large">
+                                        <input id="project-create-company" type="text" name="company_name">
                                     </div>
                                 </div>
                                 <div class="da-form-row">

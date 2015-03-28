@@ -73,7 +73,7 @@
                                                 <img class="main-center" src="assets/images/project-logo.png" alt="Project">
                                             </td>
                                             <td>
-                                                <a href="/hello">
+                                                <a href="/projectdetail">
                                                     <h3 class="main-center">Project<br/>Details</h3>
                                                 </a>
                                             </td>

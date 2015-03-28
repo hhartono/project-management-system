@@ -24,6 +24,7 @@ class Category extends CI_Controller {
         $this->load->model('login_model');
         $this->load->helper('cookie');
         $this->load->helper('url');
+        //test
     }
 
 	public function index()

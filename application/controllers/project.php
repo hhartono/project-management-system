@@ -35,16 +35,25 @@ class Project extends CI_Controller {
 
     public function create_project(){
         // check all necessary input
-        if(!empty($this->input->post('customer_name')) && !empty($this->input->post('name'))){
+        if(!empty($this->input->post('customer_name')) && !empty($this->input->post('name')) && !empty($this->input->post('company_name'))){
             // search for customer id
             $database_input_array = array();
             $customer_detail = $this->customer_model->get_customer_by_name($this->input->post('customer_name'));
+            $company_detail = $this->project_model->get_company_by_name($this->input->post('company_name'));
             if(empty($customer_detail)){
                 $message['error'] = "Project gagal disimpan. Nama customer tidak ada dalam system.";
                 $this->show_table($message);
                 return;
             }else{
                 $database_input_array['customer_id'] = $customer_detail['id'];
+            }
+
+            if(empty($company_detail)){
+                $message['error'] = "Project gagal disimpan. Nama company tidak ada dalam system.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['company_id'] = $company_detail['id'];
             }
 
             // get the project name
@@ -102,18 +111,26 @@ class Project extends CI_Controller {
 
     public function update_project(){
         // check all necessary input
-        if(!empty($this->input->post('id')) && !empty($this->input->post('customer_name'))
+        if(!empty($this->input->post('id')) && !empty($this->input->post('customer_name')) && !empty($this->input->post('company_name'))
             && !empty($this->input->post('name'))){
 
             // search for customer id
             $database_input_array = array();
             $customer_detail = $this->customer_model->get_customer_by_name($this->input->post('customer_name'));
+            $company_detail = $this->project_model->get_company_by_name($this->input->post('company_name'));
             if(empty($customer_detail)){
                 $message['error'] = "Project gagal diubah. Nama customer tidak ada dalam system.";
                 $this->show_table($message);
                 return;
             }else{
                 $database_input_array['customer_id'] = $customer_detail['id'];
+            }
+            if(empty($company_detail)){
+                $message['error'] = "Project gagal diubah. Nama company tidak ada dalam system.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['company_id'] = $company_detail['id'];
             }
 
             // get the project name
@@ -204,6 +221,11 @@ class Project extends CI_Controller {
         return $project_customers;
     }
 
+    public function get_all_project_company(){
+        $project_customers = $this->project_model->get_all_company();
+        return $project_customers;
+    }
+
     public function get_all_project_customer_names(){
         $project_customers = $this->get_all_project_customers();
         $customer_name = array();
@@ -212,6 +234,16 @@ class Project extends CI_Controller {
         }
 
         echo json_encode($customer_name);
+    }
+
+    public function get_all_project_company_names(){
+        $project_company = $this->get_all_project_company();
+        $company_name = array();
+        foreach($project_company as $project_company){
+            $company_name[] = $project_company['name'];
+        }
+
+        echo json_encode($company_name);
     }
 
     private function show_table($message)

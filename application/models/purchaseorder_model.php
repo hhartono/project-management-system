@@ -11,7 +11,7 @@ class Purchaseorder_model extends CI_Model {
         $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id');
         $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id');
         $this->db->where('transaction_po_main.id', $id);
-        $query = $this->db->get();
+            $query = $this->db->get();
 
         $row_array = $query->row_array();
         return $row_array;

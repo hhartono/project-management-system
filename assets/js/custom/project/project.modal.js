@@ -56,6 +56,18 @@
             }, "json" );
         });
 
+        $("#da-project-create-dialog").bind("click", function(event) {
+            event.preventDefault();
+            $("#da-project-create-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#project-create-start-date").datepicker({showOtherMonths:true, dateFormat: 'dd-mm-yy'});
+
+            $.get( "/project/get_all_project_company_names", function(data) {
+                $( "#project-create-company" ).autocomplete({
+                    source: data
+                });
+            }, "json" );
+        });
+
         /*
             Modal Controller for Editing
          */
