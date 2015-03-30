@@ -4,7 +4,7 @@
                 <div id="da-content-area">
                     <?php if (isset($access['create']) && $access['create']): ?>
                         <div class="row-fluid">
-                            <div class="span12">
+                            <div class="span12" >
                                 <button id="da-project-create-dialog" class="btn btn-success btn-create">[+] Tambah Project</button>
                             </div>
                         </div>
