@@ -24,7 +24,7 @@
                                             }
                                         ?>
                                             </select>
-                                            <input type="submit" value="Filter">
+                                            <input type="submit" class="btn btn-success" value="Filter">
                                             </form>
                                     </span>
                                 </div>

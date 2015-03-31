@@ -28,6 +28,7 @@ class Purchaseorder extends CI_Controller {
         $this->load->model('unit_model');
         $this->load->model('supplier_model');
         $this->load->model('project_model');
+        $this->load->model('subproject_model');
         $this->load->model('purchaseorder_model');
         $this->load->model('login_model');
         $this->load->helper('cookie');
@@ -60,7 +61,7 @@ class Purchaseorder extends CI_Controller {
             // get necessary data
             $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
             */
-
+            $data['project'] = $this->purchaseorder_model->get_all_project();
             // show the view
             $this->load->view('header');
             $this->load->view('purchaseorder/navigation', $data);
@@ -186,7 +187,7 @@ class Purchaseorder extends CI_Controller {
     public function submit_item_values(){
         // get the input value
         if(!empty($this->input->post('po_item_values')) && !empty($this->input->post('supplier'))
-            && !empty($this->input->post('project'))){
+            && !empty($this->input->post('project')) && !empty($this->input->post('subproject'))){
             $po_item_values = $this->input->post('po_item_values');
             $po_item_values = json_decode($po_item_values, TRUE);
 
@@ -206,13 +207,22 @@ class Purchaseorder extends CI_Controller {
                 }
 
                 // project name
-                $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
+                $project_detail = $this->project_model->get_project_by_id($this->input->post('project'));
                 if(empty($project_detail)){
                     $message['error'] = "Purchase Order gagal dibuat. Project tidak ada dalam system.";
                     $this->show_table($message);
                     return;
                 }else{
                     $database_input_array['project_id'] = $project_detail['id'];
+                }
+
+                $subproject_detail = $this->subproject_model->get_subproject_by_name($this->input->post('subproject'));
+                if(empty($subproject_detail)){
+                    $message['error'] = "Purchase Order gagal dibuat. SubProject tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['subproject_id'] = $subproject_detail['id'];
                 }
 
                 // search for supplier id
@@ -448,6 +458,18 @@ class Purchaseorder extends CI_Controller {
         }else{
             redirect('/login', 'refresh');
         }
+    }
+
+    public function get_subproject()
+    {
+        $project_id = $this->input->POST('project_id');
+        $subproject = $this->purchaseorder_model->get_sub_project($project_id);
+        $data .="<option value=''>-- Pilih Sub Project --</option>";
+        foreach ($subproject as $sub) {
+            $data .="<option value='$sub[name]'>$sub[name]</option>";
+        }
+
+        echo $data;
     }
 }
 

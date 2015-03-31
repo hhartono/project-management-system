@@ -102,7 +102,22 @@
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Project</label>
                                             <div class="da-form-item large">
-                                                <input id="purchaseorder-createpo-detail-project" type="text" name="project">
+                                                <select name="project" id="project_id">
+                                                    <option value="">--- Pilih ---</option>
+                                                    <?php
+                                                    foreach ($project as $project) {
+                                                        echo "<option value='$project[id]'>$project[name] </option> ";
+                                                    }
+                                                ?>   
+                                                </select>    
+                                            </div>
+                                        </div>
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Subproject</label>
+                                            <div class="da-form-item large">
+                                                <select name="subproject" id="subproject_id">
+                                                    <option value="">--- Pilih Sub Project ---</option>   
+                                                </select>    
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">

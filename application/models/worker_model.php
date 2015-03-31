@@ -15,6 +15,11 @@ class Worker_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_worker_by_name($name){
+        $query = $this->db->get_where('worker_master', array('name' => $name));
+        return $query->row_array();
+    }
+
     public function get_worker_by_name_division($name, $division_id){
         $this->db->select('worker_master.*');
         $this->db->from('worker_master');

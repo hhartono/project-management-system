@@ -88,11 +88,12 @@
 
             // get input detail
             var po_supplier = $('#purchaseorder-createpo-detail-supplier').val();
-            var po_project = $('#purchaseorder-createpo-detail-project').val();
+            var po_project = $('#project_id').val();
+            var po_subproject = $('#subproject_id').val();
             $("#da-purchaseorder-createpo-detail-error").hide();
             $("#da-purchaseorder-createpo-table-error").hide();
 
-            if(po_supplier && po_project){
+            if(po_supplier && po_project && po_subproject){
                 if(totalItem > 0){
                     $('table#da-purchaseorder-createpo-datatable-numberpaging tr').each(function(outer_index) {
                         if(outer_index > 0){

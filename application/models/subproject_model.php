@@ -33,6 +33,10 @@ class Subproject_model extends CI_Model {
         }
     }
 
+    public function get_subproject_by_name($name){
+        $query = $this->db->get_where('subproject_master', array('name' => $name));
+        return $query->row_array();
+    }
     public function get_subproject_by_subproject_project($name, $project_id){
         $this->db->select('subproject_master.*');
         $this->db->from('subproject_master');

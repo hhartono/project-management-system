@@ -148,10 +148,10 @@ class Useitem_model extends CI_Model {
     }
 
 
-    public function set_po_detail($database_input_array)
+    public function set_useitem_detail($database_input_array)
     {
-        if($database_input_array['supplier_id'] !== false && $database_input_array['project_id'] !== false
-            && $database_input_array['po_item_values'] !== false){
+        if($database_input_array['subproject_id'] !== false //&& $database_input_array['project_id'] !== false
+            && $database_input_array['worker_id'] !== false && $database_input_array['useitem_item_values'] !== false){
             date_default_timezone_set('Asia/Jakarta');
 
             // start database transaction
@@ -159,24 +159,22 @@ class Useitem_model extends CI_Model {
 
             // PART 1 - set PO main
             $data = array(
-                'po_reference_number' => $database_input_array['po_reference_number'],
-                'supplier_id' => $database_input_array['supplier_id'],
-                'project_id' => $database_input_array['project_id'],
-                'po_input_date' => date("Y-m-d H:i:s")
+                //'project_id' => $database_input_array['project_id'],
+                'subproject_id' => $database_input_array['subproject_id'],
+                'worker_id' => $database_input_array['worker_id']
             );
-            $this->db->insert('transaction_po_main', $data);
+            $this->db->insert('transaction_usage_main', $data);
 
             // PART 2 - set PO detail
-            $database_input_array['po_id'] = $this->db->insert_id();
-            foreach($database_input_array['po_item_values'] as $each_po_item){
+            $database_input_array['usage_id'] = $this->db->insert_id();
+            foreach($database_input_array['useitem_item_values'] as $each_usage_item){
                 $data = array(
-                    'po_id' => $database_input_array['po_id'],
-                    'item_id' => $each_po_item['item_id'],
-                    'quantity' => $each_po_item['item_count'],
-                    'notes' => $each_po_item['item_notes'],
+                    'usage_id' => $database_input_array['usage_id'],
+                    'stock_id' => $each_usage_item['stock_id'],
+                    'item_count' => $each_usage_item['item_usage'],
                     'creation_date' => date("Y-m-d H:i:s")
                 );
-                $this->db->insert('transaction_po_detail', $data);
+                $this->db->insert('transaction_usage_detail', $data);
             }
 
             // complete database transaction
@@ -241,6 +239,39 @@ class Useitem_model extends CI_Model {
             }
         }else{
             return FALSE;
+        }
+    }
+
+    public function get_project_by_name($name){
+        $query = $this->db->get_where('project_master', array('name' => $name));
+        return $query->row_array();
+    }
+
+    public function get_all_project()
+    {
+        $query = $this->db->get('project_master');
+        return $query->result_array();
+    }
+
+    public function get_worker_by_name($name){
+        $query = $this->db->get_where('worker_master', array('name' => $name));
+        return $query->row_array();
+    }
+
+    public function get_all_worker()
+    {
+        $query = $this->db->get('worker_master');
+        return $query->result_array();
+    }
+
+    public function get_sub_project($project_id)
+    {     
+        $this->db->where('project_id',$project_id);
+        $result = $this->db->get('subproject_master');
+        if($result->num_rows() > 0){
+            return $result->result_array();
+        }else{
+            return array();
         }
     }
 }

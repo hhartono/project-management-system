@@ -1,6 +1,6 @@
 (function($) {
 	$(document).ready(function(e) {
-        var poTable = $("table#da-useitem-datatable-numberpaging").DataTable({
+        var useitemTable = $("table#da-useitem-datatable-numberpaging").DataTable({
             bPaginate: false,
             bFilter: false,
             bSort: false,
@@ -10,6 +10,7 @@
                 $(nRow).find("td:eq(2)").attr("name", "item_stock");
                 $(nRow).find("td:eq(3)").attr("name", "item_usage").append('<input name="item_usage_input" type="text" class="span3" value="1">');
                 $(nRow).find("td:eq(4)").attr("name", "item_unit");
+                $(nRow).find("td:eq(5)").attr("name", "stock_id");
 
             }
             //sPaginationType: "full_numbers"
@@ -21,15 +22,21 @@
 
         $('#da-useitem-insert-add').on( 'click', function (event) {
             event.preventDefault();
-            add_item_to_preview_table(poTable);
+            add_item_to_preview_table(useitemTable);
         });
 
         $("#useitem-insert-code").keypress(function(event) {
             if(event.keyCode == 13) {
                 event.preventDefault();
-                add_item_to_preview_table(poTable);
+                add_item_to_preview_table(useitemTable);
             }
         });
+
+        $.get( "/useitem/get_all_useitem_worker_names", function(data) {
+            $( "#useitem-create-worker" ).autocomplete({
+                source: data
+            });
+        }, "json" );
 
         $('#da-useitem-submit').on('click', function(event) {
             event.preventDefault();
@@ -40,8 +47,8 @@
             var overflowStatus = false;
 
             // get input detail
-            var po_project = $('#useitem-detail-project').val();
-            var po_subproject = $('#useitem-detail-subproject').val();
+            var useitem_project = $('#project_id').val();
+            var useitem_subproject = $('#subproject_id').val();
             $("#da-useitem-detail-error").hide();
             $("#da-useitem-table-error").hide();
 
@@ -49,7 +56,7 @@
             var stock_count_per_item = {};
             var usage_count_per_item = {};
 
-            if(po_project && po_subproject){
+            if(useitem_project && useitem_subproject){
                 if(totalItem > 0){
                     $('table#da-useitem-datatable-numberpaging tr').each(function(outer_index) {
                         var stock_count = 0;
@@ -103,8 +110,8 @@
 
                     if(overflowStatus == false){
                         // create JSON
-                        var poItemValues = JSON.stringify(tableValue);
-                        $('#da-useitem-submit-item-values').val(poItemValues);
+                        var useitemItemValues = JSON.stringify(tableValue);
+                        $('#da-useitem-submit-item-values').val(useitemItemValues);
 
                         // submit form
                         $('form#da-useitem-detail-form-val').submit();
@@ -125,7 +132,7 @@
         /*
          Common Function
          */
-        function add_item_to_preview_table(poTable){
+        function add_item_to_preview_table(useitemTable){
             // get input value
             var item_code = $('#useitem-insert-code').val();
 
@@ -151,7 +158,8 @@
                         table_array[2] = data.item_count;
                         table_array[3] = '';
                         table_array[4] = data.item_unit;
-                        poTable.row.add(table_array).draw();
+                        table_array[5] = data.id;
+                        useitemTable.row.add(table_array).draw();
                     }else{
                         // error message
                         var message = "Kode barang tidak ditemukan dalam sistem.";

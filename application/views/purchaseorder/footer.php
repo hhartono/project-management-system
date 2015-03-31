@@ -59,6 +59,21 @@
         </script>
     <?php } ?>
 
+<script>
+    $(document).ready(function(){
+        $("#project_id").change(function(){
+            var project_id = $("#project_id").val();
+                $.ajax({
+                    type: "POST",
+                    url : "<?php echo base_url(); ?>purchaseorder/get_subproject",
+                    data: "project_id=" + project_id, 
+                        success: function(data){
+                            $('#subproject_id').html(data);
+                        }
+                });
+        });
+    });
+</script>
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
 

@@ -21,6 +21,9 @@ class Useitem extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('useitem_model');
+        $this->load->model('project_model');
+        $this->load->model('subproject_model');
+        $this->load->model('worker_model');
         $this->load->model('stock_model');
         $this->load->model('login_model');
         $this->load->helper('cookie');
@@ -33,77 +36,84 @@ class Useitem extends CI_Controller {
         $this->show_table($message);
     }
 
-    public function submit_item_values(){
+    /*public function submit_item_values(){
         var_dump($this->input->post());
     }
-
-        /*
+    */
         public function submit_item_values(){
             // get the input value
-            if(!empty($this->input->post('po_item_values')) && !empty($this->input->post('supplier'))
-                && !empty($this->input->post('project'))){
-                $po_item_values = $this->input->post('po_item_values');
-                $po_item_values = json_decode($po_item_values, TRUE);
+            if(!empty($this->input->post('useitem_item_values')) && !empty($this->input->post('subproject'))
+                && !empty($this->input->post('project')) && !empty($this->input->post('worker'))){
+                $useitem_item_values = $this->input->post('useitem_item_values');
+                $useitem_item_values = json_decode($useitem_item_values, TRUE);
 
-                if($po_item_values){
+                if($useitem_item_values){
                     // item values successfully decoded
                     $database_input_array = array();
 
                     // generate purchase order code
-                    $this->load->helper('purchaseorder_code_helper');
-                    $generated_purchaseorder_code = purchaseorder_code_generator();
-                    if(empty($generated_purchaseorder_code)){
-                        $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
-                        $this->show_table($message);
-                        return;
-                    }else{
-                        $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
-                    }
+                    //$this->load->helper('purchaseorder_code_helper');
+                   // $generated_purchaseorder_code = purchaseorder_code_generator();
+                    //if(empty($generated_purchaseorder_code)){
+                      //  $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
+                        //$this->show_table($message);
+                        //return;
+                   // }else{
+                    //    $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
+                   // }
 
                     // project name
-                    $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
+                    $project_detail = $this->project_model->get_project_by_id($this->input->post('project'));
                     if(empty($project_detail)){
-                        $message['error'] = "Purchase Order gagal dibuat. Project tidak ada dalam system.";
+                        $message['error'] = "Useitem gagal dibuat. Project tidak ada dalam system.";
                         $this->show_table($message);
                         return;
                     }else{
                         $database_input_array['project_id'] = $project_detail['id'];
                     }
 
-                    // search for supplier id
-                    $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
-                    if(empty($supplier_detail)){
-                        $message['error'] = "Purchase Order gagal dibuat. Supplier tidak ada dalam system.";
+                    // search for subproject id
+                    $subproject_detail = $this->subproject_model->get_subproject_by_id($this->input->post('subproject'));
+                    if(empty($subproject_detail)){
+                        $message['error'] = "Useitem gagal dibuat. Sub Project tidak ada dalam system.";
                         $this->show_table($message);
                         return;
                     }else{
-                        $database_input_array['supplier_id'] = $supplier_detail['id'];
+                        $database_input_array['subproject_id'] = $subproject_detail['id'];
+                    }
+
+                    $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker_id'));
+                    if(empty($worker_detail)){
+                        $message['error'] = "Useitem gagal dibuat. Worker tidak ada dalam system.";
+                        $this->show_table($message);
+                        return;
+                    }else{
+                        $database_input_array['worker_id'] = $worker_detail['id'];
                     }
 
                     // input all po item values
-                    $database_input_array['po_item_values'] = $po_item_values;
+                    $database_input_array['useitem_item_values'] = $useitem_item_values;
 
                     // input data to database
-                    $response = $this->purchaseorder_model->set_po_detail($database_input_array);
+                    $response = $this->useitem_model->set_useitem_detail($database_input_array);
 
                     if($response){
-                        $message['success'] = "Purchase Order berhasil dibuat.";
+                        $message['success'] = "Useitem berhasil dibuat.";
                         $this->show_table($message);
                     }else{
-                        $message['error'] = "Purchase Order gagal dibuat.";
+                        $message['error'] = "Useitem gagal dibuat.";
                         $this->show_table($message);
                     }
                 }else{
-                    $message['error'] = "Purchase Order gagal dibuat. Item tidak dapat dideteksi.";
+                    $message['error'] = "Useitem gagal dibuat. Item tidak dapat dideteksi.";
                     $this->show_table($message);
                 }
             }else{
-                $message['error'] = "Purchase Order gagal dibuat.";
+                $message['error'] = "Useitem gagal dibuat.";
                 $this->show_table($message);
             }
         }
-        */
-
+    
     /*
     public function get_all_po_items(){
         $po_items = $this->item_model->get_all_items();
@@ -190,6 +200,49 @@ class Useitem extends CI_Controller {
         echo json_encode($stock_detail);
     }
 
+    public function get_all_useitem_project(){
+        $useitem_project = $this->useitem_model->get_all_project();
+        return $useitem_project;
+    }
+
+    public function get_all_useitem_project_names(){
+        $useitem_project = $this->get_all_useitem_project();
+        $project_name = array();
+        foreach($useitem_project as $useitem_project){
+            $project_name[] = $useitem_project['name'];
+        }
+
+        echo json_encode($project_name);
+    }
+
+    public function get_all_useitem_worker(){
+        $useitem_worker = $this->useitem_model->get_all_worker();
+        return $useitem_worker;
+    }
+
+    public function get_all_useitem_worker_names(){
+        $useitem_worker = $this->get_all_useitem_worker();
+        $worker_name = array();
+        foreach($useitem_worker as $useitem_worker){
+            $worker_name[] = $useitem_worker['name'];
+        }
+
+        echo json_encode($worker_name);
+    }
+
+    public function get_sub_project()
+    {
+        $project_id = $this->input->POST('project_id');
+        $subproject = $this->useitem_model->get_sub_project($project_id);
+        $data .="<option value=''>-- Pilih Sub Project --</option>";
+        foreach ($subproject as $sub) {
+            $data .="<option value='$sub[id]'>$sub[name]</option>\n";
+        }
+
+        echo $data;
+
+    }
+
     private function show_table($message)
     {
         $user_id = $this->input->cookie('uid', TRUE);
@@ -209,7 +262,7 @@ class Useitem extends CI_Controller {
 
             // get necessary data
             // $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
-
+            $data['project'] = $this->useitem_model->get_all_project();
             // show the view
             $this->load->view('header');
             $this->load->view('useitem/navigation', $data);

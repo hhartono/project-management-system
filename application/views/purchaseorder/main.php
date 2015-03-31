@@ -35,6 +35,7 @@
                                                 <th>Kode Purchase Order</th>
                                                 <th>Nama Supplier</th>
                                                 <th>Nama Project</th>
+                                                <th>Nama Sub Project</th>
                                                 <th>Tanggal Terima Barang</th>
                                                 <?php if ((isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
@@ -57,6 +58,8 @@
                                                     <td class="code-row"><?php echo $each_purchaseorder['po_reference_number']; ?></td>
                                                     <td class="supplier-row"><?php echo $each_purchaseorder['supplier']; ?></td>
                                                     <td class="customer-row"><?php echo $each_purchaseorder['project']; ?></td>
+                                                    <td class="customer-row"><?php echo $each_purchaseorder['subproject']; ?></td>
+                                                    
                                                     <td class="closed-status-row">
                                                         <?php
                                                             if(empty($each_purchaseorder['po_close_date'])){

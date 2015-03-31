@@ -43,6 +43,7 @@
                                                 <th>Jumlah Stok</th>
                                                 <th>Jumlah Pemakaian</th>
                                                 <th>Satuan Barang</th>
+                                                <th>Database ID</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -63,13 +64,28 @@
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Project</label>
                                             <div class="da-form-item large">
-                                                <input id="useitem-detail-project" type="text" name="project">
+                                                <select name="project" id="project_id">
+                                                    <option value="">--- Pilih Project---</option>
+                                                    <?php
+                                                    foreach ($project as $project) {
+                                                        echo "<option value='$project[id]'>$project[name] </option> ";
+                                                    }
+                                                ?>   
+                                                </select>    
                                             </div>
                                         </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Subproject</label>
                                             <div class="da-form-item large">
-                                                <input id="useitem-detail-subproject" type="text" name="subproject">
+                                                <select name="subproject" id="subproject_id">
+                                                    <option value="">--- Pilih Sub Project ---</option>   
+                                                </select>    
+                                            </div>
+                                        </div>
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Tukang</label>
+                                            <div class="da-form-item large">
+                                                <input id="useitem-create-worker" type="text" name="worker">
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">
