@@ -28,6 +28,7 @@ class Login_model extends CI_Model {
         $return_value['customer'] = !empty($result['customer']) ? $result['customer'] : '';
         $return_value['worker'] = !empty($result['worker']) ? $result['worker'] : '';
         $return_value['division_worker'] = !empty($result['division_worker']) ? $result['division_worker'] : '';
+        $return_value['receiveorder'] = !empty($result['receiveorder']) ? $result['receiveorder'] : '';
         return $return_value;
     }
 }

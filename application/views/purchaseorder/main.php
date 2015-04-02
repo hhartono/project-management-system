@@ -2,6 +2,7 @@
             <div id="da-content-wrap" class="clearfix">
                 <!-- Content Area -->
                 <div id="da-content-area">
+                <?php if (isset($access['create']) && $access['create']): ?>
                     <div class="row-fluid">
                         <div class="span12">
                             <form id="da-purchaseorder-add-form-val" class="da-form" action="/purchaseorder/createpo" method="get">
@@ -9,6 +10,7 @@
                             </form>
                         </div>
                     </div>
+                <?php endif; ?>
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="da-panel">
@@ -67,18 +69,22 @@
                                                                 $purchaseorder_id = $each_purchaseorder['id'];
                                                                 $receive_url = "/purchaseorder/receive_po_items/" . $purchaseorder_id;
                                                         ?>
+                                                        <?php if (isset($access['receive']) && $access['receive']): ?>
                                                             <form id="da-purchaseorder-receive-form-val" class="da-form" action=<?php echo $receive_url; ?> method="post">
                                                                 <button id="da-purchaseorder-receive" class="btn btn-success">Terima Barang</button>
                                                             </form>
+                                                        <?php endif; ?>
                                                         <?php
                                                             }else if($each_purchaseorder['print_label']){
                                                                 // label hasn't been printed
                                                                 $purchaseorder_id = $each_purchaseorder['id'];
                                                                 $print_url = "/purchaseorder/print_item_barcodes/" . $purchaseorder_id;
                                                         ?>
+                                                        <?php if (isset($access['print']) && $access['print']): ?>
                                                             <form id="da-purchaseorder-print-form-val" class="da-form" action=<?php echo $print_url; ?> method="post">
                                                                 <button id="da-purchaseorder-receive" class="btn btn-success">Print Label</button>
                                                             </form>
+                                                        <?php endif; ?>
                                                         <?php
                                                             }else{
                                                                 // po already closed

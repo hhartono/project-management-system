@@ -84,6 +84,7 @@
                                 <td class="division-row"><?php echo $harga; ?></td>
                                 <td class="division-row"><?php echo $total; ?></td>
                             </tr>
+                           <?php $category=$details['category']; ?>
                             <?php $total_sum+=$details['total'];?>
                         <?php endforeach?>
                         <?php $jumlah = number_format($total_sum,2,',','.') ;?>

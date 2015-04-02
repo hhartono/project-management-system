@@ -256,6 +256,7 @@ class Project extends CI_Controller {
             $data['company_title'] = $user_info['title'];
             $data['project'] = $user_info['project'];
 
+            // access level
             $create=substr($data['project'],0,1); 
             $edit=substr($data['project'],1,1); 
             $delete=substr($data['project'],2,1); 
@@ -265,7 +266,7 @@ class Project extends CI_Controller {
             }else{
                 $data['access']['create'] = false;
             }
-            // access level
+            
             if($edit != 0){
                 $data['access']['edit'] = true;            
             }else{

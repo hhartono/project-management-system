@@ -345,12 +345,15 @@ class Purchaseorder extends CI_Controller {
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['purchaseorder'] = $user_info['purchase_order'];
+            $data['receiveorder'] = $user_info['receiveorder'];
 
             // access level
             $create=substr($data['purchaseorder'],0,1); 
             $edit=substr($data['purchaseorder'],1,1); 
             $delete=substr($data['purchaseorder'],2,1); 
-            
+            $receive=substr($data['receiveorder'],0,1); 
+            $print=substr($data['receiveorder'],1,1); 
+
             if($create != 0){
                 $data['access']['create'] = true;            
             }else{
@@ -367,6 +370,18 @@ class Purchaseorder extends CI_Controller {
                 $data['access']['delete'] = true;    
             }else{
                 $data['access']['delete'] = false;               
+            }
+
+            if($receive != 0){
+                $data['access']['receive'] = true;    
+            }else{
+                $data['access']['receive'] = false;               
+            }
+
+            if($print != 0){
+                $data['access']['print'] = true;    
+            }else{
+                $data['access']['print'] = false;               
             }
 
             // message
@@ -396,6 +411,7 @@ class Purchaseorder extends CI_Controller {
             $data['purchaseorder'] = $user_info['purchase_order'];
 
             // access level
+            /*
             $create=substr($data['purchaseorder'],0,1); 
             $edit=substr($data['purchaseorder'],1,1); 
             $delete=substr($data['purchaseorder'],2,1); 
@@ -417,7 +433,7 @@ class Purchaseorder extends CI_Controller {
             }else{
                 $data['access']['delete'] = false;               
             }
-
+            */
             // message
             $data['message'] = $message;
 
@@ -446,6 +462,7 @@ class Purchaseorder extends CI_Controller {
             $data['purchaseorder'] = $user_info['purchase_order'];
 
             // access level
+            /*
             $create=substr($data['purchaseorder'],0,1); 
             $edit=substr($data['purchaseorder'],1,1); 
             $delete=substr($data['purchaseorder'],2,1); 
@@ -467,7 +484,7 @@ class Purchaseorder extends CI_Controller {
             }else{
                 $data['access']['delete'] = false;               
             }
-
+            */
             // message
             $data['message'] = $message;
 

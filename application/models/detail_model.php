@@ -76,7 +76,7 @@ class Detail_model extends CI_Model {
 				left join stock_master sm on tud.stock_id=sm.id
 				left join item_master im on sm.item_id=im.id
 				left join unit_master um on im.unit_id=um.id
-				left join category_master cm on im.category_id=cm.id
+				join category_master cm on im.category_id=cm.id
 				where spm.id='$idsubproject'
 				order by cm.name ASC ");
         return $query->result_array();
@@ -131,6 +131,14 @@ class Detail_model extends CI_Model {
     public function get_company()
     {
         $query = $this->db->query("select name from company_master");
+
+        return $query->result();
+
+    }
+
+    public function get_category()
+    {
+        $query = $this->db->query("select * from category_master");
 
         return $query->result();
 
