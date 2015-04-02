@@ -216,7 +216,7 @@ class Purchaseorder extends CI_Controller {
                     $database_input_array['project_id'] = $project_detail['id'];
                 }
 
-                $subproject_detail = $this->subproject_model->get_subproject_by_name($this->input->post('subproject'));
+                $subproject_detail = $this->subproject_model->get_subproject_by_id($this->input->post('subproject'));
                 if(empty($subproject_detail)){
                     $message['error'] = "Purchase Order gagal dibuat. SubProject tidak ada dalam system.";
                     $this->show_table($message);
@@ -344,11 +344,30 @@ class Purchaseorder extends CI_Controller {
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
+            $data['purchaseorder'] = $user_info['purchase_order'];
 
             // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
+            $create=substr($data['purchaseorder'],0,1); 
+            $edit=substr($data['purchaseorder'],1,1); 
+            $delete=substr($data['purchaseorder'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
 
             // message
             $data['message'] = $message;
@@ -374,11 +393,30 @@ class Purchaseorder extends CI_Controller {
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
+            $data['purchaseorder'] = $user_info['purchase_order'];
 
             // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
+            $create=substr($data['purchaseorder'],0,1); 
+            $edit=substr($data['purchaseorder'],1,1); 
+            $delete=substr($data['purchaseorder'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
 
             // message
             $data['message'] = $message;
@@ -405,11 +443,30 @@ class Purchaseorder extends CI_Controller {
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
+            $data['purchaseorder'] = $user_info['purchase_order'];
 
             // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
+            $create=substr($data['purchaseorder'],0,1); 
+            $edit=substr($data['purchaseorder'],1,1); 
+            $delete=substr($data['purchaseorder'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
 
             // message
             $data['message'] = $message;
@@ -436,12 +493,30 @@ class Purchaseorder extends CI_Controller {
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
+            $data['purchaseorder'] = $user_info['purchase_order'];
 
             // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
+            $create=substr($data['purchaseorder'],0,1); 
+            $edit=substr($data['purchaseorder'],1,1); 
+            $delete=substr($data['purchaseorder'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
 
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
             // message
             $data['message'] = $message;
 
@@ -466,7 +541,7 @@ class Purchaseorder extends CI_Controller {
         $subproject = $this->purchaseorder_model->get_sub_project($project_id);
         $data .="<option value=''>-- Pilih Sub Project --</option>";
         foreach ($subproject as $sub) {
-            $data .="<option value='$sub[name]'>$sub[name]</option>";
+            $data .="<option value='$sub[id]'>$sub[name]</option>";
         }
 
         echo $data;

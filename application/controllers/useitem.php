@@ -251,12 +251,30 @@ class Useitem extends CI_Controller {
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
+            $data['useitem'] = $user_info['use_item'];
 
             // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
+            $create=substr($data['useitem'],0,1); 
+            $edit=substr($data['useitem'],1,1); 
+            $delete=substr($data['useitem'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
 
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
             // message
             $data['message'] = $message;
 
