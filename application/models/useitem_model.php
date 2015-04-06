@@ -175,8 +175,13 @@ class Useitem_model extends CI_Model {
                     'creation_date' => date("Y-m-d H:i:s")
                 );
                 $this->db->insert('transaction_usage_detail', $data);
-            }
 
+                $data = array(
+                    'item_count' => $each_usage_item['item_stock'] - $each_usage_item['item_usage']
+                );
+                $this->db->update('stock_master', $data);
+            }
+            
             // complete database transaction
             $this->db->trans_complete();
 
