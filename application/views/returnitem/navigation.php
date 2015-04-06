@@ -67,8 +67,7 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="#">Project</a></li>
-                        <li class="active"><span>Project Detail</span></li>
+                        <li class="active"><span>Pakai Barang</span></li>
                     </ul>
                 </div>
             </div>
@@ -115,7 +114,7 @@
                                 Pakai Barang
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="/returnitem">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
@@ -140,7 +139,7 @@
                                 <li><a href="/unit">Satuan</a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">

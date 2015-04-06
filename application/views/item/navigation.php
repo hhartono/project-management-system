@@ -115,6 +115,15 @@
                                 Pakai Barang
                             </a>
                         </li>
+                        <li>
+                            <a href="/returnitem">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-classic-hammer"></i>
+                                    </span>
+                                Return Barang
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="#">
                                 <!-- Icon Container -->

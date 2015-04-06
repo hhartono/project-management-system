@@ -1,5 +1,5 @@
 <?php
-class Useitem_model extends CI_Model {
+class Returnitem_model extends CI_Model {
     public function __construct()
     {
         $this->load->database();
@@ -148,10 +148,9 @@ class Useitem_model extends CI_Model {
     }
 
 
-    public function set_useitem_detail($database_input_array)
+    public function set_returnitem_detail($database_input_array)
     {
-        if($database_input_array['subproject_id'] !== false //&& $database_input_array['project_id'] !== false
-            && $database_input_array['worker_id'] !== false && $database_input_array['useitem_item_values'] !== false){
+        if($database_input_array['worker_id'] !== false && $database_input_array['returnitem_item_values'] !== false){
             date_default_timezone_set('Asia/Jakarta');
 
             // start database transaction
@@ -159,25 +158,23 @@ class Useitem_model extends CI_Model {
 
             // PART 1 - set PO main
             $data = array(
-                //'project_id' => $database_input_array['project_id'],
-                'subproject_id' => $database_input_array['subproject_id'],
                 'worker_id' => $database_input_array['worker_id']
             );
-            $this->db->insert('transaction_usage_main', $data);
+            $this->db->insert('transaction_return_main', $data);
 
             // PART 2 - set PO detail
-            $database_input_array['usage_id'] = $this->db->insert_id();
-            foreach($database_input_array['useitem_item_values'] as $each_usage_item){
+            $database_input_array['return_id'] = $this->db->insert_id();
+            foreach($database_input_array['returnitem_item_values'] as $each_usage_item){
                 $data = array(
-                    'usage_id' => $database_input_array['usage_id'],
+                    'return_id' => $database_input_array['return_id'],
                     'stock_id' => $each_usage_item['stock_id'],
-                    'item_count' => $each_usage_item['item_usage'],
+                    'return_count' => $each_usage_item['item_usage'],
                     'creation_date' => date("Y-m-d H:i:s")
                 );
-                $this->db->insert('transaction_usage_detail', $data);
+                $this->db->insert('transaction_return_detail', $data);
 
                 $data = array(
-                    'item_count' => $each_usage_item['item_stock'] - $each_usage_item['item_usage']
+                    'item_count' => $each_usage_item['item_stock'] + $each_usage_item['item_usage']
                 );
                 $stock_id = $each_usage_item['stock_id'];
                 $this->db->where('id', $stock_id);
