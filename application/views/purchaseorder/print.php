@@ -14,16 +14,18 @@
     $this->fpdf->AddPage();
 
     // Setting Font : String Family, String Style, Font size
-    $this->fpdf->SetFont('Times','',16);
+    $this->fpdf->SetFont('Times','',12);
 
     /* Kita akan membuat header dari halaman pdf yang kita buat
     ————– Header Halaman dimulai dari baris ini —————————–
     */
-    $this->fpdf->Cell(21,0.7,'',0,0,'C');
+    $this->fpdf->Cell(19,0.7,'P.O Reference     : '.$detail['reference'],0,0,'R');
+$this->fpdf->Ln();
+    $this->fpdf->Cell(19,0.7,'P.O Date : '.$detail['date'],0,0,'R');
     $this->fpdf->Image('assets/images/INERRE_Logo.png', 2,1,3,3.5);
     // fungsi Ln untuk membuat baris baru
     $this->fpdf->Ln();
-
+    $this->fpdf->SetFont('Times','',16);
     /* Setting ulang Font : String Family, String Style, Font size
     kenapa disetting ulang ???
     jika tidak disetting ulang, ukuran font akan mengikuti settingan sebelumnya.
@@ -48,7 +50,7 @@
     $this->fpdf->Ln(3);
     $this->fpdf->SetFont('Times','B',12);
    
-    $this->fpdf->Cell(10,1,'Supplier : '.$detail['name'].'',0,0,'L');
+    $this->fpdf->Cell(12,1,'Supplier : '.$detail['name'].'',0,0,'L');
     $this->fpdf->Cell(10,1,'Project : '.$detail['project'].'',0,0,'L');
     $this->fpdf->Ln();
     $this->fpdf->SetFont('Times','',12);

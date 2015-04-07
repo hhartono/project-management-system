@@ -197,7 +197,7 @@ class Purchaseorder_model extends CI_Model {
     }
 
     public function getpurchaseorder($id){
-        $this->db->select('supplier_master.*, project_master.name AS project, subproject_master.name AS subproject');
+        $this->db->select('supplier_master.*, project_master.name AS project, subproject_master.name AS subproject, transaction_po_main.po_reference_number AS reference, transaction_po_main.po_input_date AS date');
         $this->db->from('transaction_po_main');
         $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id');
         $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id');
