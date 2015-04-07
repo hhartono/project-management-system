@@ -9,6 +9,7 @@ class Projectdetail extends CI_Controller {
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->library('fpdf');
     //tser
     }
 
@@ -81,6 +82,17 @@ class Projectdetail extends CI_Controller {
         }else{
             redirect('login', 'refresh');
         }
+    }
+
+    public function cetak($idproject, $idsubproject)
+    {
+        define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+            //$idpj = $idproject;
+            $idspj = $idsubproject;
+            $data['detail'] = $this->detail_model->get_all_projectdetail($idspj);
+            $data['pro'] = $this->detail_model->getpro($idspj);
+        $this->load->view('projectdetail/print', $data);
+        
     }
 
     public function cari() {

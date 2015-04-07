@@ -6,10 +6,11 @@ class Purchaseorder_model extends CI_Model {
     }
 
     public function get_purchaseorder_by_id($id){
-        $this->db->select('transaction_po_main.*, supplier_master.name AS supplier, project_master.name AS project');
+        $this->db->select('transaction_po_main.*, supplier_master.name AS supplier, project_master.name AS project, subproject_master.name AS subproject');
         $this->db->from('transaction_po_main');
         $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id');
         $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id');
+        $this->db->join('subproject_master', 'subproject_master.project_id = project_master.id');
         $this->db->where('transaction_po_main.id', $id);
             $query = $this->db->get();
 
@@ -82,6 +83,70 @@ class Purchaseorder_model extends CI_Model {
 
             return $result_array;
         }
+        /*
+        $this->db->select('transaction_po_main.*, stock_master.item_price AS price, project_master.name AS project, supplier_master.name AS supplier, subproject_master.name AS subproject');
+        $this->db->from('transaction_po_main');
+        $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id','left');
+        $this->db->join('subproject_master', 'transaction_po_main.subproject_id = subproject_master.id','left');
+        $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id','left');
+        $this->db->join('transaction_po_detail', 'transaction_po_main.id = transaction_po_detail.po_id','left');
+        $this->db->join('stock_master', 'stock_master.po_detail_id = transaction_po_detail.id','left');
+        $this->db->distinct('transaction_po_detail.po_id');
+
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        if($result_array === false){
+            return false;
+        }else{
+            date_default_timezone_set('Asia/Jakarta');
+            $array_length = count($result_array);
+            for($walk = 0; $walk < $array_length; $walk++){
+                if(strtotime($result_array[$walk]['po_input_date']) <= 0){
+                    $result_array[$walk]['formatted_po_input_date'] = "";
+                }else{
+                    $result_array[$walk]['formatted_po_input_date'] = date("d-m-Y H:i", strtotime($result_array[$walk]['po_input_date']));
+                }
+
+                if(strtotime($result_array[$walk]['po_close_date']) <= 0){
+                    $result_array[$walk]['formatted_po_close_date'] = "";
+                }else{
+                    $result_array[$walk]['formatted_po_close_date'] = date("d-m-Y", strtotime($result_array[$walk]['po_close_date']));
+                }
+
+                if(strtotime($result_array[$walk]['po_input_date']) <= 0){
+                    $result_array[$walk]['sort_po_input_date'] = "";
+                }else{
+                    $result_array[$walk]['sort_po_input_date'] = strtotime($result_array[$walk]['po_input_date']);
+                }
+
+                $result_array[$walk]['print_label'] = false;
+            }
+
+            // check the print label status
+            $this->db->select('transaction_po_main.id AS po_id, barcode_master.print_status AS print_status');
+            $this->db->from('transaction_po_main');
+            $this->db->join('barcode_master', 'transaction_po_main.id = barcode_master.po_id');
+            $this->db->where('print_status', 0);
+            $this->db->or_where('print_status', 1);
+            $this->db->group_by('transaction_po_main.id');
+            $label_status_query = $this->db->get();
+
+            $label_status_result_array = $label_status_query->result_array();
+
+            // assigning the printed status
+            foreach($label_status_result_array as $each_label_print_status){
+                for($walk = 0; $walk < $array_length; $walk++){
+                    if($result_array[$walk]['id'] == $each_label_print_status['po_id']){
+                        $result_array[$walk]['print_label'] = true;
+                        break;
+                    }
+                }
+            }
+
+            return $result_array;
+        }
+        */
     }
 
     public function get_barcode_detail_by_po_id($po_id){
@@ -103,6 +168,45 @@ class Purchaseorder_model extends CI_Model {
 
         $result_array = $query->result_array();
         return $result_array;
+    }
+
+    public function get_purchaseorder_detail($id){
+        $this->db->select('transaction_po_detail.*, item_master.name AS item_name, unit_master.name AS unit_name');
+        $this->db->from('transaction_po_detail');
+        $this->db->join('item_master', 'transaction_po_detail.item_id = item_master.id');
+        $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
+        
+        $this->db->where('po_id', $id);
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_purchaseorder_details($id){
+        $this->db->select('transaction_po_detail.*, item_master.name AS item_name, unit_master.name AS unit_name');
+        $this->db->from('transaction_po_detail');
+        $this->db->join('item_master', 'transaction_po_detail.item_id = item_master.id');
+        $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
+        
+        $this->db->where('po_id', $id);
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function getpurchaseorder($id){
+        $this->db->select('supplier_master.name AS supplier, project_master.name AS project, subproject_master.name AS subproject');
+        $this->db->from('transaction_po_main');
+        $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id');
+        $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id');
+        $this->db->join('subproject_master', 'subproject_master.project_id = project_master.id');
+        $this->db->where('transaction_po_main.id', $id);
+            $query = $this->db->get();
+
+        $row_array = $query->row_array();
+        return $row_array;
     }
 
     public function update_unit()

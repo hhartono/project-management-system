@@ -94,7 +94,7 @@
                                                     </td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
-                                                            <a class="da-purchaseorder-view-dialog" href="#" data-value="<?php echo $each_purchaseorder['id']; ?>"><i class="icol-eye"></i></a>
+                                                            <a class="da-purchaseorder-view-dialog" href="<?php echo base_url(); ?>purchaseorder/detail/<?php echo $each_purchaseorder['id']; ?>"><i class="icol-eye"></i></a>
                                                             <?php if(isset($access['delete']) && $access['delete']):
                                                                 $po_id = $each_purchaseorder['id'];
                                                                 $delete_url = "/purchaseorder/deletepo/" . $po_id;

@@ -105,6 +105,12 @@
                                                 <input id="purchaseorder-receive-detail-project" type="text" name="project" value="<?php echo $purchaseorder_main['project']; ?>" readonly>
                                             </div>
                                         </div>
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Sub Project</label>
+                                            <div class="da-form-item large">
+                                                <input id="purchaseorder-receive-detail-subproject" type="text" name="subproject" value="<?php echo $purchaseorder_main['subproject']; ?>" readonly>
+                                            </div>
+                                        </div>
                                         <div class="da-form-row" style="text-align:center;">
                                             <input id="da-purchaseorder-receive-submit-item-values" type="hidden" name="po_received_item_values">
                                             <button id="da-purchaseorder-receive-submit" class="btn btn-success">Terima Barang</button>

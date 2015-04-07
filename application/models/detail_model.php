@@ -100,7 +100,7 @@ class Detail_model extends CI_Model {
 
     public function getpro($idsubproject)
     {
-        $this->db->select('subproject_master.name AS name, subproject_master.id AS id, project_master.name AS project');
+        $this->db->select('subproject_master.name AS name, subproject_master.id AS id, project_master.name AS project, project_master.id AS projectid');
         $this->db->from('project_master');
         $this->db->join('subproject_master', 'project_master.id = subproject_master.project_id', 'left');
         $this->db->where('subproject_master.id', $idsubproject);

@@ -33,6 +33,7 @@ class Purchaseorder extends CI_Controller {
         $this->load->model('login_model');
         $this->load->helper('cookie');
         $this->load->helper('url');
+        $this->load->library('fpdf');
     }
 
 	public function index()
@@ -562,6 +563,44 @@ class Purchaseorder extends CI_Controller {
         }
 
         echo $data;
+    }
+
+    public function detail($id){
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+            // get necessary data
+        $data['detail'] = $this->purchaseorder_model->getpurchaseorder($id);
+        $data['po'] = $this->purchaseorder_model->get_purchaseorder_detail($id);
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/detail', $data);
+        $this->load->view('purchaseorder/footer');
+        }else{
+            redirect('login', 'refresh');
+        }
+    }
+
+    public function cetak($id)
+    {
+        define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+            //$idpj = $idproject;
+        $data['detail'] = $this->purchaseorder_model->getpurchaseorder($id);
+        $data['po'] = $this->purchaseorder_model->get_purchaseorder_detail($id);
+        $this->load->view('purchaseorder/print', $data);
+        
     }
 }
 

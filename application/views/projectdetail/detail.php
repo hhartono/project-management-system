@@ -30,6 +30,10 @@
                                     </span></tr>
                         </table>
                     <?php endforeach?>
+                    <p align="right"><?php foreach($pro as $pro): ?>
+                        <a class="btn" href="/projectdetail/cetak/<?php echo $pro['projectid']; ?>/<?php echo $pro['id'] ; ?>" cls='btn' >
+   <i class='icon-print'></i>Cetak </a>
+   <?php endforeach?></p>
                     </div>
                     <?php if(isset($message['success'])): ?>
                         <div class="da-message success"><?php echo $message['success']; ?></div>
@@ -91,6 +95,7 @@
                                 <td style=background:#c6d2ff; colspan="6">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah ;?></td>
                         </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>

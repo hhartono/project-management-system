@@ -232,12 +232,12 @@ class Returnitem extends CI_Controller {
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
-            $data['useitem'] = $user_info['use_item'];
+            $data['returnitem'] = $user_info['returnitem'];
 
             // access level
-            $create=substr($data['useitem'],0,1); 
-            $edit=substr($data['useitem'],1,1); 
-            $delete=substr($data['useitem'],2,1); 
+            $create=substr($data['returnitem'],0,1); 
+            $edit=substr($data['returnitem'],1,1); 
+            $delete=substr($data['returnitem'],2,1); 
             
             if($create != 0){
                 $data['access']['create'] = true;            
