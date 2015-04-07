@@ -14,7 +14,7 @@
     $this->fpdf->AddPage();
 
     // Setting Font : String Family, String Style, Font size
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Times','',16);
 
     /* Kita akan membuat header dari halaman pdf yang kita buat
     ————– Header Halaman dimulai dari baris ini —————————–
@@ -40,20 +40,30 @@
     $this->fpdf->Cell(21,0.5,'PURCHASE ORDER',0,0,'C');
 
     /* Fungsi Line untuk membuat garis */
-    $this->fpdf->Line(1,5,29,5);
-    $this->fpdf->Line(1,5.05,29,5.05);
+    $this->fpdf->Line(1,5,20,5);
+    $this->fpdf->Line(1,5.05,20,5.05);
 
     /* ————– Header Halaman selesai ————————————————*/
 
     $this->fpdf->Ln(3);
     $this->fpdf->SetFont('Times','B',12);
    
-    $this->fpdf->Cell(10.5,1,'Nama Supplier   : '.$detail['supplier'].'',0,0,'L');
+    $this->fpdf->Cell(10,1,'Supplier : '.$detail['name'].'',0,0,'L');
+    $this->fpdf->Cell(10,1,'Project : '.$detail['project'].'',0,0,'L');
+    $this->fpdf->Ln();
+    $this->fpdf->SetFont('Times','',12);
+    $this->fpdf->Cell(10,1,$detail['address'],0,0,'L');
+    $this->fpdf->Ln();
+    $this->fpdf->Cell(10,1,$detail['city'].', '. $detail['province'].' '. $detail['postal_code'],0,0,'L');
+    $this->fpdf->Ln(2);
+    $this->fpdf->Cell(10,1,'Phone : '.$detail['phone_number_1'].', '.$detail['phone_number_2'],0,0,'L');
+    $this->fpdf->Ln();
+    $this->fpdf->Cell(10,1,'e-mail : '.$detail['email'].'',0,0,'L');
     $this->fpdf->Ln(1);
-    $this->fpdf->Cell(10.5,1,'Nama Project     : '.$detail['project'].'',0,0,'L');
+    
    
     /* setting header table */
-    $this->fpdf->Ln(3);
+    $this->fpdf->Ln(2);
     $this->fpdf->SetFont('Times','B',12);
     $this->fpdf->Cell(10 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(5 , 1, 'Jumlah Dipesan' , 1, 'LR', 'C');
