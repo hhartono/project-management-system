@@ -10,7 +10,7 @@
                    
                         <table>
                                     <tr><td><span class="da-panel-title">
-                                        <i class="icol-table"></i><b> Nama Supplier</b></td><td> :</td><td><?php echo $detail['supplier']; ?></td>
+                                        <i class="icol-table"></i><b> Nama Supplier</b></td><td> :</td><td><?php echo $detail['name']; ?></td>
                                     </span></tr>
                                     <tr><td><span class="da-panel-title">
                                         <i class="icol-table"></i><b> Nama Project</b></td><td> :</td><td><?php echo $detail['project']; ?></td>

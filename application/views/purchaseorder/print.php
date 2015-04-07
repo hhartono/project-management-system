@@ -39,7 +39,7 @@ $this->fpdf->Ln();
 
     $this->fpdf->Ln();
     $this->fpdf->Ln();
-    $this->fpdf->Cell(21,0.5,'PURCHASE ORDER',0,0,'C');
+    $this->fpdf->Cell(19,0.5,'PURCHASE ORDER',0,0,'C');
 
     /* Fungsi Line untuk membuat garis */
     $this->fpdf->Line(1,5,20,5);
