@@ -30,10 +30,14 @@
                                     </span></tr>
                         </table>
                     <?php endforeach?>
-                    <p align="right"><?php foreach($pro as $pro): ?>
-                        <a class="btn" href="/projectdetail/cetak/<?php echo $pro['projectid']; ?>/<?php echo $pro['id'] ; ?>" cls='btn' >
-   <i class='icon-print'></i>Cetak </a>
-   <?php endforeach?></p>
+                    <div class="row-fluid">
+                        <div class="span12" >
+                            <?php foreach($pro as $pro): ?>
+                                <a class="btn btn-success btn-create" href="/projectdetail/cetak/<?php echo $pro['projectid']; ?>/<?php echo $pro['id'] ; ?>" cls='btn' >
+                                <i class='icon-print'></i>Cetak </a>
+                            <?php endforeach?>
+                        </div>
+                    </div>
                     </div>
                     <?php if(isset($message['success'])): ?>
                         <div class="da-message success"><?php echo $message['success']; ?></div>

@@ -82,7 +82,7 @@ class Useitem extends CI_Controller {
                         $database_input_array['subproject_id'] = $subproject_detail['id'];
                     }
 
-                    $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker_id'));
+                    $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker'));
                     if(empty($worker_detail)){
                         $message['error'] = "Useitem gagal dibuat. Worker tidak ada dalam system.";
                         $this->show_table($message);

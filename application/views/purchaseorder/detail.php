@@ -2,7 +2,14 @@
 <div id="da-content-wrap" class="clearfix">
     <!-- Content Area -->
     <div id="da-content-area">
-        
+        <div class="row-fluid">
+                            <div class="span12" >
+                                <?php foreach($po as $purchaseorder): ?>
+                                     <a class="btn btn-success btn-create" href="/purchaseorder/cetak/<?php echo $purchaseorder['po_id']; ?>" >
+                                    <i class='icon-print'></i>Cetak </a>
+                                <?php endforeach?>
+                            </div>
+                    </div>
         <div class="row-fluid">
             <div class="span12">
                 <div class="da-panel">
@@ -17,10 +24,6 @@
                                     </span></tr>
                         </table>
                         
-                    <p align="right"><?php foreach($po as $purchaseorder): ?>
-                        <a class="btn" href="/purchaseorder/cetak/<?php echo $purchaseorder['po_id']; ?>" cls='btn' >
-   <i class='icon-print'></i>Cetak </a>
-   <?php endforeach?></p>
                     </div>
                     <?php if(isset($message['success'])): ?>
                         <div class="da-message success"><?php echo $message['success']; ?></div>

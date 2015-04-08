@@ -25,7 +25,7 @@ class Purchaseorder_model extends CI_Model {
 
     public function get_all_purchaseorders()
     {
-        $this->db->select('transaction_po_main.*, project_master.name AS project, supplier_master.name AS supplier, subproject_master.name AS subproject');
+        /*$this->db->select('transaction_po_main.*, project_master.name AS project, supplier_master.name AS supplier, subproject_master.name AS subproject');
         $this->db->from('transaction_po_main');
         $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id','left');
         $this->db->join('subproject_master', 'transaction_po_main.subproject_id = subproject_master.id','left');
@@ -82,9 +82,9 @@ class Purchaseorder_model extends CI_Model {
             }
 
             return $result_array;
-        }
-        /*
-        $this->db->select('transaction_po_main.*, stock_master.item_price AS price, project_master.name AS project, supplier_master.name AS supplier, subproject_master.name AS subproject');
+        }*/
+        
+        $this->db->select('transaction_po_main.*, stock_master.item_price AS item_price, stock_master.id AS stockid, project_master.name AS project, supplier_master.name AS supplier, subproject_master.name AS subproject');
         $this->db->from('transaction_po_main');
         $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id','left');
         $this->db->join('subproject_master', 'transaction_po_main.subproject_id = subproject_master.id','left');
@@ -146,7 +146,7 @@ class Purchaseorder_model extends CI_Model {
 
             return $result_array;
         }
-        */
+        
     }
 
     public function get_barcode_detail_by_po_id($po_id){
@@ -163,10 +163,23 @@ class Purchaseorder_model extends CI_Model {
         $this->db->select('transaction_po_detail.*, item_master.name AS item_name');
         $this->db->from('transaction_po_detail');
         $this->db->join('item_master', 'transaction_po_detail.item_id = item_master.id');
+        //$this->db->join('stock_master', 'stock_master.item_id = item_master.id'); 
         $this->db->where('po_id', $po_id);
         $query = $this->db->get();
 
         $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_purchaseorder_detail_by_stock_id($po_id){
+        $this->db->select('transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price');
+        $this->db->from('transaction_po_detail');
+        $this->db->join('item_master', 'transaction_po_detail.item_id = item_master.id');
+        $this->db->join('stock_master', 'stock_master.item_id = item_master.id'); 
+        $this->db->where('po_id', $po_id);
+        $query = $this->db->get();
+
+        $result_array = $query->row();
         return $result_array;
     }
 
@@ -445,6 +458,22 @@ class Purchaseorder_model extends CI_Model {
             return $result->result_array();
         }else{
             return array();
+        }
+    }
+
+    public function update_itemprice($database_input_array)
+    {
+        if($database_input_array['id'] !== false && $database_input_array['item_price'] !== false){
+            date_default_timezone_set('Asia/Jakarta');
+
+            $data = array(
+                'item_price' => $database_input_array['item_price'],
+            );
+
+            $this->db->where('id', $this->input->post('id'));
+            return $this->db->update('stock_master', $data);
+        }else{
+            return false;
         }
     }
 }

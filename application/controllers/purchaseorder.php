@@ -602,6 +602,62 @@ class Purchaseorder extends CI_Controller {
         $this->load->view('purchaseorder/print', $data);
         
     }
+
+    public function update_price($po_id)
+    {
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+            // get necessary data
+            $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_stock_id($po_id);
+            $data['purchaseorder_main'] = $this->purchaseorder_model->get_purchaseorder_by_id($po_id);
+
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/item_price', $data);
+            $this->load->view('purchaseorder/footer');;
+        }else{
+            redirect('login', 'refresh');
+        }
+    }
+
+    public function update_itemprice(){
+        // check all necessary input
+        if(!empty($this->input->post('id')) && !empty($this->input->post('item_price'))){
+
+            // search for project id
+            $database_input_array = array();
+            
+            $database_input_array['id'] = $this->input->post('id');
+            $database_input_array['item_price'] = $this->input->post('item_price');
+
+            // store project information
+            $response = $this->purchaseorder_model->update_itemprice($database_input_array);
+
+            if($response){
+                $message['success'] = "Item Price berhasil diubah.";
+                $this->show_table($message);
+            }else{
+                $message['error'] = "Item Price gagal diubah.";
+                $this->show_table($message);
+            }
+        }else{
+            $message['error'] = "Item Price gagal diubah.";
+            $this->show_table($message);
+        }
+    }
 }
 
 /* End of file purchaseorder.php */
