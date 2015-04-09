@@ -172,13 +172,9 @@ class Purchaseorder_model extends CI_Model {
     }
 
     public function get_purchaseorder_detail_by_stock_id($po_id){
-        $this->db->select('transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price');
-        $this->db->from('transaction_po_detail');
-        $this->db->join('item_master', 'transaction_po_detail.item_id = item_master.id');
-        $this->db->join('stock_master', 'stock_master.item_id = item_master.id'); 
-        $this->db->where('po_id', $po_id);
-        $query = $this->db->get();
-
+        $query = $this->db->query("select transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price
+                                    from transaction_po_detail, item_master, stock_master
+                                    where transaction_po_detail.item_id = item_master.id AND transaction_po_detail.id = stock_master.po_detail_id AND po_id = $po_id");
         $result_array = $query->row();
         return $result_array;
     }
