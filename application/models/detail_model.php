@@ -109,6 +109,17 @@ class Detail_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function getproj($idsubproject)
+    {
+        $this->db->select('subproject_master.name AS name, subproject_master.id AS id, project_master.name AS project, project_master.id AS projectid');
+        $this->db->from('project_master');
+        $this->db->join('subproject_master', 'project_master.id = subproject_master.project_id', 'left');
+        $this->db->where('subproject_master.id', $idsubproject);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function caridata()
     {
         $c = $this->input->POST ('cari');

@@ -84,6 +84,7 @@ class Stock_model extends CI_Model {
                 'item_price' => $database_input_array['item_price'],
                 'item_count' => $database_input_array['item_count'],
                 'stock_awal' => $database_input_array['item_count'],
+                'user_id' => $database_input_array['user'],
                 'item_stock_code' => $database_input_array['item_stock_code'],
                 'received_date' => date("Y-m-d H:i:s")
             );

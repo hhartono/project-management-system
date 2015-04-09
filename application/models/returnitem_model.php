@@ -158,7 +158,8 @@ class Returnitem_model extends CI_Model {
 
             // PART 1 - set PO main
             $data = array(
-                'worker_id' => $database_input_array['worker_id']
+                'worker_id' => $database_input_array['worker_id'],
+                'user_id' => $database_input_array['user']
             );
             $this->db->insert('transaction_return_main', $data);
 

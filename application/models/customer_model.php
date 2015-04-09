@@ -79,7 +79,8 @@ class Customer_model extends CI_Model {
                 'phone_number_3' => $this->input->post('phone_number_3'),
                 'fax' => $this->input->post('fax'),
                 'email' => $this->input->post('email'),
-                'creation_date' => date("Y-m-d H:i:s"),
+                'user_id' => $this->input->post('user'),
+                'creation_date' => date("Y-m-d H:i:s")
             );
 
             return $this->db->insert('customer_master', $data);

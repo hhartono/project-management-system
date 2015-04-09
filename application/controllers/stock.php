@@ -86,6 +86,8 @@ class Stock extends CI_Controller {
             // item count
             $database_input_array['item_count'] = $this->input->post('item_count');
 
+            $database_input_array['user'] = $this->input->post('user');
+
             // generate item stock code
             $this->load->helper('stock_code_helper');
             $generated_stock_code = stock_code_generator($database_input_array['category_id'], $database_input_array['supplier_id']);
@@ -263,6 +265,7 @@ class Stock extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['stock'] = $user_info['stock_item'];

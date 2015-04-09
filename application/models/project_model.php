@@ -142,6 +142,7 @@ class Project_model extends CI_Model {
                 'name' => $database_input_array['name'],
                 'address' => $database_input_array['address'],
                 'notes' => $database_input_array['notes'],
+                'user_id' => $database_input_array['user'],
                 'start_date' => $database_input_array['start_date'],
                 'creation_date' => date("Y-m-d H:i:s")
             );

@@ -72,6 +72,7 @@ class Supplier_model extends CI_Model {
                 'fax' => $this->input->post('fax'),
                 'email' => $this->input->post('email'),
                 'website' => $this->input->post('website'),
+                'user_id' => $this->input->post('user'),
                 'creation_date' => date("Y-m-d H:i:s"),
             );
 

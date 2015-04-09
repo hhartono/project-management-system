@@ -2,7 +2,14 @@
 <div id="da-content-wrap" class="clearfix">
     <!-- Content Area -->
     <div id="da-content-area">
-        
+        <div class="row-fluid">
+                        <div class="span12" >
+                            <?php foreach($proj as $proj): ?>
+                                <a class="btn btn-success btn-create" href="/projectdetail/cetak/<?php echo $proj['projectid']; ?>/<?php echo $proj['id'] ; ?>" cls='btn' >
+                                <i class='icon-print'></i>&nbsp; Cetak </a>
+                            <?php endforeach?>
+                        </div>
+                    </div>
         <div class="row-fluid">
             <div class="span12">
                 <div class="da-panel">
@@ -30,14 +37,7 @@
                                     </span></tr>
                         </table>
                     <?php endforeach?>
-                    <div class="row-fluid">
-                        <div class="span12" >
-                            <?php foreach($pro as $pro): ?>
-                                <a class="btn btn-success btn-create" href="/projectdetail/cetak/<?php echo $pro['projectid']; ?>/<?php echo $pro['id'] ; ?>" cls='btn' >
-                                <i class='icon-print'></i>Cetak </a>
-                            <?php endforeach?>
-                        </div>
-                    </div>
+                    
                     </div>
                     <?php if(isset($message['success'])): ?>
                         <div class="da-message success"><?php echo $message['success']; ?></div>

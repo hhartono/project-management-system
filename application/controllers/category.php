@@ -37,7 +37,7 @@ class Category extends CI_Controller {
         if($this->input->post('prefix')){
             // check if there is any duplicate
             $duplicate_check = $this->category_model->get_category_by_prefix($this->input->post('prefix'));
-
+            
             if(empty($duplicate_check)){
                 $response = $this->category_model->set_category();
 
@@ -95,6 +95,7 @@ class Category extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['category'] = $user_info['category_item'];

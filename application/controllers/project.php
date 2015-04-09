@@ -65,6 +65,8 @@ class Project extends CI_Controller {
             // get the project address
             $database_input_array['address'] = $this->input->post('address');
 
+            $database_input_array['user'] = $this->input->post('user');
+
             // get the project notes
             $database_input_array['notes'] = $this->input->post('notes');
 
@@ -252,6 +254,7 @@ class Project extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['project'] = $user_info['project'];

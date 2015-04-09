@@ -74,6 +74,7 @@ class Projectdetail extends CI_Controller {
             $idspj = $idsubproject;
             $data['detail'] = $this->detail_model->get_all_projectdetail($idspj);
             $data['pro'] = $this->detail_model->getpro($idspj);
+            $data['proj'] = $this->detail_model->getproj($idspj);
 
             $this->load->view('header');
             $this->load->view('projectdetail/navigation', $data);

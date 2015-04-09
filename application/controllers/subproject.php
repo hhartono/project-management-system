@@ -61,6 +61,8 @@ class Subproject extends CI_Controller {
             // get the subproject name
             $database_input_array['name'] = $this->input->post('name');
 
+            $database_input_array['user'] = $this->input->post('user');
+
             // get the project notes
             $database_input_array['notes'] = $this->input->post('notes');
 
@@ -198,6 +200,7 @@ class Subproject extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['subproject'] = $user_info['subproject'];

@@ -193,6 +193,7 @@
                                         <input type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
+                                <input type="hidden" value="<?php echo $userid; ?>" name="user">
                             </div>
                         </form>
                     </div>

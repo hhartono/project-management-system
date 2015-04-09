@@ -48,6 +48,7 @@ class Unit_model extends CI_Model {
                 'abbreviation' => $this->input->post('abbreviation'),
                 'name' => $this->input->post('name'),
                 'notes' => $this->input->post('notes'),
+                'user_id' => $this->input->post('user'),
                 'creation_date' => date("Y-m-d H:i:s")
             );
 

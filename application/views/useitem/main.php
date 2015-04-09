@@ -88,6 +88,7 @@
                                                 <input id="useitem-create-worker" type="text" name="worker">
                                             </div>
                                         </div>
+                                        <input type="hidden" value="<?php echo $userid; ?>" name="user">
                                         <div class="da-form-row" style="text-align:center;">
                                             <input id="da-useitem-submit-item-values" type="hidden" name="useitem_item_values">
                                             <button id="da-useitem-submit" class="btn btn-success">Pakai Barang</button>

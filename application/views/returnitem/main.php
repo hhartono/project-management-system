@@ -67,6 +67,7 @@
                                                 <input id="returnitem-create-worker" type="text" name="worker">
                                             </div>
                                         </div>
+                                        <input type="hidden" value="<?php echo $userid; ?>" name="user">
                                         <div class="da-form-row" style="text-align:center;">
                                             <input id="da-returnitem-submit-item-values" type="hidden" name="returnitem_item_values">
                                             <button id="da-returnitem-submit" class="btn btn-success">Kembalikan Barang</button>

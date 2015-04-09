@@ -28,16 +28,6 @@
                                                 <th>Jumlah Dipesan</th>
                                                 <th>Jumlah Sudah Diterima</th>
                                                 <th>Harga per Unit</th>
-                                                <th>Keterangan</th>
-                                                <?php if ((isset($access['delete']) && $access['delete'])): ?>
-                                                    <?php
-                                                        $control_label_array = array();
-                                                        if(isset($access['delete']) && $access['delete']){
-                                                            $control_label_array[] = "Hapus";
-                                                        }
-                                                    ?>
-                                                    <th><?php echo implode('/', $control_label_array); ?></th>
-                                                <?php endif; ?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -52,18 +42,17 @@
                                                     <td class="quantity-order-row" name="quantity_ordered"><?php echo $purchaseorder_details->quantity; ?></td>
                                                     <td class="quantity-already-received-row" name="quantity_already_received"><?php echo $purchaseorder_details->quantity_received; ?></td>
                                                     <td class="price-row" name="item_price">
-                                                        <input name="item_price" type="text" class="span6" value="<?php echo $purchaseorder_details->item_price; ?>">                                                        
-                                                    </td>
-                                                    <td class="notes-row"><?php echo $purchaseorder_details->notes; ?></td>
-                                                    
+                                                        <input name="item_price" type="text" class="span6" value="<?php echo '0'; ?>">                                                        
+                                                    </td>                                                    
                                                 </tr>
                                                 
-                                            <?php //endforeach?>
-<input type="button" value="Update" class="btn btn-success">
-                                            </form>
+                                            <?php echo $purchaseorder_details->stockid;//endforeach?>
+
                                 </div>                                
                                         </tbody>
                                     </table>
+                                    <input type="submit" value="Update" class="btn btn-success">
+                                            </form>
                                 </div>
                             </div>
                         </div>

@@ -112,10 +112,10 @@ $this->fpdf->Cell(4 , 0.7, $jumlah, 1, 'LR', 'L');
     $this->fpdf->SetFont('Times','',10);
 
     /* setting cell untuk waktu pencetakan */
-    $this->fpdf->Cell(9.5, 0.5, 'Printed on : '.date('d/m/Y H:i'));
+    //$this->fpdf->Cell(9.5, 0.5, 'Printed on : '.date('d/m/Y H:i'));
 
     /* setting cell untuk page number */
-    $this->fpdf->Cell(18, 0.5, 'Page '.$this->fpdf->PageNo().'/{nb}',0,0,'R');
+    //$this->fpdf->Cell(18, 0.5, 'Page '.$this->fpdf->PageNo().'/{nb}',0,0,'R');
 
     /* generate pdf jika semua konstruktor, data yang akan ditampilkan, dll sudah selesai */
     $this->fpdf->Output("project_detail.pdf","I");

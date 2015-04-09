@@ -107,6 +107,7 @@ class Item extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['item'] = $user_info['item'];

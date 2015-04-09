@@ -6,7 +6,7 @@
                             <div class="span12" >
                                 <?php foreach($po as $purchaseorder): ?>
                                      <a class="btn btn-success btn-create" href="/purchaseorder/cetak/<?php echo $purchaseorder['po_id']; ?>" >
-                                    <i class='icon-print'></i>Cetak </a>
+                                    <i class='icon-print'></i>&nbsp; Cetak </a>
                                 <?php endforeach?>
                             </div>
                     </div>

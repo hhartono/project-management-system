@@ -233,6 +233,7 @@
                                         <input type="text" name="email" autocomplete="off">
                                     </div>
                                 </div>
+                                <input type="hidden" value="<?php echo $userid; ?>" name="user">
                             </div>
                         </form>
                     </div>

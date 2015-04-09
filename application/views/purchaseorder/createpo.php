@@ -120,6 +120,7 @@
                                                 </select>    
                                             </div>
                                         </div>
+                                        <input type="hidden" value="<?php echo $userid; ?>" name="user">
                                         <div class="da-form-row" style="text-align:center;">
                                             <input id="da-purchaseorder-createpo-submit-item-values" type="hidden" name="po_item_values">
                                             <button id="da-purchaseorder-createpo-submit" class="btn btn-success">Buat PO</button>
@@ -154,6 +155,7 @@
                                         <input type="text" name="notes" autocomplete="off">
                                     </div>
                                 </div>
+
                             </div>
                         </form>
                     </div>

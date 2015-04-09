@@ -47,6 +47,7 @@ class Purchaseorder extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
 
@@ -236,6 +237,8 @@ class Purchaseorder extends CI_Controller {
                     $database_input_array['supplier_id'] = $supplier_detail['id'];
                 }
 
+                $database_input_array['user'] = $this->input->post('user');
+
                 // input all po item values
                 $database_input_array['po_item_values'] = $po_item_values;
 
@@ -343,6 +346,7 @@ class Purchaseorder extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['purchaseorder'] = $user_info['purchase_order'];

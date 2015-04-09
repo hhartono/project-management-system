@@ -14,6 +14,7 @@ class Login_model extends CI_Model {
     public function get_user_info($user_id){
         $query = $this->db->get_where('user_master', array('id' => $user_id));
         $result = $query->row_array();
+        $return_value['id'] = !empty($result['id']) ? $result['id'] : '';
         $return_value['name'] = !empty($result['name']) ? $result['name'] : 'Guest';
         $return_value['title'] = !empty($result['title']) ? $result['title'] : '';
         $return_value['project'] = !empty($result['project']) ? $result['project'] : '';

@@ -161,7 +161,8 @@ class Useitem_model extends CI_Model {
             $data = array(
                 //'project_id' => $database_input_array['project_id'],
                 'subproject_id' => $database_input_array['subproject_id'],
-                'worker_id' => $database_input_array['worker_id']
+                'worker_id' => $database_input_array['worker_id'],
+                'user_id' => $database_input_array['user']
             );
             $this->db->insert('transaction_usage_main', $data);
 

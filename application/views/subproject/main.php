@@ -122,6 +122,7 @@
                         <form id="da-subproject-create-form-val" class="da-form" action="/subproject/create_subproject" method="post">
                             <div id="da-subproject-create-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
+                            <input type="hidden" value="<?php echo $userid; ?>" name="user">
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Project</label>
                                     <div class="da-form-item large">

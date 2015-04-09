@@ -48,6 +48,7 @@ class Category_model extends CI_Model {
                 'prefix' => strtoupper($this->input->post('prefix')),
                 'name' => $this->input->post('name'),
                 'notes' => $this->input->post('notes'),
+                'user_id' => $this->input->post('user'),
                 'creation_date' => date("Y-m-d H:i:s")
             );
 

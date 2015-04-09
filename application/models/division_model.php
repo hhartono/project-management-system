@@ -48,6 +48,7 @@ class Division_model extends CI_Model {
                 'division_code' => strtoupper($this->input->post('division_code')),
                 'name' => $this->input->post('name'),
                 'notes' => $this->input->post('notes'),
+                'user_id' => $this->input->post('user'),
                 'creation_date' => date("Y-m-d H:i:s")
             );
 

@@ -91,6 +91,8 @@ class Useitem extends CI_Controller {
                         $database_input_array['worker_id'] = $worker_detail['id'];
                     }
 
+                    $database_input_array['user'] = $this->input->post('user');
+
                     // input all po item values
                     $database_input_array['useitem_item_values'] = $useitem_item_values;
 
@@ -249,6 +251,7 @@ class Useitem extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['useitem'] = $user_info['use_item'];

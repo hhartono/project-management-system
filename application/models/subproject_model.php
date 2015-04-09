@@ -113,6 +113,7 @@ class Subproject_model extends CI_Model {
                 'subproject_code' => $database_input_array['subproject_code'],
                 'name' => $database_input_array['name'],
                 'notes' => $database_input_array['notes'],
+                'user_id' => $database_input_array['user'],
                 'creation_date' => date("Y-m-d H:i:s")
             );
 

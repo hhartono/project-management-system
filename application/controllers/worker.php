@@ -91,6 +91,8 @@ class Worker extends CI_Controller {
                 // notes
                 $database_input_array['notes'] = $this->input->post('notes');
 
+                $database_input_array['user'] = $this->input->post('user');
+
                 // store worker information
                 $response = $this->worker_model->set_worker($database_input_array);
 
@@ -201,6 +203,7 @@ class Worker extends CI_Controller {
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $data['worker'] = $user_info['worker'];

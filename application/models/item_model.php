@@ -56,6 +56,7 @@ class Item_model extends CI_Model {
                 'unit_id' => $this->input->post('unit_id'),
                 'category_id' => $this->input->post('category_id'),
                 'notes' => $this->input->post('notes'),
+                'user_id' => $this->input->post('user'),
                 'creation_date' => date("Y-m-d H:i:s")
             );
 

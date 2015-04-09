@@ -361,6 +361,7 @@ class Purchaseorder_model extends CI_Model {
                 'supplier_id' => $database_input_array['supplier_id'],
                 'project_id' => $database_input_array['project_id'],
                 'subproject_id' => $database_input_array['subproject_id'],
+                'user_id_po_input' => $database_input_array['user'],
                 'po_input_date' => date("Y-m-d H:i:s")
             );
             $this->db->insert('transaction_po_main', $data);
@@ -372,7 +373,7 @@ class Purchaseorder_model extends CI_Model {
                     'po_id' => $database_input_array['po_id'],
                     'item_id' => $each_po_item['item_id'],
                     'quantity' => $each_po_item['item_count'],
-                    'notes' => $each_po_item['item_notes'],
+                    'notes' => $each_po_item['item_notes'],                                        
                     'creation_date' => date("Y-m-d H:i:s")
                 );
                 $this->db->insert('transaction_po_detail', $data);

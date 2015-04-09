@@ -183,6 +183,7 @@
                                         <input id="stock-create-item-price" type="text" name="item_price" autocomplete="off">
                                     </div>
                                 </div>
+                                <input type="hidden" value="<?php echo $userid; ?>" name="user">
                             </div>
                         </form>
                     </div>

@@ -245,6 +245,7 @@
                                         <input type="text" name="website" autocomplete="off">
                                     </div>
                                 </div>
+                                <input type="hidden" value="<?php echo $userid; ?>" name="user">
                             </div>
                         </form>
                     </div>

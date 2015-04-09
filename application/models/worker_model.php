@@ -86,6 +86,7 @@ class Worker_model extends CI_Model {
                 'join_date' => $database_input_array['join_date'],
                 'salary' => $database_input_array['salary'],
                 'notes' => $database_input_array['notes'],
+                'user_id' => $database_input_array['user'],
                 'creation_date' => date("Y-m-d H:i:s")
             );
 
