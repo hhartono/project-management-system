@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" media="screen">
 
     <!-- Plugin Stylesheet -->
+    <link rel="stylesheet" href="/assets/libs/multiple­-select.css"/>
 
     <!-- Theme Stylesheet -->
     <link rel="stylesheet" href="/assets/css/dandelion.theme.css" media="screen">
@@ -26,3 +27,5 @@
     <link rel="stylesheet" href="/assets/css/demo.css" media="screen">
     <!-- User Defined -->
     <link rel="stylesheet" href="/assets/css/general.css" media="screen">
+
+    
