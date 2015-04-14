@@ -168,6 +168,15 @@
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="/absensi">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-edit"></i>
+                                    </span>
+                                Absensi
+                            </a>
+                        </li>
 
                         <!--
                         <li>

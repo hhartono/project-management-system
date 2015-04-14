@@ -67,8 +67,7 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="#">Barang</a></li>
-                        <li class="active"><span>Kategori Barang</span></li>
+                        <li class="active"><span>Absensi</span></li>
                     </ul>
                 </div>
             </div>
@@ -124,7 +123,7 @@
                                 Return Barang
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">
@@ -167,6 +166,15 @@
                                 <li><a href="/worker">Tukang</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
+                        </li>
+                        <li class="active">
+                            <a href="/absensi">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-edit"></i>
+                                    </span>
+                                Absensi
+                            </a>
                         </li>
 
                         <!--
