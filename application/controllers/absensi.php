@@ -78,12 +78,14 @@ class Absensi extends CI_Controller{
         $data4 = isset($row_data[4]) ? $row_data[4] : null;
         $data6 = isset($row_data[6]) ? $row_data[6] : null;
         $data7 = isset($row_data[7]) ? $row_data[7] : null;
+        $data8 = $data7 - $data6;
 
         $datas = array(
                       'name' => $data3,
                       'date' => date("Y-m-d", strtotime($data4)),
                       'on_duty' => $data6,
-                      'off_duty' => $data7
+                      'off_duty' => $data7,
+                      'count_time' => $data8
                       );
         $this->db->insert('absensi', $datas);
       }  

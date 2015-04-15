@@ -62,6 +62,7 @@
 
                                         <?php
                                             $counter = 1;
+                                            if(is_array($getproject)){
                                             foreach($getproject as $each):
                                         ?>
                                             <form action="<?php echo base_url();?>projectdetail/detail/" method="POST">
@@ -125,6 +126,7 @@
                                             $counter++;
 
                                             endforeach;
+                                        }
                                         ?>
                                         </tbody>
                                     </table>

@@ -2,6 +2,12 @@
             <div id="da-content-wrap" class="clearfix">
                 <!-- Content Area -->
                 <div id="da-content-area">
+                <form id="da-purchaseorder-receive-detail-form-val" class="da-form da-form-inline" action="/purchaseorder/update_itemprice" method="post">
+                <div class="row-fluid">
+                            <div class="span12">
+                                <input type="submit" value="Update" class="btn btn-success btn-create">
+                            </div>
+                        </div>
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="da-panel">
@@ -45,17 +51,21 @@
                                                         <input name="item_price" type="text" class="span6" value="<?php echo '0'; ?>">                                                        
                                                     </td>                                                    
                                                 </tr>
-                                                
-                                            <?php echo $purchaseorder_details->stockid;//endforeach?>
+                                            
 
                                 </div>                                
                                         </tbody>
                                     </table>
-                                    <input type="submit" value="Update" class="btn btn-success">
-                                            </form>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row-fluid">
+                            <div class="span12">
+                                <input type="submit" value="Update" class="btn btn-success btn-create">
+                            </div>
+                        </div>
+                                            </form>
             </div>
