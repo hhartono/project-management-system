@@ -99,7 +99,7 @@ class Absensi extends CI_Controller{
         }
   }
 
-  public function show_table($message)
+  public function show_table()
   {   
     $user_id = $this->input->cookie('uid', TRUE);
     if($user_id){
@@ -109,9 +109,10 @@ class Absensi extends CI_Controller{
       $data['username'] = $user_info['name'];
       $data['company_title'] = $user_info['title']; 
 
-      $data['message'] = $message;
+      //$data['message'] = $message;
 
     $data['absensi'] = $this->absensi_model->get_all_absensi();
+    //$data['proabs'] = $this->absensi_model->get_project_absensi();
     $data['getpro']=$this->absensi_model->get_all_project(); 
     $this->load->view('header');
     $this->load->view('absensi/navigation', $data);
@@ -187,7 +188,7 @@ class Absensi extends CI_Controller{
             // search for customer id
             $database_input_array = array();
             
-            $database_input_array['project_id'] = implode(", ", $this->input->post('project'));
+            $database_input_array['subproject_id'] = $this->input->post('subproject');
             
             // database id
             $database_input_array['id'] = $this->input->post('id');

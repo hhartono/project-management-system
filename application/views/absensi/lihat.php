@@ -4,7 +4,7 @@
                         <div class="row-fluid">
                             <div class="span12">
                                 <?php echo form_open_multipart('/absensi/cari');?>
-                                   Pencarian Berdasarkan Tanggal : <input id="absensi-create-join-date" type="text" value="yyyy-mm-dd" name="cari" autocomplete="off">
+                                   Pencarian Berdasarkan Tanggal : <input id="absensi-create-join-date" type="text" value="yyyy-mm-dd" name="cari">
                                     <input type="submit" value="Filter" class="btn btn-success"/>
                                     </form>
                             </div>
@@ -56,17 +56,17 @@
                                                     <td class="notes-row"><?php echo $each_absensi['on_duty']; ?></td>
                                                     <td class="notes-row"><?php echo $each_absensi['off_duty']; ?></td>
                                                     <td>
-                                                    <?php 
-                                                          if ($each_absensi['project_id'] != 0){
-                                                            echo $each_absensi['project_id'];
+                                                    <?php
+                                                          if ($each_absensi['subproject'] !=null){
+                                                            echo $each_absensi['subproject'];
                                                           }else{
-                                                    ?>
-                                                            <select id="project" name="project[]" multiple="multiple" style="width:300px">
+                                                    ?>                                                    
+                                                            <select id="project" name="subproject[]" multiple="multiple" style="width:300px">
                                                             <?php                                                                
                                                                     foreach ($getpro as $pro):                                                       
                                                             ?>
                                                                     <option value="<?php echo $pro['id'];?>">
-                                                                        <?php echo $pro['name'];?>
+                                                                        <?php echo $pro['project'];?> - <?php echo $pro['subproject'];?>
                                                                     </option>
                                                             <?php
                                                                 endforeach;
@@ -75,7 +75,11 @@
                                                             </select><?php } ?>
                                                     </td>
                                                     <td class="da-icon-column">
+                                                    <?php
+                                                        if ($each_absensi['subproject'] ==null){
+                                                    ?> 
                                                         <input type="submit" value="Submit" class="btn btn-success">
+                                                    <?php } ?>
                                                     </td>
                                                   </form>  
                                                 </tr>
