@@ -167,15 +167,19 @@
                                 <li><a href="/worker">Tukang</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
-                        </li>
+                        </li>                    
                         <li>
-                            <a href="/absensi">
+                            <a href="#">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-edit"></i>
                                     </span>
                                 Absensi
                             </a>
+                            <ul>
+                                <li><a href="/absensi">Absensi</a></li>
+                                <li><a href="/absensi/projectdetail_worker">Project Detail Tukang</a></li>
+                            </ul>
                         </li>
 
                         <!--

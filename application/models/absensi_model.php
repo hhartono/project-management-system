@@ -116,5 +116,42 @@ class Absensi_model extends CI_Model {
             return false;
         }
     }
+
+    public function count_time()
+    {
+    	$query = $this->db->query("select absensi.*, SUM(absensi.count_time) as jam, date_format(date, '%M %Y') AS bulantahun						
+							FROM absensi 
+							GROUP BY date_format(date, '%M %Y'), name
+							");
+    	$result_array = $query->result_array();
+    	return $result_array;
+    }
+
+    public function count_time_filter()
+    {
+    	//$name = $this->input->post('nama');
+    	$bulan = $this->input->post('bulan');
+    	$tahun = $this->input->post('tahun');
+    	$query = $this->db->query("select absensi.*, SUM(absensi.count_time) as jam, date_format(date, '%M %Y') AS bulantahun						
+							FROM absensi
+							WHERE MONTH(date)='$bulan' AND YEAR(date) ='$tahun'
+							GROUP BY name");
+    	$result_array = $query->result_array();
+    	return $result_array;
+    }
+
+    public function detail_worker()
+    {
+    	$nama = $this->input->post('name');
+    	$bulantahun = $this->input->post('bulantahun');
+    	$query = $this->db->query("select absensi.name as name, absensi.date as date, subproject_master.name as subproject, absensi.count as count, absensi.count_time as counttime, SUM(absensi.count_time / absensi.count) as waktu 
+									from absensi, absensi_detail, subproject_master
+									where absensi.id = absensi_detail.absensi_id AND subproject_master.id = absensi_detail.subproject_id 
+									AND absensi.name = '$nama' AND date_format(absensi.date, '%M %Y') = '$bulantahun'
+									GROUP BY subproject_master.name
+									");
+    	$result_array = $query->result_array();
+    	return $result_array;
+    }
 }
 ?>

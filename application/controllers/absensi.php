@@ -210,5 +210,92 @@ class Absensi extends CI_Controller{
             $this->show_table($message);
         }
     }
+
+    public function projectdetail_worker() {
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+        $data['absensi'] = $this->absensi_model->count_time();
+        $data['getpro']=$this->absensi_model->get_all_project();
+        
+                $this->load->view('header');
+                $this->load->view('absensi/navigation', $data);
+                $this->load->view('absensi/maindetail',$data); 
+                $this->load->view('absensi/footer');
+            }else{
+            redirect('login', 'refresh');
+            }
+    }
+
+    public function caribulan() {
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+        $data['absensi']=$this->absensi_model->count_time_filter();
+        //$data['absensi'] = $this->absensi_model->get_all_absensi();
+        $data['getpro']=$this->absensi_model->get_all_project();
+        //$data['getproject']=$this->absensi_model->getproject1();
+        
+        //$data['getcompany'] = $this->detail_model->get_company();
+          
+                $this->load->view('header');
+                $this->load->view('absensi/navigation', $data);
+                $this->load->view('absensi/maindetail',$data); 
+                $this->load->view('absensi/footer');
+            }else{
+            redirect('login', 'refresh');
+            }
+    }
+
+    public function detail_worker(){
+        $user_id = $this->input->cookie('uid', TRUE);
+        if($user_id){
+            // user info
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+            // get necessary data
+        $data['detail'] = $this->absensi_model->detail_worker();
+        $this->load->view('header');
+        $this->load->view('absensi/navigation', $data);
+        $this->load->view('absensi/detail_worker', $data);
+        $this->load->view('absensi/footer');
+        }else{
+            redirect('login', 'refresh');
+        }
+    }
 }
 ?>
