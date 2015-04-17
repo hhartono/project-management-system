@@ -104,7 +104,14 @@
                     _____________________________________________________________________________________________________________________________________________________________________________
                 </div>
             </div>
-        </div>            
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <?php echo form_open_multipart('/projectdetail/caritanggal/');?>
+                    Tanggal Awal: <input id="absensi-create-join-date" type="text" value="yyyy-mm-dd" name="tanggal1">  &nbsp;&nbsp;&nbsp; Tanggal Akhir:<input id="date-cari" type="text" value="yyyy-mm-dd" name="tanggal2">
+                    <input type="submit" value="Filter" class="btn btn-success"/>
+               </form>
+           </div>
         <div class="row-fluid">
             <div class="span12">
                 <div class="da-panel">

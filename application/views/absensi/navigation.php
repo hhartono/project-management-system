@@ -67,6 +67,7 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
+                        <li><a href="#">Absensi</a></li>
                         <li class="active"><span>Absensi</span></li>
                     </ul>
                 </div>

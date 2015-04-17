@@ -86,7 +86,7 @@ class Absensi_model extends CI_Model {
             $this->db->trans_start();
             
 
-			
+			if(!empty($this->input->post('subproject'))){
             foreach($_POST['subproject'] as $pro)
 			{
 				//echo $pro . "<br>";
@@ -94,6 +94,7 @@ class Absensi_model extends CI_Model {
 				$query = $this->db->query("INSERT INTO absensi_detail(absensi_id, subproject_id) VALUES('$id', '$pro')");
             
         	}
+        	
 
         	$jum = count($_POST['subproject']);
             $data = array(
@@ -102,7 +103,7 @@ class Absensi_model extends CI_Model {
             
             $this->db->where('id', $database_input_array['id']);
             $this->db->update('absensi', $data);
-            
+            }
         	
         	$this->db->trans_complete();
 

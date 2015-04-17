@@ -34,6 +34,7 @@
     <!-- JS Table -->
     <script src="/assets/js/custom/worker/worker.modal.js"></script>
     <script src="/assets/js/custom/worker/worker.tables.js"></script>
+    <script src="/assets/js/custom/absensi/absensi.tables.js"></script>
 
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
