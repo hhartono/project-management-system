@@ -10,6 +10,7 @@ class Projectdetail extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('fpdf');
+        $this->load->library('form_validation');
     //tser
     }
 
@@ -127,7 +128,7 @@ class Projectdetail extends CI_Controller {
         }
     }
 
-    public function caritanggal($idproject, $idsubproject){
+    public function caritanggal(){
         $user_id = $this->input->cookie('uid', TRUE);
         if($user_id){
             // user info
@@ -144,20 +145,70 @@ class Projectdetail extends CI_Controller {
             //$data['message'] = $message;
 
             // get necessary data
-            $idpj = $idproject;
-            $idspj = $idsubproject;
-            $data['detail'] = $this->detail_model->get_all_workerdetail($idspj);
-            $data['pro'] = $this->detail_model->getpro($idspj);
-            $data['proj'] = $this->detail_model->getproj($idspj);
-            $data['abse'] = $this->detail_model->getabs($idspj);
-            $data['absensi'] = $this->detail_model->get_absensi($idspj);
+            //$idpj = $idproject;
+            //$idspj = $idsubproject;
+
+            $data['detail'] = $this->detail_model->get_all_workerdetail();
+            $data['pro'] = $this->detail_model->getpro2();
+            $data['proj'] = $this->detail_model->getproj2();
+            $data['absensi'] = $this->detail_model->caritanggal();
+
+            //$tanggal1 = $this->input->post('tanggal1');
+            //$tanggal2 = $this->input->post('tanggal2');
+            $this->form_validation->set_rules('tanggal1','Tanggal Awal', 'required');
+            $this->form_validation->set_rules('tanggal2','Tanggal Akhir', 'required|number');
+            if($this->form_validation->run() == false){
+                $this->load->view('header');
+                $this->load->view('projectdetail/navigation', $data);
+                $this->load->view('projectdetail/detailtukang', $data);
+                $this->load->view('projectdetail/footer');
+            }else{
 
             $this->load->view('header');
             $this->load->view('projectdetail/navigation', $data);
             $this->load->view('projectdetail/detailtukang', $data);
             $this->load->view('projectdetail/footer');
+        }
         }else{
             redirect('login', 'refresh');
         }
+    }
+
+    function checkDateFormat($tanggal1)
+    {
+        if(preg_match("/[0-9]{4}\/[0-12]{2}\/[0-31]{2}/", $tanggal1)){
+            if(checkdate(substr($tanggal1, 6, 4), substr($tanggal1, 0, 2), substr($tanggal1, 3, 2)))
+                return true;
+            else
+                //$this->form_validation->set_message('$tanggal1', 'Masukkan tanggal lahir yang benar.');
+                return false;
+        }else{
+            //$this->form_validation->set_message('valid_date', 'Masukkan tanggal lahir yang benar.');
+            return false;
+        }
+    }
+
+    public function cetaktukang($idproject, $idsubproject)
+    {
+        define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+            //$idpj = $idproject;
+            $idspj = $idsubproject;
+            $data['detail'] = $this->detail_model->get_all_projectdetail($idspj);
+            $data['pro'] = $this->detail_model->getpro($idspj);
+            $data['absensi'] = $this->detail_model->get_absensi($idspj);
+        $this->load->view('projectdetail/printtukang', $data);
+        
+    }
+
+    public function cetaktukangtanggal()
+    {
+        define('FPDF_FONTPATH',$this->config->item('fonts_path'));
+            //$idpj = $idproject;
+            //$idspj = $idsubproject;
+            $data['detail'] = $this->detail_model->get_all_workerdetail();
+            $data['pro'] = $this->detail_model->getproj3();
+            $data['absensi'] = $this->detail_model->caritanggal();
+        $this->load->view('projectdetail/printtukangtanggal', $data);
+        
     }
 }

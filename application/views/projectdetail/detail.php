@@ -5,7 +5,7 @@
         <div class="row-fluid">
                         <div class="span12" >
                             <?php foreach($proj as $proj): ?>
-                                <a class="btn btn-success btn-create" href="/projectdetail/cetak/<?php echo $proj['projectid']; ?>/<?php echo $proj['id'] ; ?>" cls='btn' >
+                                <a class="btn btn-success btn-create" href="/projectdetail/cetak/<?php echo $proj['projectid']; ?>/<?php echo $proj['id'] ; ?>" cls='btn' target="_blank">
                                 <i class='icon-print'></i>&nbsp; Cetak </a>
                             <?php endforeach?>
                         </div>
@@ -101,10 +101,29 @@
                         </table>
                         
                     </div>
-                    _____________________________________________________________________________________________________________________________________________________________________________
+                    </br>
                 </div>
             </div>
-        </div>            
+        </div>
+        <div class="row-fluid">
+                        <div class="span12" >
+                            <a class="btn btn-success btn-create" href="/projectdetail/cetaktukang/<?php echo $proj['projectid']; ?>/<?php echo $proj['id'] ; ?>" cls='btn' target="_blank">
+                                <i class='icon-print'></i>&nbsp; Cetak </a>                            
+                        </div>
+                    </div>     
+        <div class="row-fluid">
+            <div class="span12">
+            <?php 
+            if(validation_errors()){
+                echo validation_errors();
+            } 
+            ?>
+                <?php echo form_open_multipart('/projectdetail/caritanggal/');?>
+                    Tanggal Awal: <input id="absensi-create-join-date" type="text" name="tanggal1">  &nbsp;&nbsp;&nbsp; Tanggal Akhir:<input id="date-cari" type="text" name="tanggal2">
+                    <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
+                    <input type="submit" value="Filter" class="btn btn-success"/>
+               </form>
+           </div>       
         <div class="row-fluid">
             <div class="span12">
                 <div class="da-panel">
@@ -139,6 +158,7 @@
                                 <td class="division-row"><?php echo number_format((float)$absensi['waktu'], 1, ',', ''); ?> Jam</td>
                             </tr>
                         <?php endforeach?>
+                        
                         </thead>
                         </table>
                         

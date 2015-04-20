@@ -178,7 +178,7 @@ class Detail_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function caritanggal($idsubproject)
+    public function caritanggal()
     {
         $tanggal1 = $this->input->post('tanggal1');
         $tanggal2 = $this->input->post('tanggal2');
@@ -192,7 +192,7 @@ class Detail_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_all_workerdetail($idsubproject)
+    public function get_all_workerdetail()
     {
         $subproject = $this->input->post('sub');
         $query = $this->db->query("Select pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, wm.name as tukang, tud.item_count*sm.item_price as total
@@ -208,7 +208,55 @@ class Detail_model extends CI_Model {
                 order by cm.name ASC ");
         return $query->result_array();
 
-     }
+    }
+
+    public function getpro2()
+    {
+        $subproject = $this->input->post('sub');
+        $this->db->select('subproject_master.name AS name, subproject_master.id AS id, project_master.name AS project, project_master.id AS projectid');
+        $this->db->from('project_master');
+        $this->db->join('subproject_master', 'project_master.id = subproject_master.project_id', 'left');
+        $this->db->where('subproject_master.id', $subproject);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function getproj2()
+    {
+        $subproject = $this->input->post('sub');
+        $this->db->select('subproject_master.name AS name, subproject_master.id AS id, project_master.name AS project, project_master.id AS projectid');
+        $this->db->from('project_master');
+        $this->db->join('subproject_master', 'project_master.id = subproject_master.project_id', 'left');
+        $this->db->where('subproject_master.id', $subproject);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function getproj3()
+    {
+        $subproject = $this->input->post('sub');
+        $this->db->select('subproject_master.name AS name, subproject_master.id AS id, project_master.name AS project, project_master.id AS projectid');
+        $this->db->from('project_master');
+        $this->db->join('subproject_master', 'project_master.id = subproject_master.project_id', 'left');
+        $this->db->where('subproject_master.id', $subproject);
+        $query = $this->db->get();
+
+        return $query->row();
+    }
+
+    public function get_absensi2()
+    {
+        $subproject = $this->input->post('sub');
+        $query = $this->db->query("select absensi.name as name, absensi.date as date, subproject_master.name as subproject, absensi.count as count, 
+                                        absensi.count_time as counttime, SUM(absensi.count_time / absensi.count) as waktu 
+                                    from absensi, absensi_detail, subproject_master
+                                    where absensi.id = absensi_detail.absensi_id AND subproject_master.id = absensi_detail.subproject_id 
+                                            AND subproject_master.id = '$subproject'
+                                        GROUP BY absensi.name");
+        return $query->result_array();   
+    }
 
 }
 ?>
