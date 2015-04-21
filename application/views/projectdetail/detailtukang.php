@@ -101,31 +101,25 @@
                         </table>
                         
                     </div>
-                    _____________________________________________________________________________________________________________________________________________________________________________
-                </div>
+                    </div>
             </div>
         </div>
-         <div class="row-fluid">
+        <div class="row-fluid">
                         <div class="span12" >
                         <form method="post" action="/projectdetail/cetaktukangtanggal/" target="_blank">
                             <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
                             <input type="hidden" value="<?php echo $this->input->post('tanggal1') ?>" name="tanggal1">
                             <input type="hidden" value="<?php echo $this->input->post('tanggal2') ?>" name="tanggal2">
-                            <input type="submit" value="Cetak" class="btn btn-success btn-create" class="icon-print"/>
+                            <input type="submit" value="Cetak" class="btn btn-success btn-create "/>
                         </form>                            
                         </div>
                     </div>
         <div class="row-fluid">
             <div class="span12">
-            <?php if(form_error('tanggal1') == FALSE){ ?>
-                                    <div class="control-group"><!-- default input text -->
-                            <?php }else{ ?>
-                                    <div class="control-group warning"><!-- warning -->
-                            <?php } ?>
                 <?php echo form_open_multipart('/projectdetail/caritanggal/');?>
                     Tanggal Awal: <input id="absensi-create-join-date" type="text" name="tanggal1"><?php echo form_error('tanggal1'); ?>
-                      &nbsp;&nbsp;&nbsp; 
-                      Tanggal Akhir:<input id="date-cari" type="text" name="tanggal2"><span class="help-inline"><?php echo form_error('tanggal2'); ?></span>
+                      
+                    Tanggal Akhir: <input id="date-cari" type="text" name="tanggal2"><span class="help-inline"><?php echo form_error('tanggal2'); ?></span>
                     <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
                     <input type="submit" value="Filter" class="btn btn-success"/>
                </form>
@@ -140,7 +134,7 @@
                     </span>
                     <span class="da-panel-title">
                         <i class="icol-table"></i><b>  <?php
-                        echo "Tanggal: &nbsp;"; echo $this->input->post('tanggal1'); echo "&nbsp;&nbsp;Sampai tanggal:&nbsp;&nbsp;"; echo $this->input->post('tanggal2');
+                        echo "Tanggal &nbsp;"; echo $this->input->post('tanggal1'); echo "&nbsp;&nbsp;Sampai Tanggal &nbsp;"; echo $this->input->post('tanggal2');
                     ?></b>
                     </span>
                     </div>
@@ -163,12 +157,11 @@
                             <th>Jam Kerja</th>
                         </tr>
                         <?php 
-                            if($this->input->post('tanggal1') > $this->input->post('tanggal2')){
-                                echo "<tr><td colspan=2>"; echo "Tanggal Awal Tidak Boleh Lebih Besar Dari Tanggal Akhir"; echo "</td></tr>";
+                            if($this->input->post('tanggal2') < $this->input->post('tanggal1')){
+                                echo "<tr><td style=background:#c6d2ff; colspan=2>"; echo "Tanggal Awal Tidak Boleh Lebih Besar Dari Tanggal Akhir"; echo "</td></tr>";
                             }else{
-                                if(is_array($absensi)){
+                                if(!empty($absensi)){
                                 foreach($absensi as $absensi): ?>
-                             <tr>
                              <tr>
                                 <td class="division-row"><?php echo $absensi['name']; ?></td>
                                 <td class="division-row"><?php echo number_format((float)$absensi['waktu'], 1, ',', ''); ?> Jam</td>
@@ -176,11 +169,7 @@
                         <?php endforeach?>
                         <?php
                                 }else{ 
-                        ?>
-                            <tr>
-                             <tr><td colspan=2>Data Tidak Ditemukan</td></tr>
-                            </tr>
-                        <?php }
+                        echo "<tr><td style=background:#c6d2ff; colspan=2>"; echo "Data Tidak Ditemukan"; echo "</td></tr>"; }
                         } ?>
                         </thead>
                         </table>

@@ -51,7 +51,7 @@
     $this->fpdf->Ln(1);
     $this->fpdf->Cell(14,1,'Sub Project        : '.$pro->name.'',0,0,'L');
     $this->fpdf->Ln(1);
-    $this->fpdf->Cell(10,1,'Tanggal        : '.$this->input->post('tanggal1').'',0,0,'L'); $this->fpdf->Cell(10,1,'Sampai        : '.$this->input->post('tanggal2').'',0,0,'L');
+    $this->fpdf->Cell(10,1,'Tanggal              : '.$this->input->post('tanggal1').'',0,0,'L'); $this->fpdf->Cell(0,1,'Sampai        : '.$this->input->post('tanggal2').'',0,0,'L');
 
     /* setting header table */
     $this->fpdf->Ln(1);
@@ -60,11 +60,10 @@
     $this->fpdf->Cell(9 , 1, 'Jam Kerja ( Jam )' , 1, 'LR', 'C');
     
     foreach($absensi as $absensi){
-$this->fpdf->Ln();
-$this->fpdf->SetFont('Times','',12);
-$this->fpdf->Cell(5 , 0.7, $absensi['name'] , 1, 'LR', 'L');
-$this->fpdf->Cell(9 , 0.7, number_format((float)$absensi['waktu'], 1, ',', ''), 1, 'C', 'C');
- 
+        $this->fpdf->Ln();
+        $this->fpdf->SetFont('Times','',12);
+        $this->fpdf->Cell(5 , 0.7, $absensi['name'] , 1, 'LR', 'L');
+        $this->fpdf->Cell(9 , 0.7, number_format((float)$absensi['waktu'], 1, ',', ''), 1, 'C', 'C');
     }
 
     /* setting posisi footer 3 cm dari bawah */

@@ -156,7 +156,7 @@ class Projectdetail extends CI_Controller {
             //$tanggal1 = $this->input->post('tanggal1');
             //$tanggal2 = $this->input->post('tanggal2');
             $this->form_validation->set_rules('tanggal1','Tanggal Awal', 'required');
-            $this->form_validation->set_rules('tanggal2','Tanggal Akhir', 'required|number');
+            $this->form_validation->set_rules('tanggal2','Tanggal Akhir', 'required');
             if($this->form_validation->run() == false){
                 $this->load->view('header');
                 $this->load->view('projectdetail/navigation', $data);
@@ -174,7 +174,7 @@ class Projectdetail extends CI_Controller {
         }
     }
 
-    function checkDateFormat($tanggal1)
+    public function checkDateFormat($tanggal1)
     {
         if(preg_match("/[0-9]{4}\/[0-12]{2}\/[0-31]{2}/", $tanggal1)){
             if(checkdate(substr($tanggal1, 6, 4), substr($tanggal1, 0, 2), substr($tanggal1, 3, 2)))
@@ -203,8 +203,7 @@ class Projectdetail extends CI_Controller {
     public function cetaktukangtanggal()
     {
         define('FPDF_FONTPATH',$this->config->item('fonts_path'));
-            //$idpj = $idproject;
-            //$idspj = $idsubproject;
+            
             $data['detail'] = $this->detail_model->get_all_workerdetail();
             $data['pro'] = $this->detail_model->getproj3();
             $data['absensi'] = $this->detail_model->caritanggal();
