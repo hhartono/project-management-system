@@ -177,11 +177,13 @@ class Projectdetail extends CI_Controller {
     public function checkDateFormat($tanggal1)
     {
         if(preg_match("/[0-9]{4}\/[0-12]{2}\/[0-31]{2}/", $tanggal1)){
-            if(checkdate(substr($tanggal1, 6, 4), substr($tanggal1, 0, 2), substr($tanggal1, 3, 2)))
+            if(checkdate(substr($tanggal1, 6, 4), substr($tanggal1, 0, 2), substr($tanggal1, 3, 2))){
                 return true;
-            else
+            }
+            else{
                 //$this->form_validation->set_message('$tanggal1', 'Masukkan tanggal lahir yang benar.');
                 return false;
+            }
         }else{
             //$this->form_validation->set_message('valid_date', 'Masukkan tanggal lahir yang benar.');
             return false;
@@ -208,6 +210,5 @@ class Projectdetail extends CI_Controller {
             $data['pro'] = $this->detail_model->getproj3();
             $data['absensi'] = $this->detail_model->caritanggal();
         $this->load->view('projectdetail/printtukangtanggal', $data);
-        
     }
 }

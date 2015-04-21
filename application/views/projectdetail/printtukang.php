@@ -66,13 +66,13 @@
     /* setting header table */
     $this->fpdf->Ln(1);
     $this->fpdf->SetFont('Times','B',12);
-    $this->fpdf->Cell(5 , 1, 'Nama' , 1, 'LR', 'C');
+    $this->fpdf->Cell(9 , 1, 'Nama' , 1, 'LR', 'C');
     $this->fpdf->Cell(9 , 1, 'Jam Kerja ( Jam )' , 1, 'LR', 'C');
     
     foreach($absensi as $absensi){
 $this->fpdf->Ln();
 $this->fpdf->SetFont('Times','',12);
-$this->fpdf->Cell(5 , 0.7, $absensi['name'] , 1, 'C', 'C');
+$this->fpdf->Cell(9 , 0.7, $absensi['name'] , 1, 'C', 'C');
 $this->fpdf->Cell(9 , 0.7, number_format((float)$absensi['waktu'], 1, ',', ''), 1, 'C', 'C');
  
     }
@@ -91,5 +91,5 @@ $this->fpdf->Cell(9 , 0.7, number_format((float)$absensi['waktu'], 1, ',', ''), 
     //$this->fpdf->Cell(18, 0.5, 'Page '.$this->fpdf->PageNo().'/{nb}',0,0,'R');
 
     /* generate pdf jika semua konstruktor, data yang akan ditampilkan, dll sudah selesai */
-    $this->fpdf->Output("project_detail.pdf","I");
+    $this->fpdf->Output("project_detailtukang.pdf","I");
 ?>

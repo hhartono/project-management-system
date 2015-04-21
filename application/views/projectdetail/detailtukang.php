@@ -3,13 +3,13 @@
     <!-- Content Area -->
     <div id="da-content-area">
         <div class="row-fluid">
-                        <div class="span12" >
-                            <?php foreach($proj as $proj): ?>
-                                <a class="btn btn-success btn-create" href="/projectdetail/cetak/<?php echo $proj['projectid']; ?>/<?php echo $proj['id'] ; ?>" cls='btn' target="_blank" >
-                                <i class='icon-print'></i>&nbsp; Cetak </a>
-                            <?php endforeach?>
-                        </div>
-                    </div>
+            <div class="span12" >
+                <?php foreach($proj as $proj): ?>
+                    <a class="btn btn-success btn-create" href="/projectdetail/cetak/<?php echo $proj['projectid']; ?>/<?php echo $proj['id'] ; ?>" cls='btn' target="_blank" >
+                    <i class='icon-print'></i>&nbsp; Cetak </a>
+                <?php endforeach?>
+            </div>
+        </div>
         <div class="row-fluid">
             <div class="span12">
                 <div class="da-panel">
@@ -99,32 +99,30 @@
                                 <td style=background:#c6d2ff; colspan="6">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah ;?></td>
                         </tbody>
                         </table>
-                        
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
+        </br>
         <div class="row-fluid">
-                        <div class="span12" >
-                        <form method="post" action="/projectdetail/cetaktukangtanggal/" target="_blank">
-                            <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
-                            <input type="hidden" value="<?php echo $this->input->post('tanggal1') ?>" name="tanggal1">
-                            <input type="hidden" value="<?php echo $this->input->post('tanggal2') ?>" name="tanggal2">
-                            <input type="submit" value="Cetak" class="btn btn-success btn-create "/>
-                        </form>                            
-                        </div>
-                    </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <?php echo form_open_multipart('/projectdetail/caritanggal/');?>
-                    Tanggal Awal: <input id="absensi-create-join-date" type="text" name="tanggal1"><?php echo form_error('tanggal1'); ?>
+            <div class="span7">
+            <?php echo form_open_multipart('/projectdetail/caritanggal/');?>
+                    Tanggal Awal: <input id="absensi-create-join-date" type="text" name="tanggal1">
                       
-                    Tanggal Akhir: <input id="date-cari" type="text" name="tanggal2"><span class="help-inline"><?php echo form_error('tanggal2'); ?></span>
+                    Tanggal Akhir: <input id="date-cari" type="text" name="tanggal2">
                     <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
-                    <input type="submit" value="Filter" class="btn btn-success"/>
+                    <input type="submit" value="Filter" class="btn btn-success btn-create">
                </form>
-           </div>
-          
+            </div>
+            <div class="span5">
+                <form method="post" action="/projectdetail/cetaktukangtanggal/" target="_blank">
+                    <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
+                    <input type="hidden" value="<?php echo $this->input->post('tanggal1'); ?>" name="tanggal1">
+                    <input type="hidden" value="<?php echo $this->input->post('tanggal2'); ?>" name="tanggal2">
+                    <input type="submit" value="Cetak" class="btn btn-success btn-create ">
+                </form>                            
+            </div>
+        </div>
         <div class="row-fluid">
             <div class="span12">
                 <div class="da-panel">
@@ -133,8 +131,8 @@
                         <i class="icol-table"></i><b> Tukang</b>
                     </span>
                     <span class="da-panel-title">
-                        <i class="icol-table"></i><b>  <?php
-                        echo "Tanggal &nbsp;"; echo $this->input->post('tanggal1'); echo "&nbsp;&nbsp;Sampai Tanggal &nbsp;"; echo $this->input->post('tanggal2');
+                        </br><b>  <?php
+                        echo "Tanggal &nbsp; : &nbsp;"; echo $this->input->post('tanggal1'); echo "&nbsp;&nbsp;Sampai &nbsp;"; echo $this->input->post('tanggal2');
                     ?></b>
                     </span>
                     </div>
@@ -159,8 +157,10 @@
                         <?php 
                             if($this->input->post('tanggal2') < $this->input->post('tanggal1')){
                                 echo "<tr><td style=background:#c6d2ff; colspan=2>"; echo "Tanggal Awal Tidak Boleh Lebih Besar Dari Tanggal Akhir"; echo "</td></tr>";
-                            }else{
-                                if(!empty($absensi)){
+                            }elseif(empty($this->input->post('tanggal1')) OR empty($this->input->post('tanggal2'))){
+                                echo "<tr><td style=background:#c6d2ff; colspan=2>"; echo "Tanggal Tidak Boleh Kosong"; echo "</td></tr>";
+
+                            }elseif(!empty($absensi)){
                                 foreach($absensi as $absensi): ?>
                              <tr>
                                 <td class="division-row"><?php echo $absensi['name']; ?></td>
@@ -169,7 +169,7 @@
                         <?php endforeach?>
                         <?php
                                 }else{ 
-                        echo "<tr><td style=background:#c6d2ff; colspan=2>"; echo "Data Tidak Ditemukan"; echo "</td></tr>"; }
+                        echo "<tr><td style=background:#c6d2ff; colspan=2>"; echo "Data Tidak Ditemukan"; echo "</td></tr>";
                         } ?>
                         </thead>
                         </table>
