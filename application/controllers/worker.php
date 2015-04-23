@@ -25,12 +25,21 @@ class Worker extends CI_Controller {
         $this->load->model('login_model');
         $this->load->helper('cookie');
         $this->load->helper('url');
+        $this->load->library('tank_auth');
+        $this->lang->load('tank_auth');
+        $this->_is_logged_in();
     }
 
 	public function index()
 	{
         $message = array();
         $this->show_table($message);
+    }
+
+    public function _is_logged_in(){
+        if(!$this->tank_auth->is_logged_in()){
+            redirect('/auth/login');
+        }
     }
 
     public function create_worker(){
@@ -199,9 +208,8 @@ class Worker extends CI_Controller {
 
     private function show_table($message)
     {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
+        
             $user_info = $this->login_model->get_user_info($user_id);
             $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
@@ -241,9 +249,6 @@ class Worker extends CI_Controller {
             $this->load->view('worker/navigation', $data);
             $this->load->view('worker/main', $data);
             $this->load->view('worker/footer');
-        }else{
-            redirect('/login', 'refresh');
-        }
     }
 }
 

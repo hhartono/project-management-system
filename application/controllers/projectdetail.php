@@ -11,6 +11,9 @@ class Projectdetail extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('fpdf');
         $this->load->library('form_validation');
+        $this->load->library('tank_auth');
+        $this->lang->load('tank_auth');
+        $this->_is_logged_in();
     //tser
     }
 
@@ -20,11 +23,16 @@ class Projectdetail extends CI_Controller {
         $this->show_table($message);
     }
 
+    public function _is_logged_in(){
+        if(!$this->tank_auth->is_logged_in()){
+            redirect('/auth/login');
+        }
+    }
+
     private function show_table($message)
     {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
+        
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -47,17 +55,11 @@ class Projectdetail extends CI_Controller {
             $this->load->view('projectdetail/navigation', $data);
             $this->load->view('projectdetail/main', $data);
             $this->load->view('projectdetail/footer');
-           
-
-        }else{
-            redirect('login', 'refresh');
-        }
     }
 
     public function detail($idproject, $idsubproject){
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
+        
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -83,9 +85,6 @@ class Projectdetail extends CI_Controller {
             $this->load->view('projectdetail/navigation', $data);
             $this->load->view('projectdetail/detail', $data);
             $this->load->view('projectdetail/footer');
-        }else{
-            redirect('login', 'refresh');
-        }
     }
 
     public function cetak($idproject, $idsubproject)
@@ -100,9 +99,7 @@ class Projectdetail extends CI_Controller {
     }
 
     public function cari() {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -122,16 +119,11 @@ class Projectdetail extends CI_Controller {
         $this->load->view('projectdetail/navigation', $data);
         $this->load->view('projectdetail/main',$data); 
         $this->load->view('projectdetail/footer');
-               
-        }else{
-            redirect('login', 'refresh');
-        }
     }
 
     public function caritanggal(){
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
+        
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -168,9 +160,6 @@ class Projectdetail extends CI_Controller {
             $this->load->view('projectdetail/navigation', $data);
             $this->load->view('projectdetail/detailtukang', $data);
             $this->load->view('projectdetail/footer');
-        }
-        }else{
-            redirect('login', 'refresh');
         }
     }
 

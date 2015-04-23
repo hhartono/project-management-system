@@ -44,7 +44,7 @@
                         <ul>
                             <li class="da-header-button-wrap">
                                 <div class="da-header-button">
-                                    <a href="/login/logout"><i class="icon-power"></i></a>
+                                    <a href="/auth/logout"><i class="icon-power"></i></a>
                                 </div>
                             </li>
                         </ul>
@@ -176,6 +176,7 @@
                             <ul>
                                 <li><a href="/absensi">Absensi</a></li>
                                 <li><a href="/absensi/projectdetail_worker">Project Detail Tukang</a></li>
+                                <li><?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'Register'); ?></li>
                             </ul>
                         </li>
 

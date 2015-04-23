@@ -44,7 +44,7 @@
                         <ul>
                             <li class="da-header-button-wrap">
                                 <div class="da-header-button">
-                                    <a href="/login/logout"><i class="icon-power"></i></a>
+                                    <a href="/auth/logout"><i class="icon-power"></i></a>
                                 </div>
                             </li>
                         </ul>

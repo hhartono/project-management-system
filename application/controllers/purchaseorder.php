@@ -34,6 +34,9 @@ class Purchaseorder extends CI_Controller {
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->library('fpdf');
+        $this->load->library('tank_auth');
+        $this->lang->load('tank_auth');
+        $this->_is_logged_in();
     }
 
 	public function index()
@@ -42,10 +45,14 @@ class Purchaseorder extends CI_Controller {
         $this->show_table($message);
     }
 
+    public function _is_logged_in(){
+        if(!$this->tank_auth->is_logged_in()){
+            redirect('/auth/login');
+        }
+    }
+
     public function createpo(){
         $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
             $user_info = $this->login_model->get_user_info($user_id);
             $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
@@ -69,9 +76,6 @@ class Purchaseorder extends CI_Controller {
             $this->load->view('purchaseorder/navigation', $data);
             $this->load->view('purchaseorder/createpo', $data);
             $this->load->view('purchaseorder/footer');
-        }else{
-            redirect('/login', 'refresh');
-        }
     }
 
     public function deletepo($po_id){
@@ -342,9 +346,7 @@ class Purchaseorder extends CI_Controller {
 
     private function show_table($message)
     {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+            $user_id    = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
             $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
@@ -400,16 +402,11 @@ class Purchaseorder extends CI_Controller {
             $this->load->view('purchaseorder/navigation', $data);
             $this->load->view('purchaseorder/main', $data);
             $this->load->view('purchaseorder/footer');
-        }else{
-            redirect('/login', 'refresh');
-        }
     }
 
     private function show_detail_table($message, $po_id)
     {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -451,16 +448,11 @@ class Purchaseorder extends CI_Controller {
             $this->load->view('purchaseorder/navigation', $data);
             $this->load->view('purchaseorder/receive_po_items', $data);
             $this->load->view('purchaseorder/footer');
-        }else{
-            redirect('/login', 'refresh');
-        }
     }
 
     private function show_print_barcode_table($message, $po_id)
     {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -502,16 +494,11 @@ class Purchaseorder extends CI_Controller {
             $this->load->view('purchaseorder/navigation', $data);
             $this->load->view('purchaseorder/print_item_barcodes', $data);
             $this->load->view('purchaseorder/footer');
-        }else{
-            redirect('/login', 'refresh');
-        }
     }
 
     private function show_print_confirmation_screen($message, $po_id, $total_barcode_quantity)
     {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+       $user_id    = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -552,9 +539,6 @@ class Purchaseorder extends CI_Controller {
             $this->load->view('purchaseorder/navigation', $data);
             $this->load->view('purchaseorder/print_item_barcodes_confirmation', $data);
             $this->load->view('purchaseorder/footer', $data);
-        }else{
-            redirect('/login', 'refresh');
-        }
     }
 
     public function get_subproject()
@@ -570,9 +554,7 @@ class Purchaseorder extends CI_Controller {
     }
 
     public function detail($id){
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -592,9 +574,6 @@ class Purchaseorder extends CI_Controller {
         $this->load->view('purchaseorder/navigation', $data);
         $this->load->view('purchaseorder/detail', $data);
         $this->load->view('purchaseorder/footer');
-        }else{
-            redirect('login', 'refresh');
-        }
     }
 
     public function cetak($id)
@@ -609,7 +588,7 @@ class Purchaseorder extends CI_Controller {
 
     public function update_price($po_id)
     {
-        $user_id = $this->input->cookie('uid', TRUE);
+        $user_id    = $this->tank_auth->get_user_id();
         if($user_id){
             // user info
             $user_info = $this->login_model->get_user_info($user_id);

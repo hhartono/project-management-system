@@ -10,6 +10,9 @@ class Absensi extends CI_Controller{
     $this->load->model('project_model');
     $this->load->helper('cookie');
     $this->load->helper('url');
+    $this->load->library('tank_auth');
+    $this->lang->load('tank_auth');
+    $this->_is_logged_in();
   }
 
   public function index()
@@ -20,9 +23,7 @@ class Absensi extends CI_Controller{
 
   public function upload()
   {
-    $user_id = $this->input->cookie('uid', TRUE);
-    if($user_id){
-      // user info
+      $user_id    = $this->tank_auth->get_user_id();
       $user_info = $this->login_model->get_user_info($user_id);
       $data['userid'] = $user_info['id'];
       $data['username'] = $user_info['name'];
@@ -32,16 +33,13 @@ class Absensi extends CI_Controller{
     $this->load->view('absensi/navigation', $data);
     $this->load->view('absensi/absensi', array('error' => ' ' ));
     $this->load->view('absensi/footer');
-    }else{
-            redirect('/login', 'refresh');
-        }
+    
   }
 
   public function do_upload()
   {   
-  $user_id = $this->input->cookie('uid', TRUE);
-  if($user_id){
-      // user info
+  $user_id    = $this->tank_auth->get_user_id();
+  
       $user_info = $this->login_model->get_user_info($user_id);
       $datau['userid'] = $user_info['id'];
       $datau['username'] = $user_info['name'];
@@ -96,16 +94,13 @@ class Absensi extends CI_Controller{
       $this->load->view('absensi/upload_success', $data);
       $this->load->view('absensi/footer');
     }
-    }else{
-            redirect('/login', 'refresh');
-        }
+
   }
 
   public function show_table()
   {   
-    $user_id = $this->input->cookie('uid', TRUE);
-    if($user_id){
-      // user info
+    $user_id    = $this->tank_auth->get_user_id();
+    
       $user_info = $this->login_model->get_user_info($user_id);
       $data['userid'] = $user_info['id'];
       $data['username'] = $user_info['name'];
@@ -120,18 +115,12 @@ class Absensi extends CI_Controller{
     $this->load->view('absensi/navigation', $data);
     $this->load->view('absensi/lihat', $data);
     $this->load->view('absensi/footer');
-
-    }else{
-            redirect('/login', 'refresh');
-        }
-    
   }
 
   public function show_table_project()
   {   
-    $user_id = $this->input->cookie('uid', TRUE);
-    if($user_id){
-      // user info
+    $user_id    = $this->tank_auth->get_user_id();
+  
       $user_info = $this->login_model->get_user_info($user_id);
       $data['userid'] = $user_info['id'];
       $data['username'] = $user_info['name'];
@@ -143,17 +132,12 @@ class Absensi extends CI_Controller{
     $this->load->view('absensi/navigation', $data);
     $this->load->view('absensi/cari', $data);
     $this->load->view('absensi/footer');
-
-    }else{
-            redirect('/login', 'refresh');
-        }
     
   }
 
   public function cari() {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
+      
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -177,9 +161,6 @@ class Absensi extends CI_Controller{
                 $this->load->view('absensi/navigation', $data);
                 $this->load->view('absensi/lihat',$data); 
                 $this->load->view('absensi/footer');
-            }else{
-            redirect('login', 'refresh');
-            }
     }
 
     public function update_projectworker(){
@@ -212,9 +193,7 @@ class Absensi extends CI_Controller{
     }
 
     public function projectdetail_worker() {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -234,16 +213,11 @@ class Absensi extends CI_Controller{
                 $this->load->view('absensi/navigation', $data);
                 $this->load->view('absensi/maindetail',$data); 
                 $this->load->view('absensi/footer');
-            }else{
-            redirect('login', 'refresh');
-            }
     }
 
     public function caribulan() {
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
-            $user_info = $this->login_model->get_user_info($user_id);
+        $user_id    = $this->tank_auth->get_user_id();
+        $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
 
@@ -262,19 +236,15 @@ class Absensi extends CI_Controller{
         
         //$data['getcompany'] = $this->detail_model->get_company();
           
-                $this->load->view('header');
-                $this->load->view('absensi/navigation', $data);
-                $this->load->view('absensi/maindetail',$data); 
-                $this->load->view('absensi/footer');
-            }else{
-            redirect('login', 'refresh');
-            }
+        $this->load->view('header');
+        $this->load->view('absensi/navigation', $data);
+        $this->load->view('absensi/maindetail',$data); 
+        $this->load->view('absensi/footer');
     }
 
     public function detail_worker(){
-        $user_id = $this->input->cookie('uid', TRUE);
-        if($user_id){
-            // user info
+        $user_id    = $this->tank_auth->get_user_id();
+        
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -293,8 +263,11 @@ class Absensi extends CI_Controller{
         $this->load->view('absensi/navigation', $data);
         $this->load->view('absensi/detail_worker', $data);
         $this->load->view('absensi/footer');
-        }else{
-            redirect('login', 'refresh');
+    }
+
+    public function _is_logged_in(){
+        if(!$this->tank_auth->is_logged_in()){
+            redirect('/auth/login');
         }
     }
 }
