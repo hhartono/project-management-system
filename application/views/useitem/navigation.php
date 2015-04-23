@@ -32,13 +32,9 @@
                                 <span class="da-user-title"><?php echo $company_title?></span>
                             </div>
                         </div>
-                        <!--
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Change Password</a></li>
+                            <li><?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'Register User'); ?></li>
                         </ul>
-                        -->
                     </div>
                     <div id="da-header-button-container">
                         <ul>

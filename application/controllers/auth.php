@@ -11,6 +11,7 @@ class Auth extends CI_Controller
 		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
+		$this->load->model('login_model');
 	}
 
 	function index()
@@ -115,8 +116,15 @@ class Auth extends CI_Controller
 	 */
 	function register()
 	{
-		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('/auth/register');
+		$user_id    = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+		if (!$this->tank_auth->is_logged_in()) {									// logged in
+			redirect('/auth/login');
 
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
 			redirect('/auth/send_again/');
@@ -192,7 +200,10 @@ class Auth extends CI_Controller
 			$data['use_username'] = $use_username;
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
+			$this->load->view('header');
+			$this->load->view('home/navigation', $data);
 			$this->load->view('auth/register_form', $data);
+			$this->load->view('home/footer');
 		}
 	}
 

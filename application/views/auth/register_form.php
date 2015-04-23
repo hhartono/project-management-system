@@ -13,7 +13,7 @@
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Customer
+                                        <i class="icol-grid"></i> Register
                                     </span>
                                 </div>
                                 <?php if(isset($message['success'])): ?>
@@ -77,37 +77,38 @@ $captcha = array(
 	'maxlength'	=> 8,
 );
 ?>
+
 <?php echo form_open($this->uri->uri_string()); ?>
 <table>
 	<?php if ($use_username) { ?>
 	<tr>
-		<td><?php echo form_label('Username', $username['id']); ?></td>
+		<td><?php echo form_label('Username', $username['id']); ?></td><td>:</td>
 		<td><?php echo form_input($username); ?></td>
 		<td style="color: red;"><?php echo form_error($username['name']); ?><?php echo isset($errors[$username['name']])?$errors[$username['name']]:''; ?></td>
 	</tr>
 	<?php } ?>
 	<tr>
-		<td><?php echo form_label('Email Address', $email['id']); ?></td>
+		<td><?php echo form_label('Email Address', $email['id']); ?></td></td><td>:</td>
 		<td><?php echo form_input($email); ?></td>
 		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
 	</tr>
 	<tr>
-		<td><?php echo form_label('Name', $name['id']); ?></td>
+		<td><?php echo form_label('Name', $name['id']); ?></td></td><td>:</td>
 		<td><?php echo form_input($name); ?></td>
 		<td style="color: red;"><?php echo form_error($name['name']); ?><?php echo isset($errors[$name['name']])?$errors[$name['name']]:''; ?></td>
 	</tr>
 	<tr>
-		<td><?php echo form_label('Title', $title['id']); ?></td>
+		<td><?php echo form_label('Title', $title['id']); ?></td></td><td>:</td>
 		<td><?php echo form_input($title); ?></td>
 		<td style="color: red;"><?php echo form_error($title['name']); ?><?php echo isset($errors[$title['name']])?$errors[$title['name']]:''; ?></td>
 	</tr>
 	<tr>
-		<td><?php echo form_label('Password', $password['id']); ?></td>
+		<td><?php echo form_label('Password', $password['id']); ?></td></td><td>:</td>
 		<td><?php echo form_password($password); ?></td>
 		<td style="color: red;"><?php echo form_error($password['name']); ?></td>
 	</tr>
 	<tr>
-		<td><?php echo form_label('Confirm Password', $confirm_password['id']); ?></td>
+		<td><?php echo form_label('Confirm Password', $confirm_password['id']); ?></td></td><td>:</td>
 		<td><?php echo form_password($confirm_password); ?></td>
 		<td style="color: red;"><?php echo form_error($confirm_password['name']); ?></td>
 	</tr>
@@ -149,7 +150,7 @@ $captcha = array(
 	} ?>
 </table>
 <div class="da-home-form-btn-big">
-                        <input type="submit" value="Register" id="da-login-submit" class="btn btn-danger btn-block">
+                        <input type="submit" value="Register" id="da-login-submit" class="btn btn-success">
                     </div>
 <?php echo form_close(); ?>
                                 </div>

@@ -80,6 +80,9 @@ $captcha = array(
 		<td style="color: red;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']])?$errors[$login['name']]:''; ?></td>
 		</div>
 	</tr>
+</table>
+</br>
+<table>
 	<tr>
         <div class=" da-home-form-big">
 		<td><?php echo form_label('', $password['id']); ?></td>
@@ -129,7 +132,6 @@ $captcha = array(
 		<td colspan="3">
 			&nbsp;&nbsp;<?php echo form_checkbox($remember); ?>
 			<?php echo form_label('Remember me', $remember['id']); ?>
-			<?php if ($this->config->item('allow_registration', 'tank_auth')) echo anchor('/auth/register/', 'Register'); ?>
 		</td>
 	</div>
 	</tr>
