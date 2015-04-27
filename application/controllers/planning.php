@@ -1,0 +1,165 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Planning extends CI_Controller {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('planning_model');
+        $this->load->model('login_model');
+        $this->load->helper('cookie');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->library('fpdf');
+        $this->load->library('form_validation');
+        $this->load->library('tank_auth');
+        $this->lang->load('tank_auth');
+        $this->_is_logged_in();
+    //tser
+    }
+
+    public function index()
+    {
+        $message = array();
+        $this->show_table($message);
+    }
+
+    public function _is_logged_in(){
+        if(!$this->tank_auth->is_logged_in()){
+            redirect('/auth/login');
+        }
+    }
+
+    private function show_table($message)
+    {
+        $user_id    = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            //$data['planning'] = $this->detail_model->get_all_detail();
+
+            $data['getproject'] = $this->planning_model->get_project();
+            $data['getcompany'] = $this->planning_model->get_company();
+
+            $this->load->view('header');
+            $this->load->view('planning/navigation', $data);
+            $this->load->view('planning/main', $data);
+            $this->load->view('planning/footer');
+    }
+
+    public function detail($idproject, $idsubproject){
+        $user_id    = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+            // get necessary data
+            $idpj = $idproject;
+            $idspj = $idsubproject;
+            $data['detail'] = $this->planning_model->get_all_planning($idspj);
+            $data['subitem'] = $this->planning_model->get_all_subitem($idspj);
+            $data['proj'] = $this->planning_model->getproj($idspj);
+        
+            $this->load->view('header');
+            $this->load->view('planning/navigation', $data);
+            $this->load->view('planning/detail', $data);
+            $this->load->view('planning/footer');
+    }
+
+    public function cariitem(){
+        $user_id    = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+            // get necessary data
+            //$idpj = $idproject;
+            //$idspj = $idsubproject;
+            $data['detail'] = $this->planning_model->cariitem();
+            $data['subitem'] = $this->planning_model->get_all_carisubitem();
+            $data['proj'] = $this->planning_model->getprojitem();
+        
+            $this->load->view('header');
+            $this->load->view('planning/navigation', $data);
+            $this->load->view('planning/detailitem', $data);
+            $this->load->view('planning/footer');
+    }
+
+    public function cariitems($message){
+        $user_id    = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            //$idpj = $idproject;
+            //$idspj = $idsubproject;
+            $data['detail'] = $this->planning_model->cariitem();
+            $data['subitem'] = $this->planning_model->get_all_carisubitem();
+            $data['proj'] = $this->planning_model->getprojitem();
+        
+            $this->load->view('header');
+            $this->load->view('planning/navigation', $data);
+            $this->load->view('planning/detail', $data);
+            $this->load->view('planning/footer');
+    }
+
+    public function submititem(){
+        if($this->input->post('subproject_item')){
+            // check if there is any duplicate
+            //$duplicate_check = $this->planning_model->get_subprojectitem_by_name($this->input->post('subproject_item'));
+            
+                $response = $this->planning_model->set_subprojectitem();
+
+                if($response){
+                    $message['success'] = "Subproject Item berhasil disimpan.";
+                    $this->cariitems($message);
+                }else{
+                    $message['error'] = "Subproject Item gagal disimpan.";
+                    $this->cariitems($message);
+                }
+            
+        }else{
+            $message['error'] = "Subproject Item gagal disimpan.";
+            $this->cariitems($message);
+        }
+    }
+
+}
