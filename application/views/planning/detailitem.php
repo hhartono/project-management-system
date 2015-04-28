@@ -71,7 +71,13 @@
                                 <td class="division-row"><?php echo $details['item']; ?></td>
                                 <td class="division-row"><?php echo $details['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details['unit']; ?></td>
+                                <?php if(empty($details['finishing'])){ ?>
+                                <td class="division-row"><?php echo "Tidak Ada"; ?></td>
+                                <?php    
+                                    }else{
+                                ?>    
                                 <td class="division-row"><?php echo $details['finishing']; ?></td>
+                                <?php } ?>
                             </tr>
                             <?php $subproject=$details['subproject']; ?>
                         <?php endforeach?>
@@ -88,6 +94,13 @@
                 </div>
             </div>
         </div>
+        <div class="span12">
+            <div class="da-panel">
+                <div class="da-panel-header">
+                    <span class="da-panel-title">
+                        <i class="icol-grid"></i> Input Planning
+                    </span>
+                </div>
         <div class="da-panel-content da-form-container">
             <form id="da-purchaseorder-createpo-insert-form-val" class="da-form da-form-inline" method="post" action="/planning/submit_planning/">
                 <div class="da-form-row">
@@ -121,6 +134,7 @@
                 <input type="hidden" value="<?php echo $this->input->post('subitem'); ?>" name="subitem">
             </form>
         </div>
-
+        </div>
+    </div>
     </div>
 </div>
