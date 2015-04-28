@@ -34,6 +34,8 @@
     <!-- JS Table -->
     <script src="/assets/js/custom/worker/worker.modal.js"></script>
     <script src="/assets/js/custom/worker/worker.tables.js"></script>
+    <script src="/assets/js/custom/purchaseorder/purchaseorder.createpotables.js"></script>
+    
     <script src="/assets/js/custom/absensi/absensi.tables.js"></script>
 
     <!-- JS Template -->
@@ -58,5 +60,17 @@
     })
         
     </script>
+
+    <script src="/assets/libs/jquery.min.js"></script>
+        <script src="/assets/libs/jquery.multiple.select.js"></script>
+        <link rel="stylesheet" href="/assets/libs/multiple-select.css"/>
+        <script>
+            $(document).ready(function(){
+                $('#demo2').multipleSelect({
+                    placeholder: "Pilih Finishing",
+                    filter:true
+                });
+            });
+        </script>
 </body>
 </html>

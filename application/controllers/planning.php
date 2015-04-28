@@ -105,6 +105,7 @@ class Planning extends CI_Controller {
             //$idspj = $idsubproject;
             $data['detail'] = $this->planning_model->cariitem();
             $data['subitem'] = $this->planning_model->get_all_carisubitem();
+            $data['finishing'] = $this->planning_model->get_all_finishing();
             $data['proj'] = $this->planning_model->getprojitem();
         
             $this->load->view('header');
@@ -114,7 +115,7 @@ class Planning extends CI_Controller {
     }
 
     public function cariitems($message){
-        $user_id    = $this->tank_auth->get_user_id();
+            $user_id    = $this->tank_auth->get_user_id();
         
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
@@ -131,7 +132,7 @@ class Planning extends CI_Controller {
             // get necessary data
             //$idpj = $idproject;
             //$idspj = $idsubproject;
-            $data['detail'] = $this->planning_model->cariitem();
+            $data['detail'] = $this->planning_model->cariitems();
             $data['subitem'] = $this->planning_model->get_all_carisubitem();
             $data['proj'] = $this->planning_model->getprojitem();
         
@@ -162,4 +163,40 @@ class Planning extends CI_Controller {
         }
     }
 
+    public function submit_planning(){
+        // check all necessary input
+        if(!empty($this->input->post('name')) && !empty($this->input->post('item_count'))){
+            // search for customer id
+            $database_input_array = array();
+            $item_detail = $this->planning_model->get_item_by_name($this->input->post('name'));
+            
+            if(empty($item_detail)){
+                $message['error'] = "Planning gagal disimpan. Item tidak ada dalam system.";
+                $this->cariitem();
+                return;
+            }else{
+                $database_input_array['item_id'] = $item_detail['id'];
+            }
+            $database_input_array['finishing_id'] = $this->input->post('finishing');           
+
+            $database_input_array['quantity'] = $this->input->post('item_count');
+            $database_input_array['subproject_item_id'] = $this->input->post('subitem');
+
+            // check if there is any duplicate
+            
+                $response = $this->planning_model->submit_planning($database_input_array);
+
+                if($response){
+                    $message['success'] = "Planning berhasil disimpan.";
+                    $this->cariitem();
+                }else{
+                    $message['error'] = "Planning gagal disimpan.";
+                    $this->cariitem();
+                }
+            
+        }else{
+            $message['error'] = "Planning gagal disimpan.";
+            $this->cariitem();
+        }
+    }
 }

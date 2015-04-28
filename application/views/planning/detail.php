@@ -17,10 +17,10 @@
                </form>
             </div>
             <div class="span5">
-                <?php echo form_open_multipart('/planning/submititem/');?>
+                <form method="post" action="/planning/submititem/">
                 &nbsp; Tambah Subproject Item: <input type="text" name="subproject_item">
                 <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
-                <input type="hidden" value="<?php echo $this->input->post('subitem') ; ?>" name="sub">
+                <input type="hidden" value="<?php echo $this->input->post('subitem') ; ?>" name="subitem">
                 <input type="submit" value="Submit" class="btn btn-success btn-create">
                 </form>                           
             </div>
@@ -58,7 +58,7 @@
                             <th>Finishing</th>
                         </tr>
                         </thead>
-                        <tbody><?php $total_sum=0; ?>
+                        <tbody>
                         <?php foreach($detail as $details): ?>
                         <?php
                             if($subproject!=$details['subproject'])
@@ -88,5 +88,6 @@
                 </div>
             </div>
         </div>
+        
     </div>
 </div>

@@ -16,14 +16,6 @@
                     <input type="submit" value="Filter" class="btn btn-success"/>
                </form>
             </div>
-            <div class="span5">
-                <?php echo form_open_multipart('/planning/submititem/');?>
-                &nbsp; Tambah Subproject Item: <input type="text" name="subproject_item">
-                <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
-                <input type="hidden" value="<?php echo $this->input->post('subitem') ; ?>" name="sub">
-                <input type="submit" value="Submit" class="btn btn-success btn-create">
-                </form>                           
-            </div>
         </div>
         <div class="row-fluid">
             <div class="span12">
@@ -88,6 +80,39 @@
                 </div>
             </div>
         </div>
-        
+        <div class="da-panel-content da-form-container">
+            <form id="da-purchaseorder-createpo-insert-form-val" class="da-form da-form-inline" method="post" action="/planning/submit_planning/">
+                <div class="da-form-row">
+                    <label class="da-form-label">Nama Barang</label>
+                        <div class="da-form-item large">
+                            <input id="purchaseorder-createpo-insert-name" type="text" name="name">
+                        </div>
+                </div>
+                <div class="da-form-row">
+                    <label class="da-form-label">Quantity</label>
+                        <div class="da-form-item large">
+                            <input id="purchaseorder-createpo-insert-item-count" type="text" name="item_count" autocomplete="off">
+                        </div>
+                </div>
+                <div class="da-form-row">
+                    <label class="da-form-label">Finishing</label>
+                        <div class="da-form-item large">
+                            <select id="demo2" name="finishing" multiple="multiple" style="width:220px">
+                                <?php
+                                    foreach ($finishing as $finishing) {
+                                        echo "<option value='$finishing[id]'> $finishing[name] </option> ";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                </div>
+                <div class="da-form-row" style="text-align:left;">
+                    <input type="submit" value="Submit" class="btn btn-success">
+                </div>
+                <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
+                <input type="hidden" value="<?php echo $this->input->post('subitem'); ?>" name="subitem">
+            </form>
+        </div>
+
     </div>
 </div>

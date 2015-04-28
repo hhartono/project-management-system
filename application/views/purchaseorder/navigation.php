@@ -92,6 +92,15 @@
                                 Home
                             </a>
                         </li>
+                        <li>
+                            <a href="/planning">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-edit"></i>
+                                    </span>
+                                Perencanaan Bahan
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="/purchaseorder">
                                 <!-- Icon Container -->

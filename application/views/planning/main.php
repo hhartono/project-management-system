@@ -8,7 +8,7 @@
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Project Detail
+                                        <i class="icol-grid"></i> Perencanaan Bahan
                                     </span>
                                 </div>
                                 <div class="da-panel-header">

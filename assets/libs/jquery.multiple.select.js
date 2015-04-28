@@ -61,16 +61,16 @@
 				);
 			}
 			html.push('<ul>');
-			if (this.options.selectAll) {
-				html.push(
-					'<li>',
-						'<label>',
-							'<input type="checkbox" name="selectAll" /> ',
-							'[' + this.options.selectAllText + ']',
-						'</label>',
-					'</li>'
-				);
-			}
+			// if (this.options.selectAll) {
+			// 	html.push(
+			// 		'<li>',
+			// 			'<label>',
+			// 				'<input type="checkbox" name="selectAll" /> ',
+			// 				'[' + this.options.selectAllText + ']',
+			// 			'</label>',
+			// 		'</li>'
+			// 	);
+			// }
 			$.each(this.$el.children(), function(i, elm) {
 				html.push(that.optionToHtml(i, elm));
 			});

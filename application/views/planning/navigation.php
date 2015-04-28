@@ -63,8 +63,8 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="#">Project</a></li>
-                        <li class="active"><span>Project Detail</span></li>
+                        <li><a href="#">Perencanaan Bahan</a></li>
+                        <li class="active"><span>Perencanaan Bahan</span></li>
                     </ul>
                 </div>
             </div>
@@ -91,6 +91,15 @@
                                         <i class="icon-home"></i>
                                     </span>
                                 Home
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="/planning">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-edit"></i>
+                                    </span>
+                                Perencanaan Bahan
                             </a>
                         </li>
                         <li>
@@ -136,7 +145,7 @@
                                 <li><a href="/unit">Satuan</a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">
