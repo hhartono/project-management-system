@@ -50,8 +50,11 @@
                             <th>Finishing</th>
                         </tr>
                         </thead>
-                        <tbody><?php $total_sum=0; ?>
-                        <?php foreach($detail as $details): ?>
+                        <tbody>
+                        <?php 
+                        if(!empty($detail))
+                        {
+                            foreach($detail as $details): ?>
                         <?php
                             if($subproject!=$details['subproject'])
                             {
@@ -72,6 +75,11 @@
                             </tr>
                             <?php $subproject=$details['subproject']; ?>
                         <?php endforeach?>
+                        <?php 
+                        }else{
+                            echo "<tr><td colspan=6> Data Belum Tersedia</td></tr>";
+                        }
+                        ?>
                        </tbody>
                         </table>
                         

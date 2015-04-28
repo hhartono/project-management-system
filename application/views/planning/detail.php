@@ -59,7 +59,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($detail as $details): ?>
+                        <?php 
+                        if(!empty($detail))
+                        {
+                            foreach($detail as $details): ?>
                         <?php
                             if($subproject!=$details['subproject'])
                             {
@@ -79,7 +82,12 @@
                                 <td class="division-row"><?php echo $details['finishing']; ?></td>
                             </tr>
                             <?php $subproject=$details['subproject']; ?>
-                        <?php endforeach?>
+                            <?php endforeach?>
+                        <?php
+                            }else{
+                        ?>
+                            <tr><td colspan="6">Data Tidak Ada, Silahkan Isi Subproject Item Terlebih Dahulu!</td></tr>
+                       <?php } ?>
                        </tbody>
                         </table>
                         
