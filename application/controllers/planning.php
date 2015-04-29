@@ -106,6 +106,7 @@ class Planning extends CI_Controller {
             $data['detail'] = $this->planning_model->cariitem();
             $data['subitem'] = $this->planning_model->get_all_carisubitem();
             $data['finishing'] = $this->planning_model->get_all_finishing();
+            $data['finishing_belakang'] = $this->planning_model->get_all_finishing();
             $data['proj'] = $this->planning_model->getprojitem();
         
             $this->load->view('header');
@@ -177,8 +178,8 @@ class Planning extends CI_Controller {
             }else{
                 $database_input_array['item_id'] = $item_detail['id'];
             }
-            $database_input_array['finishing_id'] = $this->input->post('finishing');           
-
+            $database_input_array['finishing_id'] = $this->input->post('finishing');
+            $database_input_array['finishing_belakang_id'] = $this->input->post('finishing_belakang');        
             $database_input_array['quantity'] = $this->input->post('item_count');
             $database_input_array['subproject_item_id'] = $this->input->post('subitem');
 

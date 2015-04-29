@@ -66,11 +66,22 @@
         <link rel="stylesheet" href="/assets/libs/multiple-select.css"/>
         <script>
             $(document).ready(function(){
-                $('#demo2').multipleSelect({
-                    placeholder: "Pilih Finishing",
+                $('#finishing').multipleSelect({
+                    placeholder: "Pilih Finishing Depan",
                     filter:true
                 });
             });
-        </script>
+    </script>
+    <script src="/assets/libs/jquery.min.js"></script>
+        <script src="/assets/libs/jquery.multiple.select.js"></script>
+        <link rel="stylesheet" href="/assets/libs/multiple-select.css"/>
+        <script>
+            $(document).ready(function(){
+                $('#finishing_belakang').multipleSelect({
+                    placeholder: "Pilih Finishing Belakang",
+                    filter:true
+                });
+            });
+    </script>
 </body>
 </html>

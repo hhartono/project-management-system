@@ -63,7 +63,6 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="#">Perencanaan Bahan</a></li>
                         <li class="active"><span>Perencanaan Bahan</span></li>
                     </ul>
                 </div>

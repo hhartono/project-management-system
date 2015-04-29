@@ -3,7 +3,7 @@
     <!-- Content Area -->
     <div id="da-content-area">
         <div class="row-fluid">
-            <div class="span7">
+            <div class="span12">
             <?php echo form_open_multipart('/planning/cariitem/');?>
                 Subproject Item: <select name="subitem">
                     <option value="">--- Pilih Subproject Item---</option>
@@ -13,10 +13,11 @@
                         }
                     ?></select>   
                     <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
-                    <input type="submit" value="Filter" class="btn btn-success"/>
+                    <input type="submit" value="Submit" class="btn btn-success"/>
                </form>
             </div>
         </div>
+        </br>
         <div class="row-fluid">
             <div class="span12">
                 <div class="da-panel">
@@ -48,6 +49,7 @@
                             <th>Quantity</th>
                             <th>Satuan</th>
                             <th>Finishing</th>
+                            <th>Finishing Belakang</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,8 +80,15 @@
                                 ?>    
                                 <td class="division-row"><?php echo $details['finishing']; ?></td>
                                 <?php } ?>
+                                <?php if(empty($details['finishing_belakang'])){ ?>
+                                <td class="division-row"><?php echo "Tidak Ada"; ?></td>
+                                <?php    
+                                    }else{
+                                ?>    
+                                <td class="division-row"><?php echo $details['finishing_belakang']; ?></td>
+                                <?php } ?>
                             </tr>
-                            <?php $subproject=$details['subproject']; ?>
+                            <?php $subproject =$details ['subproject']; ?>
                         <?php endforeach?>
                         <?php 
                         }else{
@@ -116,11 +125,23 @@
                         </div>
                 </div>
                 <div class="da-form-row">
-                    <label class="da-form-label">Finishing</label>
+                    <label class="da-form-label">Finishing Depan</label>
                         <div class="da-form-item large">
-                            <select id="demo2" name="finishing" multiple="multiple" style="width:220px">
+                            <select id="finishing" name="finishing" multiple="multiple" style="width:220px">
                                 <?php
                                     foreach ($finishing as $finishing) {
+                                        echo "<option value='$finishing[id]'> $finishing[name] </option> ";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                </div>
+                <div class="da-form-row">
+                    <label class="da-form-label">Finishing Belakang</label>
+                        <div class="da-form-item large">
+                            <select id="finishing_belakang" name="finishing_belakang" multiple="multiple" style="width:220px">
+                                <?php
+                                    foreach ($finishing_belakang as $finishing) {
                                         echo "<option value='$finishing[id]'> $finishing[name] </option> ";
                                     }
                                 ?>

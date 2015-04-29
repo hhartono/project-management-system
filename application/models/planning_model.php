@@ -155,21 +155,10 @@ class Planning_model extends CI_Model {
 
     }
 
-    public function get_absensi($idsubproject)
-    {
-        $query = $this->db->query("select absensi.name as name, absensi.date as date, subproject_master.name as subproject, absensi.count as count, 
-                                        absensi.count_time as counttime, SUM(absensi.count_time / absensi.count) as waktu 
-                                    from absensi, absensi_detail, subproject_master
-                                    where absensi.id = absensi_detail.absensi_id AND subproject_master.id = absensi_detail.subproject_id 
-                                            AND subproject_master.id = '$idsubproject'
-                                        GROUP BY absensi.name");
-        return $query->result_array();   
-    }
-
     public function get_all_planning($idsubproject)
     {
         $query = $this->db->query("select subproject_item_master.name as subproject, unit_master.name as unit, category_master.name as category, item_master.name as item, item_master.id as itemid, planning_master.quantity as quantity, 
-                                        (select item_master.name from item_master, finishing_master where finishing_master.planning_id = planning_master.id AND finishing_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing 
+                                        (select item_master.name from item_master, finishing_master where finishing_master.planning_id = planning_master.id AND finishing_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing, (select item_master.name from item_master, finishing_belakang_master where finishing_belakang_master.planning_id = planning_master.id AND finishing_belakang_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing_belakang 
                                     from item_master, planning_master, unit_master, subproject_item_master, subproject_master, category_master
                                     where item_master.id = planning_master.item_id AND category_master.id = item_master.category_id AND unit_master.id = item_master.unit_id AND planning_master.subproject_item_id = subproject_item_master.id AND subproject_master.id = subproject_item_master.subproject_id AND subproject_master.id ='$idsubproject' ");
 
@@ -189,7 +178,7 @@ class Planning_model extends CI_Model {
         $subitem = $this->input->post('subitem');
         $sub = $this->input->post('sub');
         $query = $this->db->query("select subproject_item_master.name as subproject, unit_master.name as unit, category_master.name as category, item_master.name as item, item_master.id as itemid, planning_master.quantity as quantity, 
-                                        (select item_master.name from item_master, finishing_master where finishing_master.planning_id = planning_master.id AND finishing_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing 
+                                        (select item_master.name from item_master, finishing_master where finishing_master.planning_id = planning_master.id AND finishing_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing, (select item_master.name from item_master, finishing_belakang_master where finishing_belakang_master.planning_id = planning_master.id AND finishing_belakang_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing_belakang 
                                     from item_master, planning_master, unit_master, subproject_item_master, subproject_master, category_master
                                     where item_master.id = planning_master.item_id AND category_master.id = item_master.category_id AND unit_master.id = item_master.unit_id AND planning_master.subproject_item_id = subproject_item_master.id AND subproject_master.id = subproject_item_master.subproject_id AND subproject_master.id = '$sub' AND subproject_item_master.id ='$subitem'");
 
@@ -201,7 +190,7 @@ class Planning_model extends CI_Model {
         //$subitem = $this->input->post('subitem');
         $sub = $this->input->post('sub');
         $query = $this->db->query("select subproject_item_master.name as subproject, unit_master.name as unit, category_master.name as category, item_master.name as item, item_master.id as itemid, planning_master.quantity as quantity, 
-                                        (select item_master.name from item_master, finishing_master where finishing_master.planning_id = planning_master.id AND finishing_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing 
+                                        (select item_master.name from item_master, finishing_master where finishing_master.planning_id = planning_master.id AND finishing_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing, (select item_master.name from item_master, finishing_belakang_master where finishing_belakang_master.planning_id = planning_master.id AND finishing_belakang_master.item_id = item_master.id AND planning_master.item_id = itemid LIMIT 1) as finishing_belakang 
                                     from item_master, planning_master, unit_master, subproject_item_master, subproject_master, category_master
                                     where item_master.id = planning_master.item_id AND category_master.id = item_master.category_id AND unit_master.id = item_master.unit_id AND planning_master.subproject_item_id = subproject_item_master.id AND subproject_master.id = subproject_item_master.subproject_id AND subproject_master.id = '$sub'");
 
@@ -274,11 +263,17 @@ class Planning_model extends CI_Model {
 
             // PART 2 - set PO detail
             $database_input_array['planning_id'] = $this->db->insert_id();
-                $data = array(
-                    'planning_id' => $database_input_array['planning_id'],
-                    'item_id' => $database_input_array['finishing_id'],
+            $data = array(
+                'planning_id' => $database_input_array['planning_id'],
+                'item_id' => $database_input_array['finishing_id'],
                 );
-                $this->db->insert('finishing_master', $data);
+            $this->db->insert('finishing_master', $data);
+
+            $data = array(
+                'planning_id' => $database_input_array['planning_id'],
+                'item_id' => $database_input_array['finishing_belakang_id'],
+            );
+                $this->db->insert('finishing_belakang_master', $data);
 
             // complete database transaction
             $this->db->trans_complete();

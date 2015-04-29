@@ -13,7 +13,7 @@
                         }
                     ?></select>   
                     <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
-                    <input type="submit" value="Filter" class="btn btn-success"/>
+                    <input type="submit" value="Submit" class="btn btn-success"/>
                </form>
             </div>
             <div class="span5">
@@ -55,7 +55,8 @@
                             <th>Nama Barang</th>
                             <th>Quantity</th>
                             <th>Satuan</th>
-                            <th>Finishing</th>
+                            <th>Finishing Depan</th>
+                            <th>Finishing Belakang</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -79,9 +80,23 @@
                                 <td class="division-row"><?php echo $details['item']; ?></td>
                                 <td class="division-row"><?php echo $details['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details['unit']; ?></td>
+                                <?php if(empty($details['finishing'])){ ?>
+                                <td class="division-row"><?php echo "Tidak Ada"; ?></td>
+                                <?php    
+                                    }else{
+                                ?>    
                                 <td class="division-row"><?php echo $details['finishing']; ?></td>
+                                <?php } ?>
+                                <?php if(empty($details['finishing_belakang'])){ ?>
+                                <td class="division-row"><?php echo "Tidak Ada"; ?></td>
+                                <?php    
+                                    }else{
+                                ?>    
+                                <td class="division-row"><?php echo $details['finishing_belakang']; ?></td>
+                                <?php } ?>
                             </tr>
-                            <?php $subproject=$details['subproject']; ?>
+                            <?php $subproject =$details ['subproject']; ?>
+                           
                             <?php endforeach?>
                         <?php
                             }else{
