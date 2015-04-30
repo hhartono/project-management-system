@@ -34,6 +34,7 @@
     <!-- JS Table -->
     <script src="/assets/js/custom/worker/worker.modal.js"></script>
     <script src="/assets/js/custom/worker/worker.tables.js"></script>
+    <script src="/assets/js/custom/planning/planning.tables.js"></script>
     <script src="/assets/js/custom/purchaseorder/purchaseorder.createpotables.js"></script>
     
     <script src="/assets/js/custom/absensi/absensi.tables.js"></script>

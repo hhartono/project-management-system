@@ -47,7 +47,7 @@
                     ?>
                     <div class="da-panel-content da-table-container">
                     
-                        <table id="da-planning-datatable-numberpaging" class="da-table">
+                        <table id="da-plannings-datatable-numberpaging" class="da-table">
                         <thead>
                         <tr>
                             <th>Sub Project Item</th>
@@ -101,7 +101,7 @@
                         <?php
                             }else{
                         ?>
-                            <tr><td colspan="6">Data Tidak Ada, Silahkan Isi Subproject Item Terlebih Dahulu!</td></tr>
+                            <tr><td colspan="7">Data Tidak Ada, Silahkan Isi Subproject Item Terlebih Dahulu!</td></tr>
                        <?php } ?>
                        </tbody>
                         </table>
@@ -111,6 +111,71 @@
                 </div>
             </div>
         </div>
-        
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="da-panel">
+                <div class="da-panel-header">
+                    <span class="da-panel-title">
+                        <i class="icol-grid"></i> Cek Stock Barang
+                    </span>
+                </div>
+                    <?php if(isset($message['success'])): ?>
+                        <div class="da-message success"><?php echo $message['success']; ?></div>
+                    <?php endif; ?>
+                    <?php if(isset($message['info'])): ?>
+                        <div class="da-message info"><?php echo $message['info']; ?></div>
+                    <?php endif; ?>
+                    <?php if(isset($message['error'])): ?>
+                        <div class="da-message error"><?php echo $message['error']; ?></div>
+                    <?php endif; ?>
+                    <?php
+                        $category='' ;
+                    ?>
+                    <div class="da-panel-content da-table-container">
+                    
+                        <table id="da-planning-datatable-numberpaging" class="da-table">
+                        <thead>
+                        <tr>                            
+                            <th>Kategori</th>
+                            <th>Nama Barang</th>
+                            <th>Quantity</th>
+                            <th>Satuan</th>
+                            <th>Stock Tersedia</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php 
+                            foreach($stock as $stocks): ?>
+                            <tr>
+                                <td class="division-row"><?php echo $stocks['category']; ?></td>
+                                <td class="division-row"><?php echo $stocks['item']; ?></td>
+                                <td class="division-row"><?php echo $stocks['quantity']; ?></td>
+                                <td class="division-row"><?php echo $stocks['unit']; ?></td>
+                                <?php if(empty($stocks['stock'])){ ?>
+                                <td class="division-row"><?php echo "Stock Kosong"; ?></td>
+                                <?php    
+                                    }else{
+                                ?>    
+                                <td class="division-row"><?php echo $stocks['stock']; ?></td>
+                                <?php } ?>
+                                <?php if(($stocks['stock'] >= $stocks['quantity'])){ ?>
+                                <td class="division-row"><?php echo "Item Tersedia"; ?></td>
+                                <?php    
+                                    }else{
+                                        $kurang = $stocks['quantity'] - $stocks['stock'];
+                                ?>    
+                                <td class="division-row">Item Kurang :&nbsp; <?php echo $kurang ; ?>&nbsp; Unit</td>
+                                <?php } ?>
+                            </tr>                           
+                            <?php endforeach?>
+                       </tbody>
+                        </table>
+                        
+                    </div>
+                    </br>
+                </div>
+            </div>
+        </div>        
     </div>
 </div>

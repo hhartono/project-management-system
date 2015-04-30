@@ -3,7 +3,7 @@
     <!-- Content Area -->
     <div id="da-content-area">
         <div class="row-fluid">
-            <div class="span12">
+            <div class="span7">
             <?php echo form_open_multipart('/planning/cariitem/');?>
                 Subproject Item: <select name="subitem">
                     <option value="">--- Pilih Subproject Item---</option>
@@ -15,6 +15,10 @@
                     <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
                     <input type="submit" value="Submit" class="btn btn-success"/>
                </form>
+            </div>
+            <div class="span5">
+                <a class="btn btn-success btn-create" href="/planning/detail/<?php echo $proj->projectid; ?>/<?php echo $proj->id; ?>" cls='btn'>       
+                <i class='icon-retweet'></i>&nbsp; Kembali </a>
             </div>
         </div>
         </br>
@@ -40,7 +44,7 @@
                     ?>
                     <div class="da-panel-content da-table-container">
                     
-                        <table id="da-planning-datatable-numberpaging" class="da-table">
+                        <table id="da-plannings-datatable-numberpaging" class="da-table">
                         <thead>
                         <tr>
                             <th>Sub Project Item</th>

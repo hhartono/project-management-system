@@ -165,6 +165,52 @@ class Planning_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_all_stock_planning($idsubproject)
+    {
+        $query = $this->db->query("select category_master.name as category, item_master.name as item, unit_master.name as unit, item_master.id as itemid, sum(planning_master.quantity) as quantity, stock
+                                        from item_master join planning_master on item_master.id = planning_master.item_id
+                                        join unit_master on unit_master.id = item_master.unit_id
+                                        join category_master on category_master.id = item_master.category_id
+                                        join subproject_item_master on planning_master.subproject_item_id = subproject_item_master.id
+                                        join subproject_master on subproject_master.id = subproject_item_master.subproject_id
+                                        left join (SELECT item_master.id, SUM(stock_master.item_count) AS stock
+                                                    FROM item_master, stock_master
+                                                    WHERE item_master.id=stock_master.item_id
+                                                    GROUP BY stock_master.item_id ASC) AS stocks ON item_master.id=stocks.id
+                                        where subproject_master.id ='$idsubproject'
+                                        GROUP BY item_master.id ASC
+                                    UNION
+                                    select category_master.name as category, item_master.name as item, unit_master.name as unit, item_master.id as itemid, sum(planning_master.quantity) as quantity, stock
+                                        from item_master join finishing_master on item_master.id = finishing_master.item_id
+                                        join planning_master on planning_master.id = finishing_master.planning_id
+                                        join unit_master on unit_master.id = item_master.unit_id
+                                        join category_master on category_master.id = item_master.category_id
+                                        join subproject_item_master on planning_master.subproject_item_id = subproject_item_master.id
+                                        join subproject_master on subproject_master.id = subproject_item_master.subproject_id
+                                        left join (SELECT item_master.id, SUM(stock_master.item_count) AS stock
+                                                    FROM item_master, stock_master
+                                                    WHERE item_master.id=stock_master.item_id
+                                                    GROUP BY stock_master.item_id ASC) AS stocks ON item_master.id=stocks.id
+                                        where subproject_master.id ='$idsubproject'
+                                        GROUP BY item_master.id ASC
+                                    UNION
+                                    select category_master.name as category, item_master.name as item, unit_master.name as unit, item_master.id as itemid, sum(planning_master.quantity) as quantity, stock
+                                        from item_master join finishing_belakang_master on item_master.id = finishing_belakang_master.item_id
+                                        join planning_master on planning_master.id = finishing_belakang_master.planning_id
+                                        join unit_master on unit_master.id = item_master.unit_id
+                                        join category_master on category_master.id = item_master.category_id
+                                        join subproject_item_master on planning_master.subproject_item_id = subproject_item_master.id
+                                        join subproject_master on subproject_master.id = subproject_item_master.subproject_id
+                                        left join (SELECT item_master.id, SUM(stock_master.item_count) AS stock
+                                                    FROM item_master, stock_master
+                                                    WHERE item_master.id=stock_master.item_id
+                                                    GROUP BY stock_master.item_id ASC) AS stocks ON item_master.id=stocks.id
+                                        where subproject_master.id ='$idsubproject'
+                                        GROUP BY item_master.id ASC");
+
+        return $query->result_array();
+    }
+
     public function get_all_subitem($idsubproject) 
     {
         $result = $this->db->query ("select subproject_item_master.*

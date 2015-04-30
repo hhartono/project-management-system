@@ -43,7 +43,7 @@
 
                                 <div class="da-panel-content da-table-container">
 
-                                    <table id="da-planning-datatable-numberpaging" class="da-table">
+                                    <table id="da-plannings-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Project</th>

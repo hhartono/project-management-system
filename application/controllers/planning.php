@@ -76,6 +76,7 @@ class Planning extends CI_Controller {
             $idpj = $idproject;
             $idspj = $idsubproject;
             $data['detail'] = $this->planning_model->get_all_planning($idspj);
+            $data['stock'] = $this->planning_model->get_all_stock_planning($idspj);
             $data['subitem'] = $this->planning_model->get_all_subitem($idspj);
             $data['proj'] = $this->planning_model->getproj($idspj);
         
