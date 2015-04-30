@@ -119,15 +119,6 @@
                         <i class="icol-grid"></i> Cek Stock Barang
                     </span>
                 </div>
-                    <?php if(isset($message['success'])): ?>
-                        <div class="da-message success"><?php echo $message['success']; ?></div>
-                    <?php endif; ?>
-                    <?php if(isset($message['info'])): ?>
-                        <div class="da-message info"><?php echo $message['info']; ?></div>
-                    <?php endif; ?>
-                    <?php if(isset($message['error'])): ?>
-                        <div class="da-message error"><?php echo $message['error']; ?></div>
-                    <?php endif; ?>
                     <?php
                         $category='' ;
                     ?>

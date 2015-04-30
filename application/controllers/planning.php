@@ -136,6 +136,7 @@ class Planning extends CI_Controller {
             //$idspj = $idsubproject;
             $data['detail'] = $this->planning_model->cariitems();
             $data['subitem'] = $this->planning_model->get_all_carisubitem();
+            $data['stock'] = $this->planning_model->get_all_stock();
             $data['proj'] = $this->planning_model->getprojitem();
         
             $this->load->view('header');
