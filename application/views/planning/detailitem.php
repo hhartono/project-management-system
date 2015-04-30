@@ -131,7 +131,8 @@
                 <div class="da-form-row">
                     <label class="da-form-label">Finishing Depan</label>
                         <div class="da-form-item large">
-                            <select id="finishing" name="finishing" multiple="multiple" style="width:220px">
+                            <select id="finishing" name="finishing" style="width:220px">
+                            <option>Pilih Finishing Depan</option>
                                 <?php
                                     foreach ($finishing as $finishing) {
                                         echo "<option value='$finishing[id]'> $finishing[name] </option> ";
@@ -143,7 +144,8 @@
                 <div class="da-form-row">
                     <label class="da-form-label">Finishing Belakang</label>
                         <div class="da-form-item large">
-                            <select id="finishing_belakang" name="finishing_belakang" multiple="multiple" style="width:220px">
+                            <select id="finishing_belakang" name="finishing_belakang" style="width:220px">
+                            <option>Pilih Finishing Belakang</option>
                                 <?php
                                     foreach ($finishing_belakang as $finishing) {
                                         echo "<option value='$finishing[id]'> $finishing[name] </option> ";

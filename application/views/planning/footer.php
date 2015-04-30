@@ -12,6 +12,7 @@
     <script src="/assets/js/libs/jquery-1.8.3.min.js"></script>
     <script src="/assets/js/libs/jquery.placeholder.min.js"></script>
     <script src="/assets/js/libs/jquery.mousewheel.min.js"></script>
+    <script src="/assets/js/libs/chosen.jquery.min.js"></script>
 
     <!-- JS Bootstrap -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
@@ -61,27 +62,14 @@
     })
         
     </script>
-
-    <script src="/assets/libs/jquery.min.js"></script>
-        <script src="/assets/libs/jquery.multiple.select.js"></script>
-        <link rel="stylesheet" href="/assets/libs/multiple-select.css"/>
-        <script>
+    <script>
             $(document).ready(function(){
-                $('#finishing').multipleSelect({
-                    placeholder: "Pilih Finishing Depan",
-                    filter:true
-                });
+                $('#finishing').chosen();
             });
     </script>
-    <script src="/assets/libs/jquery.min.js"></script>
-        <script src="/assets/libs/jquery.multiple.select.js"></script>
-        <link rel="stylesheet" href="/assets/libs/multiple-select.css"/>
-        <script>
+    <script>
             $(document).ready(function(){
-                $('#finishing_belakang').multipleSelect({
-                    placeholder: "Pilih Finishing Belakang",
-                    filter:true
-                });
+                $('#finishing_belakang').chosen();
             });
     </script>
 </body>

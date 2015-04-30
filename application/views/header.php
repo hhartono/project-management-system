@@ -27,5 +27,5 @@
     <link rel="stylesheet" href="/assets/css/demo.css" media="screen">
     <!-- User Defined -->
     <link rel="stylesheet" href="/assets/css/general.css" media="screen">
-
+    <link rel="stylesheet" href="/assets/js/libs/chosen.min.css">
     
