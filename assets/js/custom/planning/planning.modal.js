@@ -45,10 +45,22 @@
                 source: data,
                 change: function() {
                     var item_name = $("#planning-insert-name").val();
-                    get_unit_by_item_name(item_name, '#purchaseorder-createpo-insert-item-count-label');
+                    get_unit_by_item_name(item_name, '#planning-insert-item-count-label');
                 }
             });
         }, "json" );
+
+        function get_unit_by_item_name(item_name, target_textplace){
+            var item_name_encoded = encodeURIComponent(item_name);
+
+            $.get( "/planning/get_unit_by_item_name/" + item_name_encoded, function(data) {
+                if(data != null && data.name != null){
+                    $(target_textplace).text(data.name);
+                }else{
+                    $(target_textplace).text('');
+                }
+            }, "json" );
+        }
 
     });
 }) (jQuery);

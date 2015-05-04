@@ -126,6 +126,7 @@
                     <label class="da-form-label">Quantity</label>
                         <div class="da-form-item large">
                             <input id="purchaseorder-createpo-insert-item-count" type="text" name="item_count" autocomplete="off">
+                            <label for="purchaseorder-createpo-insert-item-count" id="purchaseorder-createpo-insert-item-count-label"></label>
                         </div>
                 </div>
                 <div class="da-form-row">

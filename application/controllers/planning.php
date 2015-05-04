@@ -6,6 +6,8 @@ class Planning extends CI_Controller {
         parent::__construct();
         $this->load->model('planning_model');
         $this->load->model('login_model');
+        $this->load->model('item_model');
+        $this->load->model('unit_model');
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->helper('form');
@@ -200,6 +202,16 @@ class Planning extends CI_Controller {
         }else{
             $message['error'] = "Planning gagal disimpan.";
             $this->cariitem();
+        }
+    }
+
+    public function get_unit_by_item_name($item_name){
+        $item_name = urldecode($item_name);
+        $item_detail = $this->item_model->get_item_by_name($item_name);
+
+        if(!empty($item_detail['unit_id'])){
+            $unit_detail = $this->unit_model->get_unit_by_id($item_detail['unit_id']);
+            echo json_encode($unit_detail);
         }
     }
 }
