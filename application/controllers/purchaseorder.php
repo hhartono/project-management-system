@@ -361,6 +361,11 @@ class Purchaseorder extends CI_Controller {
             $receive=substr($data['receiveorder'],0,1); 
             $print=substr($data['receiveorder'],1,1); 
 
+            // $data['access']['create'] = true;
+            // $data['access']['edit'] = true;
+            // $data['access']['delete'] = true;
+            // $data['access']['receive'] = true;
+            // $data['access']['print'] = true;
             if($create != 0){
                 $data['access']['create'] = true;            
             }else{

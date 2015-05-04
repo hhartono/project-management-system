@@ -3,6 +3,12 @@
     <!-- Content Area -->
     <div id="da-content-area">
         <div class="row-fluid">
+            <div class="span12">
+                <h3 align="center"><?php echo $proj->project; ?> - <?php echo $proj->name;?></h3>
+            </div>
+        </div>
+        </br>
+        <div class="row-fluid">
             <div class="span7">
             <?php echo form_open_multipart('/planning/cariitem/');?>
                 Subproject Item: <select name="subitem">

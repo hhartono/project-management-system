@@ -52,21 +52,26 @@ $this->fpdf->Ln();
    
     $this->fpdf->Cell(12,1,'Supplier : '.$detail['name'].'',0,0,'L');
     $this->fpdf->Cell(10,1,'Project : '.$detail['project'].'',0,0,'L');
+    $this->fpdf->Ln();
     $this->fpdf->SetFont('Times','',12);
+    if (!empty($detail['address'])){
     $this->fpdf->Cell(10,1,$detail['address'],0,0,'L');
     $this->fpdf->Ln();
+    }else{}
+    if (!empty($detail['city'])){
     $this->fpdf->Cell(10,1,$detail['city'].', '. $detail['province'].' '. $detail['postal_code'],0,0,'L');
-    $this->fpdf->Ln(1);
+    $this->fpdf->Ln(1.5);
+    }else{}
+    if (!empty($detail['phone_number_1'])){
     $this->fpdf->Cell(10,1,'Phone : '.$detail['phone_number_1'].', '.$detail['phone_number_2'],0,0,'L');
+    $this->fpdf->Ln();
+    }else{}
     if (!empty($detail['email'])){
     $this->fpdf->Cell(10,1,'e-mail : '.$detail['email'].'',0,0,'L');
-    }else{
-
-    }
-    
+    }else{}
    
     /* setting header table */
-    $this->fpdf->Ln(2);
+    $this->fpdf->Ln(1);
     $this->fpdf->SetFont('Times','B',12);
     $this->fpdf->Cell(10 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(5 , 1, 'Jumlah Dipesan' , 1, 'LR', 'C');

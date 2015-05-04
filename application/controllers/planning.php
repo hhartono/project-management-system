@@ -83,7 +83,7 @@ class Planning extends CI_Controller {
             $data['proj'] = $this->planning_model->getproj($idspj);
         
             $this->load->view('header');
-            $this->load->view('planning/navdetail', $data);
+            $this->load->view('planning/navigation', $data);
             $this->load->view('planning/detail', $data);
             $this->load->view('planning/footer');
     }
@@ -111,6 +111,7 @@ class Planning extends CI_Controller {
             $data['finishing'] = $this->planning_model->get_all_finishing();
             $data['finishing_belakang'] = $this->planning_model->get_all_finishing();
             $data['proj'] = $this->planning_model->getprojitem();
+            $data['sub'] = $this->planning_model->getsubitem();
         
             $this->load->view('header');
             $this->load->view('planning/navigation', $data);
@@ -140,6 +141,7 @@ class Planning extends CI_Controller {
             $data['subitem'] = $this->planning_model->get_all_carisubitem();
             $data['stock'] = $this->planning_model->get_all_stock();
             $data['proj'] = $this->planning_model->getprojitem();
+            $data['sub'] = $this->planning_model->getsubitem();
         
             $this->load->view('header');
             $this->load->view('planning/navigation', $data);

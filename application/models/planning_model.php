@@ -106,7 +106,7 @@ class Planning_model extends CI_Model {
         $this->db->where('subproject_master.id', $idsubproject);
         $query = $this->db->get();
 
-        return $query->result_array();
+        return $query->row();
     }
 
     public function getproj($idsubproject)
@@ -276,6 +276,17 @@ class Planning_model extends CI_Model {
                                     where item_master.id = planning_master.item_id AND category_master.id = item_master.category_id AND unit_master.id = item_master.unit_id AND planning_master.subproject_item_id = subproject_item_master.id AND subproject_master.id = subproject_item_master.subproject_id AND subproject_master.id = '$sub' AND subproject_item_master.id ='$subitem'");
 
         return $query->result_array();
+    }
+
+    public function getsubitem()
+    {
+        $subitem = $this->input->post('subitem');
+        $sub = $this->input->post('sub');
+        $query = $this->db->query("select subproject_item_master.name as name
+                                        from subproject_item_master
+                                    where subproject_item_master.id ='$subitem'");
+
+        return $query->row();
     }
 
     public function cariitems()
