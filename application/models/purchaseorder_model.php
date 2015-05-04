@@ -201,7 +201,7 @@ class Purchaseorder_model extends CI_Model {
         $this->db->where('po_id', $id);
         $query = $this->db->get();
 
-        $result_array = $query->result_array();
+        $result_array = $query->row();
         return $result_array;
     }
 

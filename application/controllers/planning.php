@@ -83,7 +83,7 @@ class Planning extends CI_Controller {
             $data['proj'] = $this->planning_model->getproj($idspj);
         
             $this->load->view('header');
-            $this->load->view('planning/navigation', $data);
+            $this->load->view('planning/navdetail', $data);
             $this->load->view('planning/detail', $data);
             $this->load->view('planning/footer');
     }

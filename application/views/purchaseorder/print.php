@@ -47,21 +47,22 @@ $this->fpdf->Ln();
 
     /* ————– Header Halaman selesai ————————————————*/
 
-    $this->fpdf->Ln(3);
+    $this->fpdf->Ln(2);
     $this->fpdf->SetFont('Times','B',12);
    
     $this->fpdf->Cell(12,1,'Supplier : '.$detail['name'].'',0,0,'L');
     $this->fpdf->Cell(10,1,'Project : '.$detail['project'].'',0,0,'L');
-    $this->fpdf->Ln();
     $this->fpdf->SetFont('Times','',12);
     $this->fpdf->Cell(10,1,$detail['address'],0,0,'L');
     $this->fpdf->Ln();
     $this->fpdf->Cell(10,1,$detail['city'].', '. $detail['province'].' '. $detail['postal_code'],0,0,'L');
-    $this->fpdf->Ln(2);
-    $this->fpdf->Cell(10,1,'Phone : '.$detail['phone_number_1'].', '.$detail['phone_number_2'],0,0,'L');
-    $this->fpdf->Ln();
-    $this->fpdf->Cell(10,1,'e-mail : '.$detail['email'].'',0,0,'L');
     $this->fpdf->Ln(1);
+    $this->fpdf->Cell(10,1,'Phone : '.$detail['phone_number_1'].', '.$detail['phone_number_2'],0,0,'L');
+    if (!empty($detail['email'])){
+    $this->fpdf->Cell(10,1,'e-mail : '.$detail['email'].'',0,0,'L');
+    }else{
+
+    }
     
    
     /* setting header table */

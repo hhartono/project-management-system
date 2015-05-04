@@ -570,6 +570,7 @@ class Purchaseorder extends CI_Controller {
             // get necessary data
         $data['detail'] = $this->purchaseorder_model->getpurchaseorder($id);
         $data['po'] = $this->purchaseorder_model->get_purchaseorder_detail($id);
+        $data['pod'] = $this->purchaseorder_model->get_purchaseorder_details($id);
         $this->load->view('header');
         $this->load->view('purchaseorder/navigation', $data);
         $this->load->view('purchaseorder/detail', $data);
@@ -582,6 +583,7 @@ class Purchaseorder extends CI_Controller {
             //$idpj = $idproject;
         $data['detail'] = $this->purchaseorder_model->getpurchaseorder($id);
         $data['po'] = $this->purchaseorder_model->get_purchaseorder_detail($id);
+        $data['pod'] = $this->purchaseorder_model->get_purchaseorder_details($id);
         $this->load->view('purchaseorder/print', $data);
         
     }
