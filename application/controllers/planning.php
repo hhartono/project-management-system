@@ -146,7 +146,7 @@ class Planning extends CI_Controller {
     }
 
     public function submititem(){
-        if($this->input->post('subproject_item')){
+        if(!empty($this->input->post('name'))){
             // check if there is any duplicate
             //$duplicate_check = $this->planning_model->get_subprojectitem_by_name($this->input->post('subproject_item'));
             
@@ -161,7 +161,7 @@ class Planning extends CI_Controller {
                 }
             
         }else{
-            $message['error'] = "Subproject Item gagal disimpan.";
+            $message['error'] = "Subproject Item tidak boleh kosong.";
             $this->cariitems($message);
         }
     }

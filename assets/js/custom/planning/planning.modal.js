@@ -3,6 +3,42 @@
         /*
             Modal Controller for Creating
          */
+        $("#da-planning-create-form-div").dialog({
+            autoOpen: false,
+            title: "Tambah Subproject Item",
+            modal: true,
+            width: "640",
+            buttons: [{
+                text: "Simpan",
+                click: function() {
+                    $(this).find('form#da-planning-create-form-val').submit();
+                }},
+                {
+                text: "Keluar",
+                click: function() {
+                    $("#da-planning-create-form-div").dialog("option", {modal: true}).dialog("close");
+                }}]
+        }).find('form').validate({
+            rules: {
+                name: {
+                    required: true
+                }
+            },
+            invalidHandler: function(form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    var message = 'Atribut yang diberi tanda wajib diisi.';
+                    $("#da-planning-create-validate-error").html(message).show();
+                } else {
+                    $("#da-planning-create-validate-error").hide();
+                }
+            }
+        });
+
+        $("#da-planning-create-dialog").bind("click", function(event) {
+            event.preventDefault();
+            $("#da-planning-create-form-div").dialog("option", {modal: true}).dialog("open");
+        });
 
         $.get( "/planning/get_all_planning_item_names", function(data) {
             $( "#planning-insert-name" ).autocomplete({

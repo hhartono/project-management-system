@@ -17,12 +17,7 @@
                </form>
             </div>
             <div class="span5">
-                <form method="post" action="/planning/submititem/">
-                &nbsp; Tambah Subproject Item: <input type="text" name="subproject_item">
-                <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
-                <input type="hidden" value="<?php echo $this->input->post('subitem') ; ?>" name="subitem">
-                <input type="submit" value="Submit" class="btn btn-success btn-create">
-                </form>                           
+                <button id="da-planning-create-dialog" class="btn btn-success btn-create">[+] Tambah Subproject Item</button>          
             </div>
         </div>
         <div class="row-fluid">
@@ -167,6 +162,22 @@
                     </br>
                 </div>
             </div>
+        </div>
+
+        <div id="da-planning-create-form-div" class="form-container">
+            <form id="da-planning-create-form-val" class="da-form" action="/planning/submititem" method="post">
+                <div id="da-planning-create-validate-error" class="da-message error" style="display:none;"></div>
+                <div class="da-form-inline">
+                    <div class="da-form-row">
+                        <label class="da-form-label">Subproject Item</label>
+                    <div class="da-form-item large">
+                        <input type="text" name="name" autocomplete="off">
+                    </div>
+                    <input type="hidden" value="<?php echo $proj->id ; ?>" name="sub">
+                    <input type="hidden" value="<?php echo $this->input->post('subitem') ; ?>" name="subitem">
+                    </div>
+                </div>
+            </form>
         </div>        
     </div>
 </div>

@@ -318,10 +318,10 @@ class Planning_model extends CI_Model {
 
     public function set_subprojectitem()
     {
-        if($this->input->post('subproject_item') !== false)
+        if($this->input->post('name') !== false)
         {
             $data = array(
-                'name' => $this->input->post('subproject_item'),
+                'name' => $this->input->post('name'),
                 'subproject_id' => $this->input->post('sub')
             );
 
