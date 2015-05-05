@@ -16,7 +16,7 @@
                                         <div class="da-form-row">
                                             <label class="da-form-label">Kode Barang</label>
                                             <div class="da-form-item large">
-                                                <input id="useitem-insert-code" type="text" name="item_stock_code">
+                                                <input id="useitem-insert-code" class="span12" type="text" name="item_stock_code">
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">

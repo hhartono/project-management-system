@@ -211,7 +211,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Tukang</label>
                                     <div class="da-form-item large">
-                                        <input id="worker-edit-name" type="text" name="name" readonly>
+                                        <input id="worker-edit-name" type="text" name="name">
                                     </div>
                                 </div>
                                 <div class="da-form-row">

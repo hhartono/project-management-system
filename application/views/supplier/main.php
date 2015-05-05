@@ -81,7 +81,7 @@
                                                     ?>
                                                     <td class="phone-row"><?php echo implode(', ', $phone_number_array); ?></td>
                                                     <td class="da-icon-column">
-                                                        <a class="da-supplier-view-page" href="#" data-value="<?php echo $each_supplier['id']; ?>"><i class="icol-eye"></i></a>
+                                                        <a class="da-supplier-view-dialog" href="#" data-value="<?php echo $each_supplier['id']; ?>"><i class="icol-eye"></i></a>
                                                         <?php if(isset($access['edit']) && $access['edit']): ?>
                                                             <a class="da-supplier-edit-dialog" href="#" data-value="<?php echo $each_supplier['id']; ?>"><i class="icol-pencil"></i></a>
                                                         <?php endif; ?>
@@ -257,7 +257,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama</label>
                                     <div class="da-form-item large">
-                                        <input id="supplier-edit-name" type="text" name="name" readonly>
+                                        <input id="supplier-edit-name" type="text" name="name">
                                     </div>
                                 </div>
                                 <div class="da-form-row">

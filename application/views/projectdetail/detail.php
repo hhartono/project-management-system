@@ -108,7 +108,7 @@
         <div class="row-fluid">
             <div class="span7">
             <?php echo form_open_multipart('/projectdetail/caritanggal/');?>
-                    Tanggal Awal: <input id="absensi-create-join-date" type="text" name="tanggal1">  &nbsp;&nbsp;&nbsp; Tanggal Akhir: <input id="date-cari" type="text" name="tanggal2">
+                    Tanggal Awal: <input id="absensi-create-join-date" type="text" name="tanggal1" style="width: 100px;">  &nbsp;&nbsp;&nbsp; Tanggal Akhir: <input id="date-cari" type="text" name="tanggal2" style="width: 100px;">
                     <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
                     <input type="submit" value="Filter" class="btn btn-success"/>
                </form>

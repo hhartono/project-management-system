@@ -118,7 +118,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Kategori</label>
                                     <div class="da-form-item large">
-                                        <input id="category-edit-name" type="text" name="name" readonly>
+                                        <input id="category-edit-name" type="text" name="name">
                                     </div>
                                 </div>
                                 <div class="da-form-row">

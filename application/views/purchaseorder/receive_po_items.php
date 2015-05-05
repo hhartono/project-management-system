@@ -50,14 +50,14 @@
                                                     <td class="quantity-already-received-row" name="quantity_already_received"><?php echo $each_purchaseorder_detail['quantity_received']; ?></td>
                                                     <td class="quantity-received-row" name="quantity_received">
                                                         <?php if($each_purchaseorder_detail['quantity'] > $each_purchaseorder_detail['quantity_received']){ ?>
-                                                            <input name="quantity_received_input" type="text" class="span3" value="<?php echo ($each_purchaseorder_detail['quantity'] - $each_purchaseorder_detail['quantity_received']); ?>">
+                                                            <input name="quantity_received_input" type="text" class="span12" value="<?php echo ($each_purchaseorder_detail['quantity'] - $each_purchaseorder_detail['quantity_received']); ?>">
                                                         <?php }else{
                                                             echo "Sudah Diterima";
                                                         } ?>
                                                     </td>
                                                     <td class="price-row" name="item_price">
                                                         <?php if($each_purchaseorder_detail['quantity'] > $each_purchaseorder_detail['quantity_received']){ ?>
-                                                            <input name="item_price_input" type="text" class="span6" value="<?php echo '0'; ?>">
+                                                            <input name="item_price_input" type="text" class="span12" value="<?php echo '0'; ?>">
                                                         <?php }else{
                                                             echo "Sudah Diterima";
                                                         } ?>

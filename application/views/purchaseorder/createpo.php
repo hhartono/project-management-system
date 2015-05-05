@@ -16,20 +16,20 @@
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Barang</label>
                                             <div class="da-form-item large">
-                                                <input id="purchaseorder-createpo-insert-name" type="text" name="name">
+                                                <input id="purchaseorder-createpo-insert-name" type="text" name="name" class="span12">
                                             </div>
                                         </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Jumlah Barang</label>
                                             <div class="da-form-item large">
-                                                <input id="purchaseorder-createpo-insert-item-count" type="text" name="item_count" autocomplete="off">
+                                                <input id="purchaseorder-createpo-insert-item-count" type="text" name="item_count" autocomplete="off" class="span12">
                                                 <label for="purchaseorder-createpo-insert-item-count" id="purchaseorder-createpo-insert-item-count-label"></label>
                                             </div>
                                         </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Keterangan</label>
                                             <div class="da-form-item large">
-                                                <input id="purchaseorder-createpo-insert-notes" type="text" name="notes" autocomplete="off">
+                                                <input id="purchaseorder-createpo-insert-notes" type="text" name="notes" autocomplete="off" class="span12">
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">
