@@ -74,6 +74,7 @@
                                                                 ?>
                                                                 <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
                                                             <?php endif; ?>
+                                                            <a class="da-stock" href="<?php echo base_url(); ?>stock/print_item_barcodes/<?php echo $each_stock['id']; ?>"><i class="icon-print"></i></a>
                                                         </td>
                                                     <?php endif; ?>
                                                 </tr>

@@ -32,36 +32,13 @@
     <!-- JS Demo -->
 
     <!-- JS Table -->
-    <script src="/assets/js/custom/stock/stock.modal.js"></script>
-    <script src="/assets/js/custom/stock/stock.tables.js"></script>
-    <script src="/assets/js/custom/stock/stock.printbarcodetables.js"></script>
+    <script src="/assets/js/custom/returnsupplier/returnsupplier.modal.js"></script>
+    <script src="/assets/js/custom/returnsupplier/returnsupplier.tables.js"></script>
 
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
 
     <!-- JS Customizer -->
     <script src="/assets/js/core/dandelion.customizer.js"></script>
-
-    <!-- JS Barcode -->
-    <?php if(isset($id)){ ?>
-        <script>
-            (function($) {
-                $(document).ready(function(e) {
-                    $('#da-stock-barcode-print-confirmation-submit').on('click', function(event) {
-                        event.preventDefault();
-
-                        // print barcode
-                        jsWebClientPrint.print('id=' + <?php echo $id; ?>);
-
-                        // redirect the page
-                        setTimeout( function () {
-                            $('#da-stock-barcode-print-confirmation-detail-form-val').submit();
-                        }, 500);
-                    });
-                });
-            }) (jQuery);
-        </script>
-    <?php } ?>
-
 </body>
 </html>

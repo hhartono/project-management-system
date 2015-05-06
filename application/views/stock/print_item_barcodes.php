@@ -20,10 +20,9 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-purchaseorder-barcode-print-datatable-numberpaging" class="da-table"">
+                                    <table id="da-stock-barcode-print-datatable-numberpaging" class="da-table"">
                                         <thead>
                                             <tr>
-                                                <th>PO Detail ID</th>
                                                 <th>Nama Barang</th>
                                                 <th>Jumlah Barang Diterima</th>
                                                 <th>Jumlah Label</th>
@@ -32,11 +31,10 @@
                                         <tbody>
                                             <?php foreach($barcode_details as $each_barcode_detail): ?>
                                                 <tr>
-                                                    <td class="database-id-row" name="po_detail_id"><?php echo $each_barcode_detail['po_detail_id']; ?></td>
-                                                    <td class="name-row" name="label_name"><?php echo $each_barcode_detail['label_name']; ?></td>
-                                                    <td class="quantiy-row" name="item_quantity"><?php echo $each_barcode_detail['item_quantity']; ?></td>
+                                                    <td class="name-row" name="label_name"><?php echo $each_barcode_detail['item_name']; ?></td>
+                                                    <td class="quantiy-row" name="item_quantity"><?php echo $each_barcode_detail['item_count']; ?></td>
                                                     <td class="label-quantity-row" name="label_quantity">
-                                                        <input name="label_quantity_input" type="text" class="span12" value="<?php echo ($each_barcode_detail['label_quantity']); ?>">
+                                                        <input name="label_quantity_input" type="text" class="span12" value="<?php echo ($each_barcode_detail['item_count']); ?>">
                                                     </td>
                                                 </tr>
                                             <?php endforeach?>
@@ -54,12 +52,12 @@
                                         <i class="icol-grid"></i> Detail Barcode
                                     </span>
                                 </div>
-                                <div id="da-purchaseorder-barcode-print-detail-error" class="da-message error" style="display:none;"></div>
+                                <div id="da-stock-barcode-print-detail-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
-                                    <form id="da-purchaseorder-barcode-print-detail-form-val" class="da-form da-form-inline" action="<?php echo '/purchaseorder/print_item_barcodes/' . $po_id; ?>" method="post">
+                                    <form id="da-stock-barcode-print-detail-form-val" class="da-form da-form-inline" action="<?php echo '/stock/print_item_barcodes/' . $id; ?>" method="post">
                                         <div class="da-form-row" style="text-align:center;">
-                                            <input id="da-purchaseorder-barcode-print-submit-item-values" type="hidden" name="po_barcode_print_item_values">
-                                            <button id="da-purchaseorder-barcode-print-submit" class="btn btn-success">Lanjutkan</button>
+                                            <input id="da-stock-barcode-print-submit-item-values" type="hidden" name="barcode_print_item_values">
+                                            <button id="da-stock-barcode-print-submit" class="btn btn-success">Lanjutkan</button>
                                         </div>
                                     </form>
                                 </div>

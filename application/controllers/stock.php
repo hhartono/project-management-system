@@ -1,4 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+include FCPATH . "/assets/barcodeprint/WebClientPrint.php";
+use Neodynamic\SDK\Web\Utils;
+use Neodynamic\SDK\Web\WebClientPrint;
 
 class Stock extends CI_Controller {
 
@@ -311,6 +314,138 @@ class Stock extends CI_Controller {
             $this->load->view('stock/navigation', $data);
             $this->load->view('stock/main', $data);
             $this->load->view('stock/footer');
+    }
+
+    public function print_item_barcodes($id){
+        $host_name = $database_password = getenv('HOST_NAME');
+
+        if(empty($this->input->post())){
+            $message = array();
+            $this->show_print_barcode_table($message, $id);
+        }else{
+            $barcode_print_values = $this->input->post('barcode_print_item_values');
+            $barcode_print_values = json_decode($barcode_print_values, TRUE);
+
+            if($barcode_print_values){
+                // item values successfully decoded
+                $database_input_array = array();
+
+                // set the receive item values
+                $database_input_array['barcode_print_values'] = $barcode_print_values;
+
+                // input data to database
+                $response = $this->stock_model->update_barcode_status_quantity($database_input_array, $id);
+
+                if($response){
+                    $message = array();
+                    $total_barcode_quantity = 0;
+                    $barcode_details = $this->stock_model->get_barcode_detail_by_id($id);
+                    foreach($barcode_details as $barcode_detail){
+                        $total_barcode_quantity += $barcode_detail['label_quantity'];
+                    }
+
+                    $this->show_print_confirmation_screen($message, $id, $total_barcode_quantity);
+                    echo WebClientPrint::createScript($host_name . '/printbarcode');
+                }else{
+                    $message['error'] = "Label gagal di print.";
+                    $this->show_print_barcode_table($message, $id);
+                }
+            }else{
+                $message['error'] = "Label gagal di print.";
+                $this->show_print_barcode_table($message, $id);
+            }
+        }
+    }
+
+    private function show_print_barcode_table($message, $id)
+    {
+        $user_id    = $this->tank_auth->get_user_id();
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['stock'] = $user_info['purchase_order'];
+
+            // access level
+            /*
+            $create=substr($data['purchaseorder'],0,1); 
+            $edit=substr($data['purchaseorder'],1,1); 
+            $delete=substr($data['purchaseorder'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+            */
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            $data['barcode_details'] = $this->stock_model->get_barcode_detail_by_id($id);
+            $data['id'] = $id;
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('stock/navigation', $data);
+            $this->load->view('stock/print_item_barcodes', $data);
+            $this->load->view('stock/footer');
+    }
+
+    private function show_print_confirmation_screen($message, $id, $total_barcode_quantity)
+    {
+       $user_id    = $this->tank_auth->get_user_id();
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['stock'] = $user_info['purchase_order'];
+
+            // access level
+            $create=substr($data['stock'],0,1); 
+            $edit=substr($data['stock'],1,1); 
+            $delete=substr($data['stock'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            //$data['barcode_details'] = $this->purchaseorder_model->get_barcode_detail_by_po_id($po_id);
+            $data['id'] = $id;
+            $data['total_barcode_quantity'] = $total_barcode_quantity;
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('stock/navigation', $data);
+            $this->load->view('stock/print_item_barcodes_confirmation', $data);
+            $this->load->view('stock/footer', $data);
     }
 }
 

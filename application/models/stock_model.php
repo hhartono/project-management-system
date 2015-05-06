@@ -34,6 +34,18 @@ class Stock_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_stock_item_by_stock_code($stock_code){
+        $this->db->select('stock_master.*, item_master.name AS item_name, supplier_master.name as supplier, unit_master.name AS item_unit');
+        $this->db->from('stock_master');
+        $this->db->join('item_master', 'stock_master.item_id = item_master.id');
+        $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
+        $this->db->join('supplier_master', 'stock_master.supplier_id = supplier_master.id');
+        $this->db->where('stock_master.item_stock_code', $stock_code);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
     public function get_all_stocks()
     {
         $this->db->select('stock_master.*, item_master.name, unit_master.name AS unit');
@@ -105,5 +117,56 @@ class Stock_model extends CI_Model {
         }
 
         return $delete_status;
+    }
+
+    public function get_purchaseorder_detail_by_id($id){
+        $this->db->select('stock_master.*, item_master.name AS item_name');
+        $this->db->from('stock_master');
+        $this->db->join('item_master', 'stock_master.item_id = item_master.id');
+        //$this->db->join('stock_master', 'stock_master.item_id = item_master.id'); 
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function get_barcode_detail_by_id($id){
+        $this->db->select('stock_master.*, item_master.name AS item_name');
+        $this->db->from('stock_master');
+        $this->db->join('item_master', 'stock_master.item_id = item_master.id');
+        $where = "stock_master.id='" . $id . "' AND (print_status='0' OR print_status='1')";
+        $this->db->where($where, NULL, FALSE);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function update_barcode_status_quantity($database_input_array, $id){
+        // start database transaction
+        $this->db->trans_begin();
+
+        $barcode_print_values = $database_input_array['barcode_print_values'];
+        foreach($barcode_print_values as $barcode_print_value){
+            if($barcode_print_value['label_quantity'] > 0){
+                $data = array(
+                    'label_quantity' => $barcode_print_value['label_quantity'],
+                    'print_status' => '1',
+                );
+
+                $this->db->where('id', $id);
+                $this->db->update('stock_master', $data);
+            }
+        }
+
+        // complete database transaction
+        $this->db->trans_complete();
+
+        // return false if something went wrong
+        if ($this->db->trans_status() === FALSE){
+            return FALSE;
+        }else{
+            return TRUE;
+        }
     }
 }

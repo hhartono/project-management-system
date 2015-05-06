@@ -33,6 +33,15 @@
                                         <i class="icol-grid"></i> Preview Pemakaian
                                     </span>
                                 </div>
+                                <?php if(isset($message['success'])): ?>
+                                   <div class="da-message success"><?php echo $message['success']; ?></div>
+                                <?php endif; ?>
+                                <?php if(isset($message['info'])): ?>
+                                    <div class="da-message info"><?php echo $message['info']; ?></div>
+                                <?php endif; ?>
+                                <?php if(isset($message['error'])): ?>
+                                    <div class="da-message error"><?php echo $message['error']; ?></div>
+                                <?php endif; ?>
                                 <div id="da-useitem-table-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-table-container">
                                     <table id="da-useitem-datatable-numberpaging" class="da-table"">
