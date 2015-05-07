@@ -63,7 +63,7 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li class="active"><span>Pakai Barang</span></li>
+                        <li class="active"><span>Return Barang Supplier</span></li>
                     </ul>
                 </div>
             </div>
@@ -119,13 +119,22 @@
                                 Pakai Barang
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="/returnitem">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-classic-hammer"></i>
                                     </span>
                                 Return Barang
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="/returnsupplier">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-classic-hammer"></i>
+                                    </span>
+                                Return Barang Supplier
                             </a>
                         </li>
                         <li>

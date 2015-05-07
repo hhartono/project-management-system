@@ -129,6 +129,15 @@
                                 Return Barang
                             </a>
                         </li>
+                        <li>
+                            <a href="/returnsupplier">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-classic-hammer"></i>
+                                    </span>
+                                Return Barang Supplier
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="#">
                                 <!-- Icon Container -->
