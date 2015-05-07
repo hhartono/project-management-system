@@ -105,9 +105,9 @@ $this->fpdf->Ln();
     $this->fpdf->SetFont('Times','',9);
     $this->fpdf->Cell(19,1,'a. Jl. Pasteur 11, Bandung 40116, West Java - Indonesia',0,0,'C');
     $this->fpdf->Ln();
-    $this->fpdf->Cell(8,0,'t. +6222 423 2200   //',0,0,'R');
+    $this->fpdf->Cell(8,0,'t. +6222 423 2200     //',0,0,'R');
     $this->fpdf->Cell(3,0,'f. +6222 426 6618',0,0,'C');
-    $this->fpdf->Cell(8,0,'//   e. info@inerre.com',0,0,'L');
+    $this->fpdf->Cell(8,0,'//     e. info@inerre.com',0,0,'L');
     $this->fpdf->Ln();
     $this->fpdf->Cell(19,1,'www.inerre.com',0,0,'C');
     /* setting cell untuk waktu pencetakan */
