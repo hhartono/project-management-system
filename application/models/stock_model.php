@@ -135,7 +135,7 @@ class Stock_model extends CI_Model {
         $this->db->select('stock_master.*, item_master.name AS item_name');
         $this->db->from('stock_master');
         $this->db->join('item_master', 'stock_master.item_id = item_master.id');
-        $where = "stock_master.id='" . $id . "' AND (print_status='0' OR print_status='1')";
+        $where = "stock_master.id='" . $id . "'";
         $this->db->where($where, NULL, FALSE);
         $query = $this->db->get();
 

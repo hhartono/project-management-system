@@ -345,7 +345,7 @@ class Stock extends CI_Controller {
                     }
 
                     $this->show_print_confirmation_screen($message, $id, $total_barcode_quantity);
-                    echo WebClientPrint::createScript($host_name . '/printbarcode');
+                    echo WebClientPrint::createScript($host_name . '/printbarcode/stock');
                 }else{
                     $message['error'] = "Label gagal di print.";
                     $this->show_print_barcode_table($message, $id);

@@ -82,6 +82,61 @@ class Printbarcode extends CI_Controller {
             }
         }
     }
+
+    public function stock()
+    {
+        if(!empty($this->input->get('id'))){
+            $id = $this->input->get('id');
+            if(isset($id)){
+                $barcode_detail = $this->printbarcode_model->get_barcode_stock_by_id($id);
+
+                if($barcode_detail){
+                    //Create a ClientPrintJob obj that will be processed at the client side by the WCPP
+                    $cpj = new ClientPrintJob();
+                    $cpj->clientPrinter = new InstalledPrinter('SATO-CG208'); //set the installed printer's name on the client machine
+                    $printer_command = "";
+
+                    foreach($barcode_detail as $each_barcode){
+                        $temp_name = substr($each_barcode['item'], 0, 16);
+                        $description_line1 = ""; // max 16 character
+                        if($temp_name){
+                            $description_line1 = $temp_name;
+                        }
+
+                        $temp_name = substr($each_barcode['item'], 16, 16);
+                        $description_line2 = ""; // max 16 character
+                        if($temp_name){
+                            $description_line2 = $temp_name;
+                        }
+
+                        $code_to_encode = $each_barcode['item_stock_code'];; // max 7 character
+                        $quantity = $each_barcode['label_quantity'];;
+
+                        $printer_command .=
+                            '0x1BA0x0D0x0A' .
+                            '0x1BV100x1BH1200x1BP20x0D0x0A' .
+                            '0x1BRDB00,P08,P08,' . $description_line1 . '0x0D0x0A' .
+                            '0x1BV300x1BH1200x1BP20x0D0x0A' .
+                            '0x1BRDB00,P08,P08,' . $description_line2 . '0x0D0x0A' .
+                            '0x1BV500x1BH1200x1BBG02080>H' . $code_to_encode . '0x0D0x0A' .
+                            '0x1BV1500x1BH1800x1BP20x0D0x0A' .
+                            '0x1BRDB00,P08,P08,' . $code_to_encode . '0x0D0x0A' .
+                            '0x1BQ' . $quantity . '0x0D0x0A' .
+                            '0x1BZ0x0D0x0A';
+                    }
+
+                    //Send ClientPrintJob back to the client
+                    $cpj->printerCommands = $printer_command;
+                    $cpj->formatHexValues = true;
+                    echo $cpj->sendToClient();
+
+                    //echo $printer_command;
+                }else{
+                    echo FALSE;
+                }
+            }
+        }
+    }
 }
 /* End of file printbarcode.php */
 /* Location: ./application/controllers/printbarcode.php */
