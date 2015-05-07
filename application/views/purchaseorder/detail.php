@@ -4,7 +4,7 @@
     <div id="da-content-area">
         <div class="row-fluid">
                             <div class="span12" >
-                                     <a class="btn btn-success btn-create" href="/purchaseorder/cetak/<?php echo $pod->po_id;?>" >
+                                     <a class="btn btn-success btn-create" href="/purchaseorder/cetak/<?php echo $pod->po_id;?>" target="_blank">
                                     <i class='icon-print'></i>&nbsp; Cetak </a>
                             </div>
                     </div>

@@ -216,4 +216,27 @@ class Planning extends CI_Controller {
             echo json_encode($unit_detail);
         }
     }
+
+    public function cari() {
+        $user_id    = $this->tank_auth->get_user_id();
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+
+            // access level
+            $data['access']['create'] = true;
+            $data['access']['edit'] = true;
+            $data['access']['delete'] = true;
+
+            // message
+            //$data['message'] = $message;
+
+        $data['getproject'] = $this->planning_model->caridata();
+        $data['getcompany'] = $this->planning_model->get_company();
+        
+        $this->load->view('header');
+        $this->load->view('planning/navigation', $data);
+        $this->load->view('planning/main',$data); 
+        $this->load->view('planning/footer');
+    }
 }

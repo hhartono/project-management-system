@@ -73,18 +73,16 @@ $this->fpdf->Ln();
     /* setting header table */
     $this->fpdf->Ln(1);
     $this->fpdf->SetFont('Times','B',12);
-    $this->fpdf->Cell(8 , 1, 'Nama Barang' , 1, 'LR', 'C');
-    $this->fpdf->Cell(3.5 , 1, 'Jumlah Dipesan' , 1, 'LR', 'C');
-    $this->fpdf->Cell(3 , 1, 'Satuan' , 1, 'LR', 'C');
-    $this->fpdf->Cell(4.5 , 1, 'Supplier' , 1, 'LR', 'C');
+    $this->fpdf->Cell(9 , 1, 'Nama Barang' , 1, 'LR', 'C');
+    $this->fpdf->Cell(5 , 1, 'Jumlah Dipesan' , 1, 'LR', 'C');
+    $this->fpdf->Cell(5 , 1, 'Satuan' , 1, 'LR', 'C');
     
     foreach($po as $po){
         $this->fpdf->Ln();
         $this->fpdf->SetFont('Times','',12);
-        $this->fpdf->Cell(8 , 0.7, $po['item'] , 1, 'LR', 'L');
-        $this->fpdf->Cell(3.5 , 0.7, $po['kembali'] , 1, 'LR', 'L');
-        $this->fpdf->Cell(3 , 0.7, $po['unit'] , 1, 'LR', 'L');
-        $this->fpdf->Cell(4.5 , 0.7, $po['supplier'] , 1, 'LR', 'L');
+        $this->fpdf->Cell(9 , 0.7, $po['item'] , 1, 'LR', 'L');
+        $this->fpdf->Cell(5 , 0.7, $po['kembali'] , 1, 'LR', 'L');
+        $this->fpdf->Cell(5 , 0.7, $po['unit'] , 1, 'LR', 'L');
     }
     $this->fpdf->Ln();
 

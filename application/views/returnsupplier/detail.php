@@ -4,7 +4,7 @@
     <div id="da-content-area">
         <div class="row-fluid">
                             <div class="span12" >
-                                     <a class="btn btn-success btn-create" href="/returnsupplier/cetak/<?php echo $pod->id;?>" >
+                                     <a class="btn btn-success btn-create" href="/returnsupplier/cetak/<?php echo $pod->id;?>" target="_blank">
                                     <i class='icon-print'></i>&nbsp; Cetak </a>
                             </div>
                     </div>
@@ -40,7 +40,6 @@
                             <th>Nama Barang</th>
                             <th>Jumlah Return</th>
                             <th>Satuan</th>
-                            <th>Supplier</th>
                         </tr>
 
                         </thead>
@@ -50,7 +49,6 @@
                                 <td class="division-row"><?php echo $po['item']; ?></td>
                                 <td class="division-row"><?php echo $po['kembali']; ?></td>
                                 <td class="division-row"><?php echo $po['unit']; ?></td>
-                                <td class="division-row"><?php echo $po['supplier']; ?></td>
                             </tr>
                         <?php endforeach?>
                         </tbody>
