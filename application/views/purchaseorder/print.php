@@ -4,7 +4,7 @@
     $this->fpdf->FPDF("P","cm","A4");
 
     // kita set marginnya dimulai dari kiri, atas, kanan. jika tidak diset, defaultnya 1 cm
-    $this->fpdf->SetMargins(1,1,1);
+    $this->fpdf->SetMargins(1,1,1,0);
     /* AliasNbPages() merupakan fungsi untuk menampilkan total halaman
     di footer, nanti kita akan membuat page number dengan format : number page / total page
     */
@@ -83,20 +83,39 @@ $this->fpdf->Ln();
         $this->fpdf->Cell(5 , 0.7, $po['quantity'] , 1, 'LR', 'L');
         $this->fpdf->Cell(4 , 0.7, $po['unit_name'] , 1, 'LR', 'L');
     }
+    $this->fpdf->Ln(2);
+    $this->fpdf->Cell(10,1,'',0,0,'L');
+    $this->fpdf->Cell(12,1,'Authorized by : ',0,0,'L');
+    $this->fpdf->Ln(3);
+    $this->fpdf->Cell(10,1,'',0,0,'L');
+    $this->fpdf->Cell(5,1,'Hans Hartono',0,0,'L');
+    $this->fpdf->Cell(7,1,date('M d, Y'),0,0,'L');
     $this->fpdf->Ln();
-
+    $this->fpdf->Cell(10,0,'',0,0,'L');
+    $this->fpdf->Cell(12,0,'_______________________________________',0,0,'L');
+    $this->fpdf->Ln(1);
+    $this->fpdf->Cell(10,0,'',0,0,'L');
+    $this->fpdf->Cell(5,0,'Name',0,0,'L');
+    $this->fpdf->Cell(7,0,'Date',0,0,'L');
     /* setting posisi footer 3 cm dari bawah */
 
-    $this->fpdf->SetY(-3);
+    $this->fpdf->SetY(-4.5);
 
     /* setting font untuk footer */
-    $this->fpdf->SetFont('Times','',10);
-
+    $this->fpdf->SetFont('Times','',9);
+    $this->fpdf->Cell(19,1,'a. Jl. Pasteur 11, Bandung 40116, West Java - Indonesia',0,0,'C');
+    $this->fpdf->Ln();
+    $this->fpdf->Cell(8,0,'t. +6222 423 2200   //',0,0,'R');
+    $this->fpdf->Cell(3,0,'f. +6222 426 6618',0,0,'C');
+    $this->fpdf->Cell(8,0,'//   e. info@inerre.com',0,0,'L');
+    $this->fpdf->Ln();
+    $this->fpdf->Cell(19,1,'www.inerre.com',0,0,'C');
     /* setting cell untuk waktu pencetakan */
-    $this->fpdf->Cell(9.5, 0.5, 'Printed on : '.date('d/m/Y H:i'));
+    //$this->fpdf->Cell(9.5, 0.5, 'Printed on : '.date('d/m/Y H:i'));
 
     /* setting cell untuk page number */
-    $this->fpdf->Cell(9.5, 0.5, 'Page '.$this->fpdf->PageNo().'/{nb}',0,0,'R');
+    //$this->fpdf->Cell(9.5, 0.5, 'Page '.$this->fpdf->PageNo().'/{nb}',0,0,'R');
+    
 
     /* generate pdf jika semua konstruktor, data yang akan ditampilkan, dll sudah selesai */
     $this->fpdf->Output("project_detail.pdf","I");
