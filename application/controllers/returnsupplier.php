@@ -56,51 +56,51 @@ class Returnsupplier extends CI_Controller {
         var_dump($this->input->post());
     }
     */
-        public function submit_item_values(){
-            // get the input value
-            if(!empty($this->input->post('returnsupplier_item_values'))){
-                $returnsupplier_item_values = $this->input->post('returnsupplier_item_values');
-                $returnsupplier_item_values = json_decode($returnsupplier_item_values, TRUE);
+    public function submit_item_values(){
+        // get the input value
+        if(!empty($this->input->post('returnsupplier_item_values'))){
+            $returnsupplier_item_values = $this->input->post('returnsupplier_item_values');
+            $returnsupplier_item_values = json_decode($returnsupplier_item_values, TRUE);
 
-                if($returnsupplier_item_values){
-                    // item values successfully decoded
-                    $database_input_array = array();
+            if($returnsupplier_item_values){
+                // item values successfully decoded
+                $database_input_array = array();
 
-                    // generate return item code
-                    $this->load->helper('returnsupplier_code_helper');
-                    $generated_returnsupplier_code = returnsupplier_code_generator();
-                    if(empty($generated_returnsupplier_code)){
-                        $message['error'] = "Return item gagal dibuat. Kode return item tidak dapat dibuat.";
-                        $this->show_table($message);
-                        return;
-                    }else{
-                        $database_input_array['return_reference_number'] = $generated_returnsupplier_code;
-                    }
-                
-                    $database_input_array['user'] = $this->input->post('user');
-
-                    // input all po item values
-                    $database_input_array['returnsupplier_item_values'] = $returnsupplier_item_values;
-
-                    // input data to database
-                    $response = $this->returnsupplier_model->set_returnsupplier_detail($database_input_array);
-
-                    if($response){
-                        $message['success'] = "Returnsupplier berhasil dibuat.";
-                        $this->show_table($message);
-                    }else{
-                        $message['error'] = "Returnsupplier gagal dibuat.";
-                        $this->show_table($message);
-                    }
+                // generate return item code
+                $this->load->helper('returnsupplier_code_helper');
+                $generated_returnsupplier_code = returnsupplier_code_generator();
+                if(empty($generated_returnsupplier_code)){
+                    $message['error'] = "Return item gagal dibuat. Kode return item tidak dapat dibuat.";
+                    $this->show_table($message);
+                    return;
                 }else{
-                    $message['error'] = "Returnsupplier gagal dibuat. Item tidak dapat dideteksi.";
+                    $database_input_array['return_reference_number'] = $generated_returnsupplier_code;
+                }
+            
+                $database_input_array['user'] = $this->input->post('user');
+
+                // input all po item values
+                $database_input_array['returnsupplier_item_values'] = $returnsupplier_item_values;
+
+                // input data to database
+                $response = $this->returnsupplier_model->set_returnsupplier_detail($database_input_array);
+
+                if($response){
+                    $message['success'] = "Returnsupplier berhasil dibuat.";
+                    $this->show_table($message);
+                }else{
+                    $message['error'] = "Returnsupplier gagal dibuat.";
                     $this->show_table($message);
                 }
             }else{
-                $message['error'] = "Returnsupplier gagal dibuat.";
+                $message['error'] = "Returnsupplier gagal dibuat. Item tidak dapat dideteksi.";
                 $this->show_table($message);
             }
+        }else{
+            $message['error'] = "Returnsupplier gagal dibuat.";
+            $this->show_table($message);
         }
+    }
 
     public function get_stock_detail_by_item_stock_code($stock_code){
         $stock_code = urldecode($stock_code);

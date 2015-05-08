@@ -49,62 +49,62 @@ class Returnitem extends CI_Controller {
         var_dump($this->input->post());
     }
     */
-        public function submit_item_values(){
-            // get the input value
-            if(!empty($this->input->post('returnitem_item_values')) && !empty($this->input->post('worker'))){
-                $returnitem_item_values = $this->input->post('returnitem_item_values');
-                $returnitem_item_values = json_decode($returnitem_item_values, TRUE);
+    public function submit_item_values(){
+        // get the input value
+        if(!empty($this->input->post('returnitem_item_values')) && !empty($this->input->post('worker'))){
+            $returnitem_item_values = $this->input->post('returnitem_item_values');
+            $returnitem_item_values = json_decode($returnitem_item_values, TRUE);
 
-                if($returnitem_item_values){
-                    // item values successfully decoded
-                    $database_input_array = array();
+            if($returnitem_item_values){
+                // item values successfully decoded
+                $database_input_array = array();
 
-                    // generate purchase order code
-                    //$this->load->helper('purchaseorder_code_helper');
-                   // $generated_purchaseorder_code = purchaseorder_code_generator();
-                    //if(empty($generated_purchaseorder_code)){
-                      //  $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
-                        //$this->show_table($message);
-                        //return;
-                   // }else{
-                    //    $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
-                   // }
+                // generate purchase order code
+                //$this->load->helper('purchaseorder_code_helper');
+               // $generated_purchaseorder_code = purchaseorder_code_generator();
+                //if(empty($generated_purchaseorder_code)){
+                  //  $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
+                    //$this->show_table($message);
+                    //return;
+               // }else{
+                //    $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
+               // }
 
-                    // project name
-                    
-                    $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker_id'));
-                    if(empty($worker_detail)){
-                        $message['error'] = "Returnitem gagal dibuat. Worker tidak ada dalam system.";
-                        $this->show_table($message);
-                        return;
-                    }else{
-                        $database_input_array['worker_id'] = $worker_detail['id'];
-                    }
-
-                    $database_input_array['user'] = $this->input->post('user');
-
-                    // input all po item values
-                    $database_input_array['returnitem_item_values'] = $returnitem_item_values;
-
-                    // input data to database
-                    $response = $this->returnitem_model->set_returnitem_detail($database_input_array);
-
-                    if($response){
-                        $message['success'] = "Returnitem berhasil dibuat.";
-                        $this->show_table($message);
-                    }else{
-                        $message['error'] = "Returnitem gagal dibuat.";
-                        $this->show_table($message);
-                    }
+                // project name
+                
+                $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker_id'));
+                if(empty($worker_detail)){
+                    $message['error'] = "Returnitem gagal dibuat. Worker tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
                 }else{
-                    $message['error'] = "Returnitem gagal dibuat. Item tidak dapat dideteksi.";
+                    $database_input_array['worker_id'] = $worker_detail['id'];
+                }
+
+                $database_input_array['user'] = $this->input->post('user');
+
+                // input all po item values
+                $database_input_array['returnitem_item_values'] = $returnitem_item_values;
+
+                // input data to database
+                $response = $this->returnitem_model->set_returnitem_detail($database_input_array);
+
+                if($response){
+                    $message['success'] = "Returnitem berhasil dibuat.";
+                    $this->show_table($message);
+                }else{
+                    $message['error'] = "Returnitem gagal dibuat.";
                     $this->show_table($message);
                 }
             }else{
-                $message['error'] = "Returnitem gagal dibuat.";
+                $message['error'] = "Returnitem gagal dibuat. Item tidak dapat dideteksi.";
                 $this->show_table($message);
             }
+        }else{
+            $message['error'] = "Returnitem gagal dibuat.";
+            $this->show_table($message);
         }
+    }
     
     /*
     public function get_all_po_items(){

@@ -49,81 +49,81 @@ class Useitem extends CI_Controller {
         var_dump($this->input->post());
     }
     */
-        public function submit_item_values(){
-            // get the input value
-            if(!empty($this->input->post('useitem_item_values')) && !empty($this->input->post('subproject'))
-                && !empty($this->input->post('project')) && !empty($this->input->post('worker'))){
-                $useitem_item_values = $this->input->post('useitem_item_values');
-                $useitem_item_values = json_decode($useitem_item_values, TRUE);
+    public function submit_item_values(){
+        // get the input value
+        if(!empty($this->input->post('useitem_item_values')) && !empty($this->input->post('subproject'))
+            && !empty($this->input->post('project')) && !empty($this->input->post('worker'))){
+            $useitem_item_values = $this->input->post('useitem_item_values');
+            $useitem_item_values = json_decode($useitem_item_values, TRUE);
 
-                if($useitem_item_values){
-                    // item values successfully decoded
-                    $database_input_array = array();
+            if($useitem_item_values){
+                // item values successfully decoded
+                $database_input_array = array();
 
-                    // generate purchase order code
-                    //$this->load->helper('purchaseorder_code_helper');
-                   // $generated_purchaseorder_code = purchaseorder_code_generator();
-                    //if(empty($generated_purchaseorder_code)){
-                      //  $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
-                        //$this->show_table($message);
-                        //return;
-                   // }else{
-                    //    $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
-                   // }
+                // generate purchase order code
+                //$this->load->helper('purchaseorder_code_helper');
+               // $generated_purchaseorder_code = purchaseorder_code_generator();
+                //if(empty($generated_purchaseorder_code)){
+                  //  $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
+                    //$this->show_table($message);
+                    //return;
+               // }else{
+                //    $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
+               // }
 
-                    // project name
-                    $project_detail = $this->project_model->get_project_by_id($this->input->post('project'));
-                    if(empty($project_detail)){
-                        $message['error'] = "Useitem gagal dibuat. Project tidak ada dalam system.";
-                        $this->show_table($message);
-                        return;
-                    }else{
-                        $database_input_array['project_id'] = $project_detail['id'];
-                    }
-
-                    // search for subproject id
-                    $subproject_detail = $this->subproject_model->get_subproject_by_id($this->input->post('subproject'));
-                    if(empty($subproject_detail)){
-                        $message['error'] = "Useitem gagal dibuat. Sub Project tidak ada dalam system.";
-                        $this->show_table($message);
-                        return;
-                    }else{
-                        $database_input_array['subproject_id'] = $subproject_detail['id'];
-                    }
-
-                    $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker'));
-                    if(empty($worker_detail)){
-                        $message['error'] = "Useitem gagal dibuat. Worker tidak ada dalam system.";
-                        $this->show_table($message);
-                        return;
-                    }else{
-                        $database_input_array['worker_id'] = $worker_detail['id'];
-                    }
-
-                    $database_input_array['user'] = $this->input->post('user');
-
-                    // input all po item values
-                    $database_input_array['useitem_item_values'] = $useitem_item_values;
-
-                    // input data to database
-                    $response = $this->useitem_model->set_useitem_detail($database_input_array);
-
-                    if($response){
-                        $message['success'] = "Useitem berhasil dibuat.";
-                        $this->show_table($message);
-                    }else{
-                        $message['error'] = "Useitem gagal dibuat.";
-                        $this->show_table($message);
-                    }
+                // project name
+                $project_detail = $this->project_model->get_project_by_id($this->input->post('project'));
+                if(empty($project_detail)){
+                    $message['error'] = "Useitem gagal dibuat. Project tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
                 }else{
-                    $message['error'] = "Useitem gagal dibuat. Item tidak dapat dideteksi.";
+                    $database_input_array['project_id'] = $project_detail['id'];
+                }
+
+                // search for subproject id
+                $subproject_detail = $this->subproject_model->get_subproject_by_id($this->input->post('subproject'));
+                if(empty($subproject_detail)){
+                    $message['error'] = "Useitem gagal dibuat. Sub Project tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['subproject_id'] = $subproject_detail['id'];
+                }
+
+                $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker'));
+                if(empty($worker_detail)){
+                    $message['error'] = "Useitem gagal dibuat. Worker tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['worker_id'] = $worker_detail['id'];
+                }
+
+                $database_input_array['user'] = $this->input->post('user');
+
+                // input all po item values
+                $database_input_array['useitem_item_values'] = $useitem_item_values;
+
+                // input data to database
+                $response = $this->useitem_model->set_useitem_detail($database_input_array);
+
+                if($response){
+                    $message['success'] = "Useitem berhasil dibuat.";
+                    $this->show_table($message);
+                }else{
+                    $message['error'] = "Useitem gagal dibuat.";
                     $this->show_table($message);
                 }
             }else{
-                $message['error'] = "Useitem gagal dibuat.";
+                $message['error'] = "Useitem gagal dibuat. Item tidak dapat dideteksi.";
                 $this->show_table($message);
             }
+        }else{
+            $message['error'] = "Useitem gagal dibuat.";
+            $this->show_table($message);
         }
+    }
     
     /*
     public function get_all_po_items(){

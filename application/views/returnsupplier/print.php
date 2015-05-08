@@ -4,7 +4,7 @@
     $this->fpdf->FPDF("P","cm","A4");
 
     // kita set marginnya dimulai dari kiri, atas, kanan. jika tidak diset, defaultnya 1 cm
-    $this->fpdf->SetMargins(1,1,1,0);
+    $this->fpdf->SetMargins(1,1,1);
     /* AliasNbPages() merupakan fungsi untuk menampilkan total halaman
     di footer, nanti kita akan membuat page number dengan format : number page / total page
     */
@@ -12,6 +12,7 @@
 
     // AddPage merupakan fungsi untuk membuat halaman baru
     $this->fpdf->AddPage();
+    $this->fpdf->SetAutoPageBreak(true,0);
 
     // Setting Font : String Family, String Style, Font size
     $this->fpdf->SetFont('Times','',12);
@@ -20,7 +21,7 @@
     ————– Header Halaman dimulai dari baris ini —————————–
     */
     //$this->fpdf->Cell(19,0.7,'P.O Reference     : '.$detail['reference'],0,0,'R');
-$this->fpdf->Ln();
+    $this->fpdf->Ln();
     //$this->fpdf->Cell(19,0.7,'P.O Date : '.$detail['date'],0,0,'R');
     $this->fpdf->Image('assets/images/INERRE_Logo.png', 2,1,3,3.5);
     // fungsi Ln untuk membuat baris baru
@@ -42,8 +43,8 @@ $this->fpdf->Ln();
     $this->fpdf->Cell(19,0.5,'RETURN ITEM SUPPLIER',0,0,'C');
 
     /* Fungsi Line untuk membuat garis */
+    $this->fpdf->SetDrawColor(200,127,40);
     $this->fpdf->Line(1,5,20,5);
-    $this->fpdf->Line(1,5.05,20,5.05);
 
     /* ————– Header Halaman selesai ————————————————*/
 
@@ -56,15 +57,15 @@ $this->fpdf->Ln();
     $this->fpdf->SetFont('Times','',12);
     if (!empty($detail['address'])){
     $this->fpdf->Cell(10,1,$detail['address'],0,0,'L');
-    $this->fpdf->Ln();
+    $this->fpdf->Ln(0.5);
     }else{}
     if (!empty($detail['city'])){
     $this->fpdf->Cell(10,1,$detail['city'].', '. $detail['province'].' '. $detail['postal_code'],0,0,'L');
-    $this->fpdf->Ln(1.5);
+    $this->fpdf->Ln(1);
     }else{}
     if (!empty($detail['phone_number_1'])){
     $this->fpdf->Cell(10,1,'Phone : '.$detail['phone_number_1'].', '.$detail['phone_number_2'],0,0,'L');
-    $this->fpdf->Ln();
+    $this->fpdf->Ln(0.5);
     }else{}
     if (!empty($detail['email'])){
     $this->fpdf->Cell(10,1,'e-mail : '.$detail['email'].'',0,0,'L');
@@ -84,23 +85,23 @@ $this->fpdf->Ln();
         $this->fpdf->Cell(5 , 0.7, $po['kembali'] , 1, 'LR', 'L');
         $this->fpdf->Cell(5 , 0.7, $po['unit'] , 1, 'LR', 'L');
     }
-    $this->fpdf->Ln(2);
+    $this->fpdf->Ln();
     $this->fpdf->Cell(10,1,'',0,0,'L');
     $this->fpdf->Cell(12,1,'Authorized by : ',0,0,'L');
-    $this->fpdf->Ln(3);
+    $this->fpdf->Ln(2);
     $this->fpdf->Cell(10,1,'',0,0,'L');
     $this->fpdf->Cell(5,1,'Hans Hartono',0,0,'L');
     $this->fpdf->Cell(7,1,date('M d, Y'),0,0,'L');
-    $this->fpdf->Ln();
+    $this->fpdf->Ln(0.8);
     $this->fpdf->Cell(10,0,'',0,0,'L');
     $this->fpdf->Cell(12,0,'_______________________________________',0,0,'L');
-    $this->fpdf->Ln(1);
+    $this->fpdf->Ln(0.5);
     $this->fpdf->Cell(10,0,'',0,0,'L');
     $this->fpdf->Cell(5,0,'Name',0,0,'L');
     $this->fpdf->Cell(7,0,'Date',0,0,'L');
     /* setting posisi footer 3 cm dari bawah */
 
-    $this->fpdf->SetY(-4.5);
+    $this->fpdf->SetY(-2.5);
 
     /* setting font untuk footer */
     $this->fpdf->SetFont('Times','',9);
