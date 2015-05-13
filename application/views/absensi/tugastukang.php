@@ -19,7 +19,7 @@
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Absensi
+                                        <i class="icol-grid"></i> Tugas Tukang
                                     </span>
                                 </div>
                                 <?php if(isset($message['success'])): ?>

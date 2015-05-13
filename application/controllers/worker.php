@@ -52,7 +52,9 @@ class Worker extends CI_Controller {
 
                 // division id
                 $database_input_array['division_id'] = $this->input->post('division_id');
-
+                $database_input_array['group_id'] = $this->input->post('group_id');
+                $database_input_array['ketua'] = $this->input->post('ketua');
+                
                 // generate worker id for each new worker
                 $this->load->helper('worker_code_helper');
                 $generated_worker_code = worker_code_generator($database_input_array['division_id']);
@@ -127,6 +129,10 @@ class Worker extends CI_Controller {
 
         // division id
         $database_input_array['division_id'] = $this->input->post('division_id');
+
+        $database_input_array['group_id'] = $this->input->post('group_id');
+
+        $database_input_array['ketua-edit'] = $this->input->post('ketua-edit');
 
         // worker name
         $database_input_array['name'] = $this->input->post('name');
@@ -204,6 +210,11 @@ class Worker extends CI_Controller {
     public function get_all_worker_divisions(){
         $worker_divisions = $this->division_model->get_all_divisions();
         echo json_encode($worker_divisions);
+    }
+
+    public function get_all_worker_group(){
+        $worker_group = $this->worker_model->get_all_group();
+        echo json_encode($worker_group);
     }
 
     private function show_table($message)

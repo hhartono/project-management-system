@@ -161,114 +161,134 @@ class Absensi extends CI_Controller{
                 $this->load->view('absensi/navigation', $data);
                 $this->load->view('absensi/lihat',$data); 
                 $this->load->view('absensi/footer');
-    }
+  }
 
-    public function update_projectworker(){
-        // check all necessary input
-        if(!empty($this->input->post('id')))
-        {
+  public function update_projectworker(){
+      // check all necessary input
+      if(!empty($this->input->post('id')))
+      {
 
-            // search for customer id
-            $database_input_array = array();
-            
-            $database_input_array['subproject_id'] = $this->input->post('subproject');
-            
-            // database id
-            $database_input_array['id'] = $this->input->post('id');
-
-            // store project information
-            $response = $this->absensi_model->update_projectworker($database_input_array);
-
-            if($response){
-                $message['success'] = "Project Worker berhasil diubah.";
-                $this->show_table($message);
-            }else{
-                $message['error'] = "Project Worker gagal diubah.";
-                $this->show_table($message);
-            }
-        }else{
-            $message['error'] = "Project Worker gagal diubah.";
-            $this->show_table($message);
-        }
-    }
-
-    public function projectdetail_worker() {
-        $user_id    = $this->tank_auth->get_user_id();
-            $user_info = $this->login_model->get_user_info($user_id);
-            $data['username'] = $user_info['name'];
-            $data['company_title'] = $user_info['title'];
-
-            // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
-
-            // message
-            //$data['message'] = $message;
-
-        $data['absensi'] = $this->absensi_model->count_time();
-        $data['getpro']=$this->absensi_model->get_all_project();
-        
-                $this->load->view('header');
-                $this->load->view('absensi/navigation', $data);
-                $this->load->view('absensi/maindetail',$data); 
-                $this->load->view('absensi/footer');
-    }
-
-    public function caribulan() {
-        $user_id    = $this->tank_auth->get_user_id();
-        $user_info = $this->login_model->get_user_info($user_id);
-            $data['username'] = $user_info['name'];
-            $data['company_title'] = $user_info['title'];
-
-            // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
-
-            // message
-            //$data['message'] = $message;
-
-        $data['absensi']=$this->absensi_model->count_time_filter();
-        //$data['absensi'] = $this->absensi_model->get_all_absensi();
-        $data['getpro']=$this->absensi_model->get_all_project();
-        //$data['getproject']=$this->absensi_model->getproject1();
-        
-        //$data['getcompany'] = $this->detail_model->get_company();
+          // search for customer id
+          $database_input_array = array();
           
-        $this->load->view('header');
-        $this->load->view('absensi/navigation', $data);
-        $this->load->view('absensi/maindetail',$data); 
-        $this->load->view('absensi/footer');
-    }
+          $database_input_array['subproject_id'] = $this->input->post('subproject');
+          
+          // database id
+          $database_input_array['id'] = $this->input->post('id');
 
-    public function detail_worker(){
-        $user_id    = $this->tank_auth->get_user_id();
+          // store project information
+          $response = $this->absensi_model->update_projectworker($database_input_array);
+
+          if($response){
+              $message['success'] = "Project Worker berhasil diubah.";
+              $this->show_table($message);
+          }else{
+              $message['error'] = "Project Worker gagal diubah.";
+              $this->show_table($message);
+          }
+      }else{
+          $message['error'] = "Project Worker gagal diubah.";
+          $this->show_table($message);
+      }
+  }
+
+  public function projectdetail_worker() {
+      $user_id    = $this->tank_auth->get_user_id();
+          $user_info = $this->login_model->get_user_info($user_id);
+          $data['username'] = $user_info['name'];
+          $data['company_title'] = $user_info['title'];
+
+          // access level
+          $data['access']['create'] = true;
+          $data['access']['edit'] = true;
+          $data['access']['delete'] = true;
+
+          // message
+          //$data['message'] = $message;
+
+      $data['absensi'] = $this->absensi_model->count_time();
+      $data['getpro']=$this->absensi_model->get_all_project();
+      
+              $this->load->view('header');
+              $this->load->view('absensi/navigation', $data);
+              $this->load->view('absensi/maindetail',$data); 
+              $this->load->view('absensi/footer');
+  }
+
+  public function caribulan() {
+      $user_id    = $this->tank_auth->get_user_id();
+      $user_info = $this->login_model->get_user_info($user_id);
+          $data['username'] = $user_info['name'];
+          $data['company_title'] = $user_info['title'];
+
+          // access level
+          $data['access']['create'] = true;
+          $data['access']['edit'] = true;
+          $data['access']['delete'] = true;
+
+          // message
+          //$data['message'] = $message;
+
+      $data['absensi']=$this->absensi_model->count_time_filter();
+      //$data['absensi'] = $this->absensi_model->get_all_absensi();
+      $data['getpro']=$this->absensi_model->get_all_project();
+      //$data['getproject']=$this->absensi_model->getproject1();
+      
+      //$data['getcompany'] = $this->detail_model->get_company();
         
-            $user_info = $this->login_model->get_user_info($user_id);
-            $data['username'] = $user_info['name'];
-            $data['company_title'] = $user_info['title'];
+      $this->load->view('header');
+      $this->load->view('absensi/navigation', $data);
+      $this->load->view('absensi/maindetail',$data); 
+      $this->load->view('absensi/footer');
+  }
 
-            // access level
-            $data['access']['create'] = true;
-            $data['access']['edit'] = true;
-            $data['access']['delete'] = true;
+  public function detail_worker(){
+      $user_id    = $this->tank_auth->get_user_id();
+      
+          $user_info = $this->login_model->get_user_info($user_id);
+          $data['username'] = $user_info['name'];
+          $data['company_title'] = $user_info['title'];
 
-            // message
-            //$data['message'] = $message;
+          // access level
+          $data['access']['create'] = true;
+          $data['access']['edit'] = true;
+          $data['access']['delete'] = true;
 
-            // get necessary data
-        $data['detail'] = $this->absensi_model->detail_worker();
-        $this->load->view('header');
-        $this->load->view('absensi/navigation', $data);
-        $this->load->view('absensi/detail_worker', $data);
-        $this->load->view('absensi/footer');
-    }
+          // message
+          //$data['message'] = $message;
 
-    public function _is_logged_in(){
-        if(!$this->tank_auth->is_logged_in()){
-            redirect('/auth/login');
-        }
-    }
+          // get necessary data
+      $data['detail'] = $this->absensi_model->detail_worker();
+      $this->load->view('header');
+      $this->load->view('absensi/navigation', $data);
+      $this->load->view('absensi/detail_worker', $data);
+      $this->load->view('absensi/footer');
+  }
+
+  public function _is_logged_in(){
+      if(!$this->tank_auth->is_logged_in()){
+          redirect('/auth/login');
+      }
+  }
+
+  public function tugastukang()
+  {   
+    $user_id    = $this->tank_auth->get_user_id();
+    
+      $user_info = $this->login_model->get_user_info($user_id);
+      $data['userid'] = $user_info['id'];
+      $data['username'] = $user_info['name'];
+      $data['company_title'] = $user_info['title']; 
+
+      //$data['message'] = $message;
+
+    $data['absensi'] = $this->absensi_model->get_all_absensi();
+    //$data['proabs'] = $this->absensi_model->get_project_absensi();
+    $data['getpro']=$this->absensi_model->get_all_project(); 
+    $this->load->view('header');
+    $this->load->view('absensi/navigation', $data);
+    $this->load->view('absensi/tugastukang', $data);
+    $this->load->view('absensi/footer');
+  }
 }
 ?>

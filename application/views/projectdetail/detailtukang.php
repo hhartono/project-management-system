@@ -117,7 +117,7 @@
                     <input type="hidden" value="<?php echo $proj['id'] ; ?>" name="sub">
                     <input type="hidden" value="<?php echo $this->input->post('tanggal1'); ?>" name="tanggal1">
                     <input type="hidden" value="<?php echo $this->input->post('tanggal2'); ?>" name="tanggal2">
-                    <input type="submit" value="Cetak" class="btn btn-success btn-create ">
+                    <input type="submit" value="Cetak" class="btn btn-success btn-create">
                 </form>                            
             </div>
         </div>

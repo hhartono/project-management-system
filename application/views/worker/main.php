@@ -27,7 +27,7 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-worker-datatable-numberpaging" class="da-table"">
+                                    <table id="da-worker-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Kode Tukang</th>
@@ -62,12 +62,12 @@
                                                             <?php if(isset($access['edit']) && $access['edit']): ?>
                                                                 <a class="da-worker-edit-dialog" href="#" data-value="<?php echo $each_worker['id']; ?>"><i class="icol-pencil"></i></a>
                                                             <?php endif; ?>
-                                                            <?php if(isset($access['delete']) && $access['delete']):
+                                                           <!--  <?php if(isset($access['delete']) && $access['delete']):
                                                                 $worker_id = $each_worker['id'];
                                                                 $delete_url = "/worker/delete_worker/" . $worker_id;
                                                                 ?>
                                                                 <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
-                                                            <?php endif; ?>
+                                                            <?php endif; ?> -->
                                                         </td>
                                                     <?php endif; ?>
                                                 </tr>
@@ -99,6 +99,12 @@
                                     <label class="da-form-label">Divisi Tukang</label>
                                     <div class="da-form-item large">
                                         <select id="worker-view-division" name="division_id" disabled></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Group Tukang</label>
+                                    <div class="da-form-item large">
+                                        <select id="worker-view-group" name="group_id" disabled></select>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -155,6 +161,27 @@
                                     <label class="da-form-label">Divisi Tukang</label>
                                     <div class="da-form-item large">
                                         <select id="worker-create-division" name="division_id"></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kepala Tukang</label>
+                                    <div class="da-form-item large">
+                                        <?php
+                                        $data = array(
+                                        'name'        => 'ketua',
+                                        'id'          => 'ketua',
+                                        'value'       => '1',
+                                        'checked'     => FALSE,
+                                        );
+                                            // echo form_checkbox('ketua','1').'&nbsp; Ya<br>';
+                                        echo form_checkbox($data).'&nbsp; Ya<br>';
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Group</label>
+                                    <div class="da-form-item large">
+                                        <select id="worker-create-group" name="group_id"></select>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -218,6 +245,25 @@
                                     <label class="da-form-label">Divisi Tukang</label>
                                     <div class="da-form-item large">
                                         <select id="worker-edit-division" name="division_id" disabled></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Kepala Tukang</label>
+                                    <div class="da-form-item large">
+                                        <?php
+                                        $data = array(
+                                        'name'        => 'ketua-edit',
+                                        'id'          => 'ketua-edit'
+                                        );
+                                            // echo form_checkbox('ketua','1').'&nbsp; Ya<br>';
+                                        echo form_checkbox($data).'&nbsp; Ya<br>';
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Grup Tukang</label>
+                                    <div class="da-form-item large">
+                                        <select id="worker-edit-group" name="group_id"></select>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

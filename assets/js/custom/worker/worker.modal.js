@@ -53,6 +53,23 @@
                 // fill the known value
                 fillView(id);
             }, "json" );
+
+            $.get( "/worker/get_all_worker_group", function(data) {
+                $('#worker-view-group')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("Kepala Tukang / Kepala Grup"));
+
+                $.each(data, function(key, value){
+                    $('#worker-view-group')
+                        .append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.name));
+                });
+
+                // fill the known value
+                fillView(id);
+            }, "json" );
         }
 
         function fillView(id) {
@@ -60,6 +77,7 @@
                 $("#worker-view-id").val(id);
                 $("#worker-view-worker-code").val(data.worker_code);
                 $("#worker-view-division").val(data.division_id);
+                $("#worker-view-group").val(data.group_id);
                 $("#worker-view-name").val(data.name);
                 $("#worker-view-address").val(data.address);
                 $("#worker-view-phone-1").val(data.phone_number_1);
@@ -94,6 +112,9 @@
                     required: true
                 },
                 division_id: {
+                    required: true
+                },
+                group_id: {
                     required: true
                 },
                 join_date: {
@@ -138,6 +159,33 @@
                             .text(value.name));
                 });
             }, "json" );
+
+            $('#ketua').click(function(){
+                if(this.checked){
+                    $('#worker-create-group').attr('disabled',true);
+                }else{
+                    $('#worker-create-group').removeAttr('disabled',true);
+                }
+            })
+
+            $('#worker-create-group')
+                .find('option')
+                .remove()
+                .end();
+
+            $.get( "/worker/get_all_worker_group", function(data) {
+                $('#worker-create-group')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
+                $.each(data, function(key, value){
+                    $('#worker-create-group')
+                        .append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.name));
+                });
+            }, "json" );
         });
 
         /*
@@ -152,6 +200,7 @@
                 text: "Simpan",
                 click: function() {
                     $("#worker-edit-division").prop("disabled", false);
+                    $("#worker-edit-group").prop("disabled", false);
                     $(this).find('form#da-worker-edit-form-val').submit();
                 }},
                 {
@@ -165,6 +214,9 @@
                     required: true
                 },
                 division_id: {
+                    required: true
+                },
+                group_id: {
                     required: true
                 },
                 join_date: {
@@ -200,6 +252,7 @@
             // fill division with all possible values
             var id = $(this).data("value");
             prepareEditDivision(id);
+            //prepareEditGroup(id);
         });
 
         function prepareEditDivision(id) {
@@ -224,13 +277,59 @@
                 // fill the known value
                 fillEdit(id);
             }, "json" );
+
+            $('#worker-edit-group')
+                .find('option')
+                .remove()
+                .end();
+
+            $.get( "/worker/get_all_worker_group", function(data) {
+                $('#worker-edit-group')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
+                $.each(data, function(key, value){
+                    $('#worker-edit-group')
+                        .append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.name));
+                });
+
+                // fill the known value
+                fillEdit(id);
+            }, "json" );
         }
+
+
 
         function fillEdit(id){
             $.get( "/worker/get_worker_detail/" + id, function(data) {
                 $("#worker-edit-id").val(id);
                 $("#worker-edit-worker-code").val(data.worker_code);
                 $("#worker-edit-division").val(data.division_id);
+                $("#ketua-edit").val(data.leader_group);
+                if(data.leader_group == '1'){
+                    $("#ketua-edit").attr('checked',true);    
+                }else{
+                    $("#ketua-edit").removeAttr('checked',true);
+                }
+                if(data.leader_group == '1'){
+                    $('#worker-edit-group').attr('disabled',true);
+                }else{
+                    $('#worker-edit-group').removeAttr('disabled',true);
+                }
+
+                $('#ketua-edit').click(function(){
+                if(this.checked){
+                    $('#worker-edit-group').attr('disabled',true);
+                }else{
+                    $('#worker-edit-group').removeAttr('disabled',true);
+                }
+                })
+                $("#worker-edit-group").val(data.group_id);
+                console.log(data.group_id);
+                
                 $("#worker-edit-name").val(data.name);
                 $("#worker-edit-address").val(data.address);
                 $("#worker-edit-phone-1").val(data.phone_number_1);
