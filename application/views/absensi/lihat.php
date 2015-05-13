@@ -44,7 +44,6 @@
                                                 <th>On Duty</th>
                                                 <th>Off Duty</th>
                                                 <th>Project</th>
-                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -56,31 +55,10 @@
                                                     <td class="notes-row"><?php echo $each_absensi['on_duty']; ?></td>
                                                     <td class="notes-row"><?php echo $each_absensi['off_duty']; ?></td>
                                                     <td>
-                                                    <?php
-                                                          if ($each_absensi['subproject'] !=null){
+                                                        <?php
                                                             echo $each_absensi['subproject'];
-                                                          }else{
-                                                    ?>                                                    
-                                                            <select id="demo2" name="subproject[]" multiple="multiple" style="width:300px">
-                                                            <?php                                                                
-                                                                    foreach ($getpro as $pro):                                                       
-                                                            ?>
-                                                                    <option value="<?php echo $pro['id'];?>">
-                                                                        <?php echo $pro['project'];?> - <?php echo $pro['subproject'];?>
-                                                                    </option>
-                                                            <?php
-                                                                endforeach;
-                                                                 
-                                                            ?>                                                           
-                                                            </select><?php } ?>
-                                                    </td>
-                                                    <td class="da-icon-column">
-                                                    <?php
-                                                        if ($each_absensi['subproject'] ==null){
-                                                    ?> 
-                                                        <input type="submit" value="Submit" class="btn btn-success">
-                                                    <?php } ?>
-                                                    </td>
+                                                        ?>                                                    
+                                                    </td>            
                                                   </form>  
                                                 </tr>
                                             <?php endforeach?>

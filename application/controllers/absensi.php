@@ -282,13 +282,44 @@ class Absensi extends CI_Controller{
 
       //$data['message'] = $message;
 
-    $data['absensi'] = $this->absensi_model->get_all_absensi();
+    $data['absensi'] = $this->absensi_model->get_all_absensi_group();
     //$data['proabs'] = $this->absensi_model->get_project_absensi();
     $data['getpro']=$this->absensi_model->get_all_project(); 
     $this->load->view('header');
     $this->load->view('absensi/navigation', $data);
     $this->load->view('absensi/tugastukang', $data);
     $this->load->view('absensi/footer');
+  }
+
+  public function update_projectworkergrup(){
+      // check all necessary input
+      if(!empty($this->input->post('id')))
+      {
+
+          // search for customer id
+          $database_input_array = array();
+          
+          $database_input_array['subproject_id'] = $this->input->post('subproject');
+          
+          // database id
+          $database_input_array['id'] = $this->input->post('id');
+
+          $database_input_array['date'] = $this->input->post('date');
+
+          // store project information
+          $response = $this->absensi_model->update_projectworkergrup($database_input_array);
+
+          if($response){
+              $message['success'] = "Project Worker berhasil diubah.";
+              $this->tugastukang($message);
+          }else{
+              $message['error'] = "Project Worker gagal diubah.";
+              $this->tugastukang($message);
+          }
+      }else{
+          $message['error'] = "Project Worker gagal diubah.";
+          $this->tugastukang($message);
+      }
   }
 }
 ?>

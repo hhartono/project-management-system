@@ -7,12 +7,19 @@ class Absensi_model extends CI_Model {
 
 	public function get_all_absensi()
 	{
-		$query = $this->db->query("select absensi.*,
+		/*$query = $this->db->query("select absensi.*,
 							GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
 							FROM absensi 
 							left join absensi_detail on absensi.id = absensi_detail.absensi_id
 							left join subproject_master on absensi_detail.subproject_id = subproject_master.id
-							GROUP BY absensi.date, absensi.name");
+							GROUP BY absensi.date, absensi.name");*/
+        $query = $this->db->query("select absensi . *, group_master.name as grup, group_master.id as idgrup,
+                                        GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
+                                        FROM absensi join worker_master ON worker_master.name = absensi.name
+                                        left join group_master ON group_master.id = worker_master.group_id                      
+                                        left join group_tugas_detail ON group_master.id = group_tugas_detail.group_id AND absensi.date = group_tugas_detail.date 
+                                        left join subproject_master ON group_tugas_detail.subproject_id = subproject_master.id
+                                        GROUP BY absensi.date , absensi.name");
     	
     	$result_array = $query->result_array();
     	return $result_array;
@@ -153,6 +160,61 @@ class Absensi_model extends CI_Model {
 									");
     	$result_array = $query->result_array();
     	return $result_array;
+    }
+
+    public function get_all_absensi_group()
+    {
+        $query = $this->db->query("select absensi . *, group_master.name as grup, group_master.id as idgrup,
+                                        GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
+                                        FROM absensi join worker_master ON worker_master.name = absensi.name
+                                        left join group_master ON group_master.id = worker_master.group_id                      
+                                        left join group_tugas_detail ON group_master.id = group_tugas_detail.group_id AND absensi.date = group_tugas_detail.date 
+                                        left join subproject_master ON group_tugas_detail.subproject_id = subproject_master.id
+                                        GROUP BY absensi.date , group_master.name");
+        
+        $result_array = $query->result_array();
+        return $result_array;
+    }
+
+    public function update_projectworkergrup($database_input_array)
+    {
+        if($database_input_array['id'] !== false){
+            date_default_timezone_set('Asia/Jakarta');
+            
+            $this->db->trans_start();
+            
+
+            if(!empty($this->input->post('subproject'))){
+            foreach($_POST['subproject'] as $pro)
+            {
+                //echo $pro . "<br>";
+                $id = $this->input->post('id');
+                $date = $this->input->post('date');
+                $query = $this->db->query("INSERT INTO group_tugas_detail(group_id, subproject_id, date) VALUES('$id', '$pro', '$date')");
+            
+            }
+            
+
+            $jum = count($_POST['subproject']);
+            $data = array(
+                'count' => $jum
+            );            
+            
+            $this->db->where('id', $database_input_array['id']);
+            $this->db->update('absensi', $data);
+            }
+            
+            $this->db->trans_complete();
+
+            // return false if something went wrong
+            if ($this->db->trans_status() === FALSE){
+                return FALSE;
+            }else{
+                return TRUE;
+            }
+        }else{
+            return false;
+        }
     }
 }
 ?>

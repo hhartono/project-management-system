@@ -2,16 +2,16 @@
                 <!-- Content Area -->
                 <div id="da-content-area">
                         <div class="row-fluid">
-                            <div class="span12">
+                            <!-- <div class="span12">
                                 <?php echo form_open_multipart('/absensi/cari');?>
                                    Pencarian Berdasarkan Tanggal : <input id="absensi-create-join-date" type="text" value="yyyy-mm-dd" name="cari">
                                     <input type="submit" value="Filter" class="btn btn-success"/>
                                     </form>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row-fluid">
                             <div class="span12">
-                                <a href="/absensi/upload" class="btn btn-success btn-create">[+] Upload Absensi</a>
+                                <!-- <a href="/absensi/upload" class="btn btn-success btn-create">[+] Upload Absensi</a> -->
                             </div>
                         </div>
                     <div class="row-fluid">
@@ -36,10 +36,10 @@
                                   <div class="span12">
                                   
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-absensi-datatable-numberpaging" class="da-table"">
+                                    <table id="da-absensi-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
-                                                <th>Nama Pekerja</th>
+                                                <th>Grup</th>
                                                 <th>Tanggal</th>
                                                 <th>On Duty</th>
                                                 <th>Off Duty</th>
@@ -49,9 +49,10 @@
                                         </thead>
                                         <tbody>
                                             <?php foreach($absensi as $each_absensi): ?>
-                                                <tr><form method="post" action="/absensi/update_projectworker/">
-                                                    <input type="hidden" value="<?php echo $each_absensi['id'];?>" name="id">
-                                                    <td class="prefix-row"><?php echo $each_absensi['name']; ?></td>
+                                                <tr><form method="post" action="/absensi/update_projectworkergrup/">
+                                                    <input type="hidden" value="<?php echo $each_absensi['idgrup'];?>" name="id">
+                                                    <input type="hidden" value="<?php echo $each_absensi['date'];?>" name="date">
+                                                    <td class="prefix-row"><?php echo $each_absensi['grup']; ?></td>
                                                     <td class="name-row"><?php echo date("d-M-Y", strtotime($each_absensi['date'])); ?></td>
                                                     <td class="notes-row"><?php echo $each_absensi['on_duty']; ?></td>
                                                     <td class="notes-row"><?php echo $each_absensi['off_duty']; ?></td>
