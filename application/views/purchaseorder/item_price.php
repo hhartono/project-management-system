@@ -113,7 +113,7 @@
                                         </div>
                                         <?php endforeach?>
                                         <tr>
-                                            <td colspan="3" align="center"><?php
+                                            <td colspan="3"><?php
                             if(isset($purchaseorder_main)){
                                     if(($purchaseorder_main->status_pembayaran) == 0){
                                         echo "<b>Jumlah yang harus dibayar sebesar : "; echo $total->total - $pembayaran->jumlah;
