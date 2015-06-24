@@ -91,7 +91,7 @@ class Purchaseorder_model extends CI_Model {
         $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id','left');
         $this->db->join('transaction_po_detail', 'transaction_po_main.id = transaction_po_detail.po_id','left');
         $this->db->join('stock_master', 'stock_master.po_detail_id = transaction_po_detail.id','left');
-        $this->db->distinct('transaction_po_detail.po_id');
+        $this->db->group_by('transaction_po_detail.po_id');
 
         $query = $this->db->get();
 
@@ -171,11 +171,14 @@ class Purchaseorder_model extends CI_Model {
         return $result_array;
     }
 
-    public function get_purchaseorder_detail_by_stock_id($po_id){
-        $query = $this->db->query("select transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price
+    public function get_purchaseorder_detail_by_stock_id(){
+
+        $po_id = $this->uri->segment(3);
+        $query = $this->db->query("select transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price, SUM(stock_master.item_price * transaction_po_detail.quantity_received) as total
                                     from transaction_po_detail, item_master, stock_master
-                                    where transaction_po_detail.item_id = item_master.id AND transaction_po_detail.id = stock_master.po_detail_id AND po_id = $po_id");
-        $result_array = $query->row();
+                                    where transaction_po_detail.item_id = item_master.id AND transaction_po_detail.id = stock_master.po_detail_id AND po_id = $po_id 
+                                    Group By transaction_po_detail.id");
+        $result_array = $query->result_array();
         return $result_array;
     }
 
@@ -463,14 +466,106 @@ class Purchaseorder_model extends CI_Model {
         if($database_input_array['id'] !== false && $database_input_array['item_price'] !== false){
             date_default_timezone_set('Asia/Jakarta');
 
-            $data = array(
-                'item_price' => $database_input_array['item_price'],
-            );
+            $id = $database_input_array['id'];
+            $item_price = $database_input_array['item_price'];
+            $po_id = $this->uri->segment(3);
+            $query = $this->db->query("select transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price
+                                    from transaction_po_detail, item_master, stock_master
+                                    where transaction_po_detail.item_id = item_master.id AND transaction_po_detail.id = stock_master.po_detail_id AND po_id = $po_id 
+                                    Group By transaction_po_detail.id");
 
-            $this->db->where('id', $this->input->post('id'));
-            return $this->db->update('stock_master', $data);
+            $count = $query->num_rows();            
+            for($i = 0; $i < $count; $i++){   
+                $query = $this->db->query("UPDATE stock_master set item_price = $item_price[$i] where
+                    id = $id[$i]");
+            }
+            return $query;
         }else{
             return false;
         }
+    }
+
+    public function get_po_by_id(){
+        $id = $this->uri->segment(3);
+        $this->db->select('transaction_po_main.*, supplier_master.name AS supplier, project_master.name AS project, subproject_master.name AS subproject');
+        $this->db->from('transaction_po_main');
+        $this->db->join('supplier_master', 'transaction_po_main.supplier_id = supplier_master.id');
+        $this->db->join('project_master', 'transaction_po_main.project_id = project_master.id');
+        $this->db->join('subproject_master', 'subproject_master.project_id = project_master.id');
+        $this->db->where('transaction_po_main.id', $id);
+        $query = $this->db->get();
+
+        $row_array = $query->row();
+        return $row_array;
+    }
+
+    public function get_total(){
+        $po_id = $this->uri->segment(3);
+        $query = $this->db->query("select transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price, SUM(stock_master.item_price * transaction_po_detail.quantity_received) as total
+                                    from transaction_po_detail, item_master, stock_master
+                                    where transaction_po_detail.item_id = item_master.id AND transaction_po_detail.id = stock_master.po_detail_id AND po_id = $po_id 
+                                    ");
+        $result_array = $query->row();
+        return $result_array;
+    }
+
+    public function pembayaran()
+    {
+        $id = $this->uri->segment(3);
+        $query = $this->db->query("
+                SELECT sum(jumlah) as jumlah
+                FROM pembayaran
+                WHERE po_id = '$id'
+            ");
+        $result_array = $query->row();
+        return $result_array;
+    }
+
+    public function set_pembayaran($database_input_array)
+    {
+        if($database_input_array['jumlah'] !== false && $database_input_array['company_id'] !== false){
+            date_default_timezone_set('Asia/Jakarta');
+
+            $this->db->trans_start();
+            $data = array(
+                'po_id' => $this->input->post('po_id'),
+                'company_id' => $database_input_array['company_id'],
+                'jumlah' => $database_input_array['jumlah'],
+                'date' => $database_input_array['start_date']
+            );
+
+            $this->db->insert('pembayaran', $data);
+
+            if($this->input->post('harga') + $database_input_array['jumlah'] == $this->input->post('total')){
+                $data = array(
+                    'status_pembayaran' => '1'
+                );
+                $this->db->where('id', $this->input->post('po_id'));
+                $this->db->update('transaction_po_main', $data);
+            }
+            // complete database transaction
+            $this->db->trans_complete();
+
+            // return false if something went wrong
+            if ($this->db->trans_status() === FALSE){
+                return FALSE;
+            }else{
+                return TRUE;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    public function getpembayaran()
+    {
+        $id = $this->uri->segment(3);
+        $query = $this->db->query("
+                SELECT pembayaran.*, company_master.name as name
+                FROM pembayaran, company_master
+                WHERE pembayaran.company_id = company_master.id AND po_id = '$id'
+            ");
+        $result_array = $query->result_array();
+        return $result_array;
     }
 }

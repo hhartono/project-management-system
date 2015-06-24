@@ -72,6 +72,7 @@
                         }
                 });
         });
+
     });
 </script>
     <!-- JS Template -->

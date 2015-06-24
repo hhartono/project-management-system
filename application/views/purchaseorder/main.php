@@ -86,17 +86,14 @@
                                                             </form>
                                                         <?php endif; ?>
                                                         <?php
-                                                            }else if($each_purchaseorder['item_price']==0){
+                                                            }else{
                                                                 $purchaseorder_id = $each_purchaseorder['id'];
                                                                 $price_url = "/purchaseorder/update_price/" . $purchaseorder_id;
                                                         ?>
                                                             <form id="da-purchaseorder-print-form-val" class="da-form" action=<?php echo $price_url; ?> method="post">
-                                                                <button id="da-purchaseorder-receive" class="btn btn-success">Update Harga</button>
+                                                                <button id="da-purchaseorder-receive" class="btn btn-success">Pembayaran</button>
                                                             </form>
                                                         <?php
-                                                            }else{
-                                                                // po already closed
-                                                                echo $each_purchaseorder['formatted_po_close_date'];
                                                             }
                                                         ?>
                                                     </td>

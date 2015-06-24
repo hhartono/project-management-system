@@ -593,7 +593,7 @@ class Purchaseorder extends CI_Controller {
         
     }
 
-    public function update_price($po_id)
+    public function update_price($message)
     {
         $user_id    = $this->tank_auth->get_user_id();
         if($user_id){
@@ -601,18 +601,21 @@ class Purchaseorder extends CI_Controller {
             $user_info = $this->login_model->get_user_info($user_id);
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
-
+            $data['po_id'] = $this->uri->segment(3);
             // access level
             $data['access']['create'] = true;
             $data['access']['edit'] = true;
             $data['access']['delete'] = true;
 
             // message
-            //$data['message'] = $message;
+            $data['message'] = $message;
 
             // get necessary data
-            $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_stock_id($po_id);
-            $data['purchaseorder_main'] = $this->purchaseorder_model->get_purchaseorder_by_id($po_id);
+            $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_stock_id();
+            $data['purchaseorder_main'] = $this->purchaseorder_model->get_po_by_id();
+            $data['pembayaran'] = $this->purchaseorder_model->pembayaran();
+            $data['total'] = $this->purchaseorder_model->get_total();
+            $data['getpembayaran'] = $this->purchaseorder_model->getpembayaran();
 
             $this->load->view('header');
             $this->load->view('purchaseorder/navigation', $data);
@@ -638,14 +641,65 @@ class Purchaseorder extends CI_Controller {
 
             if($response){
                 $message['success'] = "Item Price berhasil diubah.";
-                $this->show_table($message);
+                $this->update_price($message);
             }else{
                 $message['error'] = "Item Price gagal diubah.";
-                $this->show_table($message);
+                $this->update_price($message);
             }
         }else{
             $message['error'] = "Item Price gagal diubah.";
-            $this->show_table($message);
+            $this->update_price($message);
+        }
+    }
+
+    public function pembayaran(){
+        // check all necessary input
+        if(!empty($this->input->post('jumlah')) && !empty($this->input->post('company_name'))){
+            $database_input_array = array();
+            $company_detail = $this->project_model->get_company_by_name($this->input->post('company_name'));
+
+            if(empty($company_detail)){
+                $message['error'] = "Project gagal disimpan. Nama company tidak ada dalam system.";
+                $this->update_price($message);
+                return;
+            }else{
+                $database_input_array['company_id'] = $company_detail['id'];
+            }
+            $database_input_array['jumlah'] = $this->input->post('jumlah');
+
+            date_default_timezone_set('Asia/Jakarta');
+            $start_date = strtotime($this->input->post('date'));
+            if($start_date === false){
+                $message['error'] = "Pembayaran gagal disimpan. Tanggal mulai tidak valid.";
+                $this->update_price($message);
+                return;
+            }else{
+                $start_date = date("Y-m-d H:i:s", $start_date);
+                if($start_date === false){
+                    $message['error'] = "Pembayaran gagal disimpan. Tanggal mulai tidak valid.";
+                    $this->update_price($message);
+                    return;
+                }else{
+                    $database_input_array['start_date'] = $start_date;
+                }
+            }
+                if($this->input->post('harga') + $this->input->post('jumlah') > $this->input->post('total')){
+                    $message['error'] = "Pembayaran gagal disimpan. Pembayaran melebihi jumlah yang harus dibayar";
+                    $this->update_price($message);
+                }else{
+                    $response = $this->purchaseorder_model->set_pembayaran($database_input_array);
+
+                    if($response){
+                        $message['success'] = "pembayaran berhasil disimpan.";
+                        $this->update_price($message);
+                    }else{
+                        $message['error'] = "pembayaran gagal disimpan.";
+                        $this->update_price($message);
+                    }
+                }
+        }else{
+            $message['error'] = "pembayaran gagal disimpan.";
+            $this->update_price($message);
         }
     }
 }
