@@ -513,9 +513,9 @@ class Purchaseorder_model extends CI_Model {
     {
         $id = $this->uri->segment(3);
         $query = $this->db->query("
-                SELECT sum(jumlah) as jumlah
-                FROM pembayaran
-                WHERE po_id = '$id'
+                SELECT sum(jumlah) as jumlah, company_master.name as name
+                FROM pembayaran, company_master
+                WHERE company_master.id = pembayaran.company_id AND po_id = '$id'
             ");
         $result_array = $query->row();
         return $result_array;

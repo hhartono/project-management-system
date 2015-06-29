@@ -29,7 +29,7 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-purchaseorder-datatable-numberpaging" class="da-table"">
+                                    <table id="da-purchaseorder-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Tanggal Purchase Order</th>
@@ -104,7 +104,7 @@
                                                                 $po_id = $each_purchaseorder['id'];
                                                                 $delete_url = "/purchaseorder/deletepo/" . $po_id;
                                                                 ?>
-                                                                <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
+                                                                <a href=<?php echo $delete_url; ?><i class="icol-cross"></i></a>
                                                             <?php endif; ?>
                                                         </td>
                                                     <?php endif; ?>

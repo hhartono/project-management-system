@@ -66,7 +66,14 @@
                                                     <td class="quantity-order-row" name="quantity_ordered"><?php echo $purchaseorder_details['quantity']; ?></td>
                                                     <td class="quantity-already-received-row" name="quantity_already_received"><?php echo $purchaseorder_details['quantity_received']; ?></td>
                                                     <td>
+                                                    <?php if(isset($purchaseorder_main)){
+                                                    if(($purchaseorder_main->status_pembayaran) == 0){ ?>
                                                         <input name="item_price[]" type="text" class="span6" value="<?php echo $purchaseorder_details['item_price']; ?>">                                                        
+                                                    <?php }else{
+                                                        echo $purchaseorder_details['item_price'];
+                                                        }
+                                                    }
+                                                    ?>
                                                     </td>                                                    
                                                 </tr>                                          
                                 </div>
@@ -78,7 +85,14 @@
                             </div>
                              <div class="row-fluid">
                             <div class="span12">
+                            <?php if(isset($purchaseorder_main)){
+                                if(($purchaseorder_main->status_pembayaran) == 0){ ?>
                                 <input type="submit" value="Update" class="btn btn-success btn-create">
+                                <?php }else{
+                                    echo "";
+                                }
+                            }
+                            ?>
                             </div>
                         </div>
                         </div>
@@ -113,15 +127,17 @@
                                         </div>
                                         <?php endforeach?>
                                         <tr>
-                                            <td colspan="3"><?php
-                            if(isset($purchaseorder_main)){
-                                    if(($purchaseorder_main->status_pembayaran) == 0){
-                                        echo "<b>Jumlah yang harus dibayar sebesar : "; echo $total->total - $pembayaran->jumlah;
-                                    }else{
-                                        echo "<b>Jumlah yang harus dibayar : <font color='green'>Sudah Dibayar</font>";
-                                    }
-                            }
-                        ?></td>
+                                            <td colspan="3">
+                                            <?php
+                                                if(isset($purchaseorder_main)){
+                                                    if(($purchaseorder_main->status_pembayaran) == 0){
+                                                        echo "<b>Jumlah yang harus dibayar sebesar : "; echo $total->total - $pembayaran->jumlah;
+                                                    }else{
+                                                        echo "<b>Jumlah yang harus dibayar : <font color='green'>Sudah Dibayar</font>";
+                                                    }
+                                                }
+                                            ?>
+                                            </td>
                                         </tr>                                
                                         </tbody>
                                     </table>                                    
@@ -138,7 +154,11 @@
                         <div class="da-form-row">
                             <label class="da-form-label">Nama Company</label>
                             <div class="da-form-item large">
+                            <?php if (empty($pembayaran->name)){ ?>
                                 <input id="project-create-company" type="text" name="company_name">
+                            <?php }else{ ?>
+                                <input id="project-create-company" type="text" name="company_name" value="<?php echo $pembayaran->name;?>" disabled>
+                            <?php } ?>
                             </div>
                         </div>
                         <div class="da-form-row">
