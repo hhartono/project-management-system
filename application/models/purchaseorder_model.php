@@ -301,6 +301,7 @@ class Purchaseorder_model extends CI_Model {
                     'project_id' => $database_input_array['project_id'],
                     'po_detail_id' => $each_po_received_item_value['po_detail_id'],
                     'item_count' => $each_po_received_item_value['quantity_received'],
+                    'stock_awal' => $each_po_received_item_value['quantity_received'],
                     'item_stock_code' => $additional_database_input_array['item_stock_code'],
                     'item_price' => $each_po_received_item_value['item_price'],
                     'received_date' => date("Y-m-d H:i:s")

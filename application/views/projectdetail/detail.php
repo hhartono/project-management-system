@@ -73,14 +73,14 @@
                         <tbody><?php $total_sum=0; ?>
                         <?php foreach($detail as $details): ?>
                         <?php
-                            if($category!=$details['category'])
+                            /*if($category!=$details['category'])
                             {
                                 $category=$details['category'];
                             }
                             else
                             {
                                 $category='';
-                            }
+                            }*/
                         ?>
                             <?php 
                                 $total=number_format($details['total'],2,',','.'); 
@@ -88,7 +88,7 @@
                             ?>
                             <?php if($details['company'] == $details['idcompany'] || $details['company'] == 0){ ?>
                             <tr>
-                                <td class="division-row"><?php echo $category; ?></td>
+                                <td class="division-row"><?php echo $details['category']; ?></td>
                                 <td class="division-row"><?php echo $details['barang']; ?></td>
                                 <td class="division-row"><?php echo $details['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details['satuan']; ?></td>
@@ -97,7 +97,7 @@
                                 <td class="division-row"><?php echo $total; ?></td>
                             </tr>
                             
-                           <?php $category=$details['category']; ?>
+                           <?php //$category=$details['category']; ?>
                             <?php $total_sum+=$details['total'];?>
                             <?php } ?>
                         <?php endforeach?>
@@ -157,14 +157,14 @@
                         <tbody><?php $total_sum=0; ?>
                         <?php foreach($detail as $details): ?>
                         <?php
-                            if($categorys!=$details['category'])
+                            /*if($categorys!=$details['category'])
                             {
                                 $categorys=$details['category'];
                             }
                             else
                             {
                                 $categorys='';
-                            }
+                            }*/
                         ?>
                             <?php 
                                 $total=number_format($details['total'],2,',','.'); 
@@ -172,7 +172,7 @@
                             ?>
                             <?php if(!($details['company'] == $details['idcompany'] || $details['company'] == 0)){ ?>
                             <tr>
-                                <td class="division-row"><?php echo $categorys; ?></td>
+                                <td class="division-row"><?php echo $details['category']; ?></td>
                                 <td class="division-row"><?php echo $details['barang']; ?></td>
                                 <td class="division-row"><?php echo $details['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details['satuan']; ?></td>
@@ -181,7 +181,7 @@
                                 <td class="division-row"><?php echo $total; ?></td>
                             </tr>
                             
-                           <?php $category=$details['category']; ?>
+                            <?php //$categorys=$details['category']; ?>
                             <?php $total_sum+=$details['total'];?>
                             <?php } ?>
                         <?php endforeach?>
