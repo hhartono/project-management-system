@@ -64,5 +64,45 @@
                 });
             }, "json" );
         });
+
+        /*
+            Modal Controller for Creating Cetak
+         */
+        $("#da-cetak-create-form-div").dialog({
+            autoOpen: false,
+            title: "Tambah Attn",
+            modal: true,
+            width: "640",
+            buttons: [{
+                text: "Simpan",
+                click: function() {
+                    $(this).find('form#da-cetak-create-form-val').submit();
+                }},
+                {
+                text: "Keluar",
+                click: function() {
+                    $(this).find("form#da-cetak-create-form-val").submit();
+                    location.reload();
+                }}]
+        }).find('form').validate({
+            rules: {
+            },
+            invalidHandler: function(form, validator) {
+                var errors = validator.numberOfInvalids();
+                if (errors) {
+                    var message = 'Atribut yang diberi tanda wajib diisi.';
+                    $("#da-project-create-validate-error").html(message).show();
+                } else {
+                    $("#da-project-create-validate-error").hide();
+                }
+            }
+        });
+
+        $("#da-cetak-create-dialog").bind("click", function(event) {
+            event.preventDefault();
+            $("#da-cetak-create-form-div").dialog("option", {modal: true}).dialog("open");
+            $("#cetak-create-start-date").datepicker({showOtherMonths:true, dateFormat: 'dd-mm-yy'});
+
+        });
     });
 }) (jQuery);

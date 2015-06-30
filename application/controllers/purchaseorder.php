@@ -589,6 +589,8 @@ class Purchaseorder extends CI_Controller {
         $data['detail'] = $this->purchaseorder_model->getpurchaseorder($id);
         $data['po'] = $this->purchaseorder_model->get_purchaseorder_detail($id);
         $data['pod'] = $this->purchaseorder_model->get_purchaseorder_details($id);
+        $data['attn'] = $this->input->post('attn');
+        $data['deliver'] = $this->input->post('deliver');
         $this->load->view('purchaseorder/print', $data);
         
     }

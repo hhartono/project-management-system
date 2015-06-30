@@ -4,8 +4,7 @@
     <div id="da-content-area">
         <div class="row-fluid">
                             <div class="span12" >
-                                     <a class="btn btn-success btn-create" href="/purchaseorder/cetak/<?php echo $pod->po_id;?>" target="_blank">
-                                    <i class='icon-print'></i>&nbsp; Cetak </a>
+                                <button id="da-cetak-create-dialog" class="btn btn-success btn-create"><i class='icon-print'></i>&nbsp; Cetak </a></button>
                             </div>
                     </div>
         <div class="row-fluid">
@@ -37,7 +36,7 @@
                     ?>
                     <div class="da-panel-content da-table-container">
                     
-                        <table id="da-projectdetail-datatable-numberpaging" class="da-table"">
+                        <table id="da-projectdetail-datatable-numberpaging" class="da-table">
                         <thead>
                         <tr>
                             <th>Nama Barang</th>
@@ -63,3 +62,27 @@
         </div>
     </div>
 </div>
+
+    <div id="da-cetak-create-form-div" class="form-container">
+        <form id="da-cetak-create-form-val" class="da-form" action="/purchaseorder/cetak/<?php echo $pod->po_id;?>" method="post" target="blank">
+            <div id="da-cetak-create-validate-error" class="da-message error" style="display:none;"></div>
+            <div class="da-form-inline">
+                <div class="da-form-row">
+                    <label class="da-form-label">Attn</label>
+                    <div class="da-form-item large">
+                        <input id="cetak-attn-create" type="text" name="attn">
+                    </div>
+                </div>
+                <div class="da-form-row">
+                    <label class="da-form-label">Deliver Address</label>
+                    <div class="da-form-item large">
+                        <select id="cetak-deliver-create" name="deliver">
+                            <option value="">Deliver Address</option>
+                            <option value="project">Project</option>
+                            <option value="inerre">Inerre</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

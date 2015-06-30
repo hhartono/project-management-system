@@ -47,31 +47,68 @@
 
     /* ————– Header Halaman selesai ————————————————*/
 
-    $this->fpdf->Ln(2);
+    $this->fpdf->Ln(2.5);
     $this->fpdf->SetFont('Times','B',12);
    
-    $this->fpdf->Cell(12,1,'Supplier : '.$detail['name'].'',0,0,'L');
-    $this->fpdf->Cell(10,1,'Project : '.$detail['project'].'',0,0,'L');
-    $this->fpdf->Ln(0.5);
-    $this->fpdf->SetFont('Times','',12);
-    if (!empty($detail['address'])){
-    $this->fpdf->Cell(10,1,$detail['address'],0,0,'L');
-    $this->fpdf->Ln(0.5);
-    }else{}
-    if (!empty($detail['city'])){
-    $this->fpdf->Cell(10,1,$detail['city'].', '. $detail['province'].' '. $detail['postal_code'],0,0,'L');
+    $this->fpdf->Cell(12,1,'Order To ',0,0,'L');
+    $this->fpdf->Cell(10,1,'Deliver To ',0,0,'L');
     $this->fpdf->Ln(1);
-    }else{}
-    if (!empty($detail['phone_number_1'])){
-    $this->fpdf->Cell(10,1,'Phone : '.$detail['phone_number_1'].', '.$detail['phone_number_2'],0,0,'L');
-    $this->fpdf->Ln(0.5);
-    }else{}
-    if (!empty($detail['email'])){
-    $this->fpdf->Cell(10,1,'e-mail : '.$detail['email'].'',0,0,'L');
-    }else{}
-   
+    if($deliver == 'project' || $deliver == ''){
+        $this->fpdf->Cell(12,1,$detail['name'],0,0,'L');
+        $this->fpdf->Cell(10,1,$detail['project'],0,0,'L');
+        $this->fpdf->Ln(0.5);
+        $this->fpdf->SetFont('Times','',12);
+        if (!empty($detail['address'])){
+        $this->fpdf->Cell(12,1,$detail['address'],0,0,'L');
+        $this->fpdf->Cell(10,1,$detail['alamat'],0,0,'L');
+        $this->fpdf->Ln(0.5);
+        }else{}
+        if (!empty($detail['city'])){
+        $this->fpdf->Cell(10,1,$detail['city'].', '. $detail['province'].' '. $detail['postal_code'],0,0,'L');
+        $this->fpdf->Ln(1);
+        }else{}
+        $this->fpdf->Cell(3,1,'Phone',0,0,'L');
+        $this->fpdf->Cell(9,1,': '.$detail['phone_number_1'].'',0,0,'L');
+        $this->fpdf->Ln(0.5);
+        $this->fpdf->Cell(3,1,'e-mail',0,0,'L');
+        $this->fpdf->Cell(9,1,': '.$detail['email'].'',0,0,'L');
+        $this->fpdf->Ln(0.5);
+        $this->fpdf->Cell(3,1,'Attn',0,0,'L');
+        $this->fpdf->Cell(9,1,': '.$attn.'',0,0,'L');
+    }else{
+        $this->fpdf->Cell(12,1,$detail['name'],0,0,'L');
+        $this->fpdf->Cell(10,1,'INERRE Interior',0,0,'L');
+        $this->fpdf->Ln(0.5);
+        $this->fpdf->SetFont('Times','',12);
+        if (!empty($detail['address'])){
+        $this->fpdf->Cell(12,1,$detail['address'],0,0,'L');
+        $this->fpdf->Cell(10,1,'Jl. Pasteur 11',0,0,'L');
+        $this->fpdf->Ln(0.5);
+        }else{}
+        if (!empty($detail['city'])){
+        $this->fpdf->Cell(12,1,$detail['city'].', '. $detail['province'].' '. $detail['postal_code'],0,0,'L');
+        $this->fpdf->Cell(10,1,'Bandung, 40116',0,0,'L');
+        $this->fpdf->Ln(1);
+        }else{}
+        $this->fpdf->Cell(3,1,'Phone',0,0,'L');
+        $this->fpdf->Cell(9,1,': '.$detail['phone_number_1'].'',0,0,'L');
+        $this->fpdf->Cell(3,1,'Phone',0,0,'L');
+        $this->fpdf->Cell(7,1,': +62 22 4232200',0,0,'L');
+        $this->fpdf->Ln(0.5);
+        $this->fpdf->Cell(3,1,'e-mail',0,0,'L');
+        $this->fpdf->Cell(9,1,': '.$detail['email'].'',0,0,'L');
+        $this->fpdf->Cell(3,1,'e-mail',0,0,'L');
+        $this->fpdf->Cell(7,1,': hans@inerre.com',0,0,'L');
+        $this->fpdf->Ln(0.5);
+        $this->fpdf->Cell(3,1,'Attn',0,0,'L');
+        $this->fpdf->Cell(9,1,': '.$attn.'',0,0,'L');
+        $this->fpdf->Cell(3,1,'Attn',0,0,'L');
+        $this->fpdf->Cell(7,1,': Hans Hartono',0,0,'L');
+    }
+    
+    
     /* setting header table */
-    $this->fpdf->Ln(1);
+    $this->fpdf->Ln(1.5);
     $this->fpdf->SetFont('Times','B',12);
     $this->fpdf->Cell(10 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(5 , 1, 'Jumlah Dipesan' , 1, 'LR', 'C');

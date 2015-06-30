@@ -29,15 +29,15 @@
                             }
                         ?>                 
                         <table>
-                                    <tr><td><span class="da-panel-title">
-                                        <i class="icol-table"></i><b> Nama Project</b></td><td> :</td><td><?php echo $pr; ?></td>
-                                    </span></tr>
-                                    <tr><td><span class="da-panel-title">
-                                        <i class="icol-table"></i><b> Sub Project</b></td><td> :</td><td><?php echo $sp; ?></td>
-                                    </span></tr>
-                                    <tr><td><span class="da-panel-title">
-                                        <i class="icon-ok"></i><b> Item Yang Sudah Dibayar</b></td>
-                                    </span></tr>
+                            <tr><td><span class="da-panel-title">
+                                <i class="icol-table"></i><b> Nama Project</b></td><td> :</td><td><?php echo $pr; ?></td>
+                            </span></tr>
+                            <tr><td><span class="da-panel-title">
+                                <i class="icol-table"></i><b> Sub Project</b></td><td> :</td><td><?php echo $sp; ?></td>
+                            </span></tr>
+                            <tr><td><span class="da-panel-title">
+                                <i class="icon-ok" style="color:LimeGreen"></i><b> Item Yang Dibayar</b></td>
+                            </span></tr>
                         </table>
                     <?php endforeach?>
                     
@@ -123,15 +123,9 @@
                             }
                         ?>                 
                         <table>
-                                    <tr><td><span class="da-panel-title">
-                                        <i class="icol-table"></i><b> Nama Project</b></td><td> :</td><td><?php echo $pr; ?></td>
-                                    </span></tr>
-                                    <tr><td><span class="da-panel-title">
-                                        <i class="icol-table"></i><b> Sub Project</b></td><td> :</td><td><?php echo $sp; ?></td>
-                                    </span></tr>
-                                    <tr><td><span class="da-panel-title">
-                                        <i class="icon-remove"></i><b> Item Yang Harus Dibayar</b></td>
-                                    </span></tr>
+                            <tr><td><span class="da-panel-title">
+                                <i class="icon-remove" style="color:Red"></i><b> Item Yang Harus Dibayar</b></td>
+                            </span></tr>
                         </table>
                     <?php endforeach?>
                     
@@ -189,6 +183,7 @@
                                 <td style=background:#c6d2ff; colspan="6">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah2 ;?></td>
                         </tbody>
                         </table>
+                    </div>
                     </br>
                     <div class="da-panel-content da-table-container">
                         <div class="da-panel-header">
@@ -208,7 +203,7 @@
                         </div>
                     </div>
                         
-                    </div>
+                    
                     </br>
                 </div>
             </div>
