@@ -68,7 +68,7 @@ class Detail_model extends CI_Model {
 
         return $query;
     */
-        $query = $this->db->query("Select pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, wm.name as tukang, tud.item_count*sm.item_price as total
+        $query = $this->db->query("Select pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, wm.name as tukang, tud.item_count*sm.item_price as total, com.id as company, pm.company_id as idcompany
 				from project_master pm left join subproject_master spm on spm.project_id=pm.id
 				 left join  transaction_usage_main tum on spm.id=tum.subproject_id
 				left join transaction_usage_detail tud on tum.id=tud.usage_id
@@ -77,7 +77,8 @@ class Detail_model extends CI_Model {
 				left join item_master im on sm.item_id=im.id
 				left join unit_master um on im.unit_id=um.id
 				join category_master cm on im.category_id=cm.id
-				where spm.id='$idsubproject'
+				left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject'
 				order by cm.name ASC ");
         return $query->result_array();
 
@@ -96,6 +97,29 @@ class Detail_model extends CI_Model {
         $row_array = $query->result_array();
         return $row_array;
      */
+    }
+
+    public function get_company_id(){
+        $this->db->select('*');
+        $this->db->from('company_master');
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+
+    public function get_company_project(){
+        $idproject = $this->uri->segment(3);
+        $this->db->select('company_id');
+        $this->db->from('project_master');
+        $this->db->where('id', $idproject);
+        $query = $this->db->get();
+
+        return $query->row();
     }
 
     public function getpro($idsubproject)

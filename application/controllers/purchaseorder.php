@@ -613,6 +613,7 @@ class Purchaseorder extends CI_Controller {
             // get necessary data
             $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_stock_id();
             $data['purchaseorder_main'] = $this->purchaseorder_model->get_po_by_id();
+            $data['postock'] = $this->purchaseorder_model->get_po_by_stock();
             $data['pembayaran'] = $this->purchaseorder_model->pembayaran();
             $data['total'] = $this->purchaseorder_model->get_total();
             $data['getpembayaran'] = $this->purchaseorder_model->getpembayaran();

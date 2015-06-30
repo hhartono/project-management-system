@@ -543,6 +543,16 @@ class Purchaseorder_model extends CI_Model {
                 $this->db->where('id', $this->input->post('po_id'));
                 $this->db->update('transaction_po_main', $data);
             }
+
+            $stockid = $this->input->post('stockid');
+            foreach($stockid as $stock)
+            {
+                $data = array(
+                    'company_id' => $database_input_array['company_id']
+                );
+                $this->db->where('id', $stock);
+                $this->db->update('stock_master', $data);
+            }
             // complete database transaction
             $this->db->trans_complete();
 
@@ -567,5 +577,20 @@ class Purchaseorder_model extends CI_Model {
             ");
         $result_array = $query->result_array();
         return $result_array;
+    }
+
+    public function get_po_by_stock(){
+
+        $po_id = $this->uri->segment(3);
+        $query = $this->db->query("select transaction_po_detail.*, item_master.name AS item_name, stock_master.id as stockid, stock_master.item_price as item_price, SUM(stock_master.item_price * transaction_po_detail.quantity_received) as total
+                                    from transaction_po_detail, item_master, stock_master
+                                    where transaction_po_detail.item_id = item_master.id AND transaction_po_detail.id = stock_master.po_detail_id AND po_id = $po_id 
+                                    Group By transaction_po_detail.id");
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
     }
 }

@@ -178,6 +178,9 @@
                                 <input id="project-create-start-date" type="text" name="date" value="<?php echo $tglsekarang;?>" autocomplete="off">
                             </div>
                         </div>
+                        <?php foreach ($postock as $postock) { ?>
+                        <input type="hidden" name="stockid[]" value="<?php echo $postock->stockid; ?>">
+                        <?php } ?>
                         <input type="hidden" value="<?php echo $total->po_id; ?>" name="po_id">
                         <input type="hidden" name="harga" value="<?php echo $pembayaran->jumlah; ?>">
                         <input type="hidden" name="total" value="<?php echo $total->total;?>">

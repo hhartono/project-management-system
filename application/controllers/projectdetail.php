@@ -80,6 +80,8 @@ class Projectdetail extends CI_Controller {
             $data['proj'] = $this->detail_model->getproj($idspj);
             $data['abse'] = $this->detail_model->getabs($idspj);
             $data['absensi'] = $this->detail_model->get_absensi($idspj);
+            $data['company'] = $this->detail_model->get_company_id();
+            $data['compro'] = $this->detail_model->get_company_project();
 
             $this->load->view('header');
             $this->load->view('projectdetail/navigation', $data);
