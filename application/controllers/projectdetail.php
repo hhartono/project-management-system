@@ -82,6 +82,7 @@ class Projectdetail extends CI_Controller {
             $data['absensi'] = $this->detail_model->get_absensi($idspj);
             $data['company'] = $this->detail_model->get_company_id();
             $data['compro'] = $this->detail_model->get_company_project();
+            $data['cetak'] = $this->detail_model->get_all_printdetail($idspj);
 
             $this->load->view('header');
             $this->load->view('projectdetail/navigation', $data);
@@ -96,6 +97,8 @@ class Projectdetail extends CI_Controller {
             $idspj = $idsubproject;
             $data['detail'] = $this->detail_model->get_all_projectdetail($idspj);
             $data['pro'] = $this->detail_model->getpro($idspj);
+            $data['company'] = $this->detail_model->get_company_id();
+            $data['compro'] = $this->detail_model->get_company_project();
         $this->load->view('projectdetail/print', $data);
         
     }

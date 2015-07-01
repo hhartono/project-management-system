@@ -73,14 +73,14 @@
                         <tbody><?php $total_sum=0; ?>
                         <?php foreach($detail as $details): ?>
                         <?php
-                            /*if($category!=$details['category'])
+                            if($category!=$details['category'])
                             {
                                 $category=$details['category'];
                             }
                             else
                             {
                                 $category='';
-                            }*/
+                            }
                         ?>
                             <?php 
                                 $total=number_format($details['total'],2,',','.'); 
@@ -88,18 +88,17 @@
                             ?>
                             <?php if($details['company'] == $details['idcompany'] || $details['company'] == 0){ ?>
                             <tr>
-                                <td class="division-row"><?php echo $details['category']; ?></td>
+                                <td class="division-row"><?php echo $category; ?></td>
                                 <td class="division-row"><?php echo $details['barang']; ?></td>
                                 <td class="division-row"><?php echo $details['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details['satuan']; ?></td>
                                 <td class="division-row"><?php echo $details['tukang']; ?></td>
                                 <td class="division-row"><?php echo $harga; ?></td>
                                 <td class="division-row"><?php echo $total; ?></td>
-                            </tr>
-                            
-                           <?php //$category=$details['category']; ?>
+                            </tr>                    
                             <?php $total_sum+=$details['total'];?>
                             <?php } ?>
+                            <?php $category=$details['category']; ?>
                         <?php endforeach?>
                         <?php $jumlah = number_format($total_sum,2,',','.') ;?>
                                 <td style=background:#c6d2ff; colspan="6">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah ;?></td>
