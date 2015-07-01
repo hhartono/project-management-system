@@ -15,18 +15,18 @@
     $this->fpdf->SetAutoPageBreak(true,0);
 
     // Setting Font : String Family, String Style, Font size
-    $this->fpdf->SetFont('Times','',12);
+    $this->fpdf->SetFont('Arial','',12);
 
     /* Kita akan membuat header dari halaman pdf yang kita buat
     ————– Header Halaman dimulai dari baris ini —————————–
     */
-    $this->fpdf->Cell(19,0.7,'P.O Reference     : '.$detail['reference'],0,0,'R');
+    $this->fpdf->Cell(19,0.7,'P.O Reference    : '.$detail['reference'],0,0,'R');
     $this->fpdf->Ln();
     $this->fpdf->Cell(19,0.7,'P.O Date : '.$detail['date'],0,0,'R');
     $this->fpdf->Image('assets/images/INERRE_Logo.png', 2,1,3,3.5);
     // fungsi Ln untuk membuat baris baru
     $this->fpdf->Ln();
-    $this->fpdf->SetFont('Times','',16);
+    $this->fpdf->SetFont('Arial','',16);
     /* Setting ulang Font : String Family, String Style, Font size
     kenapa disetting ulang ???
     jika tidak disetting ulang, ukuran font akan mengikuti settingan sebelumnya.
@@ -48,7 +48,7 @@
     /* ————– Header Halaman selesai ————————————————*/
 
     $this->fpdf->Ln(2.5);
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',12);
    
     $this->fpdf->Cell(12,1,'Order To ',0,0,'L');
     $this->fpdf->Cell(10,1,'Deliver To ',0,0,'L');
@@ -57,7 +57,7 @@
         $this->fpdf->Cell(12,1,$detail['name'],0,0,'L');
         $this->fpdf->Cell(10,1,$detail['project'],0,0,'L');
         $this->fpdf->Ln(0.5);
-        $this->fpdf->SetFont('Times','',12);
+        $this->fpdf->SetFont('Arial','',12);
         if (!empty($detail['address'])){
         $this->fpdf->Cell(12,1,$detail['address'],0,0,'L');
         $this->fpdf->Cell(10,1,$detail['alamat'],0,0,'L');
@@ -79,7 +79,7 @@
         $this->fpdf->Cell(12,1,$detail['name'],0,0,'L');
         $this->fpdf->Cell(10,1,'INERRE Interior',0,0,'L');
         $this->fpdf->Ln(0.5);
-        $this->fpdf->SetFont('Times','',12);
+        $this->fpdf->SetFont('Arial','',12);
         if (!empty($detail['address'])){
         $this->fpdf->Cell(12,1,$detail['address'],0,0,'L');
         $this->fpdf->Cell(10,1,'Jl. Pasteur 11',0,0,'L');
@@ -109,13 +109,13 @@
     
     /* setting header table */
     $this->fpdf->Ln(1.5);
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',12);
     $this->fpdf->Cell(10 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(5 , 1, 'Jumlah Dipesan' , 1, 'LR', 'C');
     $this->fpdf->Cell(4 , 1, 'Satuan' , 1, 'LR', 'C');
     foreach($po as $po){
         $this->fpdf->Ln();
-        $this->fpdf->SetFont('Times','',12);
+        $this->fpdf->SetFont('Arial','',12);
         $this->fpdf->Cell(10 , 0.7, $po['item_name'] , 1, 'LR', 'L');
         $this->fpdf->Cell(5 , 0.7, $po['quantity'] , 1, 'LR', 'L');
         $this->fpdf->Cell(4 , 0.7, $po['unit_name'] , 1, 'LR', 'L');
@@ -140,7 +140,7 @@
 
     /* setting font untuk footer */
     $this->fpdf->SetY(-2.5);
-    $this->fpdf->SetFont('Times','',9);
+    $this->fpdf->SetFont('Arial','',9);
     $this->fpdf->Cell(19,1,'a. Jl. Pasteur 11, Bandung 40116, West Java - Indonesia',0,0,'C');
     $this->fpdf->Ln();
     $this->fpdf->Cell(8,0,'t. +6222 423 2200     //',0,0,'R');

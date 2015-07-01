@@ -14,7 +14,7 @@
     $this->fpdf->AddPage();
 
     // Setting Font : String Family, String Style, Font size
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',18);
 
     /* Kita akan membuat header dari halaman pdf yang kita buat
     ————– Header Halaman dimulai dari baris ini —————————–
@@ -46,7 +46,7 @@
     /* ————– Header Halaman selesai ————————————————*/
 
     $this->fpdf->Ln(3);
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',12);
     $pr='' ;
     foreach($pro as $proj){                        
         if($pr!=$proj['project'])
@@ -59,15 +59,21 @@
                 $pr='';
                 $sp='';
             }
-    $this->fpdf->Cell(14,1,'Nama Project     : '.$pr.'',0,0,'L');
+    $this->fpdf->Cell(4,1,'Nama Project     : ',0,0,'L');
+    $this->fpdf->SetFont('Arial','',12);
+    $this->fpdf->Cell(7,1,$pr,0,0,'L');
     $this->fpdf->Ln(1);
-    $this->fpdf->Cell(14,1,'Sub Project        : '.$sp.'',0,0,'L');
+    $this->fpdf->SetFont('Arial','B',12);
+    $this->fpdf->Cell(4,1,'Sub Project        : ',0,0,'L');
+    $this->fpdf->SetFont('Arial','',12);
+    $this->fpdf->Cell(7,1,$sp,0,0,'L');
     $this->fpdf->Ln(1);
+    $this->fpdf->SetFont('Arial','B',12);
     $this->fpdf->Cell(14,1,'Item Yang Dibayar',0,0,'L');
     }
     /* setting header table */
     $this->fpdf->Ln(1);
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',12);
     $this->fpdf->Cell(5 , 1, 'Kategori' , 1, 'LR', 'C');
     $this->fpdf->Cell(8 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(2 , 1, 'Quantity' , 1, 'LR', 'C');
@@ -90,7 +96,7 @@
         $harga=number_format($details['harga'],2,',','.');
         if($details['company'] == $details['idcompany'] || $details['company'] == 0){
             $this->fpdf->Ln();
-            $this->fpdf->SetFont('Times','',12);
+            $this->fpdf->SetFont('Arial','',12);
             $this->fpdf->Cell(5 , 0.7, $category , 1, 'LR', 'L');
             $this->fpdf->Cell(8 , 0.7, $details['barang'] , 1, 'LR', 'L');
             $this->fpdf->Cell(2 , 0.7, $details['quantity'] , 1, 'LR', 'L');
@@ -110,7 +116,7 @@
     $this->fpdf->AddPage();
 
     // Setting Font : String Family, String Style, Font size
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',18);
 
     /* Kita akan membuat header dari halaman pdf yang kita buat
     ————– Header Halaman dimulai dari baris ini —————————–
@@ -140,7 +146,7 @@
     $this->fpdf->Line(1,5.05,29,5.05);
 
     $this->fpdf->Ln(3);
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',12);
     $pr='' ;
     foreach($pro as $proj){                        
         if($pr!=$proj['project'])
@@ -153,15 +159,21 @@
                 $pr='';
                 $sp='';
             }
-    $this->fpdf->Cell(14,1,'Nama Project     : '.$pr.'',0,0,'L');
+    $this->fpdf->Cell(4,1,'Nama Project     : ',0,0,'L');
+    $this->fpdf->SetFont('Arial','',12);
+    $this->fpdf->Cell(7,1,$pr,0,0,'L');
     $this->fpdf->Ln(1);
-    $this->fpdf->Cell(14,1,'Sub Project        : '.$sp.'',0,0,'L');
+    $this->fpdf->SetFont('Arial','B',12);
+    $this->fpdf->Cell(4,1,'Sub Project        : ',0,0,'L');
+    $this->fpdf->SetFont('Arial','',12);
+    $this->fpdf->Cell(7,1,$sp,0,0,'L');
     $this->fpdf->Ln(1);
+    $this->fpdf->SetFont('Arial','B',12);
     $this->fpdf->Cell(14,1,'Item Yang Harus Dibayar',0,0,'L');
     }
     /* setting header table */
     $this->fpdf->Ln(1);
-    $this->fpdf->SetFont('Times','B',12);
+    $this->fpdf->SetFont('Arial','B',12);
     $this->fpdf->Cell(5 , 1, 'Kategori' , 1, 'LR', 'C');
     $this->fpdf->Cell(8 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(2 , 1, 'Quantity' , 1, 'LR', 'C');
@@ -184,7 +196,7 @@
         $harga=number_format($details['harga'],2,',','.');
         if(!($details['company'] == $details['idcompany'] || $details['company'] == 0)){
             $this->fpdf->Ln();
-            $this->fpdf->SetFont('Times','',12);
+            $this->fpdf->SetFont('Arial','',12);
             $this->fpdf->Cell(5 , 0.7, $details['category'] , 1, 'LR', 'L');
             $this->fpdf->Cell(8 , 0.7, $details['barang'] , 1, 'LR', 'L');
             $this->fpdf->Cell(2 , 0.7, $details['quantity'] , 1, 'LR', 'L');
@@ -206,7 +218,7 @@
     $this->fpdf->SetY(-3);
 
     /* setting font untuk footer */
-    $this->fpdf->SetFont('Times','',10);
+    $this->fpdf->SetFont('Arial','',10);
 
     /* setting cell untuk waktu pencetakan */
     //$this->fpdf->Cell(9.5, 0.5, 'Printed on : '.date('d/m/Y H:i'));
