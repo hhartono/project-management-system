@@ -657,7 +657,7 @@ class Purchaseorder extends CI_Controller {
 
     public function pembayaran(){
         // check all necessary input
-        if(!empty($this->input->post('jumlah')) && !empty($this->input->post('company_name'))){
+        if(!empty($this->input->post('jumlah'))){
             $database_input_array = array();
             $company_detail = $this->project_model->get_company_by_name($this->input->post('company_name'));
 
@@ -696,12 +696,12 @@ class Purchaseorder extends CI_Controller {
                         $message['success'] = "pembayaran berhasil disimpan.";
                         $this->update_price($message);
                     }else{
-                        $message['error'] = "pembayaran gagal disimpan.";
+                        $message['error'] = "pembayaran gagal disimpan ya.";
                         $this->update_price($message);
                     }
                 }
         }else{
-            $message['error'] = "pembayaran gagal disimpan.";
+            $message['error'] = "pembayaran gagal disimpannnn.";
             $this->update_price($message);
         }
     }
