@@ -76,6 +76,8 @@ class Projectdetail extends CI_Controller {
             $idpj = $idproject;
             $idspj = $idsubproject;
             $data['detail'] = $this->detail_model->get_all_projectdetail($idspj);
+            $data['detail2'] = $this->detail_model->get_all_projectdetail2($idspj);
+            $data['sumprice'] = $this->detail_model->get_all_sumpriceproject($idspj);
             $data['pro'] = $this->detail_model->getpro($idspj);
             $data['proj'] = $this->detail_model->getproj($idspj);
             $data['abse'] = $this->detail_model->getabs($idspj);
@@ -204,5 +206,23 @@ class Projectdetail extends CI_Controller {
             $data['pro'] = $this->detail_model->getproj3();
             $data['absensi'] = $this->detail_model->caritanggal();
         $this->load->view('projectdetail/printtukangtanggal', $data);
+    }
+
+    public function get_project_detail_usage($subproject_id, $stock_id){
+        date_default_timezone_set('Asia/Jakarta');
+
+        $subproject_id = urldecode($subproject_id);
+        $stock_id = urldecode($stock_id);
+        $project_detail_usage = $this->detail_model->get_all_usageproject($subproject_id, $stock_id);
+        echo json_encode($project_detail_usage);
+    }
+
+    public function get_project_detail_usage2($subproject_id, $stock_id){
+        date_default_timezone_set('Asia/Jakarta');
+
+        $subproject_id = urldecode($subproject_id);
+        $stock_id = urldecode($stock_id);
+        $project_detail_usage = $this->detail_model->get_all_usageproject2($subproject_id, $stock_id);
+        echo json_encode($project_detail_usage);
     }
 }

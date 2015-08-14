@@ -32,6 +32,7 @@
     <!-- JS Demo -->
 
     <!-- JS Table -->
+    <script src="/assets/js/custom/projectdetail/projectdetail.modal.js"></script>
     <script src="/assets/js/custom/worker/worker.modal.js"></script>
     <script src="/assets/js/custom/worker/worker.tables.js"></script>
     <script src="/assets/js/custom/absensi/absensi.tables.js"></script>

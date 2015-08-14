@@ -282,7 +282,7 @@ class Purchaseorder extends CI_Controller {
     }
 
     public function get_unit_by_item_name($item_name){
-        $item_name = urldecode($item_name);
+        $item_name = base64_decode(urldecode($item_name));
         $item_detail = $this->item_model->get_item_by_name($item_name);
 
         if(!empty($item_detail['unit_id'])){
@@ -291,9 +291,25 @@ class Purchaseorder extends CI_Controller {
         }
     }
 
+    public function get_unit_by_item_id($item_id){
+        $item_id = urldecode($item_id);
+        $item_detail = $this->item_model->get_item_by_id($item_id);
+
+        if(!empty($item_detail['unit_id'])){
+            $unit_detail = $this->unit_model->get_unit_by_id($item_detail['unit_id']);
+            echo json_encode($unit_detail);
+        }
+    }
+
     public function get_item_detail_by_item_name($item_name){
-        $item_name = urldecode($item_name);
+        $item_name = base64_decode(urldecode($item_name));
         $item_detail = $this->item_model->get_item_by_name($item_name);
+        echo json_encode($item_detail);
+    }
+
+     public function get_item_detail_by_item_id($item_id){
+        $item_id = urldecode($item_id);
+        $item_detail = $this->item_model->get_item_by_id($item_id);
         echo json_encode($item_detail);
     }
 

@@ -63,43 +63,38 @@
                                 <th>Nama Barang</th>
                                 <th>Quantity</th>
                                 <th>Satuan</th>
-                                <th>Tukang</th>
-                                <th>Harga Satuan</th>
                                 <th>Total Harga</th>
                             </tr>
                         </thead>
                         <tbody><?php $total_sum=0; ?>
                         <?php foreach($detail as $details): ?>
-                        <?php
-                            if($category!=$details['category'])
-                            {
-                                $category=$details['category'];
-                            }
-                            else
-                            {
-                                $category='';
-                            }
-                        ?>
+                       <!--  <?php
+                           if($category!=$details['category'])
+                           {
+                               $category=$details['category'];
+                           }
+                           else
+                           {
+                               $category='';
+                           }
+                       ?> -->
                         <?php 
                             $total=number_format($details['total'],2,',','.'); 
-                            $harga=number_format($details['harga'],2,',','.');
                         ?>
                         <?php if($details['company'] == $details['idcompany'] || $details['company'] == 0){ ?>
                             <tr>
-                                <td class="division-row"><?php echo $category; ?></td>
-                                <td class="division-row"><?php echo $details['barang']; ?></td>
+                                <td class="division-row"><?php echo $details['category']; ?></td>
+                                <td class="division-row"><a class="da-projectdetail-view-dialog" href="#" data-namabarang="<?php echo $details['barang'];?>" data-value="<?php echo $details['id']; ?>" data-stock="<?php echo $details['stock']; ?>"><?php echo $details['barang']; ?></a></td>
                                 <td class="division-row"><?php echo $details['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details['satuan']; ?></td>
-                                <td class="division-row"><?php echo $details['tukang']; ?></td>
-                                <td class="division-row"><?php echo $harga; ?></td>
                                 <td class="division-row"><?php echo $total; ?></td>
                             </tr>                    
                         <?php $total_sum+=$details['total'];?>
                         <?php } ?>
-                        <?php $category=$details['category']; ?>
+                        <!-- <?php $category=$details['category']; ?> -->
                         <?php endforeach?>
                         <?php $jumlah = number_format($total_sum,2,',','.') ;?>
-                                <td style=background:#c6d2ff; colspan="6">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah ;?></td>
+                                <td style=background:#c6d2ff; colspan="4">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah ;?></td>
                         </tbody>
                         </table>
                     </div>
@@ -138,15 +133,13 @@
                             <th>Nama Barang</th>
                             <th>Quantity</th>
                             <th>Satuan</th>
-                            <th>Tukang</th>
-                            <th>Harga Satuan</th>
                             <th>Total Harga</th>
 
                         </tr>
 
                         </thead>
                         <tbody><?php $total_sum=0; ?>
-                        <?php foreach($detail as $details): ?>
+                        <?php foreach($detail2 as $details2): ?>
                         <?php
                             /*if($categorys!=$details['category'])
                             {
@@ -158,26 +151,23 @@
                             }*/
                         ?>
                             <?php 
-                                $total=number_format($details['total'],2,',','.'); 
-                                $harga=number_format($details['harga'],2,',','.');
+                                $total=number_format($details2['total'],2,',','.'); 
                             ?>
-                            <?php if(!($details['company'] == $details['idcompany'] || $details['company'] == 0)){ ?>
+                            <?php if(!($details2['company'] == $details2['idcompany'] || $details2['company'] == 0)){ ?>
                             <tr>
-                                <td class="division-row"><?php echo $details['category']; ?></td>
-                                <td class="division-row"><?php echo $details['barang']; ?></td>
-                                <td class="division-row"><?php echo $details['quantity']; ?></td>
-                                <td class="division-row"><?php echo $details['satuan']; ?></td>
-                                <td class="division-row"><?php echo $details['tukang']; ?></td>
-                                <td class="division-row"><?php echo $harga; ?></td>
+                                <td class="division-row"><?php echo $details2['category']; ?></td>
+                                <td class="division-row"><a class="da-projectdetail2-view-dialog" href="#" data-namabarang="<?php echo $details2['barang'];?>" data-value="<?php echo $details2['id']; ?>" data-stock="<?php echo $details2['stock']; ?>"><?php echo $details2['barang']; ?></a></td>
+                                <td class="division-row"><?php echo $details2['quantity']; ?></td>
+                                <td class="division-row"><?php echo $details2['satuan']; ?></td>
                                 <td class="division-row"><?php echo $total; ?></td>
                             </tr>
                             
                             <?php //$categorys=$details['category']; ?>
-                            <?php $total_sum+=$details['total'];?>
+                            <?php $total_sum+=$details2['total'];?>
                             <?php } ?>
                         <?php endforeach?>
                         <?php $jumlah2 = number_format($total_sum,2,',','.') ;?>
-                                <td style=background:#c6d2ff; colspan="6">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah2 ;?></td>
+                                <td style=background:#c6d2ff; colspan="4">Total Biaya</td><td style=background:#c6d2ff;><?php echo $jumlah2 ;?></td>
                         </tbody>
                         </table>
                     </div>
@@ -186,8 +176,8 @@
                         <div class="da-panel-header">
                         <?php $total_sum=0; ?>
                         <?php 
-                            foreach($detail as $details){
-                                $total_sum+=$details['total'];
+                            foreach($sumprice as $sumprice){
+                                $total_sum+=$sumprice['total'];
                             }
                         ?>
                         <table>
@@ -259,6 +249,64 @@
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <div id="da-projectdetail-view-form-div" class="form-container">
+            <form id="da-projectdetail-view-form-val" class="da-form" method="post">
+                <div id="da-projectdetail-view-validate-error" class="da-message error" style="display:none;"></div>
+                <div class="da-form-inline">
+                    <h3 id="judul" align="center"></h3>
+                    <div class="da-form-row" style="padding:20px 90px;">
+                            <table id="table" border="1" style="font-size:16px;">
+                                <tr>
+                                    <th>Tanggal Pakai/Return</th>
+                                    <th>Quantity</th>
+                                    <th>Satuan</th>
+                                    <th>Harga</th>
+                                    <th>Tukang</th>
+                                </tr>
+                                <tr>
+                                    <td id="projectdetail-view-tanggal"></td>
+                                    <td id="projectdetail-view-quantity"></td>
+                                    <td id="projectdetail-view-satuan"></td>
+                                    <td id="projectdetail-view-harga"></td>
+                                    <td id="projectdetail-view-tukang"></td>
+                                </tr>                
+                            </table>
+                    </div>
+                </div>
+            </form>
+            <div id="output">
+                        </div>
+        </div>
+
+        <div id="da-projectdetail2-view-form-div" class="form-container">
+            <form id="da-projectdetail2-view-form-val" class="da-form" method="post">
+                <div id="da-projectdetail2-view-validate-error" class="da-message error" style="display:none;"></div>
+                <div class="da-form-inline">
+                    <h3 id="judul2" align="center"></h3>
+                    <div class="da-form-row" style="padding:20px 90px;">
+                            <table id="table2" border="1" style="font-size:16px;">
+                                <tr>
+                                    <th>Tanggal Pakai/Return</th>
+                                    <th>Quantity</th>
+                                    <th>Satuan</th>
+                                    <th>Harga</th>
+                                    <th>Tukang</th>
+                                </tr>
+                                <tr>
+                                    <td id="projectdetail2-view-tanggal"></td>
+                                    <td id="projectdetail2-view-quantity"></td>
+                                    <td id="projectdetail2-view-satuan"></td>
+                                    <td id="projectdetail2-view-harga"></td>
+                                    <td id="projectdetail2-view-tukang"></td>
+                                </tr>                
+                            </table>
+                    </div>
+                </div>
+            </form>
+            <div id="output">
+                        </div>
         </div>
     </div>
 </div>

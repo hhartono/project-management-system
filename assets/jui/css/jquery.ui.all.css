@@ -1390,7 +1390,7 @@ button.ui-button::-moz-focus-inner {
 .ui-icon {
     width: 16px;
     height: 16px;
-    background-image: url(../images/ui-icons.png);
+    /*background-image: url(../images/ui-icons.png);*/
 }
 
 /* positioning */

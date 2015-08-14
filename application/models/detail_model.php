@@ -62,13 +62,7 @@ class Detail_model extends CI_Model {
 
     public function get_all_projectdetail($idsubproject)
     {
-     /*   $query = $this->db->query("select project_master.name AS project, subproject_master.name AS subproject, category_master.name AS category, item_master.name AS barang, 	transaction_usage_detail.item_count AS quantity, unit_master.name AS satuan, stock_master.item_price AS harga, worker_master.name AS tukang
-        from project_master, subproject_master, category_master, item_master, transaction_usage_detail, transaction_usage_main, unit_master, stock_master, worker_master
-        where subproject_master.project_id = project_master.id AND subproject_master.id=transaction_usage_main.subproject_id AND transaction_usage_main.id=transaction_usage_detail.usage_id AND transaction_usage_main.worker_id=worker_master.id AND transaction_usage_detail.stock_id=stock_master.id AND stock_master.item_id = item_master.id AND item_master.unit_id = unit_master.id AND item_master.category_id=category_master.id AND subproject_master.id='.$id.'");
-
-        return $query;
-    */
-        $query = $this->db->query("Select pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, wm.name as tukang, tud.item_count*sm.item_price as total, com.id as company, pm.company_id as idcompany
+        /*$query = $this->db->query("Select pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, wm.name as tukang, tud.item_count*sm.item_price as total, com.id as company, pm.company_id as idcompany
 				from project_master pm left join subproject_master spm on spm.project_id=pm.id
 				 left join  transaction_usage_main tum on spm.id=tum.subproject_id
 				left join transaction_usage_detail tud on tum.id=tud.usage_id
@@ -80,6 +74,34 @@ class Detail_model extends CI_Model {
 				left join company_master com on com.id = sm.company_id
                 where spm.id='$idsubproject'
 				order by cm.name ASC ");
+        return $query->result_array();*/
+
+        $query = $this->db->query("select category, barang, sum(quantity) as quantity, satuan, sum(total) as total, company, idcompany, id, stock, harga, tukang
+from(Select pm.name as project, spm.*, cm.name as category, im.name as barang, sum(tud.item_count) as quantity, um.name as satuan, sum(tud.item_count*sm.item_price) as total, com.id as company, pm.company_id as idcompany, sm.id as stock, sm.item_price as harga, wm.name as tukang
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_usage_main tum on spm.id=tum.subproject_id
+                left join transaction_usage_detail tud on tum.id=tud.usage_id
+                left join worker_master wm on tum.worker_id=wm.id
+                left join stock_master sm on tud.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject'
+                group by sm.id
+UNION
+Select pm.name as project, spm.*, cm.name as category, im.name as barang, -sum(trd.return_count) as quantity, um.name as satuan, -sum(trd.return_count*sm.item_price) as total, com.id as company, pm.company_id as idcompany, sm.id as stock, sm.item_price as harga, wm.name as tukang
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_return_main trm on spm.id=trm.subproject_id
+                left join transaction_return_detail trd on trm.id=trd.return_id
+                left join worker_master wm on trm.worker_id=wm.id
+                left join stock_master sm on trd.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject'
+                group by sm.id) as detail group by detail.stock");
         return $query->result_array();
 
      /*   $this->db->select('pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, wm.name as tukang');
@@ -97,6 +119,122 @@ class Detail_model extends CI_Model {
         $row_array = $query->result_array();
         return $row_array;
      */
+    }
+
+    public function get_all_projectdetail2($idsubproject)
+    {
+       $query = $this->db->query("select category, barang, sum(quantity) as quantity, satuan, sum(total) as total, company, idcompany, id, stock
+from(Select pm.name as project, spm.*, cm.name as category, im.name as barang, sum(tud.item_count) as quantity, um.name as satuan, sum(tud.item_count*sm.item_price) as total, com.id as company, pm.company_id as idcompany, sm.id as stock
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_usage_main tum on spm.id=tum.subproject_id
+                left join transaction_usage_detail tud on tum.id=tud.usage_id
+                left join stock_master sm on tud.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject'
+                group by sm.id
+UNION
+Select pm.name as project, spm.*, cm.name as category, im.name as barang, -sum(trd.return_count) as quantity, um.name as satuan, -sum(trd.return_count*sm.item_price) as total, com.id as company, pm.company_id as idcompany, sm.id as stock
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_return_main trm on spm.id=trm.subproject_id
+                left join transaction_return_detail trd on trm.id=trd.return_id
+                left join stock_master sm on trd.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject'
+                group by sm.id) as detail group by detail.stock");
+        return $query->result_array();
+    }
+
+    public function get_all_sumpriceproject($idsubproject)
+    {
+        $query = $this->db->query("select category, barang, sum(quantity) as quantity, satuan, sum(total) as total, company, idcompany, id, stock
+from(Select pm.name as project, spm.*, cm.name as category, im.name as barang, sum(tud.item_count) as quantity, um.name as satuan, sum(tud.item_count*sm.item_price) as total, com.id as company, pm.company_id as idcompany, sm.id as stock
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_usage_main tum on spm.id=tum.subproject_id
+                left join transaction_usage_detail tud on tum.id=tud.usage_id
+                left join stock_master sm on tud.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject'
+                group by sm.id
+UNION
+Select pm.name as project, spm.*, cm.name as category, im.name as barang, -sum(trd.return_count) as quantity, um.name as satuan, -sum(trd.return_count*sm.item_price) as total, com.id as company, pm.company_id as idcompany, sm.id as stock
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_return_main trm on spm.id=trm.subproject_id
+                left join transaction_return_detail trd on trm.id=trd.return_id
+                left join stock_master sm on trd.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject'
+                group by sm.id) as detail group by detail.stock");
+        return $query->result_array();
+    }
+
+    public function get_all_usageproject($idsubproject, $stock_id)
+    {
+        $query = $this->db->query("Select pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, tud.item_count*sm.item_price as total, tud.creation_date as tanggal, com.id as company, pm.company_id as idcompany, sm.id as stock, wm.name as tukang, im.name as item
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_usage_main tum on spm.id=tum.subproject_id
+                left join transaction_usage_detail tud on tum.id=tud.usage_id
+                left join worker_master wm on tum.worker_id=wm.id
+                left join stock_master sm on tud.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject' AND sm.id = '$stock_id'
+UNION
+Select pm.name as project, spm.*, cm.name as category, im.name as barang, -trd.return_count as quantity, um.name as satuan, sm.item_price as harga, -trd.return_count*sm.item_price as total, trd.creation_date as tanggal, com.id as company, pm.company_id as idcompany, sm.id as stock, wm.name as tukang, im.name as item
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_return_main trm on spm.id=trm.subproject_id
+                left join transaction_return_detail trd on trm.id=trd.return_id
+                left join worker_master wm on trm.worker_id=wm.id
+                left join stock_master sm on trd.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject' AND sm.id = '$stock_id'
+                ");
+        return $query->result_array();
+    }
+
+    public function get_all_usageproject2($idsubproject, $stock_id)
+    {
+        $query = $this->db->query("Select pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, tud.item_count*sm.item_price as total, tud.creation_date as tanggal, com.id as company, pm.company_id as idcompany, sm.id as stock, wm.name as tukang
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_usage_main tum on spm.id=tum.subproject_id
+                left join transaction_usage_detail tud on tum.id=tud.usage_id
+                left join worker_master wm on tum.worker_id=wm.id
+                left join stock_master sm on tud.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject' AND sm.id = '$stock_id'
+UNION
+Select pm.name as project, spm.*, cm.name as category, im.name as barang, -trd.return_count as quantity, um.name as satuan, sm.item_price as harga, -trd.return_count*sm.item_price as total, trd.creation_date as tanggal, com.id as company, pm.company_id as idcompany, sm.id as stock, wm.name as tukang
+                from project_master pm left join subproject_master spm on spm.project_id=pm.id
+                 left join  transaction_return_main trm on spm.id=trm.subproject_id
+                left join transaction_return_detail trd on trm.id=trd.return_id
+                left join worker_master wm on trm.worker_id=wm.id
+                left join stock_master sm on trd.stock_id=sm.id
+                left join item_master im on sm.item_id=im.id
+                left join unit_master um on im.unit_id=um.id
+                join category_master cm on im.category_id=cm.id
+                left join company_master com on com.id = sm.company_id
+                where spm.id='$idsubproject' AND sm.id = '$stock_id'
+                ");
+        return $query->result_array();
     }
 
     public function get_company_id(){

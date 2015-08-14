@@ -51,7 +51,8 @@ class Returnitem extends CI_Controller {
     */
     public function submit_item_values(){
         // get the input value
-        if(!empty($this->input->post('returnitem_item_values')) && !empty($this->input->post('worker'))){
+        if(!empty($this->input->post('returnitem_item_values')) && !empty($this->input->post('subproject'))
+            && !empty($this->input->post('project')) && !empty($this->input->post('worker'))){
             $returnitem_item_values = $this->input->post('returnitem_item_values');
             $returnitem_item_values = json_decode($returnitem_item_values, TRUE);
 
@@ -71,6 +72,25 @@ class Returnitem extends CI_Controller {
                // }
 
                 // project name
+
+                $project_detail = $this->project_model->get_project_by_id($this->input->post('project'));
+                if(empty($project_detail)){
+                    $message['error'] = "Returnitem gagal dibuat. Project tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['project_id'] = $project_detail['id'];
+                }
+
+                // search for subproject id
+                $subproject_detail = $this->subproject_model->get_subproject_by_id($this->input->post('subproject'));
+                if(empty($subproject_detail)){
+                    $message['error'] = "Returnitem gagal dibuat. Sub Project tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['subproject_id'] = $subproject_detail['id'];
+                }
                 
                 $worker_detail = $this->worker_model->get_worker_by_name($this->input->post('worker_id'));
                 if(empty($worker_detail)){
@@ -101,7 +121,7 @@ class Returnitem extends CI_Controller {
                 $this->show_table($message);
             }
         }else{
-            $message['error'] = "Returnitem gagal dibuat.";
+            $message['error'] = "Returnitem gagal dibuat!.";
             $this->show_table($message);
         }
     }
@@ -273,7 +293,7 @@ class Returnitem extends CI_Controller {
 
             // get necessary data
             // $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
-            //$data['project'] = $this->returnitem_model->get_all_project();
+            $data['project'] = $this->returnitem_model->get_all_project();
             // show the view
             $this->load->view('header');
             $this->load->view('returnitem/navigation', $data);

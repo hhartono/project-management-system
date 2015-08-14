@@ -44,7 +44,7 @@
                                 <?php endif; ?>
                                 <div id="da-returnitem-table-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-returnitem-datatable-numberpaging" class="da-table"">
+                                    <table id="da-returnitem-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Kode Barang</th>
@@ -70,6 +70,27 @@
                                 <div id="da-returnitem-detail-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
                                     <form id="da-returnitem-detail-form-val" class="da-form da-form-inline" action="/returnitem/submit_item_values" method="post">
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Project</label>
+                                            <div class="da-form-item large">
+                                                <select name="project" id="project_id">
+                                                    <option value="">--- Pilih Project---</option>
+                                                    <?php
+                                                    foreach ($project as $project) {
+                                                        echo "<option value='$project[id]'>$project[name] </option> ";
+                                                    }
+                                                ?>   
+                                                </select>    
+                                            </div>
+                                        </div>
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Subproject</label>
+                                            <div class="da-form-item large">
+                                                <select name="subproject" id="subproject_id">
+                                                    <option value="">--- Pilih Sub Project ---</option>   
+                                                </select>    
+                                            </div>
+                                        </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Tukang</label>
                                             <div class="da-form-item large">

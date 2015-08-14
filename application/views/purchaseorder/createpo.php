@@ -61,7 +61,7 @@
                                 </div>
                                 <div id="da-purchaseorder-createpo-table-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-purchaseorder-createpo-datatable-numberpaging" class="da-table"">
+                                    <table id="da-purchaseorder-createpo-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Database ID</th>

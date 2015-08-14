@@ -15,6 +15,7 @@ class Returnitem_model extends CI_Model {
 
             // PART 1 - set PO main
             $data = array(
+                'subproject_id' => $database_input_array['subproject_id'],
                 'worker_id' => $database_input_array['worker_id'],
                 'user_id' => $database_input_array['user']
             );

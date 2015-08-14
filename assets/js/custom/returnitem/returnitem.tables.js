@@ -48,7 +48,8 @@
 
             // get input detail
             var returnitem_worker = $('#returnitem-create-worker').val();
-            
+            var returnitem_project = $('#project_id').val();
+            var returnitem_subproject = $('#subproject_id').val();
             $("#da-returnitem-detail-error").hide();
             $("#da-returnitem-table-error").hide();
 
@@ -56,7 +57,7 @@
             var stock_count_per_item = {};
             var usage_count_per_item = {};
 
-            if(returnitem_worker){
+            if(returnitem_project && returnitem_subproject){
                 if(totalItem > 0){
                     $('table#da-returnitem-datatable-numberpaging tr').each(function(outer_index) {
                         var stock_count = 0;
