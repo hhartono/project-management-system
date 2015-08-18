@@ -157,7 +157,7 @@
                                     }else{
                                         $kurang = $stocks['quantity'] - $stocks['stock'];
                                 ?>    
-                                <td class="division-row">Item Kurang :&nbsp; <?php echo $kurang ; ?>&nbsp; Unit</td>
+                                <td class="division-row">Item Kurang :&nbsp; <font style="color:red;"><?php echo $kurang ; ?></font>&nbsp; Unit</td>
                                 <?php } ?>
                             </tr>                           
                             <?php endforeach?>
