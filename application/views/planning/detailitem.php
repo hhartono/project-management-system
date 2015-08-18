@@ -4,7 +4,11 @@
     <div id="da-content-area">
         <div class="row-fluid">
             <div class="span12">
+            <?php if(!empty($proj) && !empty($sub)){ ?>
                 <h3 align="center"><?php echo $proj->project; ?> - <?php echo $proj->name;?> - <?php echo $sub->name; ?></h3>
+            <?php }else{ ?>
+                <h3 align="center">Data Yang Dicari Tidak Tersedia</h3>
+            <?php }?>
             </div>
         </div>
         </br>
