@@ -251,7 +251,7 @@ class Stock extends CI_Controller {
     }
 
     public function get_unit_by_item_name($item_name){
-        $item_name = urldecode($item_name);
+        $item_name = base64_decode(urldecode($item_name));
         $item_detail = $this->item_model->get_item_by_name($item_name);
 
         if(!empty($item_detail['unit_id'])){

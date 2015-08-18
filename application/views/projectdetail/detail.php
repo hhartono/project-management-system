@@ -59,10 +59,10 @@
                         <table id="da-projectdetail-datatable-numberpaging" class="da-table">
                         <thead>
                             <tr>
-                                <th>Kategori</th>
                                 <th>Nama Barang</th>
                                 <th>Quantity</th>
                                 <th>Satuan</th>
+                                <th>Kategori</th>
                                 <th>Total Harga</th>
                             </tr>
                         </thead>
@@ -83,10 +83,10 @@
                         ?>
                         <?php if($details['company'] == $details['idcompany'] || $details['company'] == 0){ ?>
                             <tr>
-                                <td class="division-row"><?php echo $details['category']; ?></td>
                                 <td class="division-row"><a class="da-projectdetail-view-dialog" href="#" data-namabarang="<?php echo $details['barang'];?>" data-value="<?php echo $details['id']; ?>" data-stock="<?php echo $details['stock']; ?>"><?php echo $details['barang']; ?></a></td>
                                 <td class="division-row"><?php echo $details['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details['satuan']; ?></td>
+                                <td class="division-row"><?php echo $details['category']; ?></td>
                                 <td class="division-row"><?php echo $total; ?></td>
                             </tr>                    
                         <?php $total_sum+=$details['total'];?>
@@ -129,10 +129,10 @@
                         <table id="da-projectdetail-datatable-numberpaging" class="da-table">
                         <thead>
                         <tr>
-                            <th>Kategori</th>
                             <th>Nama Barang</th>
                             <th>Quantity</th>
                             <th>Satuan</th>
+                            <th>Kategori</th>
                             <th>Total Harga</th>
 
                         </tr>
@@ -155,10 +155,10 @@
                             ?>
                             <?php if(!($details2['company'] == $details2['idcompany'] || $details2['company'] == 0)){ ?>
                             <tr>
-                                <td class="division-row"><?php echo $details2['category']; ?></td>
                                 <td class="division-row"><a class="da-projectdetail2-view-dialog" href="#" data-namabarang="<?php echo $details2['barang'];?>" data-value="<?php echo $details2['id']; ?>" data-stock="<?php echo $details2['stock']; ?>"><?php echo $details2['barang']; ?></a></td>
                                 <td class="division-row"><?php echo $details2['quantity']; ?></td>
                                 <td class="division-row"><?php echo $details2['satuan']; ?></td>
+                                <td class="division-row"><?php echo $details2['category']; ?></td>
                                 <td class="division-row"><?php echo $total; ?></td>
                             </tr>
                             
@@ -258,7 +258,7 @@
                     <h3 id="judul" align="center"></h3>
                     <div class="da-form-row" style="padding:20px 90px;">
                             <table id="table" border="1" style="font-size:16px;">
-                                <tr>
+                                <tr style=background:#A9A9A9;>
                                     <th>Tanggal Pakai/Return</th>
                                     <th>Quantity</th>
                                     <th>Satuan</th>
@@ -287,7 +287,7 @@
                     <h3 id="judul2" align="center"></h3>
                     <div class="da-form-row" style="padding:20px 90px;">
                             <table id="table2" border="1" style="font-size:16px;">
-                                <tr>
+                                <tr style=background:#A9A9A9;>
                                     <th>Tanggal Pakai/Return</th>
                                     <th>Quantity</th>
                                     <th>Satuan</th>
