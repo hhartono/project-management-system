@@ -70,7 +70,8 @@ class Stock_model extends CI_Model {
                 'project_id' => $database_input_array['project_id'],
                 'po_detail_id' => $database_input_array['po_detail_id'],
                 'item_price' => $database_input_array['item_price'],
-                'item_count' => $database_input_array['item_count']
+                'item_count' => $database_input_array['item_count'],
+                'stock_awal' => $database_input_array['item_count']
             );
 
             $this->db->where('id', $database_input_array['id']);

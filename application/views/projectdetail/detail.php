@@ -51,9 +51,6 @@
                     <?php if(isset($message['error'])): ?>
                         <div class="da-message error"><?php echo $message['error']; ?></div>
                     <?php endif; ?>
-                    <?php
-                        $category='' ;
-                    ?>
                     <div class="da-panel-content da-table-container">
                     
                         <table id="da-projectdetail-datatable-numberpaging" class="da-table">
@@ -123,9 +120,6 @@
                     
                     </div>
                     <div class="da-panel-content da-table-container">
-                        <?php
-                            $categorys='' ;
-                        ?>
                         <table id="da-projectdetail-datatable-numberpaging" class="da-table">
                         <thead>
                         <tr>
@@ -264,14 +258,7 @@
                                     <th>Satuan</th>
                                     <th>Harga</th>
                                     <th>Tukang</th>
-                                </tr>
-                                <tr>
-                                    <td id="projectdetail-view-tanggal"></td>
-                                    <td id="projectdetail-view-quantity"></td>
-                                    <td id="projectdetail-view-satuan"></td>
-                                    <td id="projectdetail-view-harga"></td>
-                                    <td id="projectdetail-view-tukang"></td>
-                                </tr>                
+                                </tr>            
                             </table>
                     </div>
                 </div>
@@ -293,14 +280,7 @@
                                     <th>Satuan</th>
                                     <th>Harga</th>
                                     <th>Tukang</th>
-                                </tr>
-                                <tr>
-                                    <td id="projectdetail2-view-tanggal"></td>
-                                    <td id="projectdetail2-view-quantity"></td>
-                                    <td id="projectdetail2-view-satuan"></td>
-                                    <td id="projectdetail2-view-harga"></td>
-                                    <td id="projectdetail2-view-tukang"></td>
-                                </tr>                
+                                </tr>         
                             </table>
                     </div>
                 </div>

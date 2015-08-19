@@ -74,44 +74,34 @@
     /* setting header table */
     $this->fpdf->Ln(1);
     $this->fpdf->SetFont('Arial','B',12);
-    $this->fpdf->Cell(5 , 1, 'Kategori' , 1, 'LR', 'C');
     $this->fpdf->Cell(8 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(2 , 1, 'Quantity' , 1, 'LR', 'C');
     $this->fpdf->Cell(3 , 1, 'Satuan' , 1, 'LR', 'C');
-    $this->fpdf->Cell(2 , 1, 'Tukang' , 1, 'LR', 'C');
-    $this->fpdf->Cell(4 , 1, 'Harga Satuan' , 1, 'LR', 'C');
-    $this->fpdf->Cell(4 , 1, 'Total Harga' , 1, 'LR', 'C');
-    $category ='';
+    $this->fpdf->Cell(5 , 1, 'Kategori' , 1, 'LR', 'C');
+    $this->fpdf->Cell(4 , 1, 'Tukang' , 1, 'LR', 'C');
+    $this->fpdf->Cell(3 , 1, 'Harga Satuan' , 1, 'LR', 'C');
+    $this->fpdf->Cell(3 , 1, 'Total Harga' , 1, 'LR', 'C');
     $total_sum = 0;
     foreach($detail as $details){
-        if($category!=$details['category'])
-            {
-                $category=$details['category'];
-            }
-            else
-            {
-            $category='';
-            }
         $total=number_format($details['total'],2,',','.'); 
         $harga=number_format($details['harga'],2,',','.');
         if($details['company'] == $details['idcompany'] || $details['company'] == 0){
             $this->fpdf->Ln();
             $this->fpdf->SetFont('Arial','',12);
-            $this->fpdf->Cell(5 , 0.7, $category , 1, 'LR', 'L');
             $this->fpdf->Cell(8 , 0.7, $details['barang'] , 1, 'LR', 'L');
             $this->fpdf->Cell(2 , 0.7, $details['quantity'] , 1, 'LR', 'L');
             $this->fpdf->Cell(3 , 0.7, $details['satuan'] , 1, 'LR', 'L');
-            $this->fpdf->Cell(2 , 0.7, $details['tukang'] , 1, 'LR', 'L');
-            $this->fpdf->Cell(4 , 0.7, $harga , 1, 'LR', 'L');
-            $this->fpdf->Cell(4 , 0.7, $total , 1, 'LR', 'L');
+            $this->fpdf->Cell(5 , 0.7, $details['category'] , 1, 'LR', 'L');
+            $this->fpdf->Cell(4 , 0.7, $details['tukang'] , 1, 'LR', 'L');
+            $this->fpdf->Cell(3 , 0.7, $harga , 1, 'LR', 'L');
+            $this->fpdf->Cell(3 , 0.7, $total , 1, 'LR', 'L');
             $total_sum+=$details['total'];
         }
-        $category=$details['category'];
     }
         $jumlah = number_format($total_sum,2,',','.');
     $this->fpdf->Ln();
-    $this->fpdf->Cell(24 , 0.7, 'Total Biaya', 1, 'LR', 'L');
-    $this->fpdf->Cell(4 , 0.7, $jumlah, 1, 'LR', 'L');
+    $this->fpdf->Cell(25 , 0.7, 'Total Biaya', 1, 'LR', 'L');
+    $this->fpdf->Cell(3 , 0.7, $jumlah, 1, 'LR', 'L');
 
     $this->fpdf->AddPage();
 
@@ -174,13 +164,13 @@
     /* setting header table */
     $this->fpdf->Ln(1);
     $this->fpdf->SetFont('Arial','B',12);
-    $this->fpdf->Cell(5 , 1, 'Kategori' , 1, 'LR', 'C');
     $this->fpdf->Cell(8 , 1, 'Nama Barang' , 1, 'LR', 'C');
     $this->fpdf->Cell(2 , 1, 'Quantity' , 1, 'LR', 'C');
     $this->fpdf->Cell(3 , 1, 'Satuan' , 1, 'LR', 'C');
-    $this->fpdf->Cell(2 , 1, 'Tukang' , 1, 'LR', 'C');
-    $this->fpdf->Cell(4 , 1, 'Harga Satuan' , 1, 'LR', 'C');
-    $this->fpdf->Cell(4 , 1, 'Total Harga' , 1, 'LR', 'C');
+    $this->fpdf->Cell(5 , 1, 'Kategori' , 1, 'LR', 'C');
+    $this->fpdf->Cell(4 , 1, 'Tukang' , 1, 'LR', 'C');
+    $this->fpdf->Cell(3 , 1, 'Harga Satuan' , 1, 'LR', 'C');
+    $this->fpdf->Cell(3 , 1, 'Total Harga' , 1, 'LR', 'C');
     $categorys ='';
     $total_sum = 0;
     foreach($detail as $details){
@@ -197,21 +187,21 @@
         if(!($details['company'] == $details['idcompany'] || $details['company'] == 0)){
             $this->fpdf->Ln();
             $this->fpdf->SetFont('Arial','',12);
-            $this->fpdf->Cell(5 , 0.7, $details['category'] , 1, 'LR', 'L');
             $this->fpdf->Cell(8 , 0.7, $details['barang'] , 1, 'LR', 'L');
             $this->fpdf->Cell(2 , 0.7, $details['quantity'] , 1, 'LR', 'L');
             $this->fpdf->Cell(3 , 0.7, $details['satuan'] , 1, 'LR', 'L');
-            $this->fpdf->Cell(2 , 0.7, $details['tukang'] , 1, 'LR', 'L');
-            $this->fpdf->Cell(4 , 0.7, $harga , 1, 'LR', 'L');
-            $this->fpdf->Cell(4 , 0.7, $total , 1, 'LR', 'L');
+            $this->fpdf->Cell(5 , 0.7, $details['category'] , 1, 'LR', 'L');
+            $this->fpdf->Cell(4 , 0.7, $details['tukang'] , 1, 'LR', 'L');
+            $this->fpdf->Cell(3 , 0.7, $harga , 1, 'LR', 'L');
+            $this->fpdf->Cell(3 , 0.7, $total , 1, 'LR', 'L');
             $total_sum+=$details['total'];
         }
         //$categorys=$details['category'];
     }
         $jumlah = number_format($total_sum,2,',','.');
     $this->fpdf->Ln();
-    $this->fpdf->Cell(24 , 0.7, 'Total Biaya', 1, 'LR', 'L');
-    $this->fpdf->Cell(4 , 0.7, $jumlah, 1, 'LR', 'L');
+    $this->fpdf->Cell(25 , 0.7, 'Total Biaya', 1, 'LR', 'L');
+    $this->fpdf->Cell(3 , 0.7, $jumlah, 1, 'LR', 'L');
 
     /* setting posisi footer 3 cm dari bawah */
 
