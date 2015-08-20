@@ -47,7 +47,7 @@ class Absensi extends CI_Controller{
     
     $config = array(
       'upload_path' => "assets/absensi/",
-      'allowed_types' => "txt",
+      'allowed_types' => "csv",
       'file_name'     => "absensi",
       'overwrite' => TRUE,
       'max_size' => "1024", // Can be set to particular file size , here it is 2 MB(2048 Kb)
@@ -61,9 +61,9 @@ class Absensi extends CI_Controller{
     }
     else
     {
-      $txt_file = file_get_contents('assets/absensi/absensi.txt');
-      $pesan = preg_replace("/((\r?\n)|(\r\n?))/", ',',$txt_file); 
-      $rows = explode(",", $pesan);
+      $txt_file = file_get_contents('assets/absensi/absensi.csv');
+      $pesan = preg_replace("/((\r?\n)|(\r\n?))/", ']',$txt_file); 
+      $rows = explode("]", $pesan);
       $filteredarray = array_values( array_filter($rows) );
    //print_r($filteredarray);
    //print_r($rows);
@@ -71,12 +71,12 @@ class Absensi extends CI_Controller{
       
       foreach($filteredarray as $row => $data)
       {
-        $row_data = preg_split('/[\s]+/', $data);
+        $row_data = preg_split('/,/', $data);
         $data3 = isset($row_data[3]) ? $row_data[3] : null;
-        $data4 = isset($row_data[4]) ? $row_data[4] : null;
-        $data6 = isset($row_data[6]) ? $row_data[6] : null;
-        $data7 = isset($row_data[7]) ? $row_data[7] : null;
-        $data8 = $data7 - $data6;
+        $data4 = isset($row_data[5]) ? $row_data[5] : null;
+        $data6 = isset($row_data[9]) ? $row_data[9] : null;
+        $data7 = isset($row_data[10]) ? $row_data[10] : null;
+        $data8 = isset($row_data[25]) ? $row_data[25] : null;
 
         $datas = array(
                       'name' => $data3,

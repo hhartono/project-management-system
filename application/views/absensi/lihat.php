@@ -36,7 +36,7 @@
                                   <div class="span12">
                                   
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-absensi-datatable-numberpaging" class="da-table"">
+                                    <table id="da-absensi-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Nama Pekerja</th>

@@ -15,7 +15,7 @@ class Absensi_model extends CI_Model {
 							GROUP BY absensi.date, absensi.name");*/
         $query = $this->db->query("select absensi . *, group_master.name as grup, group_master.id as idgrup,
                                         GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
-                                        FROM absensi join worker_master ON worker_master.name = absensi.name
+                                        FROM absensi left join worker_master ON worker_master.name = absensi.name
                                         left join group_master ON group_master.id = worker_master.group_id                      
                                         left join group_tugas_detail ON group_master.id = group_tugas_detail.group_id AND absensi.date = group_tugas_detail.date 
                                         left join subproject_master ON group_tugas_detail.subproject_id = subproject_master.id
@@ -166,7 +166,7 @@ class Absensi_model extends CI_Model {
     {
         $query = $this->db->query("select absensi . *, group_master.name as grup, group_master.id as idgrup,
                                         GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
-                                        FROM absensi join worker_master ON worker_master.name = absensi.name
+                                        FROM absensi left join worker_master ON worker_master.name = absensi.name
                                         left join group_master ON group_master.id = worker_master.group_id                      
                                         left join group_tugas_detail ON group_master.id = group_tugas_detail.group_id AND absensi.date = group_tugas_detail.date 
                                         left join subproject_master ON group_tugas_detail.subproject_id = subproject_master.id
@@ -214,6 +214,20 @@ class Absensi_model extends CI_Model {
             }
         }else{
             return false;
+        }
+    }
+
+    public function insertabsensi()
+    {
+        for($i=0;$i<count($dataarray);$i++){
+            $data = array(
+                'name'=>$dataarray[$i]['nama'],
+                'date'=>$dataarray[$i]['tanggal'],
+                'on_duty'=>$dataarray[$i]['jam_masuk'],
+                'off_duty'=>$dataarray[$i]['jam_pulang'],
+                'count_time'=>$dataarray[$i]['count_time']
+            );
+            $this->db->insert('absensi', $data);
         }
     }
 }
