@@ -13,17 +13,33 @@ class Absensi_model extends CI_Model {
 							left join absensi_detail on absensi.id = absensi_detail.absensi_id
 							left join subproject_master on absensi_detail.subproject_id = subproject_master.id
 							GROUP BY absensi.date, absensi.name");*/
-        $query = $this->db->query("select absensi . *, group_master.name as grup, group_master.id as idgrup,
+        $query = $this->db->query("select absensi . *, group_master.name as grup, group_master.id as idgrup, absensi.idabsensi as idabsensi,
                                         GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
-                                        FROM absensi left join worker_master ON worker_master.name = absensi.name
+                                        FROM absensi left join worker_master ON worker_master.idabsensi = absensi.idabsensi
                                         left join group_master ON group_master.id = worker_master.group_id                      
                                         left join group_tugas_detail ON group_master.id = group_tugas_detail.group_id AND absensi.date = group_tugas_detail.date 
                                         left join subproject_master ON group_tugas_detail.subproject_id = subproject_master.id
-                                        GROUP BY absensi.date , absensi.name");
+                                        GROUP BY absensi.date , absensi.idabsensi");
     	
     	$result_array = $query->result_array();
     	return $result_array;
 	}
+
+    public function get_absensi_upload()
+    {
+        /*$query = $this->db->query("select absensi.*,
+                            GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
+                            FROM absensi 
+                            left join absensi_detail on absensi.id = absensi_detail.absensi_id
+                            left join subproject_master on absensi_detail.subproject_id = subproject_master.id
+                            GROUP BY absensi.date, absensi.name");*/
+        $query = $this->db->query("select absensi . *, worker_master.idabsensi as absensi
+                                    FROM absensi left join worker_master ON worker_master.idabsensi = absensi.idabsensi
+                                    ");
+        
+        $result_array = $query->row_array();
+        return $result_array;
+    }
 
 	public function caridata()
     {
@@ -34,10 +50,10 @@ class Absensi_model extends CI_Model {
 							left join absensi_detail on absensi.id = absensi_detail.absensi_id
 							left join subproject_master on absensi_detail.subproject_id = subproject_master.id
                 			WHERE date = '$cari'
-                			GROUP BY absensi.date, absensi.name
-            ");
+                			GROUP BY absensi.date, absensi.idabsensi
+        ");
 
-            return $query->result_array();
+        return $query->result_array();
         
     }
 
@@ -143,7 +159,7 @@ class Absensi_model extends CI_Model {
     	$query = $this->db->query("select absensi.*, SUM(absensi.count_time) as jam, date_format(date, '%M %Y') AS bulantahun						
 							FROM absensi
 							WHERE MONTH(date)='$bulan' AND YEAR(date) ='$tahun'
-							GROUP BY name");
+							GROUP BY idabsensi");
     	$result_array = $query->result_array();
     	return $result_array;
     }
@@ -166,7 +182,7 @@ class Absensi_model extends CI_Model {
     {
         $query = $this->db->query("select absensi . *, group_master.name as grup, group_master.id as idgrup,
                                         GROUP_CONCAT(DISTINCT subproject_master.name ORDER BY subproject_master.name DESC SEPARATOR ', ') as subproject
-                                        FROM absensi left join worker_master ON worker_master.name = absensi.name
+                                        FROM absensi left join worker_master ON worker_master.idabsensi = absensi.idabsensi
                                         left join group_master ON group_master.id = worker_master.group_id                      
                                         left join group_tugas_detail ON group_master.id = group_tugas_detail.group_id AND absensi.date = group_tugas_detail.date 
                                         left join subproject_master ON group_tugas_detail.subproject_id = subproject_master.id
