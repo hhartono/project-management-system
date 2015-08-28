@@ -46,11 +46,33 @@ class Item extends CI_Controller {
     public function create_item()
     {
         if($this->input->post('name')){
+
+            // po detail id
+            $database_input_array['name'] = $this->input->post('name');
+
+            // item price
+            $database_input_array['unit_id'] = $this->input->post('unit_id');
+
+            // item count
+            $database_input_array['category_id'] = $this->input->post('category_id');
+
+            $database_input_array['notes'] = $this->input->post('notes');
+
+            // generate item stock code
+            $this->load->helper('stock_code_helper');
+            $generated_stock_code = stock_code_generator($database_input_array['category_id'], $database_input_array['unit_id']);
+            if(empty($generated_stock_code)){
+                $message['error'] = "Stok gagal disimpan. Kode stok tidak dapat dibuat.";
+                $this->show_table($message);
+                return;
+            }else{
+                $database_input_array['item_code'] = $generated_stock_code;
+            }
             // check if there is any duplicate
             $duplicate_check = $this->item_model->get_item_by_name($this->input->post('name'));
 
             if(empty($duplicate_check)){
-                $response = $this->item_model->set_item();
+                $response = $this->item_model->set_item($database_input_array);
 
                 if($response){
                     $message['success'] = "Barang berhasil disimpan.";

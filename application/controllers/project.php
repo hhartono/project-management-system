@@ -122,7 +122,7 @@ class Project extends CI_Controller {
 
     public function update_project(){
         // check all necessary input
-        if(!empty($this->input->post('id')) && !empty($this->input->post('customer_name')) && !empty($this->input->post('company_name'))
+        if(!empty($this->input->post('id')) && !empty($this->input->post('customer_name'))
             && !empty($this->input->post('name'))){
 
             // search for customer id
@@ -188,7 +188,7 @@ class Project extends CI_Controller {
                 $this->show_table($message);
             }
         }else{
-            $message['error'] = "Project gagal diubah.";
+            $message['error'] = "Project gagal diubah.!";
             $this->show_table($message);
         }
     }

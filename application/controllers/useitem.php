@@ -60,17 +60,6 @@ class Useitem extends CI_Controller {
                 // item values successfully decoded
                 $database_input_array = array();
 
-                // generate purchase order code
-                //$this->load->helper('purchaseorder_code_helper');
-               // $generated_purchaseorder_code = purchaseorder_code_generator();
-                //if(empty($generated_purchaseorder_code)){
-                  //  $message['error'] = "Purchase Order gagal dibuat. Kode purchase order tidak dapat dibuat.";
-                    //$this->show_table($message);
-                    //return;
-               // }else{
-                //    $database_input_array['po_reference_number'] = $generated_purchaseorder_code;
-               // }
-
                 // project name
                 $project_detail = $this->project_model->get_project_by_id($this->input->post('project'));
                 if(empty($project_detail)){
@@ -105,9 +94,16 @@ class Useitem extends CI_Controller {
                 // input all po item values
                 $database_input_array['useitem_item_values'] = $useitem_item_values;
 
+                foreach ($useitem_item_values as $useitem_item_values) {
+                    $getstock = $this->useitem_model->get_stock($useitem_item_values['item_stock_code']);
+                }
+                $database_input_array['getstock'] = $getstock;
+
                 // input data to database
                 $response = $this->useitem_model->set_useitem_detail($database_input_array);
 
+                // print_r($database_input_array);
+                // print_r($database_input_array['useitem_item_values'][0]);
                 if($response){
                     $message['success'] = "Useitem berhasil dibuat.";
                     $this->show_table($message);
@@ -208,6 +204,12 @@ class Useitem extends CI_Controller {
     public function get_stock_detail_by_item_stock_code($stock_code){
         $stock_code = urldecode($stock_code);
         $stock_detail = $this->stock_model->get_stock_item_detail_by_stock_code($stock_code);
+        echo json_encode($stock_detail);
+    }
+
+    public function get_stock_detail_by_item_code($item_code){
+        $item_code = urldecode($item_code);
+        $stock_detail = $this->stock_model->get_stock_item_detail_by_item_code($item_code);
         echo json_encode($stock_detail);
     }
 

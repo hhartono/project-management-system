@@ -45,19 +45,20 @@ class Item_model extends CI_Model {
         }
     }
 
-    public function set_item()
+    public function set_item($database_input_array)
     {
         if($this->input->post('name') !== false && $this->input->post('unit_id') !== false
             && $this->input->post('category_id') !== false && $this->input->post('notes') !== false){
             date_default_timezone_set('Asia/Jakarta');
 
             $data = array(
-                'name' => $this->input->post('name'),
-                'unit_id' => $this->input->post('unit_id'),
-                'category_id' => $this->input->post('category_id'),
-                'notes' => $this->input->post('notes'),
+                'name' => $database_input_array['name'],
+                'unit_id' => $database_input_array['unit_id'],
+                'category_id' => $database_input_array['category_id'],
+                'notes' => $database_input_array['notes'],
                 'user_id' => $this->input->post('user'),
-                'creation_date' => date("Y-m-d H:i:s")
+                'creation_date' => date("Y-m-d H:i:s"),
+                'item_code' => $database_input_array['item_code']
             );
 
             return $this->db->insert('item_master', $data);

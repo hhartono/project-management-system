@@ -74,7 +74,7 @@ class Absensi extends CI_Controller{
       foreach($filteredarray as $row => $data)
       {
         $row_data = preg_split('/,/', $data);
-        $data0 = isset($row_data[0]) ? $row_data[0] : null;
+        $data1 = isset($row_data[1]) ? $row_data[1] : null;
         $data3 = isset($row_data[3]) ? $row_data[3] : null;
         $data4 = isset($row_data[5]) ? $row_data[5] : null;
         $data6 = isset($row_data[9]) ? $row_data[9] : null;
@@ -84,7 +84,7 @@ class Absensi extends CI_Controller{
         $data10 = isset($row_data[17]) ? $row_data[17] : null;
         
         $datas = array(
-          'idabsensi' => $data0,
+          'idabsensi' => $data1,
           'name' => $data3,
           'date' => date("Y-m-d", strtotime($data4)),
           'jam_datang' => $data6,
@@ -96,13 +96,12 @@ class Absensi extends CI_Controller{
         );
         $this->db->insert('absensi', $datas);
       }  
-      
+    }
       $data = array('upload_data' => $this->upload->data());
       $this->load->view('header');
       $this->load->view('absensi/navigation', $datau);
       $this->load->view('absensi/upload_success', $data);
       $this->load->view('absensi/footer');
-    }
 
   }
 
@@ -119,7 +118,8 @@ class Absensi extends CI_Controller{
 
     $data['absensi'] = $this->absensi_model->get_all_absensi();
     //$data['proabs'] = $this->absensi_model->get_project_absensi();
-    $data['getpro']=$this->absensi_model->get_all_project(); 
+    $data['getpro']=$this->absensi_model->get_all_project();
+    $data['upload'] = $this->absensi_model->get_absensi_upload(); 
     $this->load->view('header');
     $this->load->view('absensi/navigation', $data);
     $this->load->view('absensi/lihat', $data);

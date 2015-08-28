@@ -148,19 +148,19 @@
                 $('#returnitem-insert-code').val('');
                 var item_code_encoded = encodeURIComponent(item_code);
 
-                $.get( "/returnitem/get_stock_detail_by_item_stock_code/" + item_code_encoded, function(data) {
+                $.get( "/returnitem/get_stock_detail_by_item_code/" + item_code_encoded, function(data) {
                     if(data != null && data.id != null){
                         $("#da-returnitem-table-error").hide();
 
                         // update table
                         totalItem++;
                         var table_array = [];
-                        table_array[0] = data.item_stock_code;
+                        table_array[0] = data.item_code;
                         table_array[1] = data.item_name;
-                        table_array[2] = data.item_count;
+                        table_array[2] = data.jumlah;
                         table_array[3] = '';
                         table_array[4] = data.item_unit;
-                        table_array[5] = data.id;
+                        table_array[5] = data.idstock;
                         returnitemTable.row.add(table_array).draw();
                     }else{
                         // error message

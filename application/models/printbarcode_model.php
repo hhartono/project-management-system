@@ -9,9 +9,11 @@ class Printbarcode_model extends CI_Model {
         // start database transaction
         $this->db->trans_begin();
 
-        $this->db->select('*');
-        $this->db->from('barcode_master');
-        $this->db->where('po_id', $po_id);
+        $this->db->select('barcode_master.*, item_master.name as item, item_master.item_code as item_code');
+        $this->db->from('barcode_master, item_master, transaction_po_detail');
+        $this->db->where('barcode_master.po_id = transaction_po_detail.po_id');
+        $this->db->where('transaction_po_detail.item_id = item_master.id');
+        $this->db->where('barcode_master.po_id', $po_id);
         $this->db->where('print_status', '1');
         $query = $this->db->get();
         $result_array = $query->result_array();
@@ -42,7 +44,7 @@ class Printbarcode_model extends CI_Model {
         // start database transaction
         $this->db->trans_begin();
 
-        $this->db->select('stock_master.*, item_master.name as item');
+        $this->db->select('stock_master.*, item_master.name as item, item_master.item_code as item_code');
         $this->db->from('stock_master, item_master');
         $this->db->where('stock_master.item_id = item_master.id');
         $this->db->where('stock_master.id', $id);

@@ -106,6 +106,19 @@ class Returnitem extends CI_Controller {
                 // input all po item values
                 $database_input_array['returnitem_item_values'] = $returnitem_item_values;
 
+                foreach ($returnitem_item_values as $returnitem_item_values) {
+                    $getstock = $this->returnitem_model->get_stock($returnitem_item_values['item_stock_code'], $this->input->post('subproject'));
+                }
+                if(empty($getstock)){
+                    $message['error'] = "Item ini belum digunakan pada project tersebut.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    //$database_input_array['getid'] = $getstock[0]['id'];
+                    $database_input_array['getstock'] = $getstock;
+                 // print_r($database_input_array);
+                }
+
                 // input data to database
                 $response = $this->returnitem_model->set_returnitem_detail($database_input_array);
 
@@ -209,6 +222,12 @@ class Returnitem extends CI_Controller {
     public function get_stock_detail_by_item_stock_code($stock_code){
         $stock_code = urldecode($stock_code);
         $stock_detail = $this->stock_model->get_stock_item_detail_by_stock_code($stock_code);
+        echo json_encode($stock_detail);
+    }
+
+    public function get_stock_detail_by_item_code($item_code){
+        $stock_code = urldecode($item_code);
+        $stock_detail = $this->stock_model->get_stock_item_detail_by_item_code_return($item_code);
         echo json_encode($stock_detail);
     }
 

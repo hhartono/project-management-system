@@ -42,19 +42,19 @@ class Printbarcode extends CI_Controller {
                     $printer_command = "";
 
                     foreach($barcode_detail as $each_barcode){
-                        $temp_name = substr($each_barcode['label_name'], 0, 16);
+                        $temp_name = substr($each_barcode['item'], 0, 16);
                         $description_line1 = ""; // max 16 character
                         if($temp_name){
                             $description_line1 = $temp_name;
                         }
 
-                        $temp_name = substr($each_barcode['label_name'], 16, 16);
+                        $temp_name = substr($each_barcode['item'], 16, 16);
                         $description_line2 = ""; // max 16 character
                         if($temp_name){
                             $description_line2 = $temp_name;
                         }
 
-                        $code_to_encode = $each_barcode['label_code'];; // max 7 character
+                        $code_to_encode = $each_barcode['item_code'];; // max 7 character
                         $quantity = $each_barcode['label_quantity'];;
 
                         $printer_command .=
@@ -109,7 +109,7 @@ class Printbarcode extends CI_Controller {
                             $description_line2 = $temp_name;
                         }
 
-                        $code_to_encode = $each_barcode['item_stock_code'];; // max 7 character
+                        $code_to_encode = $each_barcode['item_code'];; // max 7 character
                         $quantity = $each_barcode['label_quantity'];;
 
                         $printer_command .=

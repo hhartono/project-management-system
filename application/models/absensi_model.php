@@ -37,7 +37,7 @@ class Absensi_model extends CI_Model {
                                     FROM absensi left join worker_master ON worker_master.idabsensi = absensi.idabsensi
                                     ");
         
-        $result_array = $query->row_array();
+        $result_array = $query->result_array();
         return $result_array;
     }
 

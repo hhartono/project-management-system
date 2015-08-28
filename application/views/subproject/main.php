@@ -27,7 +27,7 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-subproject-datatable-numberpaging" class="da-table"">
+                                    <table id="da-subproject-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Nama Project</th>
@@ -158,7 +158,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Subproject</label>
                                     <div class="da-form-item large">
-                                        <input id="subproject-edit-name" type="text" name="name" readonly>
+                                        <input id="subproject-edit-name" type="text" name="name">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
