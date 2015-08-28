@@ -143,7 +143,7 @@ class Returnitem_model extends CI_Model {
                                     join transaction_usage_main ON transaction_usage_main.id = transaction_usage_detail.usage_id
                                     join subproject_master ON subproject_master.id = transaction_usage_main.subproject_id
                                     where transaction_usage_detail.item_code = '$item_code' AND transaction_usage_main.subproject_id = '$subproject_id'
-                                    order by stock_master.id DESC");
+                                    order by transaction_usage_detail.usage_id DESC, stock_master.id DESC");
 
         return $query->result_array();
     }
