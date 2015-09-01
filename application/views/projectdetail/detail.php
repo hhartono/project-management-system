@@ -65,16 +65,6 @@
                         </thead>
                         <tbody><?php $total_sum=0; ?>
                         <?php foreach($detail as $details): ?>
-                       <!--  <?php
-                           if($category!=$details['category'])
-                           {
-                               $category=$details['category'];
-                           }
-                           else
-                           {
-                               $category='';
-                           }
-                       ?> -->
                         <?php 
                             $total=number_format($details['total'],2,',','.'); 
                         ?>

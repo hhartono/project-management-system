@@ -32,7 +32,9 @@ class Returnitem_model extends CI_Model {
                 );
                 $this->db->insert('transaction_return_detail', $data);*/
                 
-                foreach ($database_input_array['getstock'] as $getstock) {
+                $getstock = $this->get_stock($each_usage_item['item_stock_code'], $database_input_array['subproject_id']);
+                
+                foreach ($getstock as $getstock) {
                     if($each_usage_item['item_usage'] > $getstock['count'] ){
                         $current = $getstock['item_count'] + $getstock['count'];
                         $currentitemusage = $each_usage_item['item_usage'] - $getstock['count'];

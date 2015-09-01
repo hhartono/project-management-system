@@ -106,7 +106,7 @@ class Returnitem extends CI_Controller {
                 // input all po item values
                 $database_input_array['returnitem_item_values'] = $returnitem_item_values;
 
-                foreach ($returnitem_item_values as $returnitem_item_values) {
+                /*foreach ($returnitem_item_values as $returnitem_item_values) {
                     $getstock = $this->returnitem_model->get_stock($returnitem_item_values['item_stock_code'], $this->input->post('subproject'));
                 }
                 if(empty($getstock)){
@@ -118,7 +118,7 @@ class Returnitem extends CI_Controller {
                     $database_input_array['getstock'] = $getstock;
                  // print_r($database_input_array);
                 }
-
+*/
                 // input data to database
                 $response = $this->returnitem_model->set_returnitem_detail($database_input_array);
 

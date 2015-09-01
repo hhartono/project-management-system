@@ -129,8 +129,9 @@ class Useitem_model extends CI_Model {
                     'item_code' => $each_usage_item['item_stock_code']
                 );
                 $this->db->insert('transaction_usage_detail', $data);*/
+                $getstock = $this->get_stock($each_usage_item['item_stock_code']);
 
-                foreach ($database_input_array['getstock'] as $getstock) {
+                foreach ($getstock as $getstock) {
                     if($each_usage_item['item_usage'] > $getstock['item_count'] ){
                         $current = $getstock['item_count'] - $getstock['item_count'];
                         $currentitemusage = $each_usage_item['item_usage'] - $getstock['item_count'];

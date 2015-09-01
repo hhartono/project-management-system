@@ -94,10 +94,10 @@ class Useitem extends CI_Controller {
                 // input all po item values
                 $database_input_array['useitem_item_values'] = $useitem_item_values;
 
-                foreach ($useitem_item_values as $useitem_item_values) {
+               /* foreach ($useitem_item_values as $useitem_item_values) {
                     $getstock = $this->useitem_model->get_stock($useitem_item_values['item_stock_code']);
                 }
-                $database_input_array['getstock'] = $getstock;
+                $database_input_array['getstock'] = $getstock;*/
 
                 // input data to database
                 $response = $this->useitem_model->set_useitem_detail($database_input_array);
