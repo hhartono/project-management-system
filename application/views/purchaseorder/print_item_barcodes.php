@@ -20,7 +20,7 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-purchaseorder-barcode-print-datatable-numberpaging" class="da-table"">
+                                    <table id="da-purchaseorder-barcode-print-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>PO Detail ID</th>

@@ -28,6 +28,7 @@
                         var quantity_ordered = 0;
                         var quantity_already_received = 0;
                         var quantity_received = 0;
+                        var quantity_convert = 0;
                         var tempObject = {};
                         $.each(this.cells, function(index, element){
                             if($(element).attr("name")){
@@ -38,7 +39,7 @@
                                     quantity_received_status = true;
                                 }
 
-                                if($(element).children('input').length > 0 && column_name == 'item_price'){
+                                if($(element).children('input').length > 0 && column_name == 'quantity_convert'){
                                     column_value = $(element).children("input").val();
                                 }
                                 tempObject[column_name] = column_value;
@@ -55,6 +56,10 @@
 
                                 if(column_name == 'quantity_received'){
                                     quantity_received = parseInt(column_value);
+                                }
+
+                                if(column_name == 'quantity_convert'){
+                                    quantity_convert = parseInt(column_value);
                                 }
                             }
                         });

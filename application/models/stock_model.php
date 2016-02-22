@@ -18,6 +18,19 @@ class Stock_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_stocks_by_id($id){
+        $this->db->select('stock_master.*, item_master.name, unit_master.name AS unit, supplier_master.name AS supplier, project_master.name AS project');
+        $this->db->from('stock_master');
+        $this->db->join('item_master', 'stock_master.item_id = item_master.id');
+        $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
+        $this->db->join('supplier_master', 'stock_master.supplier_id = supplier_master.id');
+        $this->db->join('project_master', 'stock_master.project_id = project_master.id');
+        $this->db->where('stock_master.item_id', $id);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function get_stock_by_stock_code($stock_code){
         $query = $this->db->get_where('stock_master', array('item_stock_code' => $stock_code));
         return $query->row_array();
@@ -66,7 +79,7 @@ class Stock_model extends CI_Model {
 
     public function get_all_stocks()
     {
-        $this->db->select('stock_master.*, item_master.name, unit_master.name AS unit');
+        $this->db->select('stock_master.*, item_master.name, item_master.id as itemid, unit_master.name AS unit');
         $this->db->from('stock_master');
         $this->db->join('item_master', 'stock_master.item_id = item_master.id');
         $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
@@ -121,6 +134,26 @@ class Stock_model extends CI_Model {
             );
 
             return $this->db->insert('stock_master', $data);
+        }else{
+            return false;
+        }
+    }
+
+    public function update_item_count_stock($database_input_array)
+    {
+        if($database_input_array['item_id'] !== false
+            && $database_input_array['item_count'] !== false){
+
+            $counts = $this->get_stocks_by_id($database_input_array['item_id']);
+            foreach ($counts as $coun) {
+                $data = array(
+                    'item_count' => $coun['item_count'] + $database_input_array['item_count'],
+                    'stock_awal' => $coun['stock_awal'] + $database_input_array['item_count']
+                );
+
+                $this->db->where('item_id', $database_input_array['item_id']);
+                return $this->db->update('stock_master', $data);
+            }
         }else{
             return false;
         }
@@ -188,4 +221,92 @@ class Stock_model extends CI_Model {
             return TRUE;
         }
     }
+
+    public function get_stocks()
+    {
+        $query = $this->db->query("select * from item_master");
+
+        return $query->result_array();
+    }
+
+    public function get_stocks_by_name($name)
+    {
+        $query = $this->db->query("select stock_master.*, item_master.name, unit_master.name AS unit
+                            FROM stock_master, item_master, unit_master 
+                            WHERE stock_master.item_id = item_master.id AND item_master.unit_id = unit_master.id AND item_master.name = '$name' limit 1
+                            ");
+
+        return $query->result_array();
+    }
+
+    public function get_stock_id($name, $id)
+    {
+        $query = $this->db->query("select stock_master.*, item_master.name, unit_master.name AS unit
+                            FROM stock_master, item_master, unit_master 
+                            WHERE stock_master.item_id = item_master.id AND item_master.unit_id = unit_master.id AND item_master.name = '$name' AND stock_master.id != '$id'");
+        return $query->result_array();
+    }
+
+    public function get_stockscount_by_name($name)
+    {
+        $query = $this->db->query("select stock_master.id as id, stock_master.item_id as item_id, sum(stock_master.item_count) as item_count, item_master.name, unit_master.name AS unit
+                            FROM stock_master, item_master, unit_master 
+                            WHERE stock_master.item_id = item_master.id AND item_master.unit_id = unit_master.id AND item_master.name = '$name'
+                            ");
+
+        return $query->result_array();
+    }
+
+    public function update_stock_usage(){
+        $this->db->trans_start();
+
+        $itemname = $this->get_stocks();
+        foreach ($itemname as $item) {
+            
+            //update stock_id transaction_usage_detail
+            $stock = $this->get_stocks_by_name($item['name']);
+            foreach ($stock as $stok) {
+                $ids = $this->get_stock_id($item['name'], $stok['id']);
+                foreach ($ids as $id) {
+                
+                    $data = array(
+                        'stock_id' => $stok['id']
+                    );
+
+                    $this->db->where('stock_id', $id['id'] );
+                    $this->db->update('transaction_usage_detail', $data);
+                }
+            }
+        
+            $count = $this->get_stockscount_by_name($item['name']);
+            foreach ($count as $count) {
+
+                //update item_count stock_master
+                $data = array(
+                    'item_count' => $count['item_count']
+                );
+
+                $this->db->where('id', $count['id']);
+                $this->db->update('stock_master', $data);
+
+                $stockcount = $this->get_stock_id($item['name'], $stok['id']);
+                foreach ($stockcount as $stockcount) {
+                
+                    //delete stock id stock master    
+                    $this->db->where('id', $stockcount['id']);
+                    $this->db->delete('stock_master');
+                }
+            }
+        }
+
+        $this->db->trans_complete();
+
+        // return false if something went wrong
+        if ($this->db->trans_status() === FALSE){
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+
 }

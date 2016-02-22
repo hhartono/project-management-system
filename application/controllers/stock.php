@@ -45,6 +45,12 @@ class Stock extends CI_Controller {
         $generated_stock_code = stock_code_generator(2, 2);
     }
 
+    public function list_stock()
+    {
+        $message = array();
+        $this->liststock($message);
+    }
+
     public function _is_logged_in(){
         if(!$this->tank_auth->is_logged_in()){
             redirect('/auth/login');
@@ -111,15 +117,29 @@ class Stock extends CI_Controller {
                 $database_input_array['item_stock_code'] = $generated_stock_code;
             }
 
-            // store stock information
-            $response = $this->stock_model->set_stock($database_input_array);
+            $checkstock = $this->stock_model->get_stocks_by_id($database_input_array['item_id']);
 
-            if($response){
-                $message['success'] = "Stok berhasil disimpan.";
-                $this->show_table($message);
+            if(empty($checkstock)){
+                // store stock information
+                $response = $this->stock_model->set_stock($database_input_array);
+
+                if($response){
+                    $message['success'] = "Stok berhasil disimpan.";
+                    $this->show_table($message);
+                }else{
+                    $message['error'] = "Stok gagal disimpan.";
+                    $this->show_table($message);
+                }
             }else{
-                $message['error'] = "Stok gagal disimpan.";
-                $this->show_table($message);
+                $response = $this->stock_model->update_item_count_stock($database_input_array);
+
+                if($response){
+                    $message['success'] = "Stok berhasil ditambah.";
+                    $this->show_table($message);
+                }else{
+                    $message['error'] = "Stok gagal ditambah.";
+                    $this->show_table($message);
+                }
             }
         }else{
             $message['error'] = "Stok gagal disimpan.";
@@ -446,6 +466,70 @@ class Stock extends CI_Controller {
             $this->load->view('stock/navigation', $data);
             $this->load->view('stock/print_item_barcodes_confirmation', $data);
             $this->load->view('stock/footer', $data);
+    }
+
+    private function liststock($message)
+    {
+            $user_id    = $this->tank_auth->get_user_id();
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['stock'] = $user_info['stock_item'];
+
+            // access level
+            $create=substr($data['stock'],0,1); 
+            $edit=substr($data['stock'],1,1); 
+            $delete=substr($data['stock'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            $data['stocks'] = $this->stock_model->get_stocks();
+
+            $stok = $data['stocks'];
+            /*foreach ($stok as $stok) {
+                $data['allstock'] = $this->stock_model->get_stocks_by_name($stok['name']); 
+            }*/
+
+            //$data['allstock'] = $allstock;
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('stock/navigation', $data);
+            $this->load->view('stock/list', $data);
+            //$this->load->view('stock/footer');
+    }
+
+    public function updatestockusage(){
+        $response = $this->stock_model->update_stock_usage();
+
+            if($response){
+                $message['success'] = "Stok_id berhasil diubah.";
+                $this->show_table($message);
+            }else{
+                $message['error'] = "Stok_id gagal diubah.";
+                $this->show_table($message);
+            }
     }
 }
 

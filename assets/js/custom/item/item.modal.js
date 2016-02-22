@@ -65,6 +65,26 @@
                 });
             }, "json" );
 
+            /* get the option for supplier unit */
+            $('#item-create-supplier-unit')
+                .find('option')
+                .remove()
+                .end();
+
+            $.get( "/item/get_all_item_units", function(data) {
+                $('#item-create-supplier-unit')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
+                $.each(data, function(key, value){
+                    $('#item-create-supplier-unit')
+                        .append($("<option></option>")
+                        .attr("value", value.id)
+                        .text(value.name));
+                });
+            }, "json" );
+
             /* get the option for category */
             $('#item-create-category')
                 .find('option')
@@ -135,6 +155,7 @@
             // fill unit with all possible values
             var id = $(this).data("value");
             prepareEditUnit(id);
+            prepareEditStockUnit(id);
         });
 
         function prepareEditUnit(id) {
@@ -152,6 +173,31 @@
 
                 $.each(data, function(key, value){
                     $('#item-edit-unit')
+                        .append($("<option></option>")
+                            .attr("value", value.id)
+                            .text(value.name));
+                });
+
+                // fill category with all possible values
+                prepareEditCategory(id);
+            }, "json" );
+        }
+
+        function prepareEditStockUnit(id) {
+            /* get the option for unit */
+            $('#item-edit-stock-unit')
+                .find('option')
+                .remove()
+                .end();
+
+            $.get( "/item/get_all_item_stock_units", function(data) {
+                $('#item-edit-unit')
+                    .append($("<option></option>")
+                        .attr("value", "")
+                        .text("-- Silahkan Pilih --"));
+
+                $.each(data, function(key, value){
+                    $('#item-edit-stock-unit')
                         .append($("<option></option>")
                             .attr("value", value.id)
                             .text(value.name));
@@ -191,6 +237,7 @@
             $.get( "/item/get_item_detail/" + id, function(data) {
                 $("#item-edit-id").val(id);
                 $("#item-edit-unit").val(data.unit_id);
+                $("#item-edit-stock-unit").val(data.stock_unit_id);
                 $("#item-edit-category").val(data.category_id);
                 $("#item-edit-name").val(data.name);
                 $("#item-edit-notes").val(data.notes);

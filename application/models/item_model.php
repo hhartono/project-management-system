@@ -34,6 +34,7 @@ class Item_model extends CI_Model {
             $data = array(
                 'name' => $this->input->post('name'),
                 'unit_id' => $this->input->post('unit_id'),
+                'stock_unit_id' => $this->input->post('stock_unit_id'),
                 'category_id' => $this->input->post('category_id'),
                 'notes' => $this->input->post('notes')
             );
@@ -54,6 +55,7 @@ class Item_model extends CI_Model {
             $data = array(
                 'name' => $database_input_array['name'],
                 'unit_id' => $database_input_array['unit_id'],
+                'stock_unit_id' => $database_input_array['stock_unit_id'],
                 'category_id' => $database_input_array['category_id'],
                 'notes' => $database_input_array['notes'],
                 'user_id' => $this->input->post('user'),

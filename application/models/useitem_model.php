@@ -108,7 +108,9 @@ class Useitem_model extends CI_Model {
                 //'project_id' => $database_input_array['project_id'],
                 'subproject_id' => $database_input_array['subproject_id'],
                 'worker_id' => $database_input_array['worker_id'],
-                'user_id' => $database_input_array['user']
+                'user_id' => $database_input_array['user'],
+                'creation_date' => date("Y-m-d H:i:s"),
+                'last_update_timestamp' => date("Y-m-d H:i:s")
             );
             $this->db->insert('transaction_usage_main', $data);
 
@@ -160,10 +162,21 @@ class Useitem_model extends CI_Model {
                         'usage_id' => $database_input_array['usage_id'],
                         'stock_id' => $stock_id,
                         'item_count' => $stock,
+                        'user_id' => $database_input_array['user'],
                         'creation_date' => date("Y-m-d H:i:s"),
-                        'item_code' => $each_usage_item['item_stock_code']
+                        //'item_code' => $each_usage_item['item_stock_code'],
+                        'last_update_timestamp' => date("Y-m-d H:i:s")
                     );
                     $this->db->insert('transaction_usage_detail', $data);
+
+                    $data = array(
+                        'stock_id' => $stock_id,
+                        'item_count' => $each_usage_item['item_stock'],
+                        'jumlah_perubahan' => $current,
+                        'status' => '2',
+                        'date' => date("Y-m-d H:i:s")
+                    );
+                    $this->db->insert('item_count_history', $data);
 
                     // update the required item count
                     $each_usage_item['item_usage'] = $currentitemusage;

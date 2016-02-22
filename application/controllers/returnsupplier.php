@@ -76,6 +76,15 @@ class Returnsupplier extends CI_Controller {
                 }else{
                     $database_input_array['return_reference_number'] = $generated_returnsupplier_code;
                 }
+
+                $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
+                if(empty($supplier_detail)){
+                    $message['error'] = "Return item gagal dibuat. Supplier tidak ada dalam system.";
+                    $this->show_table($message);
+                    return;
+                }else{
+                    $database_input_array['supplier_id'] = $supplier_detail['id'];
+                }
             
                 $database_input_array['user'] = $this->input->post('user');
 

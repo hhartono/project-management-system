@@ -52,9 +52,9 @@ class Purchaseorder extends CI_Controller {
     }
 
     public function createpo(){
-        $user_id = $this->input->cookie('uid', TRUE);
+        $user_id = $this->tank_auth->get_user_id();
             $user_info = $this->login_model->get_user_info($user_id);
-            $data['userid'] = $user_info['id'];
+            $data['userid'] = $user_id;
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
 
@@ -150,7 +150,7 @@ class Purchaseorder extends CI_Controller {
                     $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
                     if(empty($supplier_detail)){
                         $message['error'] = "Barang gagal diterima. Supplier tidak ada dalam system.";
-                        $this->show_table($message);
+                        $this->terima_barang($message);
                         return;
                     }else{
                         $database_input_array['supplier_id'] = $supplier_detail['id'];
@@ -160,7 +160,7 @@ class Purchaseorder extends CI_Controller {
                     $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
                     if(empty($project_detail)){
                         $message['error'] = "Barang gagal diterima. Project tidak ada dalam system.";
-                        $this->show_table($message);
+                        $this->terima_barang($message);
                         return;
                     }else{
                         $database_input_array['project_id'] = $project_detail['id'];
@@ -174,7 +174,7 @@ class Purchaseorder extends CI_Controller {
 
                     if($response){
                         $message['success'] = "Barang berhasil diterima.";
-                        $this->show_table($message);
+                        $this->terima_barang($message);
                     }else{
                         $message['error'] = "Barang gagal diterima.";
                         $this->show_detail_table($message, $po_id);
@@ -425,6 +425,86 @@ class Purchaseorder extends CI_Controller {
             $this->load->view('purchaseorder/footer');
     }
 
+    public function caribulan() {
+        $user_id    = $this->tank_auth->get_user_id();
+        $user_info = $this->login_model->get_user_info($user_id);
+        $data['username'] = $user_info['name'];
+        $data['company_title'] = $user_info['title'];
+
+        // access level
+        $data['access']['create'] = true;
+        $data['access']['edit'] = true;
+        $data['access']['delete'] = true;
+
+        // message
+        //$data['message'] = $message;
+        $data['bulan'] = $this->input->post('bulan');
+        $data['tahun'] = $this->input->post('tahun');
+        $data['purchaseorders'] = $this->purchaseorder_model->count_time_filter();
+          
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/maincari', $data);
+        $this->load->view('purchaseorder/footer');
+    }
+
+    public function carisupplier() {
+        $user_id    = $this->tank_auth->get_user_id();
+        $user_info = $this->login_model->get_user_info($user_id);
+        $data['userid'] = $user_info['id'];
+        $data['username'] = $user_info['name'];
+        $data['company_title'] = $user_info['title'];
+        $data['purchaseorder'] = $user_info['purchase_order'];
+        $data['receiveorder'] = $user_info['receiveorder'];
+
+        // access level
+        $create=substr($data['purchaseorder'],0,1); 
+        $edit=substr($data['purchaseorder'],1,1); 
+        $delete=substr($data['purchaseorder'],2,1); 
+        $receive=substr($data['receiveorder'],0,1); 
+        $print=substr($data['receiveorder'],1,1); 
+
+        if($create != 0){
+            $data['access']['create'] = true;            
+        }else{
+            $data['access']['create'] = false;
+        }
+        
+        if($edit != 0){
+            $data['access']['edit'] = true;            
+        }else{
+            $data['access']['edit'] = false;
+        }
+
+        if($delete != 0){
+            $data['access']['delete'] = true;    
+        }else{
+            $data['access']['delete'] = false;               
+        }
+
+        if($receive != 0){
+            $data['access']['receive'] = true;    
+        }else{
+            $data['access']['receive'] = false;               
+        }
+
+        if($print != 0){
+            $data['access']['print'] = true;    
+        }else{
+            $data['access']['print'] = false;               
+        }
+
+        // message
+        //$data['message'] = $message;
+
+        $data['purchaseorders'] = $this->purchaseorder_model->supplier_filter();
+          
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/receiveitems', $data);
+        $this->load->view('purchaseorder/footer');
+    }
+
     private function show_detail_table($message, $po_id)
     {
         $user_id    = $this->tank_auth->get_user_id();
@@ -463,6 +543,8 @@ class Purchaseorder extends CI_Controller {
             // get necessary data
             $data['purchaseorder_details'] = $this->purchaseorder_model->get_purchaseorder_detail_by_po_id($po_id);
             $data['purchaseorder_main'] = $this->purchaseorder_model->get_purchaseorder_by_id($po_id);
+            $data['unit'] = $this->purchaseorder_model->get_purchaseorder_detail_unit_by_po_id($po_id);
+            $data['units'] = $this->purchaseorder_model->get_purchaseorder_detail_unit_by_po_id($po_id);
 
             // show the view
             $this->load->view('header');
@@ -562,6 +644,219 @@ class Purchaseorder extends CI_Controller {
             $this->load->view('purchaseorder/footer', $data);
     }
 
+    public function receive()
+    {
+        $message = array();
+        $this->terima_barang($message);
+    }
+
+    public function terima_barang($message)
+    {
+        $user_id    = $this->tank_auth->get_user_id();
+        $user_info = $this->login_model->get_user_info($user_id);
+        $data['userid'] = $user_info['id'];
+        $data['username'] = $user_info['name'];
+        $data['company_title'] = $user_info['title'];
+        $data['purchaseorder'] = $user_info['purchase_order'];
+        $data['receiveorder'] = $user_info['receiveorder'];
+
+        // access level
+        $create=substr($data['purchaseorder'],0,1); 
+        $edit=substr($data['purchaseorder'],1,1); 
+        $delete=substr($data['purchaseorder'],2,1); 
+        $receive=substr($data['receiveorder'],0,1); 
+        $print=substr($data['receiveorder'],1,1); 
+
+        // $data['access']['create'] = true;
+        // $data['access']['edit'] = true;
+        // $data['access']['delete'] = true;
+        // $data['access']['receive'] = true;
+        // $data['access']['print'] = true;
+        if($create != 0){
+            $data['access']['create'] = true;            
+        }else{
+            $data['access']['create'] = false;
+        }
+        
+        if($edit != 0){
+            $data['access']['edit'] = true;            
+        }else{
+            $data['access']['edit'] = false;
+        }
+
+        if($delete != 0){
+            $data['access']['delete'] = true;    
+        }else{
+            $data['access']['delete'] = false;               
+        }
+
+        if($receive != 0){
+            $data['access']['receive'] = true;    
+        }else{
+            $data['access']['receive'] = false;               
+        }
+
+        if($print != 0){
+            $data['access']['print'] = true;    
+        }else{
+            $data['access']['print'] = false;               
+        }
+
+        // message
+        $data['message'] = $message;
+
+        // get necessary data
+        $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders_receive();
+
+        // show the view
+        $this->load->view('header');
+        $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('purchaseorder/receiveitems', $data);
+        $this->load->view('purchaseorder/footer');
+    }
+
+    public function label()
+    {
+        $message = array();
+        $this->print_label($message);
+    }
+
+    public function print_label($message)
+    {
+            $user_id    = $this->tank_auth->get_user_id();
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['purchaseorder'] = $user_info['purchase_order'];
+            $data['receiveorder'] = $user_info['receiveorder'];
+
+            // access level
+            $create=substr($data['purchaseorder'],0,1); 
+            $edit=substr($data['purchaseorder'],1,1); 
+            $delete=substr($data['purchaseorder'],2,1); 
+            $receive=substr($data['receiveorder'],0,1); 
+            $print=substr($data['receiveorder'],1,1); 
+
+            // $data['access']['create'] = true;
+            // $data['access']['edit'] = true;
+            // $data['access']['delete'] = true;
+            // $data['access']['receive'] = true;
+            // $data['access']['print'] = true;
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+
+            if($receive != 0){
+                $data['access']['receive'] = true;    
+            }else{
+                $data['access']['receive'] = false;               
+            }
+
+            if($print != 0){
+                $data['access']['print'] = true;    
+            }else{
+                $data['access']['print'] = false;               
+            }
+
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders_label();
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/printlabel', $data);
+            $this->load->view('purchaseorder/footer');
+    }
+
+    public function pembayaran_po()
+    {
+        $message = array();
+        $this->show_pembayaran($message);
+    }
+
+    public function show_pembayaran($message)
+    {
+            $user_id    = $this->tank_auth->get_user_id();
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['purchaseorder'] = $user_info['purchase_order'];
+            $data['receiveorder'] = $user_info['receiveorder'];
+
+            // access level
+            $create=substr($data['purchaseorder'],0,1); 
+            $edit=substr($data['purchaseorder'],1,1); 
+            $delete=substr($data['purchaseorder'],2,1); 
+            $receive=substr($data['receiveorder'],0,1); 
+            $print=substr($data['receiveorder'],1,1); 
+
+            // $data['access']['create'] = true;
+            // $data['access']['edit'] = true;
+            // $data['access']['delete'] = true;
+            // $data['access']['receive'] = true;
+            // $data['access']['print'] = true;
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+
+            if($receive != 0){
+                $data['access']['receive'] = true;    
+            }else{
+                $data['access']['receive'] = false;               
+            }
+
+            if($print != 0){
+                $data['access']['print'] = true;    
+            }else{
+                $data['access']['print'] = false;               
+            }
+
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            $data['purchaseorders'] = $this->purchaseorder_model->get_all_purchaseorders();
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('purchaseorder/pembayaran', $data);
+            $this->load->view('purchaseorder/footer');
+    }
+
     public function get_subproject()
     {
         $project_id = $this->input->POST('project_id');
@@ -654,6 +949,7 @@ class Purchaseorder extends CI_Controller {
             
             $database_input_array['id'] = $this->input->post('id');
             $database_input_array['item_price'] = $this->input->post('item_price');
+            $database_input_array['price_before'] = $this->input->post('price_before');
 
             // store project information
             $response = $this->purchaseorder_model->update_itemprice($database_input_array);

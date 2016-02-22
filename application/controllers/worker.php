@@ -217,6 +217,11 @@ class Worker extends CI_Controller {
         echo json_encode($worker_group);
     }
 
+    public function get_all_worker(){
+        $worker_all = $this->worker_model->get_all_workers();
+        echo json_encode($worker_all);
+    }
+
     private function show_table($message)
     {
         $user_id    = $this->tank_auth->get_user_id();

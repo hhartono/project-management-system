@@ -2,6 +2,38 @@
             <div id="da-content-wrap" class="clearfix">
                 <!-- Content Area -->
                 <div id="da-content-area">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <?php echo form_open_multipart('/purchaseorder/caribulan');?>
+                            Bulan
+                                <select name="bulan">
+                                    <option value="01">Januari</option>
+                                    <option value="02">Februari</option>
+                                    <option value="03">Maret</option>
+                                    <option value="04">April</option>
+                                    <option value="05">Mei</option>
+                                    <option value="06">Juni</option>
+                                    <option value="07">Juli</option>
+                                    <option value="08">Agustus</option>
+                                    <option value="09">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            Tahun
+                                <select name="tahun">
+                            <?php
+                                $mulai= date('Y') - 5;
+                                for($i = $mulai;$i<$mulai + 10;$i++){
+                                    $sel = $i == date('Y') ? ' selected="selected"' : '';
+                                    echo '<option value="'.$i.'"'.$sel.'>'.$i.'</option>';
+                                }
+                            ?>
+                                </select>
+                                <input type="submit" value="Filter" class="btn btn-success"/>
+                                </form>
+                        </div>
+                    </div>
                 <?php if (isset($access['create']) && $access['create']): ?>
                     <div class="row-fluid">
                         <div class="span12">
@@ -66,8 +98,8 @@
                                                         <?php
                                                             if(empty($each_purchaseorder['po_close_date'])){
                                                                 // po still open
-                                                                $purchaseorder_id = $each_purchaseorder['id'];
-                                                                $receive_url = "/purchaseorder/receive_po_items/" . $purchaseorder_id;
+                                                                //$purchaseorder_id = $each_purchaseorder['id'];
+                                                                $receive_url = "/purchaseorder/receive/";
                                                         ?>
                                                         <?php if (isset($access['receive']) && $access['receive']): ?>
                                                             <form id="da-purchaseorder-receive-form-val" class="da-form" action=<?php echo $receive_url; ?> method="post">
@@ -75,24 +107,9 @@
                                                             </form>
                                                         <?php endif; ?>
                                                         <?php
-                                                            }else if($each_purchaseorder['print_label']){
-                                                                // label hasn't been printed
-                                                                $purchaseorder_id = $each_purchaseorder['id'];
-                                                                $print_url = "/purchaseorder/print_item_barcodes/" . $purchaseorder_id;
-                                                        ?>
-                                                        <?php if (isset($access['print']) && $access['print']): ?>
-                                                            <form id="da-purchaseorder-print-form-val" class="da-form" action=<?php echo $print_url; ?> method="post">
-                                                                <button id="da-purchaseorder-receive" class="btn btn-success">Print Label</button>
-                                                            </form>
-                                                        <?php endif; ?>
-                                                        <?php
                                                             }else{
-                                                                $purchaseorder_id = $each_purchaseorder['id'];
-                                                                $price_url = "/purchaseorder/update_price/" . $purchaseorder_id;
+                                                                echo $each_purchaseorder['po_close_date'];
                                                         ?>
-                                                            <form id="da-purchaseorder-print-form-val" class="da-form" action=<?php echo $price_url; ?> method="post">
-                                                                <button id="da-purchaseorder-receive" class="btn btn-success">Pembayaran</button>
-                                                            </form>
                                                         <?php
                                                             }
                                                         ?>

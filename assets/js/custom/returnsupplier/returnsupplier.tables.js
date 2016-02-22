@@ -9,8 +9,8 @@
                 $(nRow).find("td:eq(1)").attr("name", "item_name");
                 $(nRow).find("td:eq(2)").attr("name", "item_stock");
                 $(nRow).find("td:eq(3)").attr("name", "item_usage").append('<input name="item_usage_input" type="text" class="span12" value="1">');
-                $(nRow).find("td:eq(4)").attr("name", "supplier");
-                $(nRow).find("td:eq(5)").attr("name", "stock_id");
+                //$(nRow).find("td:eq(4)").attr("name", "supplier");
+                $(nRow).find("td:eq(4)").attr("name", "stock_id");
 
             }
             //sPaginationType: "full_numbers"
@@ -155,18 +155,18 @@
                         table_array[1] = data.item_name;
                         table_array[2] = data.item_count;
                         table_array[3] = '';
-                        table_array[4] = data.supplier;
-                        table_array[5] = data.id;
+                        //table_array[4] = data.supplier;
+                        table_array[4] = data.id;
 
-                        if(supplierCondition == ""){
-                            supplierCondition = data.supplier;
-                        }
-                        if(supplierCondition == data.supplier){
+                        // if(supplierCondition == ""){
+                        //     supplierCondition = data.supplier;
+                        // }
+                        // if(supplierCondition == data.supplier){
                             returnsupplierTable.row.add(table_array).draw();
-                        }else{
-                            var message = "Supplier tidak sama, masukkan barang yang supplier-nya sama";
-                            $("#da-returnsupplier-insert-error").html(message).show();
-                        }
+                        // }else{
+                        //     var message = "Supplier tidak sama, masukkan barang yang supplier-nya sama";
+                        //     $("#da-returnsupplier-insert-error").html(message).show();
+                        // }
                     }else{
                         // error message
                         var message = "Kode barang tidak ditemukan dalam sistem.";

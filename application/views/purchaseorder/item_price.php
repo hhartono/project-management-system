@@ -68,7 +68,8 @@
                                                     <td>
                                                     <?php if(isset($purchaseorder_main)){
                                                     if(($purchaseorder_main->status_pembayaran) == 0){ ?>
-                                                        <input name="item_price[]" type="text" class="span6" value="<?php echo $purchaseorder_details['item_price']; ?>">                                                        
+                                                        <input name="item_price[]" type="text" class="span6" value="<?php echo $purchaseorder_details['item_price']; ?>">
+                                                        <input name="price_before[]" type="hidden" class="span6" value="<?php echo $purchaseorder_details['item_price']; ?>">                                                        
                                                     <?php }else{
                                                         echo $purchaseorder_details['item_price'];
                                                         }

@@ -53,6 +53,8 @@ class Item extends CI_Controller {
             // item price
             $database_input_array['unit_id'] = $this->input->post('unit_id');
 
+            $database_input_array['stock_unit_id'] = $this->input->post('stock_unit_id');
+
             // item count
             $database_input_array['category_id'] = $this->input->post('category_id');
 
@@ -128,6 +130,11 @@ class Item extends CI_Controller {
     }
 
     public function get_all_item_units(){
+        $item_units = $this->unit_model->get_all_units();
+        echo json_encode($item_units);
+    }
+
+    public function get_all_item_stock_units(){
         $item_units = $this->unit_model->get_all_units();
         echo json_encode($item_units);
     }

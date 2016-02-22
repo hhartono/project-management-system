@@ -27,11 +27,12 @@
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-item-datatable-numberpaging" class="da-table"">
+                                    <table id="da-item-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Nama Barang</th>
-                                                <th>Satuan Barang</th>
+                                                <th>Satuan Barang Supplier</th>
+                                                <th>Satuan Barang Stock</th>
                                                 <th>Kategori Barang</th>
                                                 <th>Keterangan</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
@@ -54,7 +55,16 @@
                                                 <tr>
                                                     <td class="name-row"><?php echo $each_item['name']; ?></td>
                                                     <td class="unit-row"><?php echo $each_item['unit']; ?></td>
-                                                    <td class="unit-row"><?php echo $each_item['category']; ?></td>
+                                                    <?php 
+                                                        $stockunit = mysql_query("select unit_master.name as name 
+                                                                                    from item_master left join unit_master on item_master.stock_unit_id = unit_master.id 
+                                                                                    where item_master.id = '$each_item[id]'");
+                                                        
+                                                        while ($unit = mysql_fetch_array($stockunit)) {
+                                                    ?>
+                                                    <td class="stock-unit-row"><?php echo $unit['name']; ?></td>
+                                                    <?php } ?>
+                                                    <td class="category-row"><?php echo $each_item['category']; ?></td>
                                                     <td class="notes-row"><?php echo $each_item['notes']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
@@ -89,9 +99,15 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Satuan Barang</label>
+                                    <label class="da-form-label">Satuan Barang Supplier</label>
                                     <div class="da-form-item large">
                                         <select id="item-create-unit" name="unit_id"></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Satuan Barang Stock</label>
+                                    <div class="da-form-item large">
+                                        <select id="item-create-supplier-unit" name="stock_unit_id"></select>
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -122,9 +138,15 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
-                                    <label class="da-form-label">Satuan Barang</label>
+                                    <label class="da-form-label">Satuan Barang Supplier</label>
                                     <div class="da-form-item large">
                                         <select id="item-edit-unit" name="unit_id"></select>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Satuan Barang Stock</label>
+                                    <div class="da-form-item large">
+                                        <select id="item-edit-stock-unit" name="stock_unit_id"></select>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

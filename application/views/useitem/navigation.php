@@ -102,13 +102,19 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/purchaseorder">
+                            <a href="#">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-edit"></i>
                                     </span>
                                 Purchase Order
                             </a>
+                            <ul>
+                                <li><a href="/purchaseorder">Purchase Order</a></li>
+                                <li><a href="/purchaseorder/receive">Terima Barang</a></li>
+                                <li><a href="/purchaseorder/label">Print Label</a></li>
+                                <li><a href="/purchaseorder/pembayaran_po">Pembayaran</a></li>
+                            </ul>
                         </li>
                         <li class="active">
                             <a href="/useitem">

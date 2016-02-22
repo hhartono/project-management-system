@@ -17,7 +17,8 @@ class Returnitem_model extends CI_Model {
             $data = array(
                 'subproject_id' => $database_input_array['subproject_id'],
                 'worker_id' => $database_input_array['worker_id'],
-                'user_id' => $database_input_array['user']
+                'user_id' => $database_input_array['user'],
+                'creation_date' => date("Y-m-d H:i:s")
             );
             $this->db->insert('transaction_return_main', $data);
 
@@ -32,7 +33,7 @@ class Returnitem_model extends CI_Model {
                 );
                 $this->db->insert('transaction_return_detail', $data);*/
                 
-                $getstock = $this->get_stock($each_usage_item['item_stock_code'], $database_input_array['subproject_id']);
+                $getstock = $this->get_stock($each_usage_item['stock_id']);
                 
                 foreach ($getstock as $getstock) {
                     if($each_usage_item['item_usage'] > $getstock['count'] ){
@@ -52,8 +53,8 @@ class Returnitem_model extends CI_Model {
                         //$each_usage_item['item_usage'] = 0;
                     }
                     $data = array(
-                        // 'item_count' => $getstock['item_count'] - $each_usage_item['item_usage']
-                        'item_count' => $current
+                        'item_count' => $getstock['item_count'] + $each_usage_item['item_usage']
+                        //'item_count' => $current
                     );
                     $stock_id = $getstock['id'];
                     $this->db->where('id', $stock_id);
@@ -62,8 +63,9 @@ class Returnitem_model extends CI_Model {
                     $data = array(
                         'return_id' => $database_input_array['return_id'],
                         'stock_id' => $stock_id,
-                        'return_count' => $stock,
-                        'creation_date' => date("Y-m-d H:i:s")
+                        'return_count' => $each_usage_item['item_usage'],
+                        'creation_date' => date("Y-m-d H:i:s"),
+                        'user_id' => $database_input_array['user']
                     );
                     $this->db->insert('transaction_return_detail', $data);
 
@@ -137,14 +139,14 @@ class Returnitem_model extends CI_Model {
         }
     }
 
-    public function get_stock($item_code, $subproject_id)
+    public function get_stock($stock_id)
     {
         $query = $this->db->query("select stock_master.*, item_master.name AS item_name, item_master.item_code AS item_code, transaction_usage_detail.item_count as count
                                     from stock_master join transaction_usage_detail ON stock_master.id = transaction_usage_detail.stock_id
-                                    join item_master ON transaction_usage_detail.item_code = item_master.item_code
+                                    join item_master ON stock_master.item_id = item_master.id
                                     join transaction_usage_main ON transaction_usage_main.id = transaction_usage_detail.usage_id
                                     join subproject_master ON subproject_master.id = transaction_usage_main.subproject_id
-                                    where transaction_usage_detail.item_code = '$item_code' AND transaction_usage_main.subproject_id = '$subproject_id'
+                                    where stock_master.id = '$stock_id'
                                     order by transaction_usage_detail.usage_id DESC, stock_master.id DESC");
 
         return $query->result_array();

@@ -54,8 +54,8 @@
                                                     <input type="hidden" value="<?php echo $each_absensi['date'];?>" name="date">
                                                     <td class="prefix-row"><?php echo $each_absensi['grup']; ?></td>
                                                     <td class="name-row"><?php echo date("d-M-Y", strtotime($each_absensi['date'])); ?></td>
-                                                    <td class="notes-row"><?php echo $each_absensi['on_duty']; ?></td>
-                                                    <td class="notes-row"><?php echo $each_absensi['off_duty']; ?></td>
+                                                    <td class="notes-row"><?php echo $each_absensi['jam_datang']; ?></td>
+                                                    <td class="notes-row"><?php echo $each_absensi['jam_pulang']; ?></td>
                                                     <td>
                                                     <?php
                                                           if ($each_absensi['subproject'] !=null){

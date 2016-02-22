@@ -44,14 +44,13 @@
                                 <?php endif; ?>
                                 <div id="da-returnsupplier-table-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-returnsupplier-datatable-numberpaging" class="da-table"">
+                                    <table id="da-returnsupplier-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
                                                 <th>Kode Barang</th>
                                                 <th>Nama Barang</th>
                                                 <th>Jumlah Stok</th>
                                                 <th>Jumlah Return</th>
-                                                <th>Supplier</th>
                                                 <th>Database ID</th>
                                             </tr>
                                         </thead>
@@ -71,6 +70,12 @@
                                 <div class="da-panel-content da-form-container">
                                     <form id="da-returnsupplier-detail-form-val" class="da-form da-form-inline" action="/returnsupplier/submit_item_values" method="post">
                                         <input type="hidden" value="<?php echo $userid; ?>" name="user">
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Nama Supplier</label>
+                                            <div class="da-form-item large">
+                                                <input id="returnsupplier-create-supplier" type="text" name="supplier">
+                                            </div>
+                                        </div>
                                         <div class="da-form-row" style="text-align:center;">
                                             <input id="da-returnsupplier-submit-item-values" type="hidden" name="returnsupplier_item_values">
                                             <button id="da-returnsupplier-submit" class="btn btn-success">Kembalikan Barang</button>
