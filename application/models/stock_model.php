@@ -50,7 +50,7 @@ class Stock_model extends CI_Model {
     public function get_stock_item_detail_by_item_code($item_code){
         $query = $this->db->query("select stock_master.*, item_master.name AS item_name, item_master.item_code AS item_code, unit_master.name AS item_unit, sum(stock_master.item_count) as jumlah, GROUP_CONCAT(DISTINCT stock_master.id ORDER BY stock_master.id ASC SEPARATOR ', ') as idstock
        from stock_master join item_master ON stock_master.item_id = item_master.id
-       join unit_master ON item_master.unit_id = unit_master.id 
+       join unit_master ON item_master.stock_unit_id = unit_master.id 
         where item_master.item_code = '$item_code' AND stock_master.item_count!=0");
 
         return $query->row_array();
