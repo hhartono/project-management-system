@@ -13,8 +13,20 @@
         });
         var totalItem = 0;
 
-        $.get( "/kirimpress/get_all_bahandasar", function(data) {
+        $.get( "/kirimpress/get_all_bahandasar_names", function(data) {
             $( "#kirimpress-createpress-insert-name" ).autocomplete({
+                source: data,
+            });
+        }, "json" );
+
+        $.get( "/kirimpress/get_all_sisi1", function(data) {
+            $( "#kirimpress-createpress-insert-sisi1" ).autocomplete({
+                source: data,
+            });
+        }, "json" );
+
+        $.get( "/kirimpress/get_all_sisi2", function(data) {
+            $( "#kirimpress-createpress-insert-sisi2" ).autocomplete({
                 source: data,
             });
         }, "json" );

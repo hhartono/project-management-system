@@ -10,9 +10,18 @@
                                         <i class="icol-grid"></i> Input Press
                                     </span>
                                 </div>
+                                <?php if(isset($message['success'])): ?>
+                                   <div class="da-message success"><?php echo $message['success']; ?></div>
+                                <?php endif; ?>
+                                <?php if(isset($message['info'])): ?>
+                                    <div class="da-message info"><?php echo $message['info']; ?></div>
+                                <?php endif; ?>
+                                <?php if(isset($message['error'])): ?>
+                                    <div class="da-message error"><?php echo $message['error']; ?></div>
+                                <?php endif; ?>
                                 <div id="da-kirimpress-createpress-insert-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
-                                    <form id="da-kirimpress-createpress-insert-form-val" class="da-form da-form-inline" method="post">
+                                    <form action="/kirimpress/submit_press" class="da-form da-form-inline" method="post">
                                         <div class="da-form-row">
                                             <label class="da-form-label">Bahan Dasar</label>
                                             <div class="da-form-item large">
@@ -22,19 +31,17 @@
                                         <div class="da-form-row">
                                             <label class="da-form-label">Sisi 1</label>
                                             <div class="da-form-item large">
-                                                <input id="kirimpress-createpress-insert-item-count" type="text" name="item_count" autocomplete="off" class="span12">
-                                                <label for="kirimpress-createpress-insert-item-count" id="kirimpress-createpress-insert-item-count-label"></label>
+                                                <input id="kirimpress-createpress-insert-sisi1" type="text" name="sisi1" class="span12">
                                             </div>
                                         </div>
                                         <div class="da-form-row">
                                             <label class="da-form-label">Sisi 2</label>
                                             <div class="da-form-item large">
-                                                <input id="kirimpress-createpress-insert-notes" type="text" name="notes" autocomplete="off" class="span12">
+                                                <input id="kirimpress-createpress-insert-sisi2" type="text" name="sisi2" class="span12">
                                             </div>
                                         </div>
                                         <div class="da-form-row" style="text-align:center;">
-                                            <button id="da-kirimpress-createpress-insert-add" class="btn btn-success">Tambah Barang</button>
-                                            <button id="da-kirimpress-createpress-insert-clear" class="btn btn-danger">Hapus Input</button>
+                                            <button id="da-kirimpress-createpress-insert-add" class="btn btn-success">Tambah Press Barang</button>
                                         </div>
                                     </form>
                                 </div>
@@ -67,7 +74,22 @@
                                                 <th>Bahan Dasar</th>
                                                 <th>Sisi 1</th>
                                                 <th>Sisi 2</th>
+                                                <th>Hapus</th>
                                             </tr>
+                                            <?php foreach ($press as $press) { ?>
+                                            <tr>
+                                                <td><?php echo $press['bahan_dasar']; ?></td>
+                                                <td><?php echo $press['sisi1']; ?></td>
+                                                <td><?php echo $press['sisi2']; ?></td>
+                                                <td>
+                                                    <?php
+                                                        $press_id = $press['id'];
+                                                        $delete_url = "/kirimpress/delete_press_temp/" . $press_id;
+                                                    ?>
+                                                        <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
+                                                </td>
+                                            </tr>
+                                            <?php } ?>
                                         </thead>
                                     </table>
                                 </div>
@@ -91,13 +113,8 @@
 
                                 <div id="da-kirimpress-createpress-detail-error" class="da-message error" style="display:none;"></div>
                                 <div class="da-panel-content da-form-container">
-                                    <form id="da-kirimpress-createpress-detail-form-val" class="da-form da-form-inline" action="/kirimpress/submit_item_values" method="post">
-                                        <div class="da-form-row">
-                                            <label class="da-form-label">Nama Supplier</label>
-                                            <div class="da-form-item large">
-                                                <input id="kirimpress-createpress-detail-supplier" type="text" name="supplier">
-                                            </div>
-                                        </div>
+                                    <form id="da-kirimpress-createpress-detail-form-val" class="da-form da-form-inline" action="/kirimpress/submit_kirim_press" method="post">
+                                        
                                         <div class="da-form-row">
                                             <label class="da-form-label">Nama Project</label>
                                             <div class="da-form-item large">
@@ -122,7 +139,7 @@
                                         <input type="hidden" value="<?php echo $userid; ?>" name="user">
                                         <div class="da-form-row" style="text-align:center;">
                                             <input id="da-kirimpress-createpress-submit-item-values" type="hidden" name="po_item_values">
-                                            <button id="da-kirimpress-createpress-submit" class="btn btn-success">Buat PO</button>
+                                            <button id="da-kirimpress-createpress-submit" class="btn btn-success">Buat Press</button>
                                         </div>
                                     </form>
                                 </div>

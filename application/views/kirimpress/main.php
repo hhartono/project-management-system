@@ -5,7 +5,7 @@
                 <?php if (isset($access['create']) && $access['create']): ?>
                     <div class="row-fluid">
                         <div class="span12">
-                            <form id="da-purchaseorder-add-form-val" class="da-form" action="/kirimpress/createpress" method="get">
+                            <form id="da-kirimpress-add-form-val" class="da-form" action="/kirimpress/createpress" method="get">
                                 <button id="da-purchase-create-dialog" class="btn btn-success btn-create">[+] Buat Kirim Barang</button>
                             </form>
                         </div>
@@ -32,58 +32,40 @@
                                     <table id="da-purchaseorder-datatable-numberpaging" class="da-table">
                                         <thead>
                                             <tr>
+                                                <th></th>
                                                 <th>Tanggal Kirim</th>
                                                 <th>Kode Kirim Press</th>
                                                 <th>Tanggal Terima Barang</th>
-                                                <?php if ((isset($access['delete']) && $access['delete'])): ?>
-                                                    <?php
-                                                        $control_label_array = array();
-                                                        $control_label_array[] = "Lihat";
-
-                                                        if(isset($access['delete']) && $access['delete']){
-                                                            $control_label_array[] = "Hapus";
-                                                        }
-                                                    ?>
-                                                    <th><?php echo implode('/', $control_label_array); ?></th>
-                                                <?php endif; ?>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($purchaseorders as $each_purchaseorder): ?>
+                                            <?php foreach($kirimpress as $each_kirimpress): ?>
                                                 <tr>
-                                                    <td class="input-date-sort-row"><?php echo $each_purchaseorder['sort_po_input_date']; ?></td>
-                                                    <td class="code-row"><?php echo $each_purchaseorder['po_reference_number']; ?></td>
+                                                    <td></td>
+                                                    <td ><?php echo $each_kirimpress['creation_date']; ?></td>
+                                                    <td class="code-row"><?php echo $each_kirimpress['kode_press']; ?></td>
                                                     <td class="closed-status-row">
                                                         <?php
-                                                            if(empty($each_purchaseorder['po_close_date'])){
+                                                            if(empty($each_kirimpress['receive_date'])){
                                                                 // po still open
-                                                                //$purchaseorder_id = $each_purchaseorder['id'];
-                                                                $receive_url = "/purchaseorder/receive/";
+                                                                //$kirimpress_id = $each_kirimpress['id'];
+                                                                $receive_url = "/kirimpress/receive/";
                                                         ?>
                                                         <?php if (isset($access['receive']) && $access['receive']): ?>
-                                                            <form id="da-purchaseorder-receive-form-val" class="da-form" action=<?php echo $receive_url; ?> method="post">
-                                                                <button id="da-purchaseorder-receive" class="btn btn-success">Terima Barang</button>
+                                                            <form id="da-kirimpress-receive-form-val" class="da-form" action=<?php echo $receive_url; ?> method="post">
+                                                                <input type="hidden" name="id" value="<?php echo $each_kirimpress['id']; ?>">
+                                                                <button id="da-kirimpress-receive" class="btn btn-success">Terima Barang</button>
                                                             </form>
                                                         <?php endif; ?>
                                                         <?php
                                                             }else{
-                                                                echo $each_purchaseorder['po_close_date'];
+                                                                echo $each_kirimpress['receive_date'];
                                                         ?>
                                                         <?php
                                                             }
                                                         ?>
                                                     </td>
-                                                    <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
-                                                        <td class="da-icon-column">
-                                                            <a class="da-purchaseorder-view-dialog" href="<?php echo base_url(); ?>purchaseorder/detail/<?php echo $each_purchaseorder['id']; ?>"><i class="icol-eye"></i></a>
-                                                            <?php if(isset($access['delete']) && $access['delete']):
-                                                                $po_id = $each_purchaseorder['id'];
-                                                                $delete_url = "/purchaseorder/deletepo/" . $po_id;
-                                                                ?>
-                                                                <a href=<?php echo $delete_url; ?><i class="icol-cross"></i></a>
-                                                            <?php endif; ?>
-                                                        </td>
-                                                    <?php endif; ?>
                                                 </tr>
                                             <?php endforeach?>
                                         </tbody>

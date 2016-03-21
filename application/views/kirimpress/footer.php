@@ -40,33 +40,14 @@
     <script src="/assets/js/custom/kirimpress/kirimpress.createpress.js"></script>
 
     <!-- JS Barcode -->
-    <?php if(isset($po_id)){ ?>
-        <script>
-            (function($) {
-                $(document).ready(function(e) {
-                    $('#da-purchaseorder-barcode-print-confirmation-submit').on('click', function(event) {
-                        event.preventDefault();
-
-                        // print barcode
-                        jsWebClientPrint.print('po_id=' + <?php echo $po_id; ?>);
-
-                        // redirect the page
-                        setTimeout( function () {
-                            $('#da-purchaseorder-barcode-print-confirmation-detail-form-val').submit();
-                        }, 500);
-                    });
-                });
-            }) (jQuery);
-        </script>
-    <?php } ?>
-
+    
 <script>
     $(document).ready(function(){
         $("#project_id").change(function(){
             var project_id = $("#project_id").val();
                 $.ajax({
                     type: "POST",
-                    url : "<?php echo base_url(); ?>purchaseorder/get_subproject",
+                    url : "<?php echo base_url(); ?>kirimpress/get_subproject",
                     data: "project_id=" + project_id, 
                         success: function(data){
                             $('#subproject_id').html(data);
