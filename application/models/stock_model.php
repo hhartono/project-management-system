@@ -309,4 +309,13 @@ class Stock_model extends CI_Model {
         }
     }
 
+    public function get_all_limit_stocks()
+    {
+        $query = $this->db->query("select stock_master.*, item_master.item_code , item_master.name, item_master.id as itemid, unit_master.name AS unit
+            FROM stock_master, item_master, unit_master
+            where stock_master.item_id = item_master.id AND unit_master.id = item_master.unit_id AND stock_master.item_count <= 5");
+        
+        return $query->result_array();
+    }
+
 }
