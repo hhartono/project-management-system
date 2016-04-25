@@ -97,6 +97,9 @@
                 item_count: {
                     required: true
                 },
+                min_stock: {
+                    required: true
+                },
                 supplier: {
                     required: true
                 },
@@ -124,6 +127,7 @@
                 $("#stock-edit-id").val(id);
                 $("#stock-edit-name").val(data.name);
                 $("#stock-edit-item-count").val(data.item_count);
+                $("#stock-edit-minimal").val(data.min_stock);
                 $("#stock-edit-supplier").val(data.supplier);
                 $("#stock-edit-project").val(data.project);
                 $("#stock-edit-po-detail-id").val(data.po_detail_id);

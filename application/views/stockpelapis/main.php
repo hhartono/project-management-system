@@ -32,10 +32,11 @@
                                             <tr>
                                                 <th>Kode Barang</th>
                                                 <th>Nama Barang</th>
-                                                <th>Jumlah Barang</th>
+                                                <th>Panjang</th>
+                                                <th>Lebar</th>
+                                                <th>Jumlah</th>
                                                 <th>Satuan Barang</th>
                                                 <th>Harga Barang</th>
-                                                <th>Minimal Stock</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         $control_label_array = array();
@@ -54,16 +55,17 @@
                                         <tbody>
                                             <?php foreach($stocks as $each_stock): ?>
                                                 <tr>
-                                                    <td class="stock-code-row"><?php echo $each_stock['item_stock_code']; ?></td>
+                                                    <td class="stock-code-row"><?php echo $each_stock['stock_kode_pelapis']; ?></td>
                                                     <td class="name-row"><?php echo $each_stock['name']; ?></td>
-                                                    <td class="count-row"><?php echo $each_stock['item_count']; ?></td>
+                                                    <td class="name-row"><?php echo $each_stock['panjang']; ?></td>
+                                                    <td class="name-row"><?php echo $each_stock['lebar']; ?></td>
+                                                    <td class="count-row"><?php echo $each_stock['jumlah']; ?></td>
                                                     <td class="unit-row"><?php echo $each_stock['unit']; ?></td>
                                                     <td class="price-row">
                                                         <?php
-                                                            echo number_format($each_stock['item_price'], 2, ',', '.');;
+                                                            echo number_format($each_stock['biaya'], 2, ',', '.');;
                                                         ?>
                                                     </td>
-                                                    <td><?php echo $each_stock['min_stock']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <a class="da-stock-view-dialog" href="#" data-value="<?php echo $each_stock['id']; ?>"><i class="icol-eye"></i></a>
@@ -146,7 +148,7 @@
                     </div>
 
                     <div id="da-stock-create-form-div" class="form-container">
-                        <form id="da-stock-create-form-val" class="da-form" action="/stock/create_stock" method="post">
+                        <form id="da-stock-create-form-val" class="da-form" action="/stockpelapis/create_stock" method="post">
                             <div id="da-stock-create-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline">
                                 <div class="da-form-row">
@@ -156,28 +158,22 @@
                                     </div>
                                 </div>
                                 <div class="da-form-row">
+                                    <label class="da-form-label">Panjang</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-create-panjang" type="text" name="panjang" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Lebar</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-create-lebar" type="text" name="lebar" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
                                     <label class="da-form-label">Jumlah Stok</label>
                                     <div class="da-form-item large">
                                         <input id="stock-create-item-count" type="text" name="item_count" autocomplete="off">
                                         <label for="stock-create-item-count" id="stock-create-item-count-label"></label>
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Supplier Barang</label>
-                                    <div class="da-form-item large">
-                                        <input id="stock-create-supplier" type="text" name="supplier">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">Project</label>
-                                    <div class="da-form-item large">
-                                        <input id="stock-create-project" type="text" name="project">
-                                    </div>
-                                </div>
-                                <div class="da-form-row">
-                                    <label class="da-form-label">PO Detail ID</label>
-                                    <div class="da-form-item large">
-                                        <input id="stock-create-po-detail-id" type="text" name="po_detail_id" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">

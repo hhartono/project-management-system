@@ -32,36 +32,36 @@
     <!-- JS Demo -->
 
     <!-- JS Table -->
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.modal.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.tables.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.createpotables.js"></script>
-    <script src="/assets/js/custom/kirimpress/kirimpress.receiveitemstables.js"></script>
-    <script src="/assets/js/custom/kirimpress/kirimpress.printbarcodetables.js"></script>
-    <script src="/assets/js/custom/kirimpress/kirimpress.createpress.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.printbarcodetables.js"></script>
-    
-    <!-- JS Barcode -->
-    
-<script>
-    $(document).ready(function(){
-        $("#project_id").change(function(){
-            var project_id = $("#project_id").val();
-                $.ajax({
-                    type: "POST",
-                    url : "<?php echo base_url(); ?>kirimpress/get_subproject",
-                    data: "project_id=" + project_id, 
-                        success: function(data){
-                            $('#subproject_id').html(data);
-                        }
-                });
-        });
+    <script src="/assets/js/custom/stockpelapis/stockpelapis.modal.js"></script>
+    <script src="/assets/js/custom/stock/stock.tables.js"></script>
+    <script src="/assets/js/custom/stock/stock.printbarcodetables.js"></script>
 
-    });
-</script>
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
 
     <!-- JS Customizer -->
     <script src="/assets/js/core/dandelion.customizer.js"></script>
+
+    <!-- JS Barcode -->
+    <?php if(isset($id)){ ?>
+        <script>
+            (function($) {
+                $(document).ready(function(e) {
+                    $('#da-stock-barcode-print-confirmation-submit').on('click', function(event) {
+                        event.preventDefault();
+
+                        // print barcode
+                        jsWebClientPrint.print('id=' + <?php echo $id; ?>);
+
+                        // redirect the page
+                        setTimeout( function () {
+                            $('#da-stock-barcode-print-confirmation-detail-form-val').submit();
+                        }, 500);
+                    });
+                });
+            }) (jQuery);
+        </script>
+    <?php } ?>
+
 </body>
 </html>

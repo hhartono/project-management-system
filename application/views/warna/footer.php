@@ -32,32 +32,9 @@
     <!-- JS Demo -->
 
     <!-- JS Table -->
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.modal.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.tables.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.createpotables.js"></script>
-    <script src="/assets/js/custom/kirimpress/kirimpress.receiveitemstables.js"></script>
-    <script src="/assets/js/custom/kirimpress/kirimpress.printbarcodetables.js"></script>
-    <script src="/assets/js/custom/kirimpress/kirimpress.createpress.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.printbarcodetables.js"></script>
-    
-    <!-- JS Barcode -->
-    
-<script>
-    $(document).ready(function(){
-        $("#project_id").change(function(){
-            var project_id = $("#project_id").val();
-                $.ajax({
-                    type: "POST",
-                    url : "<?php echo base_url(); ?>kirimpress/get_subproject",
-                    data: "project_id=" + project_id, 
-                        success: function(data){
-                            $('#subproject_id').html(data);
-                        }
-                });
-        });
+    <script src="/assets/js/custom/warna/warna.modal.js"></script>
+    <script src="/assets/js/custom/warna/warna.tables.js"></script>
 
-    });
-</script>
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
 

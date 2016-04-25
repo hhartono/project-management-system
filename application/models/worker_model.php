@@ -40,6 +40,30 @@ class Worker_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_all_workers_by_kepala()
+    {
+        $this->db->select('worker_master.*, division_master.name AS division, group_master.name as kepala');
+        $this->db->from('worker_master');
+        $this->db->join('division_master', 'worker_master.division_id = division_master.id');
+        $this->db->join('group_master', 'worker_master.group_id = group_master.id');
+        
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function get_all_workerkepala($worker)
+    {
+        $this->db->select('worker_master.*, division_master.name AS division, group_master.name as kepala');
+        $this->db->from('worker_master');
+        $this->db->join('division_master', 'worker_master.division_id = division_master.id');
+        $this->db->join('group_master', 'worker_master.group_id = group_master.id');
+        $this->db->where('group_master.name', $worker);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function update_worker($database_input_array)
     {
         if($database_input_array['id'] !== false && $database_input_array['division_id'] !== false

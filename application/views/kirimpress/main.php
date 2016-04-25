@@ -49,12 +49,11 @@
                                                         <?php
                                                             if(empty($each_kirimpress['receive_date'])){
                                                                 // po still open
-                                                                //$kirimpress_id = $each_kirimpress['id'];
-                                                                $receive_url = "/kirimpress/receive/";
+                                                                $kirimpress_id = $each_kirimpress['id'];
+                                                                $receive_url = "/kirimpress/receive/" . $kirimpress_id;
                                                         ?>
                                                         <?php if (isset($access['receive']) && $access['receive']): ?>
                                                             <form id="da-kirimpress-receive-form-val" class="da-form" action=<?php echo $receive_url; ?> method="post">
-                                                                <input type="hidden" name="id" value="<?php echo $each_kirimpress['id']; ?>">
                                                                 <button id="da-kirimpress-receive" class="btn btn-success">Terima Barang</button>
                                                             </form>
                                                         <?php endif; ?>

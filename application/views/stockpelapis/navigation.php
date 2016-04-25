@@ -63,8 +63,8 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="#">Absensi</a></li>
-                        <li class="active"><span>Absensi</span></li>
+                        <li><a href="#">Barang</a></li>
+                        <li class="active"><span>Stok Barang</span></li>
                     </ul>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                                 Return Barang Supplier
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">
@@ -177,29 +177,19 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/warna">
-                                <!-- Icon Container -->
-                                    <span class="da-nav-icon">
-                                        <i class="icon-table"></i>
-                                    </span>
-                                Warna
-                            </a>
-                        </li>
-                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
-                                    <span class="da-nav-icon">
+                                	<span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>
                                 Tukang
                             </a>
                             <ul>
                                 <li><a href="/worker">Tukang</a></li>
-                                <li><a href="/worker/detail">Grup Tukang</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
@@ -213,7 +203,6 @@
                                 <li><a href="/absensi/projectdetail_worker">Project Detail Tukang</a></li>
                             </ul>
                         </li>
-
                         <!--
                         <li>
                             <a href="statistics.html">

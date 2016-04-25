@@ -156,6 +156,37 @@
                         </table>
                     </div>
                     </br>
+                    <div class="da-panel-header">
+                        <table>
+                            <tr><td><span class="da-panel-title">
+                                <i class="icon-remove" style="color:"></i><b> Item Press</b></td>
+                            </span></tr>
+                        </table>
+                    </div>
+                    <div class="da-panel-content da-table-container">
+                    
+                        <table id="da-projectdetail-datatable-numberpaging" class="da-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Barang</th>
+                                <th>Quantity</th>
+                                <th>Satuan</th>
+                                <th>Kategori</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($press as $press): ?>
+                            <tr>
+                                <td class="division-row"><a class="da-press-view-dialog" href="#" data-namabarang="<?php echo $press['barang'];?>" data-value="<?php echo $press['id']; ?>" data-stock="<?php echo $press['id']; ?>"><?php echo $press['barang']; ?></a></td>
+                                <td class="division-row"><?php echo $press['jumlah']; ?></td>
+                                <td class="division-row"><?php echo $press['satuan']; ?></td>
+                                <td class="division-row"><?php echo $press['kategori']; ?></td>
+                            </tr>                    
+                        <?php endforeach?>
+                        </tbody>
+                        </table>
+                    </div>
+                    </br>
                     <div class="da-panel-content da-table-container">
                         <div class="da-panel-header">
                         <?php $total_sum=0; ?>
@@ -269,6 +300,27 @@
                                     <th>Quantity</th>
                                     <th>Satuan</th>
                                     <th>Harga</th>
+                                    <th>Tukang</th>
+                                </tr>         
+                            </table>
+                    </div>
+                </div>
+            </form>
+            <div id="output">
+                        </div>
+        </div>
+
+        <div id="da-press-view-form-div" class="form-container">
+            <form id="da-press-view-form-val" class="da-form" method="post">
+                <div id="da-press-view-validate-error" class="da-message error" style="display:none;"></div>
+                <div class="da-form-inline">
+                    <h3 id="judul3" align="center"></h3>
+                    <div class="da-form-row" style="padding:20px 90px;">
+                            <table id="table3" border="1" style="font-size:16px;">
+                                <tr style=background:#A9A9A9;>
+                                    <th>Tanggal Pakai/Return</th>
+                                    <th>Quantity</th>
+                                    <th>Satuan</th>
                                     <th>Tukang</th>
                                 </tr>         
                             </table>

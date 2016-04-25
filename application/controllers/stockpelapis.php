@@ -3,7 +3,7 @@ include FCPATH . "/assets/barcodeprint/WebClientPrint.php";
 use Neodynamic\SDK\Web\Utils;
 use Neodynamic\SDK\Web\WebClientPrint;
 
-class Stock extends CI_Controller {
+class Stockpelapis extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,10 +23,8 @@ class Stock extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('stock_model');
+        $this->load->model('stock_pelapis_model');
         $this->load->model('item_model');
-        $this->load->model('supplier_model');
-        $this->load->model('project_model');
         $this->load->model('unit_model');
         $this->load->model('login_model');
         $this->load->helper('cookie');
@@ -61,7 +59,7 @@ class Stock extends CI_Controller {
     {
         // check all necessary input
         if(!empty($this->input->post('name')) && !empty($this->input->post('item_count'))
-            && !empty($this->input->post('supplier'))){
+            && !empty($this->input->post('panjang')) && !empty($this->input->post('lebar'))){
 
             // search for item id
             $database_input_array = array();
@@ -75,42 +73,21 @@ class Stock extends CI_Controller {
                 $database_input_array['category_id'] = $item_detail['category_id'];
             }
 
-            // search for supplier id
-            $supplier_detail = $this->supplier_model->get_supplier_by_name($this->input->post('supplier'));
-            if(empty($supplier_detail)){
-                $message['error'] = "Stok gagal disimpan. Supplier barang tidak ada dalam system.";
-                $this->show_table($message);
-                return;
-            }else{
-                $database_input_array['supplier_id'] = $supplier_detail['id'];
-            }
-
-            // search for project id
-            $project_detail = $this->project_model->get_project_by_name($this->input->post('project'));
-            if(empty($project_detail)){
-                $message['error'] = "Stok gagal disimpan. Project tidak ada dalam system.";
-                $this->show_table($message);
-                return;
-            }else{
-                $database_input_array['project_id'] = $project_detail['id'];
-            }
-
-            // po detail id
-            $database_input_array['po_detail_id'] = $this->input->post('po_detail_id');
-
             // item price
             $database_input_array['item_price'] = $this->input->post('item_price');
 
+            // panjang
+            $database_input_array['panjang'] = $this->input->post('panjang');
+
+            $database_input_array['lebar'] = $this->input->post('lebar');
             // item count
             $database_input_array['item_count'] = $this->input->post('item_count');
 
             $database_input_array['user'] = $this->input->post('user');
 
-            $database_input_array['minstock'] = $this->input->post('minstock');
-
             // generate item stock code
-            $this->load->helper('stock_code_helper');
-            $generated_stock_code = stock_code_generator($database_input_array['category_id'], $database_input_array['supplier_id']);
+            $this->load->helper('stock_pelapis_code_helper');
+            $generated_stock_code = stock_code_generator($database_input_array['category_id'], $database_input_array['item_id']);
             if(empty($generated_stock_code)){
                 $message['error'] = "Stok gagal disimpan. Kode stok tidak dapat dibuat.";
                 $this->show_table($message);
@@ -119,11 +96,11 @@ class Stock extends CI_Controller {
                 $database_input_array['item_stock_code'] = $generated_stock_code;
             }
 
-            $checkstock = $this->stock_model->get_stocks_by_id($database_input_array['item_id']);
+            $checkstock = $this->stock_pelapis_model->get_stocks_by_id($database_input_array['item_id'], $database_input_array['panjang'], $database_input_array['lebar']);
 
             if(empty($checkstock)){
                 // store stock information
-                $response = $this->stock_model->set_stock($database_input_array);
+                $response = $this->stock_pelapis_model->set_stock($database_input_array);
 
                 if($response){
                     $message['success'] = "Stok berhasil disimpan.";
@@ -133,7 +110,7 @@ class Stock extends CI_Controller {
                     $this->show_table($message);
                 }
             }else{
-                $response = $this->stock_model->update_item_count_stock($database_input_array);
+                $response = $this->stock_pelapis_model->update_item_count_stock($database_input_array);
 
                 if($response){
                     $message['success'] = "Stok berhasil ditambah.";
@@ -230,7 +207,7 @@ class Stock extends CI_Controller {
     }
 
     public function get_all_stock_items(){
-        $stock_items = $this->item_model->get_all_items();
+        $stock_items = $this->stock_pelapis_model->get_all_items();
         return $stock_items;
     }
 
@@ -242,36 +219,6 @@ class Stock extends CI_Controller {
         }
 
         echo json_encode($stock_name);
-    }
-
-    public function get_all_stock_suppliers(){
-        $stock_suppliers = $this->supplier_model->get_all_suppliers();
-        return $stock_suppliers;
-    }
-
-    public function get_all_stock_supplier_names(){
-        $stock_suppliers = $this->get_all_stock_suppliers();
-        $supplier_name = array();
-        foreach($stock_suppliers as $stock_supplier){
-            $supplier_name[] = $stock_supplier['name'];
-        }
-
-        echo json_encode($supplier_name);
-    }
-
-    public function get_all_stock_projects(){
-        $stock_projects = $this->project_model->get_all_projects();
-        return $stock_projects;
-    }
-
-    public function get_all_stock_project_names(){
-        $stock_projects = $this->get_all_stock_projects();
-        $project_name = array();
-        foreach($stock_projects as $stock_project){
-            $project_name[] = $stock_project['name'];
-        }
-
-        echo json_encode($project_name);
     }
 
     public function get_unit_by_item_name($item_name){
@@ -331,13 +278,13 @@ class Stock extends CI_Controller {
             $data['message'] = $message;
 
             // get necessary data
-            $data['stocks'] = $this->stock_model->get_all_stocks();
+            $data['stocks'] = $this->stock_pelapis_model->get_all_stocks();
 
             // show the view
             $this->load->view('header');
-            $this->load->view('stock/navigation', $data);
-            $this->load->view('stock/main', $data);
-            $this->load->view('stock/footer');
+            $this->load->view('stockpelapis/navigation', $data);
+            $this->load->view('stockpelapis/main', $data);
+            $this->load->view('stockpelapis/footer');
     }
 
     public function print_item_barcodes($id){

@@ -63,8 +63,7 @@
                 <div id="da-breadcrumb">
                     <ul>
                         <li><a href="/home"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="#">Absensi</a></li>
-                        <li class="active"><span>Absensi</span></li>
+                        <li class="active"><span>Warna</span></li>
                     </ul>
                 </div>
             </div>
@@ -161,7 +160,7 @@
                                 <li><a href="/unit">Satuan</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="">
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">
@@ -176,7 +175,7 @@
                                 <li><a href="/customer">Customer</a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="/warna">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
@@ -188,7 +187,7 @@
                         <li>
                             <a href="#">
                                 <!-- Icon Container -->
-                                    <span class="da-nav-icon">
+                                	<span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>
                                 Tukang
@@ -198,8 +197,8 @@
                                 <li><a href="/worker/detail">Grup Tukang</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
-                        </li>
-                        <li class="active">
+                        </li>                        
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">

@@ -101,7 +101,7 @@
                                 Perencanaan Bahan
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
@@ -160,6 +160,19 @@
                                 <li><a href="/unit">Satuan</a></li>
                             </ul>
                         </li>
+                        <li class="active">
+                            <a href="#">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Barang Press
+                            </a>
+                            <ul>
+                                <li><a href="/kirimpress/item_press">Stock Barang Press</a></li>
+                                <li><a href="/kirimpress">Kirim Press</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="#">
                                 <!-- Icon Container -->
@@ -176,15 +189,25 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="/warna">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Warna
+                            </a>
+                        </li>
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
-                                	<span class="da-nav-icon">
+                                    <span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>
                                 Tukang
                             </a>
                             <ul>
                                 <li><a href="/worker">Tukang</a></li>
+                                <li><a href="/worker/detail">Grup Tukang</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
                         </li>
