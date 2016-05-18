@@ -603,7 +603,7 @@ class Stock extends CI_Controller {
     public function print_stock()
     {
         $user_id    = $this->tank_auth->get_user_id();
-            $user_info = $this->login_model->get_user_info($user_id);
+            /*$user_info = $this->login_model->get_user_info($user_id);
             $data['userid'] = $user_info['id'];
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
@@ -630,7 +630,7 @@ class Stock extends CI_Controller {
                 $data['access']['delete'] = true;    
             }else{
                 $data['access']['delete'] = false;               
-            }
+            }*/
 
             // message
             //$data['message'] = $message;
@@ -639,10 +639,10 @@ class Stock extends CI_Controller {
             $data['stocks'] = $this->stock_model->get_all_stocks();
 
             // show the view
-            $this->load->view('header');
-            $this->load->view('stock/navigation', $data);
+            //$this->load->view('header');
+            //$this->load->view('stock/navigation', $data);
             $this->load->view('stock/printstock', $data);
-            $this->load->view('stock/footer');
+            //$this->load->view('stock/footer');
     }
 
 
