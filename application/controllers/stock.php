@@ -536,6 +536,19 @@ class Stock extends CI_Controller {
             }
     }
 
+    public function update_view_limit($stock_id){
+        $response = $this->stock_model->update_view_limit($stock_id);
+
+        // display message according db status
+        if($response){
+            $message['success'] = "Stok limit berhasil diubah.";
+            $this->show_limit($message);
+        }else{
+            $message['error'] = "Stok limit gagal diubah.";
+            $this->show_limit($message);
+        }
+    }
+
     public function limit_stock()
     {
         $message = array();
@@ -584,6 +597,51 @@ class Stock extends CI_Controller {
             $this->load->view('header');
             $this->load->view('stock/navigation', $data);
             $this->load->view('stock/limit_stock', $data);
+            $this->load->view('stock/footer');
+    }
+
+    public function print_stock()
+    {
+        $user_id    = $this->tank_auth->get_user_id();
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['stock'] = $user_info['stock_item'];
+
+            // access level
+            $create=substr($data['stock'],0,1); 
+            $edit=substr($data['stock'],1,1); 
+            $delete=substr($data['stock'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+
+            // message
+            //$data['message'] = $message;
+
+            // get necessary data
+            $data['stocks'] = $this->stock_model->get_all_stocks();
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('stock/navigation', $data);
+            $this->load->view('stock/printstock', $data);
             $this->load->view('stock/footer');
     }
 

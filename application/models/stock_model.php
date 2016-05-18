@@ -92,7 +92,7 @@ class Stock_model extends CI_Model {
 
     public function get_all_stocks()
     {
-        $this->db->select('stock_master.*, item_master.name, item_master.id as itemid, unit_master.name AS unit');
+        $this->db->select('stock_master.*, item_master.name, item_master.id as itemid, item_master.item_code as item_code, unit_master.name AS unit');
         $this->db->from('stock_master');
         $this->db->join('item_master', 'stock_master.item_id = item_master.id');
         $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
@@ -184,6 +184,20 @@ class Stock_model extends CI_Model {
         }
 
         return $delete_status;
+    }
+
+    public function update_view_limit($stock_id){
+        if($stock_id !== false){
+
+            $data = array(
+                'view_limit' => '1'
+            );
+
+            $this->db->where('id', $stock_id);
+            return $this->db->update('stock_master', $data);
+        }else{
+            return false;
+        }
     }
 
     public function get_purchaseorder_detail_by_id($id){
@@ -328,7 +342,7 @@ class Stock_model extends CI_Model {
     {
         $query = $this->db->query("select stock_master.*, item_master.item_code , item_master.name, item_master.id as itemid, unit_master.name AS unit
             FROM stock_master, item_master, unit_master
-            where stock_master.item_id = item_master.id AND unit_master.id = item_master.unit_id AND stock_master.item_count <= stock_master.min_stock");
+            where stock_master.item_id = item_master.id AND unit_master.id = item_master.unit_id AND stock_master.item_count <= stock_master.min_stock AND stock_master.view_limit = '0'");
         
         return $query->result_array();
     }
