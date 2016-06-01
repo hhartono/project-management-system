@@ -32,6 +32,7 @@
     <!-- JS Demo -->
 
     <!-- JS Table -->
+    <script src="/assets/js/custom/warna/image.modal.js"></script>
     <script src="/assets/js/custom/warna/warna.modal.js"></script>
     <script src="/assets/js/custom/warna/warna.tables.js"></script>
 
@@ -40,5 +41,31 @@
 
     <!-- JS Customizer -->
     <script src="/assets/js/core/dandelion.customizer.js"></script>
+
+    <script src="/assets/dropzone/dropzone.js"></script>
+
+    <script type="text/javascript" src="/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.lightbox-0.5.js"></script>
+
+    <script type="text/javascript">
+    $(function() {
+        $('#gallery a').lightBox();
+    });
+    </script>
+
+    <!-- <script type="text/javascript">
+        $(document).ready(function(){
+            $('#addPhotoModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var id = button.data('id')
+                var modal = $(this)
+                modal.find('.modal-body input#idsubproject').attr("value", id)
+            });
+    
+            $('#addPhotoModal').on('hidden.bs.modal',function(){
+                location.reload();
+            });
+        })
+    </script> -->
 </body>
 </html>
