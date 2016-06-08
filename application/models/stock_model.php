@@ -48,16 +48,29 @@ class Stock_model extends CI_Model {
     }
 
     public function get_stock_item_detail_by_item_code($item_code){
-        $query = $this->db->query("select stock_master.*, item_master.name AS item_name, item_master.item_code AS item_code, unit_master.name AS item_unit, sum(stock_master.item_count) as jumlah, GROUP_CONCAT(DISTINCT stock_master.id ORDER BY stock_master.id ASC SEPARATOR ', ') as idstock
+        $query = $this->db->query("select stock_master.id as id, item_master.name AS item_name, item_master.item_code AS item_code, unit_master.name AS item_unit, sum(stock_master.item_count) as jumlah, GROUP_CONCAT(DISTINCT stock_master.id ORDER BY stock_master.id ASC SEPARATOR ', ') as idstock, category_master.name as category
        from stock_master join item_master ON stock_master.item_id = item_master.id
-       join unit_master ON item_master.stock_unit_id = unit_master.id 
-        where item_master.item_code = '$item_code' AND stock_master.item_count!=0");
+       join unit_master ON item_master.stock_unit_id = unit_master.id
+       join category_master ON category_master.id = item_master.category_id 
+        where item_master.item_code = '$item_code' AND stock_master.item_count!=0
+        UNION
+        select stock_pelapis_master.id as id, item_master.name AS item_name, stock_pelapis_master.stock_kode_pelapis AS item_code, unit_master.name AS item_unit, sum(stock_pelapis_master.jumlah) as jumlah, GROUP_CONCAT(DISTINCT stock_pelapis_master.id ORDER BY stock_pelapis_master.id ASC SEPARATOR ', ') as idstock, category_master.name as category
+       from stock_pelapis_master join item_master ON stock_pelapis_master.item_id = item_master.id
+       join unit_master ON item_master.stock_unit_id = unit_master.id
+       join category_master ON category_master.id = item_master.category_id 
+        where stock_pelapis_master.stock_kode_pelapis = '$item_code' AND stock_pelapis_master.jumlah!=0
+        UNION
+        select stock_press_master.id as id, CONCAT(stock_press_master.bahan_dasar, stock_press_master.sisi1, stock_press_master.sisi2) as item_name, stock_press_master.stock_press_code as item_code, unit_master.name as item_unit, stock_press_master.jumlah as jumlah, stock_press_master.id as idstock, category_master.name as category
+            from stock_press_master join unit_master ON unit_master.id = stock_press_master.unit_id join category_master ON category_master.id = stock_press_master.category_id
+            where stock_press_master.stock_press_code = '$item_code' AND stock_press_master.jumlah !=0 ORDER by id DESC
+        
+        ");
 
         return $query->row_array();
     }
 
     public function get_stock_item_detail_by_item_code_return($item_code){
-        $query = $this->db->query("select stock_master.*, item_master.name AS item_name, item_master.item_code AS item_code, unit_master.name AS item_unit, sum(stock_master.item_count) as jumlah, GROUP_CONCAT(DISTINCT stock_master.id ORDER BY stock_master.id ASC SEPARATOR ', ') as idstock
+        $query = $this->db->query("select stock_master.id as id, item_master.name AS item_name, item_master.item_code AS item_code, unit_master.name AS item_unit, sum(stock_master.item_count) as jumlah, GROUP_CONCAT(DISTINCT stock_master.id ORDER BY stock_master.id ASC SEPARATOR ', ') as idstock
        from stock_master join item_master ON stock_master.item_id = item_master.id
        join unit_master ON item_master.unit_id = unit_master.id 
         where item_master.item_code = '$item_code'");
@@ -79,7 +92,7 @@ class Stock_model extends CI_Model {
 
     public function get_all_stocks()
     {
-        $this->db->select('stock_master.*, item_master.name, item_master.id as itemid, unit_master.name AS unit');
+        $this->db->select('stock_master.*, item_master.name, item_master.id as itemid, item_master.item_code as item_code, unit_master.name AS unit');
         $this->db->from('stock_master');
         $this->db->join('item_master', 'stock_master.item_id = item_master.id');
         $this->db->join('unit_master', 'item_master.unit_id = unit_master.id');
@@ -102,7 +115,8 @@ class Stock_model extends CI_Model {
                 'po_detail_id' => $database_input_array['po_detail_id'],
                 'item_price' => $database_input_array['item_price'],
                 'item_count' => $database_input_array['item_count'],
-                'stock_awal' => $database_input_array['item_count']
+                'stock_awal' => $database_input_array['item_count'],
+                'min_stock' => $database_input_array['min_stock']
             );
 
             $this->db->where('id', $database_input_array['id']);
@@ -128,6 +142,7 @@ class Stock_model extends CI_Model {
                 'item_price' => $database_input_array['item_price'],
                 'item_count' => $database_input_array['item_count'],
                 'stock_awal' => $database_input_array['item_count'],
+                'min_stock' => $database_input_array['minstock'],
                 'user_id' => $database_input_array['user'],
                 'item_stock_code' => $database_input_array['item_stock_code'],
                 'received_date' => date("Y-m-d H:i:s")
@@ -169,6 +184,20 @@ class Stock_model extends CI_Model {
         }
 
         return $delete_status;
+    }
+
+    public function update_view_limit($stock_id){
+        if($stock_id !== false){
+
+            $data = array(
+                'view_limit' => '1'
+            );
+
+            $this->db->where('id', $stock_id);
+            return $this->db->update('stock_master', $data);
+        }else{
+            return false;
+        }
     }
 
     public function get_purchaseorder_detail_by_id($id){
@@ -313,7 +342,7 @@ class Stock_model extends CI_Model {
     {
         $query = $this->db->query("select stock_master.*, item_master.item_code , item_master.name, item_master.id as itemid, unit_master.name AS unit
             FROM stock_master, item_master, unit_master
-            where stock_master.item_id = item_master.id AND unit_master.id = item_master.unit_id AND stock_master.item_count <= 5");
+            where stock_master.item_id = item_master.id AND unit_master.id = item_master.unit_id AND stock_master.item_count <= stock_master.min_stock AND stock_master.view_limit = '0'");
         
         return $query->result_array();
     }

@@ -35,10 +35,11 @@
     <script src="/assets/js/custom/purchaseorder/purchaseorder.modal.js"></script>
     <script src="/assets/js/custom/purchaseorder/purchaseorder.tables.js"></script>
     <script src="/assets/js/custom/purchaseorder/purchaseorder.createpotables.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.receiveitemstables.js"></script>
-    <script src="/assets/js/custom/purchaseorder/purchaseorder.printbarcodetables.js"></script>
+    <script src="/assets/js/custom/kirimpress/kirimpress.receiveitemstables.js"></script>
+    <script src="/assets/js/custom/kirimpress/kirimpress.printbarcodetables.js"></script>
     <script src="/assets/js/custom/kirimpress/kirimpress.createpress.js"></script>
-
+    <script src="/assets/js/custom/purchaseorder/purchaseorder.printbarcodetables.js"></script>
+    
     <!-- JS Barcode -->
     
 <script>

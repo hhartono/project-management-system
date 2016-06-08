@@ -190,18 +190,28 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="/warna">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Warna
+                            </a>
+                        </li>
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
-                                	<span class="da-nav-icon">
+                                    <span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>
                                 Tukang
                             </a>
                             <ul>
                                 <li><a href="/worker">Tukang</a></li>
+                                <li><a href="/worker/detail">Grup Tukang</a></li>
                                 <li><a href="/division">Divisi Tukang</a></li>
                             </ul>
-                        </li>                        
+                        </li>                     
                         <li>
                             <a href="#">
                                 <!-- Icon Container -->

@@ -35,6 +35,7 @@
                                                 <th>Jumlah Barang</th>
                                                 <th>Satuan Barang</th>
                                                 <th>Harga Barang</th>
+                                                <th>Minimal Stock</th>
                                                 <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                     <?php
                                                         $control_label_array = array();
@@ -62,6 +63,7 @@
                                                             echo number_format($each_stock['item_price'], 2, ',', '.');;
                                                         ?>
                                                     </td>
+                                                    <td><?php echo $each_stock['min_stock']; ?></td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <a class="da-stock-view-dialog" href="#" data-value="<?php echo $each_stock['id']; ?>"><i class="icol-eye"></i></a>
@@ -185,6 +187,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" value="<?php echo $userid; ?>" name="user">
+                                <input type="hidden" value="5" name="minstock">
                             </div>
                         </form>
                     </div>
@@ -204,6 +207,13 @@
                                     <div class="da-form-item large">
                                         <input id="stock-edit-item-count" type="text" name="item_count" autocomplete="off">
                                         <label for="stock-edit-item-count" id="stock-edit-item-count-label"></label>
+                                    </div>
+                                </div>
+                                <div class="da-form-row">
+                                    <label class="da-form-label">Minimal Stok</label>
+                                    <div class="da-form-item large">
+                                        <input id="stock-edit-minimal" type="text" name="min_stock" autocomplete="off">
+                                        <label for="stock-edit-minimal" id="stock-edit-minimal-label"></label>
                                     </div>
                                 </div>
                                 <div class="da-form-row">

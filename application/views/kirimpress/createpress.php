@@ -40,6 +40,12 @@
                                                 <input id="kirimpress-createpress-insert-sisi2" type="text" name="sisi2" class="span12">
                                             </div>
                                         </div>
+                                        <div class="da-form-row">
+                                            <label class="da-form-label">Jumlah</label>
+                                            <div class="da-form-item large">
+                                                <input id="kirimpress-createpress-insert-jumlah" type="text" name="jumlah" class="span12">
+                                            </div>
+                                        </div>
                                         <div class="da-form-row" style="text-align:center;">
                                             <button id="da-kirimpress-createpress-insert-add" class="btn btn-success">Tambah Press Barang</button>
                                         </div>
@@ -74,6 +80,7 @@
                                                 <th>Bahan Dasar</th>
                                                 <th>Sisi 1</th>
                                                 <th>Sisi 2</th>
+                                                <th>Jumlah</th>
                                                 <th>Hapus</th>
                                             </tr>
                                             <?php foreach ($press as $press) { ?>
@@ -81,6 +88,7 @@
                                                 <td><?php echo $press['bahan_dasar']; ?></td>
                                                 <td><?php echo $press['sisi1']; ?></td>
                                                 <td><?php echo $press['sisi2']; ?></td>
+                                                <td><?php echo $press['jumlah']; ?></td>
                                                 <td>
                                                     <?php
                                                         $press_id = $press['id'];

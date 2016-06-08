@@ -85,6 +85,7 @@ class Projectdetail extends CI_Controller {
             $data['company'] = $this->detail_model->get_company_id();
             $data['compro'] = $this->detail_model->get_company_project();
             $data['cetak'] = $this->detail_model->get_all_printdetail($idspj);
+            $data['press'] = $this->detail_model->get_all_press($idspj);
 
             $this->load->view('header');
             $this->load->view('projectdetail/navigation', $data);
@@ -223,6 +224,15 @@ class Projectdetail extends CI_Controller {
         $subproject_id = urldecode($subproject_id);
         $stock_id = urldecode($stock_id);
         $project_detail_usage = $this->detail_model->get_all_usageproject2($subproject_id, $stock_id);
+        echo json_encode($project_detail_usage);
+    }
+
+    public function get_project_detail_press_usage($subproject_id, $stock_id){
+        date_default_timezone_set('Asia/Jakarta');
+
+        $subproject_id = urldecode($subproject_id);
+        $stock_id = urldecode($stock_id);
+        $project_detail_usage = $this->detail_model->get_all_usagepress($subproject_id, $stock_id);
         echo json_encode($project_detail_usage);
     }
 }

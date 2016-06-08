@@ -11,6 +11,7 @@
                 $(nRow).find("td:eq(3)").attr("name", "item_usage").append('<input name="item_usage_input" type="text" class="span12" value="1">');
                 $(nRow).find("td:eq(4)").attr("name", "item_unit");
                 $(nRow).find("td:eq(5)").attr("name", "stock_id");
+                $(nRow).find("td:eq(6)").attr("name", "category");
 
             }
             //sPaginationType: "full_numbers"
@@ -147,7 +148,7 @@
                 var item_code_encoded = encodeURIComponent(item_code);
 
                 $.get( "/useitem/get_stock_detail_by_item_code/" + item_code_encoded, function(data) {
-                    if(data != null && data.id != null){
+                    if(data != null && data.idstock != null){
                         $("#da-useitem-table-error").hide();
 
                         // update table
@@ -159,6 +160,7 @@
                         table_array[3] = '';
                         table_array[4] = data.item_unit;
                         table_array[5] = data.idstock;
+                        table_array[6] = data.category;
                         useitemTable.row.add(table_array).draw();
                     }else{
                         // error message

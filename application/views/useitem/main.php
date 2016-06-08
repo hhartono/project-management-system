@@ -53,6 +53,7 @@
                                                 <th>Jumlah Pemakaian</th>
                                                 <th>Satuan Barang</th>
                                                 <th>Database ID</th>
+                                                <th>Category</th>
                                             </tr>
                                         </thead>
                                     </table>

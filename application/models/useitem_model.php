@@ -94,6 +94,24 @@ class Useitem_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_stock_press($item_code)
+    {
+        $query = $this->db->query("select stock_press_master.*
+                                    from stock_press_master 
+                                    where stock_press_master.stock_press_code = '$item_code' AND stock_press_master.jumlah!=0");
+
+        return $query->result_array();
+    }
+
+    public function get_stock_pelapis($item_code)
+    {
+        $query = $this->db->query("select stock_pelapis_master.*
+                                    from stock_pelapis_master 
+                                    where stock_pelapis_master.stock_kode_pelapis = '$item_code' AND stock_pelapis_master.jumlah!=0");
+
+        return $query->result_array();
+    }
+
     public function set_useitem_detail($database_input_array)
     {
         if($database_input_array['subproject_id'] !== false //&& $database_input_array['project_id'] !== false
@@ -103,99 +121,160 @@ class Useitem_model extends CI_Model {
             // start database transaction
            $this->db->trans_start();
 
-            // PART 1 - set PO main
-            $data = array(
-                //'project_id' => $database_input_array['project_id'],
-                'subproject_id' => $database_input_array['subproject_id'],
-                'worker_id' => $database_input_array['worker_id'],
-                'user_id' => $database_input_array['user'],
-                'creation_date' => date("Y-m-d H:i:s"),
-                'last_update_timestamp' => date("Y-m-d H:i:s")
-            );
-            $this->db->insert('transaction_usage_main', $data);
-
-            // PART 2 - set PO detail
-            $database_input_array['usage_id'] = $this->db->insert_id();
-
-            // $diarray = $database_input_array['useitem_item_values'];
-            // $dlength = sizeof($database_input_array['useitem_item_values']);
-            // for($i=0; $i< $dlength; $i++){
-
-            // }
             foreach($database_input_array['useitem_item_values'] as $each_usage_item){
-                /*$data = array(
-                    'usage_id' => $database_input_array['usage_id'],
-                    'stock_id' => $each_usage_item['stock_id'],
-                    'item_count' => $each_usage_item['item_usage'],
-                    'creation_date' => date("Y-m-d H:i:s"),
-                    'item_code' => $each_usage_item['item_stock_code']
-                );
-                $this->db->insert('transaction_usage_detail', $data);*/
-                $getstock = $this->get_stock($each_usage_item['item_stock_code']);
-
-                foreach ($getstock as $getstock) {
-                    if($each_usage_item['item_usage'] > $getstock['item_count'] ){
-                        $current = $getstock['item_count'] - $getstock['item_count'];
-                        $currentitemusage = $each_usage_item['item_usage'] - $getstock['item_count'];
-                        $stock = $getstock['item_count'];
-                        //$each_usage_item['item_usage'] = $each_usage_item['item_usage'] - $getstock['item_count'];                    
-                    }else if($each_usage_item['item_usage'] < $getstock['item_count'] ){
-                        $current = $getstock['item_count'] - $each_usage_item['item_usage'];
-                        $currentitemusage = $each_usage_item['item_usage'] - $each_usage_item['item_usage'];
-                        $stock = $each_usage_item['item_usage'];
-                        //$each_usage_item['item_usage'] = 0;
-                    }else{
-                        $current = $getstock['item_count'] - $each_usage_item['item_usage'];
-                        $currentitemusage = $getstock['item_count'] - $each_usage_item['item_usage'];
-                        $stock = $each_usage_item['item_usage'];
-                        //$each_usage_item['item_usage'] = 0;
-                    }
+                if($each_usage_item['category'] == 'Press'){
                     $data = array(
-                        // 'item_count' => $getstock['item_count'] - $each_usage_item['item_usage']
-                        'item_count' => $current
-                    );
-                    $stock_id = $getstock['id'];
-                    $this->db->where('id', $stock_id);
-                    $this->db->update('stock_master', $data);
-
-                    $data = array(
-                        'usage_id' => $database_input_array['usage_id'],
-                        'stock_id' => $stock_id,
-                        'item_count' => $stock,
+                        'subproject_id' => $database_input_array['subproject_id'],
+                        'worker_id' => $database_input_array['worker_id'],
                         'user_id' => $database_input_array['user'],
                         'creation_date' => date("Y-m-d H:i:s"),
-                        //'item_code' => $each_usage_item['item_stock_code'],
                         'last_update_timestamp' => date("Y-m-d H:i:s")
+                        );
+                    $this->db->insert('transaction_usage_press_main', $data);
+
+                    $database_input_array['usage_press_id'] = $this->db->insert_id();
+
+                    $getstock = $this->get_stock_press($each_usage_item['item_stock_code']);
+
+                    foreach ($getstock as $getstock) {
+                        $data = array(
+                            'jumlah' => $getstock['jumlah'] - $each_usage_item['item_usage']
+                        );
+                        $stock_press_id = $getstock['id'];
+                        $this->db->where('id', $stock_press_id);
+                        $this->db->update('stock_press_master', $data);
+
+                        $data = array(
+                            'usage_press_id' => $database_input_array['usage_press_id'],
+                            'stock_press_id' => $stock_press_id,
+                            'item_count' => $each_usage_item['item_usage'],
+                            'user_id' => $database_input_array['user'],
+                            'creation_date' => date("Y-m-d H:i:s"),
+                            'last_update_timestamp' => date("Y-m-d H:i:s")
+                        );
+                        $this->db->insert('transaction_usage_press_detail', $data);        
+                    }
+                }elseif($each_usage_item['category'] == 'Veneer') {
+                    $data = array(
+                        'subproject_id' => $database_input_array['subproject_id'],
+                        'worker_id' => $database_input_array['worker_id'],
+                        'user_id' => $database_input_array['user'],
+                        'creation_date' => date("Y-m-d H:i:s"),
+                        'last_update_timestamp' => date("Y-m-d H:i:s")
+                        );
+                    $this->db->insert('transaction_usage_pelapis_main', $data);
+
+                    $database_input_array['usage_pelapis_id'] = $this->db->insert_id();
+
+                    $getstock = $this->get_stock_pelapis($each_usage_item['item_stock_code']);
+
+                    foreach ($getstock as $getstock) {
+                        $data = array(
+                            'jumlah' => $getstock['jumlah'] - $each_usage_item['item_usage']
+                        );
+                        $stock_pelapis_id = $getstock['id'];
+                        $this->db->where('id', $stock_pelapis_id);
+                        $this->db->update('stock_pelapis_master', $data);
+
+                        $data = array(
+                            'usage_pelapis_id' => $database_input_array['usage_pelapis_id'],
+                            'stock_pelapis_id' => $stock_pelapis_id,
+                            'item_count' => $each_usage_item['item_usage'],
+                            'user_id' => $database_input_array['user'],
+                            'creation_date' => date("Y-m-d H:i:s"),
+                            'last_update_timestamp' => date("Y-m-d H:i:s")
+                        );
+                        $this->db->insert('transaction_usage_pelapis_detail', $data);        
+                    }
+                }else{
+
+                    /*$data = array(
+                        'usage_id' => $database_input_array['usage_id'],
+                        'stock_id' => $each_usage_item['stock_id'],
+                        'item_count' => $each_usage_item['item_usage'],
+                        'creation_date' => date("Y-m-d H:i:s"),
+                        'item_code' => $each_usage_item['item_stock_code']
                     );
-                    $this->db->insert('transaction_usage_detail', $data);
+                    $this->db->insert('transaction_usage_detail', $data);*/
 
                     $data = array(
-                        'stock_id' => $stock_id,
-                        'item_count' => $each_usage_item['item_stock'],
-                        'jumlah_perubahan' => $current,
-                        'status' => '2',
-                        'date' => date("Y-m-d H:i:s")
-                    );
-                    $this->db->insert('item_count_history', $data);
+                        //'project_id' => $database_input_array['project_id'],
+                        'subproject_id' => $database_input_array['subproject_id'],
+                        'worker_id' => $database_input_array['worker_id'],
+                        'user_id' => $database_input_array['user'],
+                        'creation_date' => date("Y-m-d H:i:s"),
+                        'last_update_timestamp' => date("Y-m-d H:i:s")
+                        );
+                    $this->db->insert('transaction_usage_main', $data);
 
-                    // update the required item count
-                    $each_usage_item['item_usage'] = $currentitemusage;
+                    $database_input_array['usage_id'] = $this->db->insert_id();
 
-                    // break the loop if all the item has been fulfilled
-                    if($each_usage_item['item_usage'] <= 0){
-                        break;
+                    $getstock = $this->get_stock($each_usage_item['item_stock_code']);
+
+                    foreach ($getstock as $getstock) {
+                        if($each_usage_item['item_usage'] > $getstock['item_count'] ){
+                            $current = $getstock['item_count'] - $getstock['item_count'];
+                            $currentitemusage = $each_usage_item['item_usage'] - $getstock['item_count'];
+                            $stock = $getstock['item_count'];
+                            //$each_usage_item['item_usage'] = $each_usage_item['item_usage'] - $getstock['item_count'];                    
+                        }else if($each_usage_item['item_usage'] < $getstock['item_count'] ){
+                            $current = $getstock['item_count'] - $each_usage_item['item_usage'];
+                            $currentitemusage = $each_usage_item['item_usage'] - $each_usage_item['item_usage'];
+                            $stock = $each_usage_item['item_usage'];
+                            //$each_usage_item['item_usage'] = 0;
+                        }else{
+                            $current = $getstock['item_count'] - $each_usage_item['item_usage'];
+                            $currentitemusage = $getstock['item_count'] - $each_usage_item['item_usage'];
+                            $stock = $each_usage_item['item_usage'];
+                            //$each_usage_item['item_usage'] = 0;
+                        }
+                        $data = array(
+                            // 'item_count' => $getstock['item_count'] - $each_usage_item['item_usage']
+                            'item_count' => $current
+                        );
+                        $stock_id = $getstock['id'];
+                        $this->db->where('id', $stock_id);
+                        $this->db->update('stock_master', $data);
+
+                        $data = array(
+                            'usage_id' => $database_input_array['usage_id'],
+                            'stock_id' => $stock_id,
+                            'item_count' => $stock,
+                            'user_id' => $database_input_array['user'],
+                            'creation_date' => date("Y-m-d H:i:s"),
+                            //'item_code' => $each_usage_item['item_stock_code'],
+                            'last_update_timestamp' => date("Y-m-d H:i:s")
+                        );
+                        $this->db->insert('transaction_usage_detail', $data);
+
+                        $data = array(
+                            'stock_id' => $stock_id,
+                            'item_count' => $each_usage_item['item_stock'],
+                            'jumlah_perubahan' => $current,
+                            'status' => '2',
+                            'date' => date("Y-m-d H:i:s")
+                        );
+                        $this->db->insert('item_count_history', $data);
+
+                        // update the required item count
+                        $each_usage_item['item_usage'] = $currentitemusage;
+
+                        // break the loop if all the item has been fulfilled
+                        if($each_usage_item['item_usage'] <= 0){
+                            break;
+                        }
                     }
-                }
 
-                if ($each_usage_item['item_usage'] > 0){
-                    // TODO - display error message - item not enough
-                    $this->db->trans_rollback(); 
-                    return FALSE;
+                    if ($each_usage_item['item_usage'] > 0){
+                        // TODO - display error message - item not enough
+                        $this->db->trans_rollback(); 
+                        return FALSE;
+                    }
                 }
             }
             
             // complete database transaction
-           $this->db->trans_complete();
+            $this->db->trans_complete();
 
             // return false if something went wrong
             if ($this->db->trans_status() === FALSE){

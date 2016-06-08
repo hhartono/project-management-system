@@ -73,4 +73,25 @@ class Printbarcode_model extends CI_Model {
             return $result_array;
         }
     }
+
+    public function get_barcode_stock_press_by_id($id){
+        // start database transaction
+        $this->db->trans_begin();
+
+        $this->db->select('stock_press_master.*');
+        $this->db->from('stock_press_master');
+        $this->db->where('stock_press_master.id', $id);
+        $query = $this->db->get();
+        $result_array = $query->result_array();
+
+        // complete database transaction
+        $this->db->trans_complete();
+
+        // return false if something went wrong
+        if ($this->db->trans_status() === FALSE){
+            return FALSE;
+        }else{
+            return $result_array;
+        }
+    }
 }

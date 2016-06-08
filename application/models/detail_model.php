@@ -26,9 +26,24 @@ class Detail_model extends CI_Model {
         return $query;
     }
 
-    /*
-       
-    */
+    public function get_all_press($idsubproject)
+    {
+        $query = $this->db->query("select subproject_master.id as id, concat(stock_press_master.bahan_dasar, stock_press_master.sisi1, stock_press_master.sisi2) as barang, transaction_usage_press_detail.item_count as jumlah, unit_master.name as satuan, category_master.name as kategori
+            from stock_press_master, transaction_usage_press_detail, transaction_usage_press_main, unit_master, category_master, subproject_master
+            where stock_press_master.id = transaction_usage_press_detail.stock_press_id AND transaction_usage_press_main.id = transaction_usage_press_detail.usage_press_id AND stock_press_master.unit_id = unit_master.id AND stock_press_master.category_id = category_master.id AND  transaction_usage_press_main.subproject_id = subproject_master.id AND transaction_usage_press_main.subproject_id ='$idsubproject'");
+
+        return $query->result_array();
+    }
+
+    public function get_all_usagepress($subproject_id, $stock_id)
+    {
+        $query = $this->db->query("select subproject_master.id as id, concat(stock_press_master.bahan_dasar, stock_press_master.sisi1, stock_press_master.sisi2) as barang, transaction_usage_press_detail.item_count as quantity, unit_master.name as satuan, category_master.name as kategori, transaction_usage_press_detail.creation_date as tanggal, worker_master.name as tukang
+            from stock_press_master, transaction_usage_press_detail, transaction_usage_press_main, unit_master, category_master, subproject_master, worker_master
+            where stock_press_master.id = transaction_usage_press_detail.stock_press_id AND transaction_usage_press_main.id = transaction_usage_press_detail.usage_press_id AND stock_press_master.unit_id = unit_master.id AND stock_press_master.category_id = category_master.id AND  transaction_usage_press_main.subproject_id = subproject_master.id AND transaction_usage_press_main.worker_id = worker_master.id AND  transaction_usage_press_main.subproject_id ='$idsubproject' AND stock_press_master.id = '$stock_id'");
+
+        return $query->result_array();
+    }
+
     public function get_project(){
         $query = $this->db->query("
                 SELECT pm.id AS idproject, pm.name AS projectname
