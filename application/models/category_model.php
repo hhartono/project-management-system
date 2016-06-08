@@ -1,7 +1,6 @@
 <?php
 class Category_model extends CI_Model {
-    public function __construct()
-    {
+    public function __construct(){
         $this->load->database();
     }
 
@@ -15,14 +14,12 @@ class Category_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function get_all_categories()
-    {
+    public function get_all_categories(){
         $query = $this->db->get('category_master');
         return $query->result_array();
     }
 
-    public function update_category()
-    {
+    public function update_category(){
         if($this->input->post('id') !== false && $this->input->post('prefix') !== false
             && $this->input->post('name') !== false && $this->input->post('notes') !== false){
             $data = array(
@@ -38,8 +35,7 @@ class Category_model extends CI_Model {
         }
     }
 
-    public function set_category()
-    {
+    public function set_category(){
         if($this->input->post('prefix') !== false && $this->input->post('name') !== false
             && $this->input->post('notes') !== false){
             date_default_timezone_set('Asia/Jakarta');

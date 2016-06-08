@@ -42,7 +42,7 @@
 
         /*
             Modal Controller for Editing
-         */
+        */
         $("#da-customer-edit-form-div").dialog({
             autoOpen: false,
             title: "Ubah Customer",

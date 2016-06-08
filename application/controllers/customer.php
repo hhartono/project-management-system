@@ -97,49 +97,48 @@ class Customer extends CI_Controller {
         echo json_encode($customer_detail);
     }
 
-    private function show_table($message)
-    {
-            $user_id    = $this->tank_auth->get_user_id();
+    private function show_table($message){
+        $user_id    = $this->tank_auth->get_user_id();
         
-            $user_info = $this->login_model->get_user_info($user_id);
-            $data['userid'] = $user_info['id'];
-            $data['username'] = $user_info['name'];
-            $data['company_title'] = $user_info['title'];
-            $data['customer'] = $user_info['customer'];
+        $user_info = $this->login_model->get_user_info($user_id);
+        $data['userid'] = $user_info['id'];
+        $data['username'] = $user_info['name'];
+        $data['company_title'] = $user_info['title'];
+        $data['customer'] = $user_info['customer'];
 
-            // access level
-            $create=substr($data['customer'],0,1); 
-            $edit=substr($data['customer'],1,1); 
-            $delete=substr($data['customer'],2,1); 
+        // access level
+        $create=substr($data['customer'],0,1); 
+        $edit=substr($data['customer'],1,1); 
+        $delete=substr($data['customer'],2,1); 
             
-            if($create != 0){
-                $data['access']['create'] = true;            
-            }else{
-                $data['access']['create'] = false;
-            }
+        if($create != 0){
+            $data['access']['create'] = true;            
+        }else{
+            $data['access']['create'] = false;
+        }
             
-            if($edit != 0){
-                $data['access']['edit'] = true;            
-            }else{
-                $data['access']['edit'] = false;
-            }
+        if($edit != 0){
+            $data['access']['edit'] = true;            
+        }else{
+            $data['access']['edit'] = false;
+        }
 
-            if($delete != 0){
-                $data['access']['delete'] = true;    
-            }else{
-                $data['access']['delete'] = false;               
-            }
-            // message
-            $data['message'] = $message;
+        if($delete != 0){
+            $data['access']['delete'] = true;    
+        }else{
+            $data['access']['delete'] = false;               
+        }
+        // message
+        $data['message'] = $message;
 
-            // get necessary data
-            $data['customers'] = $this->customer_model->get_all_customers();
+        // get necessary data
+        $data['customers'] = $this->customer_model->get_all_customers();
 
-            // show the view
-            $this->load->view('header');
-            $this->load->view('customer/navigation', $data);
-            $this->load->view('customer/main', $data);
-            $this->load->view('customer/footer');
+        // show the view
+        $this->load->view('header');
+        $this->load->view('customer/navigation', $data);
+        $this->load->view('customer/main', $data);
+        $this->load->view('customer/footer');
     }
 }
 

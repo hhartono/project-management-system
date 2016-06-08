@@ -28,4 +28,4 @@
     <!-- User Defined -->
     <link rel="stylesheet" href="/assets/css/general.css" media="screen">
     <link rel="stylesheet" href="/assets/js/libs/chosen.min.css">
-    
+    <link rel="stylesheet" href="/assets/dropzone/dist/dropzone.css">

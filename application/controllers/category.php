@@ -17,8 +17,7 @@ class Category extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
         $this->load->model('category_model');
         $this->load->model('login_model');
@@ -98,8 +97,7 @@ class Category extends CI_Controller {
         echo json_encode($category_detail);
     }
 
-    private function show_table($message)
-    {
+    private function show_table($message){
         $user_id    = $this->tank_auth->get_user_id();
         
             $user_info = $this->login_model->get_user_info($user_id);
@@ -110,24 +108,24 @@ class Category extends CI_Controller {
 
             // access level
             $create=substr($data['category'],0,1); 
-            $edit=substr($data['category'],1,1); 
+            $edit  =substr($data['category'],1,1); 
             $delete=substr($data['category'],2,1); 
             
             if($create != 0){
                 $data['access']['create'] = true;            
-            }else{
+            } else{
                 $data['access']['create'] = false;
             }
             
             if($edit != 0){
                 $data['access']['edit'] = true;            
-            }else{
+            } else{
                 $data['access']['edit'] = false;
             }
 
             if($delete != 0){
                 $data['access']['delete'] = true;    
-            }else{
+            } else{
                 $data['access']['delete'] = false;               
             }
             // message
