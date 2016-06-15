@@ -177,6 +177,15 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="/warna">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Warna
+                            </a>
+                        </li>
+                        <li>
                             <a href="#">
                                 <!-- Icon Container -->
                                 	<span class="da-nav-icon">

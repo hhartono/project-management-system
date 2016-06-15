@@ -83,6 +83,39 @@ class Subproject_model extends CI_Model {
         }
     }
 
+    public function get_all_subprojects_warna($uri)
+    {
+        $this->db->select('subproject_master.*, project_master.name AS project_name');
+        $this->db->from('subproject_master');
+        $this->db->join('project_master', 'subproject_master.project_id = project_master.id');
+        $this->db->join('project_warna', 'project_warna.project_id = project_master.id');
+        //$this->db->where('project_warna.id', $uri);
+        $query = $this->db->get();
+
+        $result_array = $query->result_array();
+        if($result_array === false){
+            return false;
+        }else{
+            date_default_timezone_set('Asia/Jakarta');
+            $array_length = count($result_array);
+            for($walk = 0; $walk < $array_length; $walk++){
+                if(strtotime($result_array[$walk]['start_date']) <= 0){
+                    $result_array[$walk]['formatted_start_date'] = "";
+                }else{
+                    $result_array[$walk]['formatted_start_date'] = date("d-m-Y", strtotime($result_array[$walk]['start_date']));
+                }
+
+                if(strtotime($result_array[$walk]['install_date']) <= 0){
+                    $result_array[$walk]['formatted_install_date'] = "";
+                }else{
+                    $result_array[$walk]['formatted_install_date'] = date("d-m-Y", strtotime($result_array[$walk]['install_date']));
+                }
+            }
+
+            return $result_array;
+        }
+    }
+
     public function update_subproject($database_input_array)
     {
         if($database_input_array['id'] !== false && $database_input_array['project_id'] !== false

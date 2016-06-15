@@ -27,7 +27,7 @@
                                                 <th>Nama Barang</th>
                                                 <th>Jumlah Barang</th>
                                                 <th>Satuan Barang</th>
-                                                
+                                                <th>Jangan Tampilkan
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -37,7 +37,13 @@
                                                     <td class="name-row"><?php echo $each_stock['name']; ?></td>
                                                     <td class="count-row"><?php echo $each_stock['item_count']; ?></td>
                                                     <td class="unit-row"><?php echo $each_stock['unit']; ?></td>
-                                                    
+                                                    <td>
+                                                    <?php
+                                                        $limit_id = $each_stock['id'];
+                                                        $limit_url = "/stock/update_view_limit/" . $limit_id;
+                                                    ?>
+                                                        <a href=<?php echo $limit_url; ?>><i class="icol-pencil"></i></a>
+                                                </td>
                                                 </tr>
                                             <?php endforeach?>
                                         </tbody>

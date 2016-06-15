@@ -35,6 +35,15 @@ class Detail_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_all_pelapis($idsubproject)
+    {
+        $query = $this->db->query("select subproject_master.id as id, concat(item_master.name, stock_pelapis_master.panjang, stock_pelapis_master.lebar) as barang, transaction_usage_pelapis_detail.item_count as jumlah, unit_master.name as satuan, category_master.name as kategori
+            from stock_pelapis_master, transaction_usage_pelapis_detail, transaction_usage_pelapis_main, unit_master, category_master, subproject_master, item_master
+            where stock_pelapis_master.item_id = item_master.id AND stock_pelapis_master.id = transaction_usage_pelapis_detail.stock_pelapis_id AND transaction_usage_pelapis_main.id = transaction_usage_pelapis_detail.usage_pelapis_id AND item_master.unit_id = unit_master.id AND item_master.category_id = category_master.id AND  transaction_usage_pelapis_main.subproject_id = subproject_master.id AND transaction_usage_pelapis_main.subproject_id ='$idsubproject'");
+
+        return $query->result_array();
+    }
+
     public function get_all_usagepress($subproject_id, $stock_id)
     {
         $query = $this->db->query("select subproject_master.id as id, concat(stock_press_master.bahan_dasar, stock_press_master.sisi1, stock_press_master.sisi2) as barang, transaction_usage_press_detail.item_count as quantity, unit_master.name as satuan, category_master.name as kategori, transaction_usage_press_detail.creation_date as tanggal, worker_master.name as tukang
@@ -116,7 +125,8 @@ Select pm.name as project, spm.*, cm.name as category, im.name as barang, -sum(t
                 join category_master cm on im.category_id=cm.id
                 left join company_master com on com.id = sm.company_id
                 where spm.id='$idsubproject'
-                group by sm.id) as detail group by detail.stock");
+                group by sm.id) as detail 
+group by detail.stock");
         return $query->result_array();
 
      /*   $this->db->select('pm.name as project, spm.*, cm.name as category, im.name as barang, tud.item_count as quantity, um.name as satuan, sm.item_price as harga, wm.name as tukang');

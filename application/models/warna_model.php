@@ -250,7 +250,7 @@ class Warna_model extends CI_Model {
         $this->db->where('subproject_warna.subproject_id', $uri);
         $query = $this->db->get();
 
-        return $query->row();
+        return $query->result_array();
     }
 
     public function delete_pattern($id){

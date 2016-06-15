@@ -86,6 +86,7 @@ class Projectdetail extends CI_Controller {
             $data['compro'] = $this->detail_model->get_company_project();
             $data['cetak'] = $this->detail_model->get_all_printdetail($idspj);
             $data['press'] = $this->detail_model->get_all_press($idspj);
+            $data['pelapis'] = $this->detail_model->get_all_pelapis($idspj);
 
             $this->load->view('header');
             $this->load->view('projectdetail/navigation', $data);

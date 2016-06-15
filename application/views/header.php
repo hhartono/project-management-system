@@ -28,4 +28,10 @@
     <!-- User Defined -->
     <link rel="stylesheet" href="/assets/css/general.css" media="screen">
     <link rel="stylesheet" href="/assets/js/libs/chosen.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/assets/dropzone/css/dropzone.css">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.lightbox-0.5.css" media="screen">   
     

@@ -54,7 +54,7 @@
                                         <tbody>
                                             <?php foreach($stocks as $each_stock): ?>
                                                 <tr>
-                                                    <td class="stock-code-row"><?php echo $each_stock['item_stock_code']; ?></td>
+                                                    <td class="stock-code-row"><?php echo $each_stock['item_code']; ?></td>
                                                     <td class="name-row"><?php echo $each_stock['name']; ?></td>
                                                     <td class="count-row"><?php echo $each_stock['item_count']; ?></td>
                                                     <td class="unit-row"><?php echo $each_stock['unit']; ?></td>

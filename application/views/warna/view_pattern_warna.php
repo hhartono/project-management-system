@@ -20,17 +20,19 @@
                                     <?php if(isset($message['error'])): ?>
                                         <div class="da-message error"><?php echo $message['error']; ?></div>
                                     <?php endif; ?>
-                                    <a class="btn btn-success btn-create" href="" cls='btn' target="_blank">
+                                <div class="da-form-row" style="margin: 10px 220px 10px;">
+                                    <a class="btn btn-success btn-create" href="/warna/cetak/<?php echo $uri; ?>" cls='btn' target="_blank" >
                                     <i class='icon-print'></i>&nbsp; Export PDF </a>
-
+                                </div>
+                                <br><br>
                                 <?php foreach ($pattern as $pattern) { ?>
-                                <div class="span2.5">
+                                <div class="span2.9">
                                     <div class="da-panel">
-                                        <div class="da-panel-content" style=" width:150px; height:80px; background: <?php echo $pattern['hexadecimal']; ?>">
-                                        <form action="/warna/delete_pattern/<?php echo $uri;?>" method="post">
+                                        <div class="da-panel-content" style=" width:200px; height:90px; background: <?php echo $pattern['hexadecimal']; ?>">
+                                        <!-- <form action="/warna/delete_pattern/<?php echo $uri;?>" method="post">
                                                 <input type="hidden" name="id" value="<?php echo $pattern['id']; ?>">
                                                 <button><i class="icol-cross"></i></button>
-                                            </form>
+                                            </form> -->
                                             
                                         </div>
                                         <div>
@@ -57,9 +59,9 @@
                                 
                                 <div id="gallery">
                                     <?php foreach ($gambar as $gambar) { ?>
-                                        <div class="span2">
-                                            <a href="/uploads/gambar/<?php echo $gambar['gambar'];?>" title="Satu">
-                                                <img src="/uploads/gambar/<?php echo $gambar['gambar'];?>" alt="tutorial web design" >
+                                        <div class="span5">
+                                            <a href="/uploads/gambar/<?php echo $gambar['gambar'];?>" style="width: 470px; height: 265px;">
+                                                <img src="/uploads/gambar/<?php echo $gambar['gambar'];?>">
                                             </a>                                            
                                         </div>
                                     <?php } ?>
@@ -102,33 +104,5 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="form-container" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title" id="image-gallery-title"></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <img id="image-gallery-image" class="img-responsive" src="">
-                                </div>
-                                <div class="modal-footer">
-                    
-                                    <div class="col-md-2">
-                                        <button type="button" class="btn btn-primary" id="show-previous-image">Previous</button>
-                                    </div>
-                    
-                                    <div class="col-md-8 text-justify" id="image-gallery-caption">
-                                        This text will be overwritten by jQuery
-                                    </div>
-                    
-                                    <div class="col-md-2">
-                                        <button type="button" id="show-next-image" class="btn btn-default">Next</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>

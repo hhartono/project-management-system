@@ -26,7 +26,7 @@
                                 <?php foreach ($pattern as $pattern) { ?>
                                 <div class="span2.5">
                                     <div class="da-panel">
-                                        <div class="da-panel-content" style=" width:150px; height:80px; background: <?php echo $pattern['hexadecimal']; ?>">
+                                        <div class="da-panel-content" style=" width:200px; height:90px; background: <?php echo $pattern['hexadecimal']; ?>">
                                         <form action="/warna/delete_pattern/<?php echo $uri;?>" method="post">
                                                 <input type="hidden" name="id" value="<?php echo $pattern['id']; ?>">
                                                 <button><i class="icol-cross"></i></button>
@@ -62,11 +62,11 @@
                                     </span>
                                 </div>
                                 
-                                <div id="gallery">
+                                <div id="gallery" style="height:20px; width:20px">
                                     <?php foreach ($gambar as $gambar) { ?>
-                                        <div class="span2">
-                                            <a href="/uploads/gambar/<?php echo $gambar['gambar'];?>" title="Satu">
-                                                <img src="/uploads/gambar/<?php echo $gambar['gambar'];?>" alt="tutorial web design" >
+                                        <div class="span5">
+                                            <a href="/uploads/gambar/<?php echo $gambar['gambar'];?>" >
+                                                <img src="/uploads/gambar/<?php echo $gambar['gambar'];?>">
                                             </a>                                            
                                         </div>
                                     <?php } ?>

@@ -26,6 +26,7 @@ class Warna extends CI_Controller {
         $this->load->model('subproject_model');
         $this->load->helper('cookie');
         $this->load->helper('url');
+        $this->load->library('fpdf');
         $this->load->library('tank_auth');
         $this->lang->load('tank_auth');
         $this->_is_logged_in();
@@ -433,17 +434,41 @@ class Warna extends CI_Controller {
                 'upload_path' => 'uploads/gambar/',
                 'allowed_types' => 'gif|jpg|jpeg|png',
                 'max_size' => '1024',
-                'max_width' => '1920',
-                'max_height' => '1920'
+                'max_width' => '600',
+                'max_height' => '600'
             );
         $this->load->library('upload', $config);
+        
         $idsubproject = $this->input->post('id');
         $file = $this->input->post('file');
+        // $filename = $this->upload->data('file');
+        // $gambar = $filename['file_name'];
         if(!$this->upload->do_upload('file')){
             $output = json_encode(array('error' => $this->upload->display_errors(), 'file'=> $file));
         }else{
-            $filename = $this->upload->data();
-            $this->warna_model->uploadSubprojectPhoto($idsubproject, $filename['file_name']);
+            $data_upload = $this->upload->data();
+
+            $file_name = $data_upload['file_name'];
+            $file_name_thumb = $data_upload['raw_name'].'_thumb' . $data_upload['file_ext'];
+
+            
+            $config_resize['image_library'] = 'gd2';    
+            $config_resize['create_thumb'] = TRUE;
+            $config_resize['maintain_ratio'] = TRUE;
+            $config_resize['source_image'] = 'uploads/gambar/'. $file_name;
+            $config_resize['width'] = 75;
+            $config_resize['height'] = 50;
+            
+            $this->load->library('image_lib', $config_resize);
+            
+            $this->image_lib->resize();
+
+            // $data["file_name_url"] = base_url() . $user_upload_path . $file_name;
+            // $data["file_name_thumb_url"] = base_url() . $user_upload_path . $file_name_thumb;
+    
+            //$config['new_image'] = 'uploads/gambar/thumbs/'.$gambar;
+
+            $this->warna_model->uploadSubprojectPhoto($idsubproject, $file_name);
             $output = json_encode(array('upload_data' => $this->upload->data()));
         }
         die($output);
@@ -535,18 +560,18 @@ class Warna extends CI_Controller {
 
                 if($response){
                     $message['success'] = "Pattern berhasil disimpan.";
-                    $this->view_patterngambar_warna($message);
+                    $this->view_pattern($message);
                 }else{
                     $message['error'] = "Pattern gagal disimpan.";
-                    $this->view_patterngambar_warna($message);
+                    $this->view_pattern($message);
                 }
             }else{
                 $message['error'] = "Pattern gagal disimpan. Pattern sudah ada dalam system.";
-                $this->view_patterngambar_warna($message);
+                $this->view_pattern($message);
             }
         }else{
             $message['error'] = "Pattern gagal disimpan.";
-            $this->view_patterngambar_warna($message);
+            $this->view_pattern($message);
         }
     }
 
@@ -569,10 +594,10 @@ class Warna extends CI_Controller {
         // display message according db status
         if($response){
             $message['success'] = "warna berhasil dihapus.";
-            $this->view_patterngambar_warna($message);
+            $this->view_pattern($message);
         }else{
             $message['error'] = "warna gagal dihapus.";
-            $this->view_patterngambar_warna($message);
+            $this->view_pattern($message);
         }
     }
 

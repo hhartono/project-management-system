@@ -187,24 +187,6 @@
                         </table>
                     </div>
                     </br>
-                    <div class="da-panel-content da-table-container">
-                        <div class="da-panel-header">
-                        <?php $total_sum=0; ?>
-                        <?php 
-                            foreach($sumprice as $sumprice){
-                                $total_sum+=$sumprice['total'];
-                            }
-                        ?>
-                        <table>
-                            <?php $jumlah3 = number_format($total_sum,2,',','.') ;?>
-                            <tr><td><span class="da-panel-title">
-                                <i class=""></i><h3><b> Total Biaya Keseluruhan</b></h3></td><td> :</td><td><font color='red'><h3><b><?php echo $jumlah3;?></b></h3></font></td></td>
-                            </span></tr>
-                        </table>
-                    
-                        </div>
-                    </div>
-                        
                     
                     </br>
                 </div>
