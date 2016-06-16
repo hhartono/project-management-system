@@ -164,6 +164,19 @@
                         <li>
                             <a href="#">
                                 <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                BLUM Library
+                            </a>
+                            <ul>
+                                <li><a href="/intivo">Intivo</a></li>
+                                <li><a href="/intivoacc">Intivo Accessories</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <!-- Icon Container -->
                                 	<span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>

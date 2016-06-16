@@ -80,11 +80,14 @@
                                                         }
                                                     ?>
                                                     <td class="phone-row"><?php echo implode(', ', $phone_number_array); ?></td>
+
                                                     <td class="da-icon-column">
                                                         <a class="da-customer-view-dialog" href="#" data-value="<?php echo $each_customer['id']; ?>"><i class="icol-eye"></i></a>
+
                                                         <?php if(isset($access['edit']) && $access['edit']): ?>
                                                             <a class="da-customer-edit-dialog" href="#" data-value="<?php echo $each_customer['id']; ?>"><i class="icol-pencil"></i></a>
                                                         <?php endif; ?>
+                                                        
                                                         <?php if(isset($access['delete']) && $access['delete']):
                                                             $customer_id = $each_customer['id'];
                                                             $delete_url = "/customer/delete_customer/" . $customer_id;
