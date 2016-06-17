@@ -51,7 +51,7 @@ $database_password = getenv('DB_PASSWORD');
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['password'] = 'inerre1';
 $db['default']['database'] = 'project_management_system';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
