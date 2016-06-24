@@ -28,7 +28,6 @@
     <!-- User Defined -->
     <link rel="stylesheet" href="/assets/css/general.css" media="screen">
     <link rel="stylesheet" href="/assets/js/libs/chosen.min.css">
-<<<<<<< HEAD
 
     <link rel="stylesheet" type="text/css" href="/assets/dropzone/css/dropzone.css">
 
@@ -36,6 +35,5 @@
 
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery.lightbox-0.5.css" media="screen">   
     
-=======
-    <link rel="stylesheet" href="/assets/dropzone/dist/dropzone.css">
->>>>>>> c5435d3ee3404a91959329857d61bcabbf4a3542
+<!--     <link rel="stylesheet" href="/assets/dropzone/dist/dropzone.css"> -->
+

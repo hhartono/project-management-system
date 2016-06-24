@@ -32,7 +32,7 @@
     <!-- JS Demo -->
 
     <!-- JS Table -->
-    <script src="/assets/js/custom/item/item.js"></script>
+    <script src="/assets/js/custom/item/item.modal.js"></script>
     <script src="/assets/js/custom/item/item.tables.js"></script>
 
     <!-- JS Template -->
