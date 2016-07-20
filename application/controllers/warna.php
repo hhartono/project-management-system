@@ -179,6 +179,58 @@ class Warna extends CI_Controller {
             $this->load->view('warna/footer');
     }
 
+    public function corak()
+    {
+        $message = array();
+        $this->show_table_corak($message);
+    }
+
+    private function show_table_corak($message)
+    {
+        $user_id = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['project'] = $user_info['project'];
+
+            // access level
+            $create=substr($data['project'],0,1); 
+            $edit=substr($data['project'],1,1); 
+            $delete=substr($data['project'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            $data['corak'] = $this->warna_model->get_all_corak();
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('warna/navigation', $data);
+            $this->load->view('warna/maincorak', $data);
+            $this->load->view('warna/footer');
+    }
+
     public function pattern_warna()
     {
         $message = array();
@@ -530,6 +582,7 @@ class Warna extends CI_Controller {
             $data['gambar'] = $this->warna_model->get_all_gambar_by_id($uri);
             $data['warna'] = $this->warna_model->get_all_warnas();
             $data['pattern'] = $this->warna_model->get_all_pattern_warna($uri);
+            $data['corak'] = $this->warna_model->get_all_pattern_corak($uri);
             
             // show the view
             $this->load->view('header');
@@ -582,6 +635,7 @@ class Warna extends CI_Controller {
             $uri = $this->uri->segment(3);
             $data['pattern'] = $this->warna_model->get_all_pattern_warna($uri);
             $data['subproject'] = $this->warna_model->get_all_subproject($uri);
+            $data['corak'] = $this->warna_model->get_all_pattern_corak($uri);
 
         $this->load->view('warna/eksport_pdf', $data);
         
@@ -649,12 +703,146 @@ class Warna extends CI_Controller {
             $data['gambar'] = $this->warna_model->get_all_gambar_by_id($uri);
             $data['warna'] = $this->warna_model->get_all_warnas();
             $data['pattern'] = $this->warna_model->get_all_pattern_warna($uri);
+            $data['corak'] = $this->warna_model->get_all_pattern_corak($uri);
+            $data['corakmaster'] = $this->warna_model->get_all_corak();
             
             // show the view
             $this->load->view('header');
             $this->load->view('warna/navigation', $data);
             $this->load->view('warna/view_pattern', $data);
             $this->load->view('warna/footer');
+    }
+
+    public function create_corak(){
+        // check all necessary input
+        if(!empty($this->input->post('kode_corak')) && !empty($this->input->post('nama_corak'))){
+            // search for customer id
+            $database_input_array = array();
+
+            $database_input_array['kode_corak'] = $this->input->post('kode_corak');
+
+            $database_input_array['nama_corak'] = $this->input->post('nama_corak');
+
+            // get the warna start date
+            date_default_timezone_set('Asia/Jakarta');
+
+            // check if there is any duplicate
+            $duplicate_check = $this->warna_model->get_corak_by_name_kode($database_input_array['nama_corak'], $database_input_array['kode_corak']);
+
+            if(empty($duplicate_check)){
+                $response = $this->warna_model->set_corak($database_input_array);
+
+                if($response){
+                    $message['success'] = "Corak berhasil disimpan.";
+                    $this->show_table_corak($message);
+                }else{
+                    $message['error'] = "Corak gagal disimpan.";
+                    $this->show_table_corak($message);
+                }
+            }else{
+                $message['error'] = "Corak gagal disimpan. Corak sudah ada dalam system.";
+                $this->show_table_corak($message);
+            }
+        }else{
+            $message['error'] = "Corak gagal disimpan.";
+            $this->show_table_corak($message);
+        }
+    }
+
+    public function delete_corak($corak_id){
+        $response = $this->warna_model->delete_corak($corak_id);
+
+        // display message according db status
+        if($response){
+            $message['success'] = "Corak berhasil dihapus.";
+            $this->show_table_corak($message);
+        }else{
+            $message['error'] = "Corak gagal dihapus.";
+            $this->show_table_corak($message);
+        }
+    }
+
+    public function upload_corak()
+    {
+        $config = array(
+                'upload_path' => 'uploads/corak/',
+                'allowed_types' => 'gif|jpg|jpeg|png',
+                'max_size' => '1024',
+                'max_width' => '600',
+                'max_height' => '600'
+            );
+        $this->load->library('upload', $config);
+        
+        $idcorak = $this->input->post('id');
+        $file = $this->input->post('file');
+        // $filename = $this->upload->data('file');
+        // $gambar = $filename['file_name'];
+        if(!$this->upload->do_upload('file')){
+            $output = json_encode(array('error' => $this->upload->display_errors(), 'file'=> $file));
+        }else{
+            $data_upload = $this->upload->data();
+
+            $file_name = $data_upload['file_name'];
+            $file_name_thumb = $data_upload['raw_name'].'_thumb' . $data_upload['file_ext'];
+
+            
+            $config_resize['image_library'] = 'gd2';    
+            $config_resize['create_thumb'] = TRUE;
+            $config_resize['maintain_ratio'] = TRUE;
+            $config_resize['source_image'] = 'uploads/corak/'. $file_name;
+            $config_resize['width'] = 75;
+            $config_resize['height'] = 50;
+            
+            $this->load->library('image_lib', $config_resize);
+            
+            $this->image_lib->resize();
+
+            // $data["file_name_url"] = base_url() . $user_upload_path . $file_name;
+            // $data["file_name_thumb_url"] = base_url() . $user_upload_path . $file_name_thumb;
+    
+            //$config['new_image'] = 'uploads/gambar/thumbs/'.$gambar;
+
+            $this->warna_model->uploadCorakPhoto($idcorak, $file_name);
+            $output = json_encode(array('upload_data' => $this->upload->data()));
+        }
+        die($output);
+    }
+
+    public function create_pattern_corak(){
+        // check all necessary input
+        if(!empty($this->input->post('id'))){
+            // search for customer id
+            
+            $database_input_array = array();
+
+            $database_input_array['uri'] = $this->uri->segment(3);
+
+            $database_input_array['corak_id'] = $this->input->post('id');
+
+            // get the warna start date
+            date_default_timezone_set('Asia/Jakarta');
+
+            // check if there is any duplicate
+            $duplicate_check = $this->warna_model->get_corak_by_id($database_input_array['corak_id'], $database_input_array['uri']);
+
+            if(empty($duplicate_check)){
+                $response = $this->warna_model->set_corak_warna($database_input_array);
+
+                if($response){
+                    $message['success'] = "Corak berhasil disimpan.";
+                    $this->view_pattern($message);
+                }else{
+                    $message['error'] = "Corak gagal disimpan.";
+                    $this->view_pattern($message);
+                }
+            }else{
+                $message['error'] = "Corak gagal disimpan. Corak sudah ada dalam system.";
+                $this->view_pattern($message);
+            }
+        }else{
+            $message['error'] = "Corak gagal disimpan.";
+            $this->view_pattern($message);
+        }
     }
 
 }

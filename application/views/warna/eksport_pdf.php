@@ -82,6 +82,8 @@
     
     $this->fpdf->Ln();
 
+    
+
     /* setting cell untuk waktu pencetakan */
     //$this->fpdf->Cell(9.5, 0.5, 'Printed on : '.date('d/m/Y H:i'));
 

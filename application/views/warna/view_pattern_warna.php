@@ -20,11 +20,11 @@
                                     <?php if(isset($message['error'])): ?>
                                         <div class="da-message error"><?php echo $message['error']; ?></div>
                                     <?php endif; ?>
-                                <div class="da-form-row" style="margin: 10px 220px 10px;">
+                                <div class="da-form-row" style="margin: 30px 220px 10px;">
                                     <a class="btn btn-success btn-create" href="/warna/cetak/<?php echo $uri; ?>" cls='btn' target="_blank" >
                                     <i class='icon-print'></i>&nbsp; Export PDF </a>
                                 </div>
-                                <br><br>
+                                <br><br><br>
                                 <?php foreach ($pattern as $pattern) { ?>
                                 <div class="span2.9">
                                     <div class="da-panel">
@@ -40,6 +40,24 @@
                                         </div>
                                         <div>
                                             <b>Nama</b> &nbsp; <?php echo $pattern['nama']; ?>
+                                        </div>
+                                        <div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <?php foreach ($corak as $corak) { ?>
+                                <div class="span2.9">
+                                    <div class="da-panel">
+                                    <div class="da-panel-content">
+                                        <img src="/uploads/corak/<?php echo $corak['gambar']; ?>" ></td>
+                                    </div>    
+                                        <div>
+                                            <b>Kode</b> &nbsp;&nbsp; <?php echo $corak['kode']; ?>
+                                        </div>
+                                        <div>
+                                            <b>Nama</b> &nbsp; <?php echo $corak['nama']; ?>
                                         </div>
                                         <div>
                                             

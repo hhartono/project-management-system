@@ -189,13 +189,18 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/warna">
+                            <a href="#">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>
                                 Warna
                             </a>
+                            <ul>
+                                <li><a href="/warna">Warna</a></li>
+                                <li><a href="/warna/corak">Corak</a></li>
+                                <li><a href="/warna/pattern_warna">Pattern</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="#">

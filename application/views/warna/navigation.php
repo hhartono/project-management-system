@@ -185,6 +185,7 @@
                             </a>
                             <ul>
                                 <li><a href="/warna">Warna</a></li>
+                                <li><a href="/warna/corak">Corak</a></li>
                                 <li><a href="/warna/pattern_warna">Pattern</a></li>
                             </ul>
                         </li>

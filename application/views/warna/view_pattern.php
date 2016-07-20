@@ -20,9 +20,11 @@
                                     <?php if(isset($message['error'])): ?>
                                         <div class="da-message error"><?php echo $message['error']; ?></div>
                                     <?php endif; ?>
-                                    <a class="btn btn-success btn-create" href="" cls='btn' target="_blank">
-                                    <i class='icon-print'></i>&nbsp; Export PDF </a>
-
+                                    <!-- <div class="da-form-row" style="margin: 10px 220px 10px;">
+                                        <a class="btn btn-success btn-create" href="" cls='btn' target="_blank">
+                                        <i class='icon-print'></i>&nbsp; Export PDF </a>
+                                    </div> -->
+                                    <br>
                                 <?php foreach ($pattern as $pattern) { ?>
                                 <div class="span2.5">
                                     <div class="da-panel">
@@ -47,7 +49,7 @@
                                 <?php } ?>
                                 <div class="span2.5">
                                     <div class="da-panel">
-                                        <div class="da-panel-content" style=" width:150px; height:80px">
+                                        <div class="da-panel-content" style=" width:200px; height:90px">
                                                         <button id="da-warna-cari-dialog" class="btn btn-info" data-target="#da-warna-cari-form-div"><i class="icol-add"></button></i>
                                         </div>
                                     </div>
@@ -58,20 +60,52 @@
                             <div class="da-panel">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
-                                        <i class="icol-grid"></i> Preview Photo
+                                        <i class="icol-grid"></i> Corak
                                     </span>
                                 </div>
-                                
-                                <div id="gallery" style="height:20px; width:20px">
-                                    <?php foreach ($gambar as $gambar) { ?>
-                                        <div class="span5">
-                                            <a href="/uploads/gambar/<?php echo $gambar['gambar'];?>" >
-                                                <img src="/uploads/gambar/<?php echo $gambar['gambar'];?>">
-                                            </a>                                            
+                                    <?php if(isset($message['success'])): ?>
+                                       <div class="da-message success"><?php echo $message['success']; ?></div>
+                                    <?php endif; ?>
+                                    <?php if(isset($message['info'])): ?>
+                                        <div class="da-message info"><?php echo $message['info']; ?></div>
+                                    <?php endif; ?>
+                                    <?php if(isset($message['error'])): ?>
+                                        <div class="da-message error"><?php echo $message['error']; ?></div>
+                                    <?php endif; ?>
+                                    <!-- <div class="da-form-row" style="margin: 10px 220px 10px;">
+                                        <a class="btn btn-success btn-create" href="" cls='btn' target="_blank">
+                                        <i class='icon-print'></i>&nbsp; Export PDF </a>
+                                    </div> -->
+                                <br>
+                                <?php foreach ($corak as $corak) { ?>
+                                <div class="span2.5">
+                                    <div class="da-panel">
+                                        <div class="da-panel-content" style=" width:200px; height:90px; ?>">
+                                           <!--  <form action="/warna/delete_corak/<?php echo $uri;?>" method="post">
+                                               <input type="hidden" name="id" value="<?php echo $corak['id']; ?>">
+                                               <button><i class="icol-cross"></i></button>
+                                           </form> -->
+                                            <img src="/uploads/corak/<?php echo $corak['gambar']; ?>"></td>                                           
                                         </div>
-                                    <?php } ?>
+                                        <div>
+                                            <b>Kode</b> &nbsp;&nbsp; <?php echo $corak['kode']; ?>
+                                        </div>
+                                        <div>
+                                            <b>Nama</b> &nbsp; <?php echo $corak['nama']; ?>
+                                        </div>
+                                        <div>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
-                               
+                                <?php } ?>
+                                <div class="span2.5">
+                                    <div class="da-panel">
+                                        <div class="da-panel-content" style=" width:200px; height:90px">
+                                            <button id="da-corak-cari-dialog" class="btn btn-info" data-target="#da-corak-cari-form-div"><i class="icol-add"></button></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,6 +133,42 @@
                                                 <form id="da-warna-cari-form-val" class="da-form" action="/warna/create_pattern_warna/<?php echo $uri; ?>" method="post">
                                                     <input type="hidden" name="id" value="<?php echo $warna['id'];?>">
                                                 <input type="submit" style="width:150px; height:50px; background:<?php echo $warna['hexadecimal'];?>" value="Klik Disini"></td>
+                                                </form>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="da-corak-cari-form-div" class="form-container">
+                        <div id="da-corak-cari-validate-error" class="da-message error" style="display:none;"></div>
+                        <div class="da-form-inline">
+                            <div class="da-form-row">
+                                <table id="da-corak-datatable-numberpaging" class="da-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Kode Warna</th>
+                                            <th>Nama Warna</th>
+                                            <th>Preview</th>
+                                            <th>Pilih</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            foreach ($corakmaster as $corakmaster) {
+                                        ?>
+                                            <tr class="pilih" data-kode="<?php echo $corakmaster['kode_corak']; ?>">
+                                                <td><?php echo $corakmaster['kode_corak']; ?></td>
+                                                <td><?php echo $corakmaster['nama_corak']; ?></td>
+                                                <td><img src="/uploads/corak/<?php echo $corakmaster['gambar_corak']; ?>" style="height: 200px; width: 200px;"></td>
+                                                <td>
+                                                <form id="da-corak-cari-form-val" class="da-form" action="/warna/create_pattern_corak/<?php echo $uri; ?>" method="post">
+                                                    <input type="hidden" name="id" value="<?php echo $corakmaster['id'];?>">
+                                                <input type="submit" value="Pilih"></td>
                                                 </form>
                                             </tr>
                                             <?php
