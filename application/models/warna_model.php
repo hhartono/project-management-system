@@ -242,6 +242,18 @@ class Warna_model extends CI_Model {
 
     }
 
+    public function get_all_pattern_corak($uri)
+    {
+        $this->db->select('corak_warna.*, corak_master.kode_corak as kode, corak_master.nama_corak as nama, corak_master.gambar_corak as gambar');
+        $this->db->from('corak_warna');
+        $this->db->join('corak_master', 'corak_master.id = corak_warna.corak_id');
+        $this->db->where('corak_warna.subproject_warna_id', $uri);
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+    }
+
     public function get_all_subproject($uri)
     {
         $this->db->select('subproject_master.*');
@@ -263,5 +275,87 @@ class Warna_model extends CI_Model {
         }
 
         return $delete_status;
+    }
+
+    public function get_all_corak()
+    {
+        $this->db->select('corak_master.*');
+        $this->db->from('corak_master');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function get_corak_by_name_kode($name, $kode){
+        $this->db->select('corak_master.*');
+        $this->db->from('corak_master');
+        $this->db->where('nama_corak', $name);
+        $this->db->where('kode_corak', $kode);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
+    public function set_corak($database_input_array)
+    {
+        if($database_input_array['kode_corak'] !== false && $database_input_array['nama_corak'] !== false){
+            date_default_timezone_set('Asia/Jakarta');
+
+            $data = array(
+                'kode_corak' => $database_input_array['kode_corak'],
+                'nama_corak' => $database_input_array['nama_corak']
+            );
+
+            return $this->db->insert('corak_master', $data);
+        }else{
+            return false;
+        }
+    }
+
+    public function delete_corak($corak_id){
+        $response = $this->db->delete('corak_master', array('id' => $corak_id));
+        $affected_row = $this->db->affected_rows();
+
+        $delete_status = false;
+        if($response === true && $affected_row > 0){
+            $delete_status = true;
+        }
+
+        return $delete_status;
+    }
+
+    public function uploadCorakPhoto($id, $file)
+    {
+        $field = array(
+            'gambar_corak' => $file,
+        );
+        $this->db->where('id', $id);
+        return $this->db->update('corak_master', $field);
+    }
+
+    public function get_corak_by_id($corak_id, $subproject_warna_id){
+        $this->db->select('corak_warna.*');
+        $this->db->from('corak_warna');
+        $this->db->where('corak_id', $corak_id);
+        $this->db->where('subproject_warna_id', $subproject_warna_id);
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
+    public function set_corak_warna($database_input_array)
+    {
+        if($database_input_array['corak_id'] !== false && $database_input_array['uri'] !== false){
+            date_default_timezone_set('Asia/Jakarta');
+
+            $data = array(
+                'corak_id' => $database_input_array['corak_id'],
+                'subproject_warna_id' => $database_input_array['uri'],
+            );
+
+            return $this->db->insert('corak_warna', $data);
+        }else{
+            return false;
+        }
     }
 }
