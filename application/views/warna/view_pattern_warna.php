@@ -75,14 +75,20 @@
                                     </span>
                                 </div>
                                 
-                                <div id="gallery">
+                                
+                                 <div id="imgtag">
                                     <?php foreach ($gambar as $gambar) { ?>
                                         <div class="span5">
-                                            <a href="/uploads/gambar/<?php echo $gambar['gambar'];?>" style="width: 470px; height: 265px;">
-                                                <img src="/uploads/gambar/<?php echo $gambar['gambar'];?>">
+                                            <!-- <a href="/uploads/gambar/<?php echo $gambar['gambar'];?>" style="width: 470px; height: 265px;"> -->
+                                                <img id="<?php echo $gambar['id']; ?>" src="/uploads/gambar/<?php echo $gambar['gambar'];?>" sub-id="<?php echo $gambar['subproject_warna_id'];?>">
                                             </a>                                            
                                         </div>
                                     <?php } ?>
+                                    <div id="tagbox"></div>
+                                </div>
+                                <div id="taglist"> 
+                                <ol> 
+                                </ol>
                                 </div>
                                
                             </div>

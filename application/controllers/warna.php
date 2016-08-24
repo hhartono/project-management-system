@@ -23,6 +23,7 @@ class Warna extends CI_Controller {
         $this->load->model('warna_model');
         $this->load->model('login_model');
         $this->load->model('project_model');
+        $this->load->model('customer_model');
         $this->load->model('subproject_model');
         $this->load->helper('cookie');
         $this->load->helper('url');
@@ -843,6 +844,126 @@ class Warna extends CI_Controller {
             $message['error'] = "Corak gagal disimpan.";
             $this->view_pattern($message);
         }
+    }
+
+    public function savetagimg(){
+        if(!empty($this->input->post('type') && $this->input->post('type') == 'insert'))
+        {
+            $database_input_array['id'] = $this->input->post('pic_id');
+            $database_input_array['name'] = $this->input->post('name');
+            $database_input_array['pic_x'] = $this->input->post('pic_x');
+            $database_input_array['pic_y'] = $this->input->post('pic_y');
+
+            $uri = $this->uri->segment(3);
+            $response = $this->warna_model->set_img_tag($database_input_array);
+
+            if ($response) {
+                $message['success'] = "Gambar berhasil di tag.";
+                $this->show_patterngambar_warna($message, $uri);
+            }else{
+                $message['error'] = "Gambar gagal di tag.";
+                $this->show_patterngambar_warna($message, $uri);
+            }
+
+        }
+
+        $taglist = $this->warna_model->taglist($this->input->post('pic_id'));
+            
+            $data['boxes'] = '';
+            $data['lists'] = '';
+
+            if($taglist){
+                foreach ($taglist as $tag) {
+                    $data['boxes'] .= '<div class="tagview" style="left:' . $tag['pic_x'] . 'px;top:' . $tag['pic_y'] . 'px;" id="view_'.$tag['id'].'">';
+                    $data['boxes'] .= '<div class="square"></div>';
+                    $data['boxes'] .= '<div class="person" style="left:' . $tag['pic_x'] . 'px;top:' . $tag['pic_y']  . 'px;">' . $tag['name'] . '</div>';
+                    $data['boxes'] .= '</div>';
+                    
+                    $data['lists'] .= '<li id="'.$tag['id'].'"><a>' . $tag['name'] . '</a> (<a class="remove">Remove</a>)</li>';
+                }
+            }
+            echo json_encode($data);
+    }
+
+    public function taglist()
+    {
+        $user_id = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['project'] = $user_info['project'];
+            $data['uri'] = $this->uri->segment(3);
+
+            // access level
+            $create=substr($data['project'],0,1); 
+            $edit=substr($data['project'],1,1); 
+            $delete=substr($data['project'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+
+            // message
+            $data['message'] = $message;
+
+            // get necessary data
+            $data['gambar'] = $this->warna_model->get_all_gambar_by_id($uri);
+            $data['warna'] = $this->warna_model->get_all_warnas();
+            $data['pattern'] = $this->warna_model->get_all_pattern_warna($uri);
+            $data['corak'] = $this->warna_model->get_all_pattern_corak($uri);
+            
+            // show the view
+            $this->load->view('header');
+            $this->load->view('warna/navigation', $data);
+            $this->load->view('warna/view_pattern_warna', $data);
+            $this->load->view('warna/footer');
+    }
+
+    public function get_all_warna_customer_names(){
+        $warna_customers = $this->get_all_warna_customers();
+        $customer_name = array();
+        foreach($warna_customers as $warna_customer){
+            $customer_name[] = $warna_customer['name'];
+        }
+
+        echo json_encode($customer_name);
+    }
+
+    public function get_all_warna_customers(){
+        $warna_customers = $this->customer_model->get_all_customers();
+        return $warna_customers;
+    }
+
+    public function get_all_warna_pattern(){
+        $warna_patterns = $this->get_all_warna_patterns();
+        $pattern_name = array();
+        foreach($warna_patterns as $warna_pattern){
+            $pattern_name[] = $warna_pattern['nama'];
+        }
+
+        echo json_encode($pattern_name);
+    }
+
+    public function get_all_warna_patterns(){
+        $uri3 = $this->uri->segment(3);
+        $warna_patterns = $this->warna_model->get_pattern_warna($uri3);
+        return $warna_patterns;
     }
 
 }

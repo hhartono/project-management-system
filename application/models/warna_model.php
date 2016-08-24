@@ -242,6 +242,19 @@ class Warna_model extends CI_Model {
 
     }
 
+    public function get_pattern_warna()
+    {
+        //$uri = $this->uri->segment(3);
+        $this->db->select('pattern_warna.*, warna_master.kode_warna as kode, warna_master.nama_warna as nama, warna_master.hexadecimal as hexadecimal');
+        $this->db->from('pattern_warna');
+        $this->db->join('warna_master', 'warna_master.id = pattern_warna.warna_id');
+        //$this->db->where('pattern_warna.subproject_warna_id', $uri);
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+    }
+
     public function get_all_pattern_corak($uri)
     {
         $this->db->select('corak_warna.*, corak_master.kode_corak as kode, corak_master.nama_corak as nama, corak_master.gambar_corak as gambar');
@@ -357,5 +370,32 @@ class Warna_model extends CI_Model {
         }else{
             return false;
         }
+    }
+
+    public function set_img_tag($database_input_array){
+        if($database_input_array['id'] !== false && $database_input_array['name'] !== false){
+            date_default_timezone_set('Asia/Jakarta');
+
+            $data = array(
+                'gambar_id' => $database_input_array['id'],
+                'name' => $database_input_array['name'],
+                'pic_x' => $database_input_array['pic_x'],
+                'pic_y' => $database_input_array['pic_y']
+            );
+
+            return $this->db->insert('image_tag', $data);
+        }else{
+            return false;
+        }
+    }
+
+    public function taglist($id)
+    {
+        $this->db->select('image_tag.*');
+        $this->db->from('image_tag');
+        $this->db->where('image_tag.gambar_id', $id);
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 }
