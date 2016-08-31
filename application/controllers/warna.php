@@ -430,6 +430,7 @@ class Warna extends CI_Controller {
             // get necessary data
             $data['subpattern'] = $this->warna_model->get_all_pattern_subproject($uri);
             $data['subgambar'] = $this->warna_model->get_all_gambar_subproject($uri);
+            $data['subpro'] = $this->warna_model->get_subproject_by_uri($uri); 
 
             // show the view
             $this->load->view('header');
@@ -954,15 +955,15 @@ class Warna extends CI_Controller {
         $warna_patterns = $this->get_all_warna_patterns();
         $pattern_name = array();
         foreach($warna_patterns as $warna_pattern){
-            $pattern_name[] = $warna_pattern['nama'];
+            $pattern_name[] = $warna_pattern['nama_warna'];
         }
 
         echo json_encode($pattern_name);
     }
 
     public function get_all_warna_patterns(){
-        $uri3 = $this->uri->segment(3);
-        $warna_patterns = $this->warna_model->get_pattern_warna($uri3);
+        //$uri3 = $this->uri->segment(3);
+        $warna_patterns = $this->warna_model->get_all_warnas();
         return $warna_patterns;
     }
 

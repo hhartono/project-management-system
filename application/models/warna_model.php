@@ -33,13 +33,22 @@ class Warna_model extends CI_Model {
         return $query->row_array();
     }
 
-     public function get_subproject_by_name($name){
+    public function get_subproject_by_name($name){
         $this->db->select('subproject_warna.*');
         $this->db->from('subproject_warna');
         $this->db->where('subproject_warna.subproject_id', $name);
         $query = $this->db->get();
 
         return $query->row_array();
+    }
+
+    public function get_subproject_by_uri($uri){
+        $this->db->select('subproject_master.*');
+        $this->db->from('subproject_master');
+        $this->db->where('subproject_master.project_id', $uri);
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 
     public function get_warna_by_name($name){

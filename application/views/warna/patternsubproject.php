@@ -86,7 +86,19 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama SubProject</label>
                                     <div class="da-form-item large">
-                                        <input id="pattern-create-subproject" type="text" name="subproject_name">
+                                        
+                                             <select class="form-control" name="cari">
+                                        <?php 
+                                            echo '<option>--- Pilih SubProject ---</option>';
+                                            foreach ($subpro as $subpro)
+                                            {            
+                                                echo '<option value="'.$subpro['name'].'">'.$subpro['name'].'</option>';
+                                            }
+                                        ?>
+                                            </select>
+                                            
+                                        
+                                        <!-- <input id="pattern-create-subproject" type="text" name="subproject_name"> -->
                                         <input type="hidden" name="projectid" value="<?php echo $uri; ?>">
                                     </div>
                                 </div>
