@@ -126,8 +126,8 @@
       // Remove the tag
       $.ajax({
         type: "POST", 
-        url: "/warna/savetagimg", 
-        data: "tag_id=" + id + "&type=remove",
+        url: "/warna/deletetagimg", 
+        data: "pic_id=" + id + "&type=remove",
         success: function(data){
             var img = $('#imgtag').find('img');
             var id = $(img).attr('id');

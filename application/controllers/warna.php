@@ -880,10 +880,20 @@ class Warna extends CI_Controller {
                     $data['boxes'] .= '<div class="person" style="left:' . $tag['pic_x'] . 'px;top:' . $tag['pic_y']  . 'px;">' . $tag['name'] . '</div>';
                     $data['boxes'] .= '</div>';
                     
-                    $data['lists'] .= '<li id="'.$tag['id'].'"><a>' . $tag['name'] . '</a> (<a class="remove">Remove</a>)</li>';
+                    $data['lists'] .= '<li id="'.$tag['id'].'"><a>' . $tag['name'] . '</a> (<a class="remove">Hapus</a>)</li>';
                 }
             }
             echo json_encode($data);
+    }
+
+    public function deletetagimg()
+    {
+        if( !empty($this->input->post('type') && $this->input->post('type') == 'remove'))
+        {
+          $id = $this->input->post('pic_id');
+          $sql = "DELETE FROM image_tag WHERE id = '".$id."'";
+          $qry = mysql_query($sql);
+        }
     }
 
     public function taglist()

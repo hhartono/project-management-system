@@ -305,6 +305,31 @@
 
         });
 
+        $("#da-corak-cari-form-div").dialog({
+            autoOpen: false,
+            title: "Tambah Corak",
+            modal: true,
+            width: "640",
+            buttons: [{
+                text: "Keluar",
+                click: function() {
+                    $("#da-corak-cari-form-div").dialog("option", {modal: true}).dialog("close");
+                }}]
+        });
+
+        $("#da-corak-cari-dialog").bind("click", function(event) {
+            event.preventDefault();
+            $("#da-corak-cari-form-div").dialog("option", {modal: true}).dialog("open");
+
+            $("#da-corak-cari-dialog").getElementById("kode_corak").value = $(this).attr('data-kode');
+
+            /*var id = $(this).data("value");
+            $.get( "/warna/get_subproject_warna_detail/" + id, function(data) {
+                $("#subproject-warna-id").val(id);
+            }, "json" );*/
+
+        });
+
         $(document).on('click', '.pilih', function (e) {
             document.getElementById("nim").value = $(this).attr('data-nim');
             $('#myModal').modal('hide');
