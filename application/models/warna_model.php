@@ -65,6 +65,16 @@ class Warna_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_all_warnacorak()
+    {
+        $query = $this->db->query('select kode, nama
+                            from (select kode_warna as kode, nama_warna as nama from warna_master
+                            UNION 
+                                select kode_corak as kode, nama_corak as nama from corak_master) as pattern');
+        
+        return $query->result_array();
+    }
+
     public function update_warna($database_input_array)
     {
         if($database_input_array['id'] !== false && $database_input_array['kode_warna'] !== false 

@@ -965,7 +965,7 @@ class Warna extends CI_Controller {
         $warna_patterns = $this->get_all_warna_patterns();
         $pattern_name = array();
         foreach($warna_patterns as $warna_pattern){
-            $pattern_name[] = $warna_pattern['nama_warna'];
+            $pattern_name[] = $warna_pattern['nama'];
         }
 
         echo json_encode($pattern_name);
@@ -973,7 +973,7 @@ class Warna extends CI_Controller {
 
     public function get_all_warna_patterns(){
         //$uri3 = $this->uri->segment(3);
-        $warna_patterns = $this->warna_model->get_all_warnas();
+        $warna_patterns = $this->warna_model->get_all_warnacorak();
         return $warna_patterns;
     }
 
