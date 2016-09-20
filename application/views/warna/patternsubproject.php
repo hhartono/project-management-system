@@ -87,12 +87,12 @@
                                     <label class="da-form-label">Nama SubProject</label>
                                     <div class="da-form-item large">
                                         
-                                             <select class="form-control" name="cari">
+                                             <select class="form-control" name="subproject_name">
                                         <?php 
                                             echo '<option>--- Pilih SubProject ---</option>';
                                             foreach ($subpro as $subpro)
                                             {            
-                                                echo '<option value="'.$subpro['name'].'">'.$subpro['name'].'</option>';
+                                                echo '<option value="'.$subpro['name'].'" name="subproject_name">'.$subpro['name'].'</option>';
                                             }
                                         ?>
                                             </select>
