@@ -47,7 +47,7 @@ class Warna extends CI_Controller {
 
     public function create_warna(){
         // check all necessary input
-        if(!empty($this->input->post('kode_warna')) && !empty($this->input->post('nama_warna')) && !empty($this->input->post('kode_pantone')) && !empty($this->input->post('hexadecimal'))){
+        if(!empty($this->input->post('kode_warna')) && !empty($this->input->post('nama_warna')) && !empty($this->input->post('kode_pantone'))){
             // search for customer id
             $database_input_array = array();
 
@@ -57,13 +57,21 @@ class Warna extends CI_Controller {
 
             $database_input_array['kode_pantone'] = $this->input->post('kode_pantone');
 
-            $database_input_array['hexadecimal'] = $this->input->post('hexadecimal');
+            //$database_input_array['hexadecimal'] = $this->input->post('hexadecimal');
 
             // get the warna start date
             date_default_timezone_set('Asia/Jakarta');
 
             // check if there is any duplicate
             $duplicate_check = $this->warna_model->get_warna_by_name_kode($database_input_array['nama_warna'], $database_input_array['kode_warna']);
+
+            $hexa = $this->warna_model->get_hexa_from_pantone($database_input_array['kode_pantone']);
+            $database_input_array['hexadecimal'] = $hexa['Hex'];
+
+            if(empty($hexa)){
+                $message['error'] = "Kode pantone belum ada dalam system.";
+                $this->show_table($message);
+            }
 
             if(empty($duplicate_check)){
                 $response = $this->warna_model->set_warna($database_input_array);
@@ -946,6 +954,24 @@ class Warna extends CI_Controller {
             $this->load->view('warna/footer');
     }
 
+    public function pantone()
+    {
+        $user_id = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['project'] = $user_info['project'];
+            $data['uri'] = $this->uri->segment(3);
+
+            
+            //$this->load->view('header');
+            //$this->load->view('warna/navigation', $data);
+            $this->load->view('warna/dynamic-create', $data);
+            //$this->load->view('warna/footer');
+    }
+
     public function get_all_warna_customer_names(){
         $warna_customers = $this->get_all_warna_customers();
         $customer_name = array();
@@ -975,6 +1001,27 @@ class Warna extends CI_Controller {
         //$uri3 = $this->uri->segment(3);
         $warna_patterns = $this->warna_model->get_all_warnacorak();
         return $warna_patterns;
+    }
+
+    public function create_pantone(){
+        $pantone_json = file_get_contents('assets/pantone/pantone_CMYK_RGB_Hex.json');
+        $pantone = json_decode($pantone_json);
+        
+        $array = array();
+        $array = $pantone;
+
+        foreach ($array as $key => $value) {
+            $data = array(
+                'Code' => $array[$key]->Code,
+                'CMYK' => $array[$key]->C . ", " . $array[$key]->M . ", " . $array[$key]->Y . ", " . $array[$key]->K,
+                'RGB' => $array[$key]->R . ", " . $array[$key]->G . ", " . $array[$key]->B,
+                'Hex' => $array[$key]->Hex
+            );
+
+            $this->db->insert('pantone_master', $data);
+        }
+
+        echo "Added Successfully!";
     }
 
 }

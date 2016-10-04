@@ -138,6 +138,17 @@ class Warna_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_hexa_from_pantone($hexa)
+    {
+        $this->db->select('pantone_master.*');
+        $this->db->from('pantone_master');
+        $this->db->where('pantone_master.Code', $hexa);
+        
+        $query = $this->db->get();
+
+        return $query->row_array();
+    }
+
     public function set_project_warna($database_input_array)
     {
         if($database_input_array['project_id'] !== false){
@@ -416,5 +427,25 @@ class Warna_model extends CI_Model {
         $query = $this->db->get();
 
         return $query->result_array();
+    }
+
+    public function set_pantone()
+    {   
+        $pantone_json = file_get_contents('assets/pantone/pantone_CMYK_RGB_Hex.json');
+        $pantone = json_decode($pantone_json,true);
+        
+        $array = array();
+        $array = $pantone;
+
+        foreach ($array as $key => $value) {
+            $data = array(
+                'kode_warna' => $array[$key]->Code,
+                'nama_warna' => $array[$key]->C . ", " . $array[$key]->M . ", " . $array[$key]->Y . ", " . $array[$key]->K,
+                'kode_pantone' => $array[$key]->R . ", " . $array[$key]->G . ", " . $array[$key]->B,
+                'hexadecimal' => $array[$key]->Hex
+            );
+
+            $this->db->insert('warna_master', $data);
+        }
     }
 }
