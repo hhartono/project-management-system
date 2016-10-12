@@ -33,7 +33,9 @@
 
     <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.lightbox-0.5.css" media="screen">   
+    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.lightbox-0.5.css" media="screen">
+
+    <link rel="stylesheet" href="/assets/css/tagging.css" type="text/css" >   
     
 <!--     <link rel="stylesheet" href="/assets/dropzone/dist/dropzone.css"> -->
 

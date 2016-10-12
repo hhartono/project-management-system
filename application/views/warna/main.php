@@ -99,12 +99,12 @@
                                         <input type="text" name="kode_pantone">
                                     </div>
                                 </div>
-                                <div class="da-form-row">
+                                <!-- <div class="da-form-row">
                                     <label class="da-form-label">Hexadecimal</label>
                                     <div class="da-form-item large">
                                         <input type="text" name="hexadecimal" autocomplete="off">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </form>
                     </div>
@@ -131,12 +131,12 @@
                                         <input id="warna-edit-kode-pantone" type="text" name="kode_pantone">
                                     </div>
                                 </div>
-                                <div class="da-form-row">
+                                <!-- <div class="da-form-row">
                                     <label class="da-form-label">Hexadecimal</label>
                                     <div class="da-form-item large">
                                         <input id="warna-edit-hexadecimal" type="text" name="hexadecimal">
                                     </div>
-                                </div>
+                                </div> -->
                                 <input id="warna-edit-id" type="hidden" name="id">
                             </div>
                         </form>
