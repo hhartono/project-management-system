@@ -65,6 +65,15 @@ class Warna_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function get_all_pantone()
+    {
+        $this->db->select('pantone_master.*');
+        $this->db->from('pantone_master');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function get_all_warnacorak()
     {
         $query = $this->db->query('select kode, nama

@@ -188,6 +188,58 @@ class Warna extends CI_Controller {
             $this->load->view('warna/footer');
     }
 
+    public function pantone_master()
+    {
+        $message = array();
+        $this->show_table_pantone();
+    }
+
+    private function show_table_pantone()
+    {
+        $user_id = $this->tank_auth->get_user_id();
+        
+            $user_info = $this->login_model->get_user_info($user_id);
+            $data['userid'] = $user_info['id'];
+            $data['username'] = $user_info['name'];
+            $data['company_title'] = $user_info['title'];
+            $data['project'] = $user_info['project'];
+
+            // access level
+            $create=substr($data['project'],0,1); 
+            $edit=substr($data['project'],1,1); 
+            $delete=substr($data['project'],2,1); 
+            
+            if($create != 0){
+                $data['access']['create'] = true;            
+            }else{
+                $data['access']['create'] = false;
+            }
+            
+            if($edit != 0){
+                $data['access']['edit'] = true;            
+            }else{
+                $data['access']['edit'] = false;
+            }
+
+            if($delete != 0){
+                $data['access']['delete'] = true;    
+            }else{
+                $data['access']['delete'] = false;               
+            }
+
+            // message
+            //$data['message'] = $message;
+
+            // get necessary data
+            $data['warnas'] = $this->warna_model->get_all_pantone();
+
+            // show the view
+            $this->load->view('header');
+            $this->load->view('warna/navigation', $data);
+            $this->load->view('warna/pantone', $data);
+            $this->load->view('warna/footer');
+    }
+
     public function corak()
     {
         $message = array();
