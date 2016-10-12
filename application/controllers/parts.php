@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Parts extends CI_Controller{
 	public $group;
-	public $url = 'http://architect.local/';
+    private $url;
 
 	public function __construct(){
 		parent::__construct();
@@ -12,6 +12,8 @@ class Parts extends CI_Controller{
 		$this->load->library(array('tank_auth', 'user_agent'));
 		$this->lang->load('tank_auth');
 		$this->_is_logged_in();
+
+        $this->url = base_url();
 	}
 
 	public function _is_logged_in(){
@@ -181,7 +183,6 @@ class Parts extends CI_Controller{
         		$data['gn'] = $group;
         		$data['parts'] = $this->parts_model->get_parts_by_group_name($group);
     		} else{
-    			echo $ref;
     			$data['gn'] = $this->group;
     			$data['parts'] = $this->parts_model->get_parts_by_group_name($this->group);
     		}

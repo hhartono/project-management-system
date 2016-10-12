@@ -53,13 +53,6 @@
         <div id="da-header-bottom">
             <!-- Container -->
             <div class="da-container clearfix">
-                <!--
-                <div id="da-search">
-                    <form>
-                        <input type="text" class="search-query" placeholder="Search...">
-                    </form>
-                </div>
-                -->
                 <!-- Breadcrumbs -->
                 <div id="da-breadcrumb">
                     <ul>
@@ -174,7 +167,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/gnd">
+                            <a href="#">
                                 <!-- Icon Container -->
                                     <span class="da-nav-icon">
                                         <i class="icon-table"></i>
@@ -239,20 +232,6 @@
                                 <li><a href="/absensi/projectdetail_worker">Project Detail Tukang</a></li>
                             </ul>
                         </li>
-
-                        <!--
-                        <li>
-                            <a href="statistics.html">
-                                // Nav Notification
-                                <span class="da-nav-count">32</span>
-                                // Icon Container
-                                    <span class="da-nav-icon">
-                                        <i class="icon-stats"></i>
-                                    </span>
-                                Statistics
-                            </a>
-                        </li>
-                        -->
                     </ul>
                 </div>
 

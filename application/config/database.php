@@ -51,7 +51,7 @@ $database_password = getenv('DB_PASSWORD');
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'inerre1';
+$db['default']['password'] = '';
 $db['default']['database'] = 'project_management_system';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -65,6 +65,21 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$db['gnd']['hostname'] = 'localhost';
+$db['gnd']['username'] = 'root';
+$db['gnd']['password'] = '';
+$db['gnd']['database'] = 'gnd';
+$db['gnd']['dbdriver'] = 'mysql';
+$db['gnd']['dbprefix'] = '';
+$db['gnd']['pconnect'] = FALSE;
+$db['gnd']['db_debug'] = TRUE;
+$db['gnd']['cache_on'] = FALSE;
+$db['gnd']['cachedir'] = '';
+$db['gnd']['char_set'] = 'utf8';
+$db['gnd']['dbcollat'] = 'utf8_general_ci';
+$db['gnd']['swap_pre'] = '';
+$db['gnd']['autoinit'] = TRUE;
+$db['gnd']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

@@ -36,7 +36,7 @@ class Intivo extends CI_Controller{
                     $message['success'] = "Item set berhasil disimpan.";
                     $this->show_table($message);
                 } else{
-                    $message['error'] = "Item set gagal diisimpan.";
+                    $message['error'] = "Item set gagal disimpan.";
                     $this->show_table($message);
                 }
             } else{
