@@ -177,6 +177,15 @@
                         <li>
                             <a href="#">
                                 <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Generator No. Dokumen
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <!-- Icon Container -->
                                 	<span class="da-nav-icon">
                                         <i class="icon-table"></i>
                                     </span>

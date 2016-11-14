@@ -174,6 +174,15 @@
                                 <li><a href="/intivoacc">Intivo Accessories</a></li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="/gnd">
+                                <!-- Icon Container -->
+                                    <span class="da-nav-icon">
+                                        <i class="icon-table"></i>
+                                    </span>
+                                Generator No. Dokumen
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="#">
                                 <!-- Icon Container -->

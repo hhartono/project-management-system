@@ -5,13 +5,12 @@
                     <?php if (isset($access['create']) && $access['create']): ?>
                         <div class="row-fluid">
                             <div class="span12">
-                                
                             </div>
                         </div>
                     <?php endif; ?>
                     <div class="row-fluid">
                         <div class="span12">
-                            <div class="da-panel">
+                            <div class="da-panel ">
                                 <div class="da-panel-header">
                                     <span class="da-panel-title">
                                         <i class="icol-grid"></i> Generator No. Dokumen
@@ -26,194 +25,69 @@
                                 <?php if(isset($message['error'])): ?>
                                     <div class="da-message error"><?php echo $message['error']; ?></div>
                                 <?php endif; ?>
+                                <form action="#" class="da-panel-content">
+                                    <b>Jenis Dokumen : </b>
+                                    <select id="doc_type" name="doc_types">
+                                        <option selected disabled>--Pilih Jenis Dokumen--</option>
+                                        <option>Invoice</option>
+                                        <option>Quotation</option>
+                                        <option>PO</option>
+                                    </select> &nbsp;
+                                    <select id="month">
+                                        <option selected disabled>--Pilih Bulan--</option>
+                                        <option>Januari</option>
+                                        <option>Februari</option>
+                                        <option>Maret</option>
+                                        <option>April</option>
+                                        <option>Mei</option>
+                                        <option>Juni</option>
+                                        <option>Juli</option>
+                                        <option>Agustus</option>
+                                        <option>September</option>
+                                        <option>Oktober</option>
+                                        <option>November</option>
+                                        <option>Desember</option>
+                                    </select> &nbsp;
+                                    <input type="submit" id="create_new_doc" class="btn btn-primary" name="cnd" value="Create Document">
+                                </form>
                                 <div class="da-panel-content da-table-container">
-                                    <table id="da-gnd-datatable-numberpaging" class="da-table">
+                                    <table id="gnd-report" class="da-table">
                                         <thead>
-                                            <tr>
-                                            <form id="from_doc" action="/gnd/show_report" method="post">
-                                                Jenis Dokumen :
-                                                <select id="doc_type" name="doc_types">
-                                                    <option selected disabled>--Pilih Jenis Dokumen--</option>
-                                                    <option>Invoice</option>
-                                                    <option>Quotation</option>
-                                                    <option>PO</option>
-                                                </select>
-                                                <input type="submit" id="create_new_doc" name="cnd" value="Create Document">
-                                                <input type="submit" id="show_report" name="report" value="Show Report">
-                                            </form>
-                                            </tr>
-                                            <tr>
-                                                <?php if(!empty($type)): ?>
-                                                    <?php if($type == 'inv'): ?>
-                                                        <th>No</th>
-                                                        <th>Date Created</th>
-                                                        <th>Client</th>
-                                                        <th>Project</th>
-                                                        <th>Invoice Number</th>
-                                                        <th>Document Number</th>                                                        
-                                                    <?php elseif($type == 'quo'): ?>
-                                                        <th>No</th>
-                                                        <th>Date Created</th>
-                                                        <th>Client</th>
-                                                        <th>Project</th>
-                                                        <th>Document Number</th>
-                                                    <?php elseif($type == 'po'): ?>
-                                                        <th>No</th>
-                                                        <th>Date Created</th>
-                                                        <th>Supplier</th>
-                                                        <th>Project</th>
-                                                        <th>Document Number</th>
-                                                    <?php endif ?>
-                                                    <?php
-                                                        $control_label_array = array();
-                                                        // $control_label_array[] = "Lihat";
-
-                                                        if(isset($access['edit']) && $access['edit']){
-                                                            $control_label_array[] = "Ubah";
-                                                        }
-
-                                                        if(isset($access['delete']) && $access['delete']){
-                                                            $control_label_array[] = "Hapus";
-                                                        }
-                                                    ?>
-                                                    <th><?php echo implode('/', $control_label_array); ?></th>
-                                                <?php endif ?>
-                                            </tr>
+                                            <th>No</th>
+                                            <th>Date Created</th>
+                                            <th>Client</th>
+                                            <th>Supplier</th>
+                                            <th>Project</th>
+                                            <th>Invoice Number</th>
+                                            <th>Document Number</th>
+                                            <th>Ket</th>
                                         </thead>
-                                        <tbody>
-                                        <!--Pakai if u/ tahu $report kosong atau isi-->
-                                        <?php 
-                                            $num = 0; 
-                                            if(!empty($report)): 
-                                                foreach($report as $each_report): ?>
-                                                    <tr class="result">                                                    
-                                                        <?php $num += 1; ?>
-                                                        <td class="report-no-row"><?php echo $num; ?></td>
-                                                        <?php if($type == 'inv'): ?>
-                                                            <?php
-                                                                $date_array = array();
-                                                                if(!empty($each_report['creation_date'])){
-                                                                    $date_array[] = $each_report['creation_date'];
-                                                                }
-                                                            ?>
-                                                            <td class="report-date-row"><?php echo implode(', ', $date_array); ?></td>
+                                    </table>
 
-                                                            <?php
-                                                                $client_array = array();
-                                                                if(!empty($each_report['client'])){
-                                                                    $client_array[] = $each_report['client'];
-                                                                }
-                                                            ?>
-                                                            <td class="client-row"><?php echo implode(', ', $client_array); ?></td>
+                                    <table id="gnd-report-2" class="da-table">
+                                        <thead>
+                                            <th>No</th>
+                                            <th>Date Created</th>
+                                            <th>Client</th>
+                                            <th>Supplier</th>
+                                            <th>Project</th>
+                                            <th>Invoice Number</th>
+                                            <th>Document Number</th>
+                                            <th>Ket</th>
+                                        </thead>
+                                    </table>
 
-                                                            <?php
-                                                                $project_array = array();
-                                                                if(!empty($each_report['project'])){
-                                                                    $project_array[] = $each_report['project'];
-                                                                }
-                                                            ?>
-                                                            <td class="project-row"><?php echo implode(', ', $project_array); ?></td>
-
-                                                            <?php
-                                                                $inv_num_array = array();
-                                                                if(!empty($each_report['inv_num'])){
-                                                                    $inv_num_array[] = $each_report['inv_num'];
-                                                                }
-                                                            ?>
-                                                            <td class="inv-num-row"><?php echo implode(', ', $inv_num_array); ?></td>
-
-                                                            <?php
-                                                                $doc_num_array = array();
-                                                                if(!empty($each_report['doc_num'])){
-                                                                    $doc_num_array[] = $each_report['doc_num'];
-                                                                }
-                                                            ?>
-                                                            <td class="doc_num-row"><?php echo implode(', ', $doc_num_array); ?></td>
-                                                        <?php elseif($type == 'quo'): ?>
-                                                            <?php
-                                                                $date_array = array();
-                                                                if(!empty($each_report['creation_date'])){
-                                                                    $date_array[] = $each_report['creation_date'];
-                                                                }
-                                                            ?>
-                                                            <td class="report-date-row"><?php echo implode(', ', $date_array); ?></td>
-
-                                                            <?php
-                                                                $client_array = array();
-                                                                if(!empty($each_report['client'])){
-                                                                    $client_array[] = $each_report['client'];
-                                                                }
-                                                            ?>
-                                                            <td class="client-row"><?php echo implode(', ', $client_array); ?></td>
-
-                                                            <?php
-                                                                $project_array = array();
-                                                                if(!empty($each_report['project'])){
-                                                                    $project_array[] = $each_report['project'];
-                                                                }
-                                                            ?>
-                                                            <td class="project-row"><?php echo implode(', ', $project_array); ?></td>
-
-                                                            <?php
-                                                                $doc_num_array = array();
-                                                                if(!empty($each_report['doc_num'])){
-                                                                    $doc_num_array[] = $each_report['doc_num'];
-                                                                }
-                                                            ?>
-                                                            <td class="doc_num-row"><?php echo implode(', ', $doc_num_array); ?></td>
-                                                        <?php elseif($type == 'po'): ?>
-                                                            <?php
-                                                                $date_array = array();
-                                                                if(!empty($each_report['creation_date'])){
-                                                                    $date_array[] = $each_report['creation_date'];
-                                                                }
-                                                            ?>
-                                                            <td class="report-date-row"><?php echo implode(', ', $date_array); ?></td>
-
-                                                            <?php
-                                                                $supplier_array = array();
-                                                                if(!empty($each_report['supplier'])){
-                                                                    $supplier_array[] = $each_report['supplier'];
-                                                                }
-                                                            ?>
-                                                            <td class="client-row"><?php echo implode(', ', $supplier_array); ?></td>
-
-                                                            <?php
-                                                                $project_array = array();
-                                                                if(!empty($each_report['project'])){
-                                                                    $project_array[] = $each_report['project'];
-                                                                }
-                                                            ?>
-                                                            <td class="project-row"><?php echo implode(', ', $project_array); ?></td>
-
-                                                            <?php
-                                                                $doc_num_array = array();
-                                                                if(!empty($each_report['doc_num'])){
-                                                                    $doc_num_array[] = $each_report['doc_num'];
-                                                                }
-                                                            ?>
-                                                            <td class="doc_num-row"><?php echo implode(', ', $doc_num_array); ?></td>
-                                                        <?php endif ?>
-
-                                                        <td class="da-icon-column">
-                                                            <?php if(isset($access['edit']) && $access['edit']): ?>
-                                                                <a class="da-report-edit-dialog" href="#" data-value="<?php echo $each_report['id']; ?>"><i class="icol-pencil"></i></a>
-                                                            <?php endif; ?>
-
-                                                            <?php if(isset($access['delete']) && $access['delete']):
-                                                                $item_id = $each_report['id'];
-                                                                $delete_url = "/gnd/delete_item/" . $item_id;
-                                                            ?>
-                                                            <a href=<?php echo $delete_url; ?>><i class="icol-cross"></i></a>
-                                                            <?php endif; ?>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach ?>
-                                            <?php if($type = 'quo'): ?>
-
-                                            <?php endif ?>
-                                        <?php endif ?>
-                                        </tbody-->
+                                    <table id="gnd-report-3" class="da-table">
+                                        <thead>
+                                            <th>No</th>
+                                            <th>Date Created</th>
+                                            <th>Client</th>
+                                            <th>Supplier</th>
+                                            <th>Project</th>
+                                            <th>Invoice Number</th>
+                                            <th>Document Number</th>
+                                            <th>Ket</th>
+                                        </thead>
                                     </table>
                                 </div>
                             </div>
@@ -221,8 +95,7 @@
                     </div>
 
                     <!-- Create Invoice Form -->
-                    <div id="da-gnd-create-form-invoice-div" class="form-container modal">
-                        <!--form id="da-gnd-create-form-invoice-val" class="da-form" action="/gnd/create_doc" method="post"-->                   
+                    <div id="da-gnd-create-form-invoice-div" class="form-container modal">                   
                         <form id="da-gnd-create-form-invoice-val" class="da-form" method="post">
                             <div id="da-gnd-create-invoice-validate-error" class="da-message error" style="display:none;"></div>
                             <div class="da-form-inline modal-content">
@@ -235,7 +108,7 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Project</label>
                                     <div class="da-form-item large">
-                                        <input type="text" id="project" name="project" autofocus autocomplete="off">
+                                        <input type="text" id="project" name="project" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
@@ -248,21 +121,19 @@
                                                 }
                                             ?>
                                         </select>
+                                    <input type="submit" id="search_inv" name="search_inv" class="btn btn-danger" value="Search" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <div class="da-form-label large">
-                                        <input type="submit" id="generate_inv" name="generate" value="Generate" autocomplete="off">
-                                        <!--input type="button" name="generate" onclick="alert('HW')" value="Generate" autocomplete="off"-->
-                                        <!--input type="button" name="generate" value="Generate" autocomplete="off"-->
+                                        <input type="submit" id="generate_inv" name="generate" class="btn btn-primary" value="Generate" autocomplete="off">
                                     </div>
                                     <div class="da-form-item large">
                                         <input type="text" id="doc_num_inv" name="doc_num" autocomplete="off" readonly>
-                                        <input type="button" id="btnCopy" value="Copy">
+                                        <input type="button" id="btn_cp_inv" class="btn btn-default" value="Copy" data-clipboard-target="#doc_num_inv">
                                     </div>
                                 </div>
-                                <input type="hidden" value="<?php echo $userid; ?>" name="user">
-                                <input type="hidden" id="doc" name="doc" value="inv">
+                                <input type="hidden" id="user" value="<?php echo $userid; ?>" name="user">
                             </div>
                         </form>
                     </div>
@@ -275,26 +146,25 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Klien</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="klien" autocomplete="off">
+                                        <input type="text" id="klienq" name="klien" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Project</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="project" autofocus autocomplete="off">
+                                        <input type="text" id="projectq" name="project" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <div class="da-form-label large">
-                                        <input type="submit" id="generate_quo" name="generate" value="Generate" autocomplete="off">
+                                        <input type="submit" id="generate_quo" name="generate" class="btn btn-primary" value="Generate" autocomplete="off">
                                     </div>
                                     <div class="da-form-item large">
                                         <input type="text" id="doc_num_quo" name="doc_num" autocomplete="off" readonly>
-                                        <input type="button" id="btnCopy" value="Copy">
+                                        <input type="button" id="btn_cp_quo" class="btn btn-default" value="Copy" data-clipboard-target="#doc_num_quo">
                                     </div>
                                 </div>
-                                <input type="hidden" value="<?php echo $userid; ?>" name="user">
-                                <input type="hidden" id="doc" name="doc" value="quo">
+                                <input type="hidden" id="user" value="<?php echo $userid; ?>" name="user">
                             </div>
                         </form>
                     </div>
@@ -307,26 +177,25 @@
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Supplier</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="supplier" autocomplete="off">
+                                        <input type="text" id="supplier" name="supplier" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <label class="da-form-label">Nama Project</label>
                                     <div class="da-form-item large">
-                                        <input type="text" name="project" autofocus autocomplete="off">
+                                        <input type="text" id="projectp" name="project" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="da-form-row">
                                     <div class="da-form-label large">
-                                        <input type="submit" id="generate_po" name="generate" value="Generate" autocomplete="off">
+                                        <input type="submit" id="generate_po" name="generate" class="btn btn-primary" value="Generate" autocomplete="off">
                                     </div>
                                     <div class="da-form-item large">
                                         <input type="text" id="doc_num_po" name="doc_num" autocomplete="off" readonly>
-                                        <input type="button" id="btnCopy" value="Copy">
+                                        <input type="button" id="btn_cp_po" class="btn btn-default" value="Copy" data-clipboard-target="#doc_num_po">
                                     </div>
                                 </div>
-                                <input type="hidden" value="<?php echo $userid; ?>" name="user">
-                                <input type="hidden" id="doc_po" name="doc" value="po">
+                                <input type="hidden" id="user" value="<?php echo $userid; ?>" name="user">
                             </div>
                         </form>
                     </div>

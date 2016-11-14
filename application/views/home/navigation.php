@@ -153,6 +153,7 @@
                             </a>
                             <ul>
                                 <li><a href="/category">Kategori Barang</a></li>
+                                <li><a href="/categoryrev">Kategori Barang Rev</a></li>
                                 <li><a href="/item">Jenis Barang</a></li>
                                 <li><a href="/stock">Stok Barang</a></li>
                                 <li><a href="/stock/limit_stock">Kekurangan Stok Barang</a></li>

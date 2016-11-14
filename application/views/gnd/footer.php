@@ -14,6 +14,7 @@
     <script src="/assets/js/libs/jquery.mousewheel.min.js"></script>
 
     <!-- JS Bootstrap -->
+    <!--Bootstrap v-2.2.1-->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- jQuery-UI JavaScript Files --> <!-- TODO - please double check -->
@@ -33,13 +34,13 @@
 
     <!-- JS Table -->
     <script src="/assets/js/custom/gnd/gnd.modal.js"></script>
-    <script src="/assets/js/custom/gnd/gnd.tables.js"></script>
-    <!--script src="/assets/js/custom/gnd/gnd.dropdown.js"></script-->
+    <!-- <script src="/assets/js/custom/gnd/gnd.tables.js"></script> -->
 
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>
 
     <!-- JS Customizer -->
     <script src="/assets/js/core/dandelion.customizer.js"></script>
+    <script src="/assets/js/plugins/clipboard/dist/clipboard.min.js"></script>
 </body>
 </html>
