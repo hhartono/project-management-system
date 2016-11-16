@@ -57,13 +57,18 @@
                                                     <td class="name-row"><?php echo $each_category['nama']; ?></td>
                                                     <td class="cat-row"><?php echo $each_category['kategori']; ?></td>
                                                     <td class="satuan-row"><?php echo $each_category['satuan']; ?></td>
-                                                    <td class="harga-row"><?php echo 'Rp. '. $each_category['harga']; ?></td>
+                                                    <td class="harga-row">
+                                                        <?php echo 'Rp. '. $each_category['harga']; ?>
+                                                        <?php if(isset($access['edit']) && $access['edit']): ?>
+                                                                <a class="da-category-edit-dialog" href="#" data-value="<?php echo $each_category['id']; ?>"><i class="icol-pencil"></i></a>
+                                                        <?php endif; ?>
+                                                    </td>
                                                     <?php if ((isset($access['edit']) && $access['edit']) || (isset($access['delete']) && $access['delete'])): ?>
                                                         <td class="da-icon-column">
                                                             <a class="da-category-view-dialog" href="#" data-value="<?php echo $each_category['id']; ?>"><i class="icol-eye"></i></a> 
-                                                            <?php if(isset($access['edit']) && $access['edit']): ?>
-                                                                <a class="da-category-edit-dialog" href="#" data-value="<?php echo $each_category['id']; ?>"><i class="icol-pencil"></i></a>
-                                                            <?php endif; ?>
+                                                            <!-- <?php// if(isset($access['edit']) && $access['edit']): ?>
+                                                                <a class="da-category-edit-dialog" href="#" data-value="<?php// echo $each_category['id']; ?>"><i class="icol-pencil"></i></a>
+                                                            <?php// endif; ?> -->
                                                             <?php if(isset($access['delete']) && $access['delete']):
                                                                 $category_id = $each_category['id'];
                                                                 $delete_url = "/category/delete_category/" . $category_id;

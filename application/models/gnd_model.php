@@ -94,35 +94,27 @@ class Gnd_model extends CI_Model {
         $gnd_db = $this->load->database("gnd", TRUE);
         if(!empty($month)){
             $q = 'SELECT id, creation_date, client, project, inv_num, doc_num FROM invoice 
-                WHERE MONTH (creation_date) IN( MONTH(CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )';
+                WHERE MONTH (creation_date) IN( MONTH(CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )
+                ORDER BY creation_date DESC';
             $query = $gnd_db->query($q);
         } else{
             $q = 'SELECT id, creation_date, client, project, inv_num, doc_num FROM invoice 
-                WHERE MONTH (creation_date) IN( ?, ?, ? )';
+                WHERE MONTH (creation_date) IN( ?, ?, ? ) ORDER BY creation_date DESC';
             $query = $gnd_db->query($q, array(date('n'), date('n')-1, date('n')-2));
         }
-        // $q = 'SELECT id, creation_date, client, project, inv_num, doc_num FROM invoice 
-        //         WHERE MONTH (creation_date) IN( $month, MONTH (CURDATE())-1, MONTH (CURDATE())-2 )';
-        // $query = $gnd_db->query($q);
-        // $gnd_db->select('id, creation_date, client, project, inv_num, doc_num');
-        // $gnd_db->from('invoice');
-        // $gnd_db->where_in(MONTH('creation_date'), $month_array, FALSE);
-        // $gnd_db->get();
         return $query->result_array();
     }
 
     public function get_quo_rpt(){
         $gnd_db = $this->load->database("gnd", TRUE);
-        // $q = 'SELECT id, creation_date, client, project, doc_num FROM quotation 
-        //         WHERE MONTH (creation_date) IN( MONTH (CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )';
-        // $query = $gnd_db->query($q);
         if(!empty($month)){
             $q = 'SELECT id, creation_date, client, project, doc_num FROM quotation 
-                WHERE MONTH (creation_date) IN( MONTH(CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )';
+                WHERE MONTH (creation_date) IN( MONTH(CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )
+                ORDER BY creation_date DESC';
             $query = $gnd_db->query($q);
         } else{
             $q = 'SELECT id, creation_date, client, project, doc_num FROM quotation 
-                WHERE MONTH (creation_date) IN( ?, ?, ? )';
+                WHERE MONTH (creation_date) IN( ?, ?, ? ) ORDER BY creation_date DESC';
             $query = $gnd_db->query($q, array(date('n'), date('n')-1, date('n')-2));
         }
         return $query->result_array();
@@ -130,34 +122,18 @@ class Gnd_model extends CI_Model {
 
     public function get_po_rpt(){
         $gnd_db = $this->load->database("gnd", TRUE);
-        // $q = 'SELECT id, creation_date, supplier, project, doc_num FROM po 
-        //         WHERE MONTH (creation_date) IN( MONTH (CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )';
-        // $query = $gnd_db->query($q);
         if(!empty($month)){
             $q = 'SELECT id, creation_date, supplier, project, doc_num FROM po 
-                WHERE MONTH (creation_date) IN( MONTH(CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )';
+                WHERE MONTH (creation_date) IN( MONTH(CURDATE()), MONTH (CURDATE())-1, MONTH (CURDATE())-2 )
+                ORDER BY creation_date DESC';
             $query = $gnd_db->query($q);
         } else{
             $q = 'SELECT id, creation_date, supplier, project, doc_num FROM po 
-                WHERE MONTH (creation_date) IN( ?, ?, ? )';
+                WHERE MONTH (creation_date) IN( ?, ?, ? ) ORDER BY creation_date DESC';
             $query = $gnd_db->query($q, array(date('n'), date('n')-1, date('n')-2));
         }
         return $query->result_array();
     }
-
-    // public function get_all_quo(){
-    //     $gnd_db = $this->load->database("gnd", TRUE);
-    //     $gnd_db->select('id, creation_date, client, project, doc_num');
-    //     $query = $gnd_db->get('quotation');
-    //     return $query->result_array();
-    // }
-
-    // public function get_all_po(){
-    //     $gnd_db = $this->load->database("gnd", TRUE);
-    //     $gnd_db->select('id, creation_date, supplier, project, doc_num');
-    //     $query = $gnd_db->get('po');
-    //     return $query->result_array();
-    // }
 
     public function check_inv_num($klien, $project){ 
         $gnd_db = $this->load->database("gnd", TRUE);
@@ -167,6 +143,17 @@ class Gnd_model extends CI_Model {
         $gnd_db->from('invoice');
         $gnd_db->where($param);
         $gnd_db->order_by('inv_num', 'DESC');
+        $query = $gnd_db->get();
+        return $query->row_array();
+    }
+
+    public function check_inv_rpt($klien, $project, $invnum){
+        $gnd_db = $this->load->database("gnd", TRUE);
+        $param = array('client' => $klien, 'project' => $project, 'inv_num' => $invnum);
+
+        $gnd_db->select('client, project, inv_num');
+        $gnd_db->from('invoice');
+        $gnd_db->where($param);
         $query = $gnd_db->get();
         return $query->row_array();
     }

@@ -129,9 +129,19 @@ class Gnd extends CI_Controller{
         //create document number
         switch($doc){
             case "Invoice" :
-                $doc_num = "INV/".$date."/".$year_roman."/".$month_roman."/".$sn;
-                echo json_encode($doc_num);
-                $response = $this->gnd_model->set_doc_num($doc, $doc_num);
+                //check for duplicate
+                $klien = $this->input->post('klien');
+                $project = $this->input->post('project');
+                $invnum = $this->input->post('inv_num');
+                $check = $this->gnd_model->check_inv_rpt($klien, $project, $invnum);
+                //data sudah ada
+                if($check){
+                    echo json_encode("Invoice untuk klien ".$klien." dan project ".$project." bernomor ".$invnum." sudah ada");
+                } else{
+                    $doc_num = "INV/".$date."/".$year_roman."/".$month_roman."/".$sn;
+                    echo json_encode($doc_num);
+                    // $response = $this->gnd_model->set_doc_num($doc, $doc_num);
+                }
             break;
             case "Quotation" :
                 $doc_num = "QUO/".$date."/".$year_roman."/".$month_roman."/".$sn;

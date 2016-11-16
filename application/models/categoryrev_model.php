@@ -70,7 +70,7 @@ class Categoryrev_model extends CI_Model {
             $data2 = array(
                 'kat_id'                => $this->input->post('id'),
                 'nama_kat'              => $this->input->post('nama'),
-                'harga'                 => $this->input->post('harga'),
+                'harga'                 => $this->input->post('harga'), //tambah userid(admin)
                 'last_update_timestamp' => date('Y-m-d H:i:s')
             );
 

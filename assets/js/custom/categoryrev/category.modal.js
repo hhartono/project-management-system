@@ -138,7 +138,7 @@
             });
 
             var text = "<tr><td>"+t+"</td><td>b</td></tr>";
-            console.log(t);
+            // console.log(t);
             // var text = 'ab';
             // var teks = '<thead><th>Harga</th><th>Tanggal</th></thead><tbody></tbody>';
             document.getElementById('coba').innerHTML = text;

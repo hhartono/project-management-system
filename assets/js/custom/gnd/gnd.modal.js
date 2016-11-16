@@ -176,27 +176,30 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'client' : data[a].client,
-                                          'project' : data[a].project,
-                                          'inv_num' : data[a].inv_num,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'client'  : data[a].client,
+                                              'project' : data[a].project,
+                                              'inv_num' : data[a].inv_num,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns : [
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "client"},
                             {"data" : "project"},
                             {"data" : "inv_num"},
                             {"data" : "doc_num"},   
-                        ]
+                        ],
+                        order:[1, "desc"]
                     });
 
                     $('#gnd-report-2').show();
@@ -210,27 +213,30 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month-1)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'client' : data[a].client,
-                                          'project' : data[a].project,
-                                          'inv_num' : data[a].inv_num,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month-1){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'client'  : data[a].client,
+                                              'project' : data[a].project,
+                                              'inv_num' : data[a].inv_num,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns : [
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "client"},
                             {"data" : "project"},
                             {"data" : "inv_num"},
                             {"data" : "doc_num"},   
-                        ]
+                        ],
+                        order:[1, "desc"]
                     });
 
                     $('#gnd-report-3').show();
@@ -244,27 +250,30 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month-2)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'client' : data[a].client,
-                                          'project' : data[a].project,
-                                          'inv_num' : data[a].inv_num,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month-2){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'client'  : data[a].client,
+                                              'project' : data[a].project,
+                                              'inv_num' : data[a].inv_num,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns : [
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "client"},
                             {"data" : "project"},
                             {"data" : "inv_num"},
                             {"data" : "doc_num"},   
-                        ]
+                        ],
+                        order:[1, "desc"]
                     });
                     break;
                 case "Quotation":
@@ -288,31 +297,34 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'client' : data[a].client,
-                                          'project' : data[a].project,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'client'  : data[a].client,
+                                              'project' : data[a].project,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns: [ 
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "client"},
                             {"data" : "project"},
                             {"data" : "doc_num"},
                             {"data" : ""}
                         ],
-                        columnDefs: [ {
+                        columnDefs: [{
                             "targets": -1,
                             "data": null,
                             "defaultContent": ""
-                        } ]
+                        }],
+                        order:[1, "desc"]
                     });
 
                     $('#gnd-report-2').show();
@@ -326,31 +338,34 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month-1)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'client' : data[a].client,
-                                          'project' : data[a].project,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month-1){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'client'  : data[a].client,
+                                              'project' : data[a].project,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns: [ 
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "client"},
                             {"data" : "project"},
                             {"data" : "doc_num"},
                             {"data" : ""}
                         ],
-                        columnDefs: [ {
+                        columnDefs: [{
                             "targets": -1,
                             "data": null,
                             "defaultContent": ""
-                        } ]
+                        }],
+                        order:[1, "desc"]
                     });
 
                     $('#gnd-report-3').show();
@@ -364,31 +379,34 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month-2)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'client' : data[a].client,
-                                          'project' : data[a].project,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month-2){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'client'  : data[a].client,
+                                              'project' : data[a].project,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns: [ 
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "client"},
                             {"data" : "project"},
                             {"data" : "doc_num"},
                             {"data" : ""}
                         ],
-                        columnDefs: [ {
+                        columnDefs: [{
                             "targets": -1,
                             "data": null,
                             "defaultContent": ""
-                        } ]
+                        }],
+                        order:[1, "desc"]
                     });
                     break;
                 case "PO":
@@ -412,31 +430,34 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'supplier' : data[a].supplier,
-                                          'project' : data[a].project,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'supplier': data[a].supplier,
+                                              'project' : data[a].project,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns: [ 
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "supplier"},
                             {"data" : "project"},
                             {"data" : "doc_num"},
                             {"data" : ""}
                         ],
-                        "columnDefs": [ {
+                        "columnDefs": [{
                             "targets": -1,
                             "data": null,
                             "defaultContent": ""
-                        } ]
+                        }],
+                        order:[1, "desc"]
                     });
 
                     $('#gnd-report-2').show();
@@ -450,31 +471,34 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month-1)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'supplier' : data[a].supplier,
-                                          'project' : data[a].project,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month-1){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'supplier': data[a].supplier,
+                                              'project' : data[a].project,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns: [ 
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "supplier"},
                             {"data" : "project"},
                             {"data" : "doc_num"},
                             {"data" : ""}
                         ],
-                        "columnDefs": [ {
+                        "columnDefs": [{
                             "targets": -1,
                             "data": null,
                             "defaultContent": ""
-                        } ]
+                        }],
+                        order:[1, "desc"]
                     });
 
                     $('#gnd-report-3').show();
@@ -488,31 +512,34 @@
                                 var return_data = new Array();
                                     for(var a = 0; a < data.length; a++){
                                         var m = data[a].creation_date;
-                                        if(m.substr(5,2) == month-2)
-                                        return_data.push({
-                                          'id': data[a].id,
-                                          'creation_date'  : data[a].creation_date,
-                                          'supplier' : data[a].supplier,
-                                          'project' : data[a].project,
-                                          'doc_num' : data[a].doc_num
-                                        })
+                                        var date = m.substr(0,10);
+                                        if(m.substr(5,2) == month-2){
+                                            return_data.push({
+                                              'id'      : data[a].id,
+                                              'date'    : date,
+                                              'supplier': data[a].supplier,
+                                              'project' : data[a].project,
+                                              'doc_num' : data[a].doc_num
+                                            })
+                                        }
                                     }
                                     return return_data;
                             }
                         },
                         columns: [ 
                             {"data" : "id"},
-                            {"data" : "creation_date"},
+                            {"data" : "date"},
                             {"data" : "supplier"},
                             {"data" : "project"},
                             {"data" : "doc_num"},
                             {"data" : ""}
                         ],
-                        "columnDefs": [ {
+                        "columnDefs": [{
                             "targets": -1,
                             "data": null,
                             "defaultContent": ""
-                        } ]
+                        }],
+                        order:[1, "desc"]
                     });
                     break;
                 default: null; break;
@@ -548,8 +575,19 @@
                 url:'/gnd/create_doc/Invoice',
                 data:postData,
                 dataType:'json',
-                success:function(data){         
-                    $('#doc_num_inv').val(data);
+                success:function(data){
+                    if(data.substr(3, 1) == '/'){
+                        $('#doc_num_inv').val(data);
+                    }else{
+                        // window.alert(data);
+                        $("<div title='Invoice'>"+data+"</div>").dialog({
+                            buttons: [{
+                                text: "Keluar",
+                                click: function() {
+                                    $(this).dialog("close");
+                                }}]
+                        });
+                    }
                 }
             });
         }));
