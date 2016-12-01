@@ -315,7 +315,8 @@ class Returnitem extends CI_Controller {
             $data['project'] = $this->returnitem_model->get_all_project();
             // show the view
             $this->load->view('header');
-            $this->load->view('returnitem/navigation', $data);
+            // $this->load->view('returnitem/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('returnitem/main', $data);
             $this->load->view('returnitem/footer');
     }

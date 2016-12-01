@@ -178,5 +178,8 @@
                 $("#da-returnsupplier-insert-error").html(message).show();
             }
         }
+
+        var element = document.getElementById('returnsupplier');
+        element.classList.add("active");
     });
 }) (jQuery);

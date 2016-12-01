@@ -40,7 +40,8 @@ class Projectdetail extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('projectdetail/navigation', $data);
+            // $this->load->view('projectdetail/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('projectdetail/main', $data);
             $this->load->view('projectdetail/footer');
         }else{
@@ -67,7 +68,8 @@ class Projectdetail extends CI_Controller {
             // get necessary data
          $data['detail'] = $this->detail_model->get_all_projectdetail($id);
         $this->load->view('header');
-        $this->load->view('projectdetail/navigation', $data);
+        // $this->load->view('projectdetail/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('projectdetail/detail', $data);
         $this->load->view('projectdetail/footer');
         }else{

@@ -137,7 +137,8 @@ class Supplier extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('supplier/navigation', $data);
+            // $this->load->view('supplier/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('supplier/main', $data);
             $this->load->view('supplier/footer');
     }

@@ -13,5 +13,14 @@
                 this.select();
             }
         });
+
+        var element = document.getElementById('project');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        $('#nav-menu').html('<a href="#">Project</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Subproject</span>');
+        $('#nav-submenu').addClass('active');
 	});
 }) (jQuery);

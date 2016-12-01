@@ -266,7 +266,8 @@ class Kirimpress extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('kirimpress/navigation', $data);
+            // $this->load->view('kirimpress/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('kirimpress/print_item_barcodes', $data);
             $this->load->view('kirimpress/footer');
     }
@@ -311,7 +312,8 @@ class Kirimpress extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('kirimpress/navigation', $data);
+            // $this->load->view('kirimpress/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('kirimpress/print_item_barcodes_confirmation', $data);
             $this->load->view('kirimpress/footer', $data);
     }
@@ -515,7 +517,8 @@ class Kirimpress extends CI_Controller {
 
         // show the view
         $this->load->view('header');
-        $this->load->view('kirimpress/navigation', $data);
+        // $this->load->view('kirimpress/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('kirimpress/receive_press_items', $data);
         $this->load->view('kirimpress/footer');
     }

@@ -179,7 +179,8 @@ class Item extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('item/navigation', $data);
+            // $this->load->view('item/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('item/main', $data);
             $this->load->view('item/footer');
     }

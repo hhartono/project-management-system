@@ -579,7 +579,6 @@
                     if(data.substr(3, 1) == '/'){
                         $('#doc_num_inv').val(data);
                     }else{
-                        // window.alert(data);
                         $("<div title='Invoice'>"+data+"</div>").dialog({
                             buttons: [{
                                 text: "Keluar",

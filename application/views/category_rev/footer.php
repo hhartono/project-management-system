@@ -40,5 +40,10 @@
 
     <!-- JS Customizer -->
     <script src="/assets/js/core/dandelion.customizer.js"></script>
+
+    <!-- Custom Table --><!-- 
+    <link rel="stylesheet" type="text/css" href="/assets/css/cust-table.css" media="screen"> -->
+    
+    <!-- <script src="/assets/js/custom/active.js"></script> -->
 </body>
 </html>

@@ -173,5 +173,14 @@
                 $("#da-useitem-insert-error").html(message).show();
             }
         }
+
+        var element = document.getElementById('useitem');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        // $('#nav-menu').html('<a href="#">Barang</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Pakai Barang</span>');
+        $('#nav-submenu').addClass('active');
 	});
 }) (jQuery);

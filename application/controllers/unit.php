@@ -136,7 +136,8 @@ class Unit extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('unit/navigation', $data);
+            // $this->load->view('unit/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('unit/main', $data);
             $this->load->view('unit/footer');
     }

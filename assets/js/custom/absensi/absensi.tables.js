@@ -17,5 +17,14 @@
                 this.select();
             }
         });
+
+        var element = document.getElementById('absensi');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        $('#nav-menu').html('<a href="#">Absensi</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Kategori Barang</span>');
+        $('#nav-submenu').addClass('active');
 	});
 }) (jQuery);

@@ -39,6 +39,32 @@ class Categoryrev extends CI_Controller {
         $this->show_table($message);
     }
 
+    public function check_active(){
+        //terima input dari hidden input di navigation, return string-> active or false
+        $li = $this->input->post('id');
+        // $menu_sel = $this->input->post('checkmenu');
+        // echo $menu_sel;
+        // switch ($menu_sel) {
+        //     case 'home':
+        //         $class = 'active';
+        //         return $class;
+        //         break;
+        //     case 'barang':
+        //         $class = 'active';
+        //         return $class;
+        //         break;
+        //     case 'blum':
+        //         $class = 'active';
+        //         return $class;
+        //         break;
+        //     default:
+        //         $class = null;
+        //         return $class;
+        //         break;
+        // }
+        // echo json_encode($li);
+    }
+
     public function create_category(){
         if($this->input->post('prefix')){
             // check if there is any duplicate
@@ -68,10 +94,13 @@ class Categoryrev extends CI_Controller {
         // $response = $this->categoryrev_model->update_category();
         $response = $this->categoryrev_model->update_harga();
 
-        if($response){
+        if($response == 'success'){
             $message['success'] = "Kategori berhasil diubah.";
             $this->show_table($message);
-        }else{
+        } elseif ($response == 'zero') {
+            $message['error'] = "Harga 0 (Satuan POST)";
+            $this->show_table($message);
+        } else{
             $message['error'] = "Kategori gagal diubah.";
             $this->show_table($message);
         }
@@ -97,12 +126,17 @@ class Categoryrev extends CI_Controller {
     }
 
     public function cek_history_harga($kat_id){
-        // echo 'test';
         $kat_id = urldecode($kat_id);
         $harga = $this->categoryrev_model->get_harga_by_id($kat_id);
-        // $data['num_rows'] = count($harga);
-        // echo json_encode($data['num_rows']);
         echo json_encode($harga);
+    }
+
+    private function space(){
+        $res = $this->categoryrev_model->getHarga();
+        foreach ($res as $key => $value) {
+            $space[$key] = strlen($value['harga']);
+        }
+        return $space;
     }
 
     private function show_table($message){
@@ -141,14 +175,17 @@ class Categoryrev extends CI_Controller {
 
         // get necessary data
         $data['categories'] = $this->categoryrev_model->get_all_categories();
+        $data['space'] = $this->space();
+        $data['active'] = $this->check_active();
 
         // show the view
         $this->load->view('header');
-        $this->load->view('category_rev/navigation', $data);
+        // $this->load->view('category_rev/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('category_rev/main', $data);
         $this->load->view('category_rev/footer');
     }
 }
 
-/* End of file category.php */
-/* Location: ./application/controllers/category_rev.php */
+/* End of file categoryrev.php */
+/* Location: ./application/controllers/categoryrev.php */

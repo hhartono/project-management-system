@@ -197,7 +197,8 @@ class Intivo extends CI_Controller{
 
             // show the view
             $this->load->view('header');
-            $this->load->view('intivo/navigation', $data);
+            // $this->load->view('intivo/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('intivo/main', $data);
             $this->load->view('intivo/footer');
         } else if($this->input->get() == true){
@@ -246,7 +247,8 @@ class Intivo extends CI_Controller{
             }
             // show the view
             $this->load->view('header');
-            $this->load->view('intivo/navigation', $data);
+            // $this->load->view('intivo/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('intivo/main', $data);
             $this->load->view('intivo/footer');  
         }

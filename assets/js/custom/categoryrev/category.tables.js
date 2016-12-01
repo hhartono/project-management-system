@@ -13,5 +13,14 @@
                 this.select();
             }
         });
+
+        var element = document.getElementById('barang-li');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        $('#nav-menu').html('<a href="#">Barang</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Kategori Barang</span>');
+        $('#nav-submenu').addClass('active');
 	});
 }) (jQuery);

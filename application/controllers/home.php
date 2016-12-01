@@ -43,7 +43,8 @@ class Home extends CI_Controller {
             $data['username'] = $user_info['name'];
             $data['company_title'] = $user_info['title'];
             $this->load->view('header');
-            $this->load->view('home/navigation', $data);
+            // $this->load->view('home/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('home/main');
             $this->load->view('home/footer');
         

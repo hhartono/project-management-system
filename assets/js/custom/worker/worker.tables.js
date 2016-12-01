@@ -13,5 +13,14 @@
                 this.select();
             }
         });
+
+        var element = document.getElementById('tukang');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        $('#nav-menu').html('<a href="#">Tukang</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Tukang</span>');
+        $('#nav-submenu').addClass('active');
     });
 }) (jQuery);

@@ -13,5 +13,14 @@
                 this.select();
             }
         });
+
+        var element = document.getElementById('blum');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        $('#nav-menu').html('<a href="#">Blum</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Intivo Parts</span>');
+        $('#nav-submenu').addClass('active');
 	});
 }) (jQuery);

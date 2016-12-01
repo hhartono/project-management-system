@@ -420,7 +420,8 @@ class Purchaseorder extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('purchaseorder/navigation', $data);
+            // $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('purchaseorder/main', $data);
             $this->load->view('purchaseorder/footer');
     }
@@ -443,7 +444,8 @@ class Purchaseorder extends CI_Controller {
         $data['purchaseorders'] = $this->purchaseorder_model->count_time_filter();
           
         $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
+        // $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('purchaseorder/maincari', $data);
         $this->load->view('purchaseorder/footer');
     }
@@ -500,7 +502,8 @@ class Purchaseorder extends CI_Controller {
         $data['purchaseorders'] = $this->purchaseorder_model->supplier_filter();
           
         $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
+        // $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('purchaseorder/receiveitems', $data);
         $this->load->view('purchaseorder/footer');
     }
@@ -548,7 +551,8 @@ class Purchaseorder extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('purchaseorder/navigation', $data);
+            // $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('purchaseorder/receive_po_items', $data);
             $this->load->view('purchaseorder/footer');
     }
@@ -594,7 +598,8 @@ class Purchaseorder extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('purchaseorder/navigation', $data);
+            // $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('purchaseorder/print_item_barcodes', $data);
             $this->load->view('purchaseorder/footer');
     }
@@ -639,7 +644,8 @@ class Purchaseorder extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('purchaseorder/navigation', $data);
+            // $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('purchaseorder/print_item_barcodes_confirmation', $data);
             $this->load->view('purchaseorder/footer', $data);
     }
@@ -710,7 +716,8 @@ class Purchaseorder extends CI_Controller {
 
         // show the view
         $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
+        // $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('purchaseorder/receiveitems', $data);
         $this->load->view('purchaseorder/footer');
     }
@@ -781,7 +788,8 @@ class Purchaseorder extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('purchaseorder/navigation', $data);
+            // $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('purchaseorder/printlabel', $data);
             $this->load->view('purchaseorder/footer');
     }
@@ -852,7 +860,8 @@ class Purchaseorder extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('purchaseorder/navigation', $data);
+            // $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('purchaseorder/pembayaran', $data);
             $this->load->view('purchaseorder/footer');
     }
@@ -888,7 +897,8 @@ class Purchaseorder extends CI_Controller {
         $data['po'] = $this->purchaseorder_model->get_purchaseorder_detail($id);
         $data['pod'] = $this->purchaseorder_model->get_purchaseorder_details($id);
         $this->load->view('header');
-        $this->load->view('purchaseorder/navigation', $data);
+        // $this->load->view('purchaseorder/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('purchaseorder/detail', $data);
         $this->load->view('purchaseorder/footer');
     }
@@ -932,7 +942,8 @@ class Purchaseorder extends CI_Controller {
             $data['getpembayaran'] = $this->purchaseorder_model->getpembayaran();
 
             $this->load->view('header');
-            $this->load->view('purchaseorder/navigation', $data);
+            // $this->load->view('purchaseorder/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('purchaseorder/item_price', $data);
             $this->load->view('purchaseorder/footer');;
         }else{

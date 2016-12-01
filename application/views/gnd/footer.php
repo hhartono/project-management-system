@@ -34,7 +34,7 @@
 
     <!-- JS Table -->
     <script src="/assets/js/custom/gnd/gnd.modal.js"></script>
-    <!-- <script src="/assets/js/custom/gnd/gnd.tables.js"></script> -->
+    <script src="/assets/js/custom/gnd/gnd.tables.js"></script>
 
     <!-- JS Template -->
     <script src="/assets/js/core/dandelion.core.js"></script>

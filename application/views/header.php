@@ -28,6 +28,8 @@
     <!-- User Defined -->
     <link rel="stylesheet" href="/assets/css/general.css" media="screen">
     <link rel="stylesheet" href="/assets/js/libs/chosen.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="/assets/css/custom.css" media="screen">
 
     <link rel="stylesheet" type="text/css" href="/assets/dropzone/css/dropzone.css">
 

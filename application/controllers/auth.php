@@ -201,7 +201,8 @@ class Auth extends CI_Controller
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
 			$this->load->view('header');
-			$this->load->view('home/navigation', $data);
+			// $this->load->view('home/navigation', $data);
+    		$this->load->view('navigation', $data);
 			$this->load->view('auth/register_form', $data);
 			$this->load->view('home/footer');
 		}

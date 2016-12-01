@@ -201,7 +201,8 @@ class Returnsupplier extends CI_Controller {
             //$data['project'] = $this->returnsupplier_model->get_all_project();
             // show the view
             $this->load->view('header');
-            $this->load->view('returnsupplier/navigation', $data);
+            // $this->load->view('returnsupplier/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('returnsupplier/main', $data);
             $this->load->view('returnsupplier/footer');
     }
@@ -266,7 +267,8 @@ class Returnsupplier extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('returnsupplier/navigation', $data);
+            // $this->load->view('returnsupplier/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('returnsupplier/list', $data);
             $this->load->view('returnsupplier/footer');
     }
@@ -291,7 +293,8 @@ class Returnsupplier extends CI_Controller {
         $data['pod'] = $this->returnsupplier_model->get_returnsupplier_details($id);
         
         $this->load->view('header');
-        $this->load->view('returnsupplier/navigation', $data);
+        // $this->load->view('returnsupplier/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('returnsupplier/detail', $data);
         $this->load->view('returnsupplier/footer');
     }

@@ -335,7 +335,8 @@ class Stock extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('stock/navigation', $data);
+            // $this->load->view('stock/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('stock/main', $data);
             $this->load->view('stock/footer');
     }
@@ -422,7 +423,8 @@ class Stock extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('stock/navigation', $data);
+            // $this->load->view('stock/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('stock/print_item_barcodes', $data);
             $this->load->view('stock/footer');
     }
@@ -467,7 +469,8 @@ class Stock extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('stock/navigation', $data);
+            // $this->load->view('stock/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('stock/print_item_barcodes_confirmation', $data);
             $this->load->view('stock/footer', $data);
     }
@@ -519,7 +522,8 @@ class Stock extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('stock/navigation', $data);
+            // $this->load->view('stock/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('stock/list', $data);
             //$this->load->view('stock/footer');
     }
@@ -595,7 +599,8 @@ class Stock extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('stock/navigation', $data);
+            // $this->load->view('stock/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('stock/limit_stock', $data);
             $this->load->view('stock/footer');
     }

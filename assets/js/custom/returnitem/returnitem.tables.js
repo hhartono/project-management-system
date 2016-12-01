@@ -173,5 +173,8 @@
                 $("#da-returnitem-insert-error").html(message).show();
             }
         }
+
+        var element = document.getElementById('returnitem');
+        element.classList.add("active");
     });
 }) (jQuery);

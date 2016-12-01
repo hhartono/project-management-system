@@ -54,7 +54,8 @@ class Planning extends CI_Controller {
             $data['getcompany'] = $this->planning_model->get_company();
 
             $this->load->view('header');
-            $this->load->view('planning/navigation', $data);
+            // $this->load->view('planning/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('planning/main', $data);
             $this->load->view('planning/footer');
     }
@@ -83,7 +84,8 @@ class Planning extends CI_Controller {
             $data['proj'] = $this->planning_model->getproj($idspj);
         
             $this->load->view('header');
-            $this->load->view('planning/navigation', $data);
+            // $this->load->view('planning/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('planning/detail', $data);
             $this->load->view('planning/footer');
     }
@@ -114,7 +116,8 @@ class Planning extends CI_Controller {
             $data['sub'] = $this->planning_model->getsubitem();
         
             $this->load->view('header');
-            $this->load->view('planning/navigation', $data);
+            // $this->load->view('planning/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('planning/detailitem', $data);
             $this->load->view('planning/footer');
     }
@@ -144,7 +147,8 @@ class Planning extends CI_Controller {
             $data['sub'] = $this->planning_model->getsubitem();
         
             $this->load->view('header');
-            $this->load->view('planning/navigation', $data);
+            // $this->load->view('planning/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('planning/detail', $data);
             $this->load->view('planning/footer');
     }
@@ -235,7 +239,8 @@ class Planning extends CI_Controller {
         $data['getcompany'] = $this->planning_model->get_company();
         
         $this->load->view('header');
-        $this->load->view('planning/navigation', $data);
+        // $this->load->view('planning/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('planning/main',$data); 
         $this->load->view('planning/footer');
     }

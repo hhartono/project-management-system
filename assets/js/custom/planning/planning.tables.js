@@ -13,5 +13,14 @@
                 this.select();
             }
         });
+
+        var element = document.getElementById('planning');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        // $('#nav-menu').html('<a href="#">Barang</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Perencanaan Bahan</span>');
+        $('#nav-submenu').addClass('active');
 	});
 }) (jQuery);

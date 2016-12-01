@@ -30,7 +30,8 @@ class Absensi extends CI_Controller{
     $data['company_title'] = $user_info['title']; 
 
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/absensi', array('error' => ' ' ));
     $this->load->view('absensi/footer');    
   }
@@ -57,7 +58,8 @@ class Absensi extends CI_Controller{
     {
       $error = array('error' => $this->upload->display_errors());
       $this->load->view('header');
-      $this->load->view('absensi/navigation', $datau);
+      // $this->load->view('absensi/navigation', $datau);
+      $this->load->view('navigation', $data);
       $this->load->view('absensi/absensi', $error);
       $this->load->view('absensi/footer');
     }
@@ -99,7 +101,8 @@ class Absensi extends CI_Controller{
     }
       $data = array('upload_data' => $this->upload->data());
       $this->load->view('header');
-      $this->load->view('absensi/navigation', $datau);
+      // $this->load->view('absensi/navigation', $datau);
+      $this->load->view('navigation', $data);
       $this->load->view('absensi/upload_success', $data);
       $this->load->view('absensi/footer');
 
@@ -121,7 +124,8 @@ class Absensi extends CI_Controller{
     $data['getpro']=$this->absensi_model->get_all_project();
     $data['upload'] = $this->absensi_model->get_absensi_upload(); 
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/lihat', $data);
     $this->load->view('absensi/footer');
   }
@@ -138,7 +142,8 @@ class Absensi extends CI_Controller{
     //$data['message'] = $message;
 
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/cari', $data);
     $this->load->view('absensi/footer');
     
@@ -167,7 +172,8 @@ class Absensi extends CI_Controller{
     //$data['getcompany'] = $this->detail_model->get_company();
       
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/lihat',$data); 
     $this->load->view('absensi/footer');
   }
@@ -218,7 +224,8 @@ class Absensi extends CI_Controller{
     $data['getpro']=$this->absensi_model->get_all_project();
       
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/maindetail',$data); 
     $this->load->view('absensi/footer');
   }
@@ -245,7 +252,8 @@ class Absensi extends CI_Controller{
     //$data['getcompany'] = $this->detail_model->get_company();
       
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/maindetail',$data); 
     $this->load->view('absensi/footer');
   }
@@ -268,7 +276,8 @@ class Absensi extends CI_Controller{
     // get necessary data
     $data['detail'] = $this->absensi_model->detail_worker();
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/detail_worker', $data);
     $this->load->view('absensi/footer');
   }
@@ -294,7 +303,8 @@ class Absensi extends CI_Controller{
     //$data['proabs'] = $this->absensi_model->get_project_absensi();
     $data['getpro']=$this->absensi_model->get_all_project(); 
     $this->load->view('header');
-    $this->load->view('absensi/navigation', $data);
+    // $this->load->view('absensi/navigation', $data);
+    $this->load->view('navigation', $data);
     $this->load->view('absensi/tugastukang', $data);
     $this->load->view('absensi/footer');
   }

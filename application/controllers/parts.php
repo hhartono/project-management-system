@@ -190,7 +190,8 @@ class Parts extends CI_Controller{
 
         // show the view
         $this->load->view('header');
-        $this->load->view('parts/navigation', $data);
+        // $this->load->view('parts/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('parts/main', $data);
         $this->load->view('parts/footer');
     }

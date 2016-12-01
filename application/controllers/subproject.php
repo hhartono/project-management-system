@@ -243,7 +243,8 @@ class Subproject extends CI_Controller {
 
             // show the view
             $this->load->view('header');
-            $this->load->view('subproject/navigation', $data);
+            // $this->load->view('subproject/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('subproject/main', $data);
             $this->load->view('subproject/footer');
     }

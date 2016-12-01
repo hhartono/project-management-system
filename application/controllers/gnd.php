@@ -235,7 +235,8 @@ class Gnd extends CI_Controller{
 
         // show the view
         $this->load->view('header');
-        $this->load->view('gnd/navigation', $data);
+        // $this->load->view('gnd/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('gnd/main', $data);
         $this->load->view('gnd/footer');
     }

@@ -88,9 +88,7 @@
             var id = $(this).data("value");
             $.get( "/categoryrev/get_category_detail/" + id, function(data) {
                 $("#category-edit-id").val(id);
-                $("#category-edit-prefix").val(data.prefix);
                 $("#category-edit-nama").val(data.nama);
-                $("#category-edit-kat").val(data.kategori);
                 $("#category-edit-satuan").val(data.satuan);
                 $("#category-edit-harga").val(data.harga);
             }, "json" );
@@ -107,6 +105,8 @@
             buttons: [{
                 text: "Keluar",
                 click: function() {
+                    $("#harga th").remove();
+                    $("#harga tr").remove();
                     $("#da-category-view-form-div").dialog("option", {modal: true}).dialog("close");
                 }}]
         });
@@ -116,67 +116,43 @@
             $("#da-category-view-form-div").dialog("option", {modal: true}).dialog("open");
 
             var kat_id = $(this).data('value');
-            // $.get('/categoryrev/cek_history_harga/'+kat_id, function(data){
-            //     // $("category-view-nama").val(data.nama);
-            // }, "json");
-            var t = [];
+            var x;
             $.ajax({
                 type:'post',
                 url:'/categoryrev/cek_history_harga/'+kat_id,
                 dataType:'json',
                 success:function(data){
-                    var x;
+                    var t = [];
                     for(x in data){
-                        console.log(data[x]['harga']);
-                        // var texts = "<tr><td>"+data[x]['harga']+"</td><td>"+data[x]['last_update_timestamp']+"</td></tr>";
-                        t['harga'] = data[x]['harga'];
-                        t['last_update_timestamp'] = data[x]['last_update_timestamp'];
-                        // document.getElementById('coba').innerHTML = texts;
-                        // console.log(data);
+                        t.push({"harga":data[x]['harga'], "date":data[x]['creation_date']});
+                    }
+
+                    table = document.getElementById('harga');
+
+                    thHarga = document.createElement('th');
+                    thHarga.appendChild(document.createTextNode('Harga'));
+                    thDate = document.createElement('th');
+                    thDate.appendChild(document.createTextNode('Tanggal'));
+
+                    table.appendChild(thHarga);
+                    table.appendChild(thDate);
+
+                    for (var i = 0; i < t.length; i++) {
+                        row = document.createElement('tr');
+                        for (var j = 0; j < 1; j++) {
+                            col = document.createElement('td');
+                            col.appendChild(document.createTextNode(t[i]['harga']));
+                            row.appendChild(col);
+                        }
+                        for (var k = 0; k < 1; k++) {
+                            col = document.createElement('td');
+                            col.appendChild(document.createTextNode(t[i]['date']));
+                            row.appendChild(col);
+                        }
+                        table.appendChild(row);
                     }
                 }
             });
-
-            var text = "<tr><td>"+t+"</td><td>b</td></tr>";
-            // console.log(t);
-            // var text = 'ab';
-            // var teks = '<thead><th>Harga</th><th>Tanggal</th></thead><tbody></tbody>';
-            document.getElementById('coba').innerHTML = text;
-            // $("#harga").dataTable().api().destroy();
-            // $("#harga").dataTable({
-            //     sPaginationType: "full_numbers",
-            //     ajax : {
-            //         type:'post',
-            //         url:'/categoryrev/cek_history_harga/'+kat_id,
-            //         data:'',
-            //         dataType:'json',
-            //         // dataSrc:function(data){
-            //         //     var return_data = new Array();
-            //         //         for(var a = 0; a < data.length; a++){
-            //         //             // var m = data[a].creation_date;
-            //         //             // if(m.substr(5,2) == month)
-            //         //             return_data.push({
-            //         //               'id': data[a].id,
-            //         //               'kat_id' : data[a].kat_id,
-            //         //               'nama_kat'  : data[a].nama_kat,
-            //         //               'harga' : data[a].harga,
-            //         //               'last_update_timestamp' : data[a].last_update_timestamp,
-            //         //             })
-            //         //         }
-            //         //         return return_data;
-            //         // },
-            //         success:function(data){
-            //             console.log(data);
-            //         }
-            //     }//,
-            //     // columns : [
-            //     //     {"data" : "id"},
-            //     //     {"data" : "kat_id"},
-            //     //     {"data" : "nama_kat"},
-            //     //     {"data" : "harga"},
-            //     //     {"data" : "last_update_timestamp"},
-            //     // ]
-            // });
         });
     });
 }) (jQuery);

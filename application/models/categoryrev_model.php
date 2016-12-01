@@ -43,22 +43,8 @@ class Categoryrev_model extends CI_Model {
         }
     }
 
-    // public function update_harga(){
-    //     if($this->input->post('id') !== false && $this->input->post('harga') !== false){
-    //         $data = array(
-    //             'harga' => $this->input->post('harga'),
-    //             'last_update_timestamp' => date('Y-m-d H:i:s')
-    //         );
-
-    //         $this->db->where('id', $this->input->post('id'));
-    //         return $this->db->update('category_rev', $data);
-    //     }else{
-    //         return false;
-    //     }
-    // }
-
-    public function update_harga(){ //update to category_rev, insert to harga_kat_history
-        if($this->input->post('id') !== false && $this->input->post('nama') !== false && $this->input->post('harga') !== false){
+    public function update_harga(){
+        if($this->input->post('id') !== false && $this->input->post('nama') !== false && $this->input->post('harga') !== false && $this->input->post('userid') !== false && $this->input->post('satuan') !== false && $this->input->post('satuan') !== 'post'){
             $data = array(
                 'harga'                 => $this->input->post('harga'),
                 'last_update_timestamp' => date('Y-m-d H:i:s')
@@ -68,15 +54,19 @@ class Categoryrev_model extends CI_Model {
             $this->db->update('category_rev', $data);
 
             $data2 = array(
-                'kat_id'                => $this->input->post('id'),
-                'nama_kat'              => $this->input->post('nama'),
-                'harga'                 => $this->input->post('harga'), //tambah userid(admin)
-                'last_update_timestamp' => date('Y-m-d H:i:s')
+                'kat_id'        => $this->input->post('id'),
+                'nama_kat'      => $this->input->post('nama'),
+                'harga'         => $this->input->post('harga'),
+                'user_id'       => $this->input->post('userid'),
+                'creation_date' => date('Y-m-d H:i:s')
             );
 
             $this->db->insert('harga_kat_history', $data2);
-            return true;
-        }else{
+            return 'success';
+        } elseif ($this->input->post('id') !== false && $this->input->post('nama') !== false && $this->input->post('harga') !== false && $this->input->post('userid') !== false && $this->input->post('satuan') !== false && $this->input->post('satuan') == 'post') {
+            // return false;
+            return 'zero';
+        } else{
             return false;
         }
     }
@@ -86,15 +76,27 @@ class Categoryrev_model extends CI_Model {
             $this->input->post('satuan') !== false && $this->input->post('harga') !== false){
             date_default_timezone_set('Asia/Jakarta');
 
-            $data = array(
-                'prefix'        => strtoupper($this->input->post('prefix')),
-                'nama'          => $this->input->post('nama'),
-                'kategori'      => $this->input->post('kat'),
-                'satuan'        => $this->input->post('satuan'),
-                'harga'         => $this->input->post('harga'),
-                'user_id'       => $this->input->post('user'),
-                'creation_date' => date("Y-m-d H:i:s")
-            );
+            if($this->input->post('satuan') == strtolower('post')){
+                $data = array(
+                    'prefix'        => strtoupper($this->input->post('prefix')),
+                    'nama'          => $this->input->post('nama'),
+                    'kategori'      => $this->input->post('kat'),
+                    'satuan'        => $this->input->post('satuan'),
+                    'harga'         => 0,
+                    'user_id'       => $this->input->post('user'),
+                    'creation_date' => date("Y-m-d H:i:s")
+                );
+            } else{
+                $data = array(
+                    'prefix'        => strtoupper($this->input->post('prefix')),
+                    'nama'          => $this->input->post('nama'),
+                    'kategori'      => $this->input->post('kat'),
+                    'satuan'        => $this->input->post('satuan'),
+                    'harga'         => $this->input->post('harga'),
+                    'user_id'       => $this->input->post('user'),
+                    'creation_date' => date("Y-m-d H:i:s")
+                );
+            }
 
             return $this->db->insert('category_rev', $data);
         }else{
@@ -112,5 +114,11 @@ class Categoryrev_model extends CI_Model {
         }
 
         return $delete_status;
+    }
+
+    public function getHarga(){
+        $this->db->select('harga');
+        $query = $this->db->get('category_rev');
+        return $query->result_array();
     }
 }

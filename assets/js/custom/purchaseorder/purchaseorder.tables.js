@@ -20,5 +20,14 @@
                 this.select();
             }
         });
+
+        var element = document.getElementById('purchaseorder');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        // $('#nav-menu').html('<a href="#">Purchase Order</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Purchase Order</span>');
+        $('#nav-submenu').addClass('active');
 	});
 }) (jQuery);

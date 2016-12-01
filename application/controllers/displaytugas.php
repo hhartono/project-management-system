@@ -47,7 +47,8 @@ class Displaytugas extends CI_Controller {
         
         // show the view
         $this->load->view('header');
-        $this->load->view('displaytugas/navigation', $data);
+        // $this->load->view('displaytugas/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('displaytugas/create', $data);
         $this->load->view('displaytugas/footer');
     }

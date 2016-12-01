@@ -89,7 +89,8 @@ class Projectdetail extends CI_Controller {
             $data['pelapis'] = $this->detail_model->get_all_pelapis($idspj);
 
             $this->load->view('header');
-            $this->load->view('projectdetail/navigation', $data);
+            // $this->load->view('projectdetail/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('projectdetail/detail', $data);
             $this->load->view('projectdetail/footer');
     }
@@ -125,7 +126,8 @@ class Projectdetail extends CI_Controller {
         $data['getcompany'] = $this->detail_model->get_company();
         
         $this->load->view('header');
-        $this->load->view('projectdetail/navigation', $data);
+        // $this->load->view('projectdetail/navigation', $data);
+        $this->load->view('navigation', $data);
         $this->load->view('projectdetail/main',$data); 
         $this->load->view('projectdetail/footer');
     }
@@ -160,13 +162,15 @@ class Projectdetail extends CI_Controller {
             $this->form_validation->set_rules('tanggal2','Tanggal Akhir', 'required');
             if($this->form_validation->run() == false){
                 $this->load->view('header');
-                $this->load->view('projectdetail/navigation', $data);
+                // $this->load->view('projectdetail/navigation', $data);
+            $this->load->view('navigation', $data);
                 $this->load->view('projectdetail/detailtukang', $data);
                 $this->load->view('projectdetail/footer');
             }else{
 
             $this->load->view('header');
-            $this->load->view('projectdetail/navigation', $data);
+            // $this->load->view('projectdetail/navigation', $data);
+            $this->load->view('navigation', $data);
             $this->load->view('projectdetail/detailtukang', $data);
             $this->load->view('projectdetail/footer');
         }

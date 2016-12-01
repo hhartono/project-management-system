@@ -1,5 +1,5 @@
 (function($) {
-	$(document).ready(function(e) {
+    $(document).ready(function(e) {
         // r = $("table#da-gnd-datatable-numberpaging").DataTable({
         //     sPaginationType: "full_numbers"
         // });
@@ -14,5 +14,13 @@
         //         this.select();
         //     }
         // });
-	});
+        var element = document.getElementById('gnd');
+        element.classList.add("active");
+
+        $('#nav-menu').empty();
+        $('#nav-menu').html('<a href="#">GND</a>');
+        $('#nav-submenu').empty();
+        $('#nav-submenu').html('<span>Generator No Dokumen</span>');
+        $('#nav-submenu').addClass('active');
+    });
 }) (jQuery);
